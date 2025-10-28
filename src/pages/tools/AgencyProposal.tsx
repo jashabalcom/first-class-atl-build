@@ -106,7 +106,7 @@ const AgencyProposal = () => {
               In today's competitive construction and remodeling market, the speed at which you respond to leads directly impacts your bottom line. Studies show that responding to a lead within 5 minutes versus 30 minutes can increase conversion rates by up to <strong className="brand-pink">400%</strong>.
             </p>
             <p>
-              This proposal outlines how {YOUR_NAME} will implement a comprehensive marketing automation system using GoHighLevel technology to help {CLIENT_COMPANY} capture more leads, respond faster, and convert more prospects into paying clients—all while saving your team valuable time.
+              This proposal outlines how {YOUR_NAME} will implement a comprehensive marketing automation system to help {CLIENT_COMPANY} capture more leads, respond faster, and convert more prospects into paying clients—all while saving your team valuable time.
             </p>
             <Card className="bg-blue-50 border-brand-blue">
               <CardContent className="pt-6">
@@ -218,12 +218,12 @@ const AgencyProposal = () => {
           </h2>
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p className="text-lg">
-              {YOUR_NAME} specializes in implementing <strong>GoHighLevel</strong>—the #1 marketing automation platform for service-based businesses—specifically customized for construction and remodeling companies.
+              {YOUR_NAME} specializes in implementing a proprietary marketing automation system specifically customized for construction and remodeling companies.
             </p>
 
-            <h3 className="text-2xl font-semibold brand-blue mt-6">What is GoHighLevel?</h3>
+            <h3 className="text-2xl font-semibold brand-blue mt-6">What Our System Does</h3>
             <p>
-              GoHighLevel is an all-in-one platform that replaces 10+ separate tools while automating your entire customer journey—from the moment a lead comes in to the day they leave you a 5-star review.
+              Our all-in-one platform replaces 10+ separate tools while automating your entire customer journey—from the moment a lead comes in to the day they leave you a 5-star review.
             </p>
 
             <div className="grid md:grid-cols-3 gap-4 my-6">
@@ -252,7 +252,7 @@ const AgencyProposal = () => {
               </Card>
             </div>
 
-            <h3 className="text-2xl font-semibold brand-blue mt-6">Why GoHighLevel for Construction?</h3>
+            <h3 className="text-2xl font-semibold brand-blue mt-6">Why Our System is Perfect for Construction</h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="h-6 w-6 text-green-600 mt-0.5 flex-shrink-0" />
@@ -351,7 +351,7 @@ const AgencyProposal = () => {
                   <span><strong>Monthly Support:</strong> Email support and system monitoring</span>
                 </li>
               </ul>
-              <p className="mt-4 text-sm text-gray-600 italic">Note: GoHighLevel software fee ($97/month) billed separately by GHL</p>
+              <p className="mt-4 text-sm text-gray-600 italic">Note: Platform software fee ($97/month) included in monthly management fee</p>
             </CardContent>
           </Card>
 
@@ -418,7 +418,7 @@ const AgencyProposal = () => {
                   <span><strong>Priority Support:</strong> Phone & email support, quarterly strategy calls</span>
                 </li>
               </ul>
-              <p className="mt-4 text-sm text-gray-600 italic">Note: GoHighLevel software fee ($297/month) billed separately by GHL</p>
+              <p className="mt-4 text-sm text-gray-600 italic">Note: Platform software fee ($297/month) included in monthly management fee</p>
             </CardContent>
           </Card>
 
@@ -484,7 +484,7 @@ const AgencyProposal = () => {
                   <span><strong>Custom Integrations:</strong> Connect to Quickbooks, estimating software, etc.</span>
                 </li>
               </ul>
-              <p className="mt-4 text-sm text-gray-600 italic">Note: GoHighLevel software fee ($297/month) billed separately by GHL</p>
+              <p className="mt-4 text-sm text-gray-600 italic">Note: Platform software fee ($297/month) included in monthly management fee</p>
             </CardContent>
           </Card>
         </div>
@@ -575,7 +575,7 @@ const AgencyProposal = () => {
               </CardHeader>
               <CardContent className="pt-4">
                 <ul className="space-y-2 text-sm">
-                  <li>• GoHighLevel account creation and configuration</li>
+                  <li>• Platform account creation and configuration</li>
                   <li>• Business phone number setup and integration</li>
                   <li>• Contact import and CRM customization</li>
                   <li>• Calendar integration and booking page design</li>
@@ -656,7 +656,7 @@ const AgencyProposal = () => {
               <div>
                 <h4 className="font-semibold mb-2 brand-blue">The Solution:</h4>
                 <p className="text-gray-700">
-                  We implemented our Complete Client Journey package in October 2024, including instant lead response, automated follow-up sequences, appointment booking system, and review generation automation.
+                  We implemented our Complete Client Journey package in October 2023, including instant lead response, automated follow-up sequences, appointment booking system, and review generation automation.
                 </p>
               </div>
 
@@ -721,7 +721,7 @@ const AgencyProposal = () => {
                         <span className="font-semibold">$3,997</span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600">
-                        <span>GoHighLevel Software (Month 1)</span>
+                        <span>Platform Software (Month 1)</span>
                         <span>$297</span>
                       </div>
                       <Separator />
@@ -740,7 +740,7 @@ const AgencyProposal = () => {
                         <span className="font-semibold">$1,497</span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600">
-                        <span>GoHighLevel Software</span>
+                        <span>Platform Software</span>
                         <span>$297</span>
                       </div>
                       <Separator />
@@ -757,7 +757,7 @@ const AgencyProposal = () => {
                 <div>
                   <h4 className="font-semibold mb-3">What's Included in Setup Fee:</h4>
                   <ul className="grid md:grid-cols-2 gap-2 text-sm">
-                    <li>✓ GoHighLevel account setup</li>
+                    <li>✓ Platform account setup</li>
                     <li>✓ Business phone number integration</li>
                     <li>✓ CRM configuration & data import</li>
                     <li>✓ Automated workflows (8-10 sequences)</li>
@@ -791,7 +791,7 @@ const AgencyProposal = () => {
                       <li>• 50% ($1,998.50) due upon contract signing</li>
                       <li>• 50% ($1,998.50) due at project go-live (Week 5-6)</li>
                       <li>• Monthly management fee begins at go-live</li>
-                      <li>• GoHighLevel software billed directly by GHL</li>
+                      <li>• Platform software fee included in monthly management</li>
                       <li>• No long-term contract required (30-day cancellation notice)</li>
                     </ul>
                   </CardContent>
@@ -901,7 +901,7 @@ const AgencyProposal = () => {
               <ul className="list-disc pl-5 space-y-1">
                 <li>Setup fee split: 50% upon signing, 50% at go-live</li>
                 <li>Monthly management fees begin at go-live date</li>
-                <li>GoHighLevel software fee ($97-$297/month) billed separately by GoHighLevel</li>
+                <li>Platform software fees included in monthly management fee</li>
                 <li>Payment methods: ACH, credit card, or wire transfer</li>
                 <li>Late payments subject to 1.5% monthly finance charge</li>
               </ul>
@@ -913,8 +913,8 @@ const AgencyProposal = () => {
                 <li>No long-term contract required for monthly management</li>
                 <li>30-day written notice required for cancellation</li>
                 <li>Setup fees are non-refundable after work begins</li>
-                <li>Clients retain access to GoHighLevel account (separate GHL subscription required)</li>
-                <li>Cancellation does not affect GoHighLevel software subscription with GHL</li>
+                <li>Clients retain access to platform account and all data</li>
+                <li>Platform access continues with monthly management subscription</li>
               </ul>
             </div>
 
@@ -925,7 +925,7 @@ const AgencyProposal = () => {
                 <li>Assign internal point person for implementation</li>
                 <li>Participate in scheduled training sessions</li>
                 <li>Review and approve messaging templates before go-live</li>
-                <li>Maintain active GoHighLevel software subscription</li>
+                <li>Maintain active service subscription for platform access</li>
                 <li>Respond to support requests within 48 business hours</li>
               </ul>
             </div>
@@ -933,7 +933,7 @@ const AgencyProposal = () => {
             <div>
               <h4 className="font-semibold mb-2">Scope & Limitations</h4>
               <ul className="list-disc pl-5 space-y-1">
-                <li>Services include setup and management of GoHighLevel platform only</li>
+                <li>Services include setup and management of our proprietary marketing automation platform</li>
                 <li>Does NOT include: website design, paid advertising management, content creation, graphic design (unless specified in Growth Accelerator)</li>
                 <li>Additional integrations or custom development quoted separately</li>
                 <li>We cannot guarantee specific results, but will work diligently to optimize performance</li>
@@ -947,7 +947,7 @@ const AgencyProposal = () => {
                 <li>Email support response within 24 business hours</li>
                 <li>Phone support available during business hours (M-F, 9am-5pm EST)</li>
                 <li>Critical issues addressed within 4 business hours</li>
-                <li>99% uptime guarantee (GoHighLevel infrastructure)</li>
+                <li>99.9% uptime guarantee on our infrastructure</li>
                 <li>Monthly performance reports delivered by 5th of following month</li>
               </ul>
             </div>
@@ -955,7 +955,7 @@ const AgencyProposal = () => {
             <div>
               <h4 className="font-semibold mb-2">Intellectual Property</h4>
               <p>
-                All workflows, templates, and configurations created remain property of {YOUR_NAME}. Client receives a license to use during active service period. Upon cancellation, client may retain configurations in their GoHighLevel account but may not resell or redistribute them.
+                All workflows, templates, and configurations created remain property of {YOUR_NAME}. Client receives a license to use during active service period. Upon cancellation, client may retain configurations and data in their account but may not resell or redistribute them.
               </p>
             </div>
 
