@@ -38,10 +38,10 @@ const Callout = ({ children, type = "tip" }: CalloutProps) => {
   const Icon = style.icon;
 
   return (
-    <div className={`${style.bg} ${style.border} p-6 my-8 rounded-r-lg`}>
-      <div className="flex gap-4">
-        <Icon className={`h-6 w-6 flex-shrink-0 ${style.iconColor}`} />
-        <div className="font-inter text-base leading-[1.7] text-foreground/90">
+    <div className={`${style.bg} ${style.border} p-4 md:p-6 my-6 md:my-8 rounded-r-lg`}>
+      <div className="flex gap-3 md:gap-4">
+        <Icon className={`h-5 w-5 md:h-6 md:w-6 flex-shrink-0 ${style.iconColor} mt-0.5`} />
+        <div className="font-inter text-sm md:text-base leading-[1.7] text-foreground">
           {children}
         </div>
       </div>

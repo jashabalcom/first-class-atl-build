@@ -37,11 +37,12 @@ const BlogCard = ({
   return (
     <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 group bg-card border-[hsl(var(--editorial-border))]">
       <Link to={`/blog/${slug}`}>
-        <div className="relative aspect-[4/5] overflow-hidden bg-muted">
+        <div className="relative aspect-[3/2] md:aspect-[4/5] overflow-hidden bg-muted">
           <img
             src={featuredImage}
             alt={title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
           />
           {featured && (
             <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground font-inter text-xs tracking-wider">

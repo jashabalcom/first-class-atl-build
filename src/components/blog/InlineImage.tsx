@@ -1,19 +1,20 @@
 interface InlineImageProps {
   src: string;
+  alt?: string;
   position: "left" | "right";
   width?: string;
 }
 
-const InlineImage = ({ src, position, width = "40%" }: InlineImageProps) => {
+const InlineImage = ({ src, alt = "", position, width = "40%" }: InlineImageProps) => {
   return (
     <div
-      className={`${position === "left" ? "float-left mr-6" : "float-right ml-6"} mb-6`}
-      style={{ width: width }}
+      className={`w-full mb-6 ${position === "left" ? "md:float-left md:mr-6 md:w-[40%]" : "md:float-right md:ml-6 md:w-[40%]"}`}
+      style={{ maxWidth: width }}
     >
-      <div className="relative aspect-[4/5] rounded-sm overflow-hidden bg-muted">
+      <div className="relative aspect-[4/3] md:aspect-[4/5] rounded-sm overflow-hidden bg-muted">
         <img
           src={src}
-          alt=""
+          alt={alt}
           className="w-full h-full object-cover"
           loading="lazy"
         />

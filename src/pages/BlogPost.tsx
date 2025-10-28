@@ -171,18 +171,18 @@ const BlogPost = () => {
 
         {/* Article Content - Magazine Typography */}
         <AnimatedSection delay={200}>
-          <div className="container max-w-4xl px-6">
+          <div className="container max-w-3xl px-4 sm:px-6">
             {/* Lead paragraph styling via content renderer */}
-            <div className="mb-16">
+            <article className="mb-12 md:mb-16">
               <BlogContentRenderer content={post.content} />
-            </div>
+            </article>
 
             {/* Elegant CTA Box */}
-            <div className="bg-card/50 border-2 border-accent/20 rounded-sm p-10 text-center mb-16">
-              <h3 className="font-playfair text-3xl font-semibold mb-4 text-foreground">
+            <div className="bg-card/50 border-2 border-accent/20 rounded-sm p-6 md:p-10 text-center mb-12 md:mb-16">
+              <h3 className="font-playfair text-2xl md:text-3xl font-semibold mb-3 md:mb-4 text-foreground">
                 Ready to Start Your Project?
               </h3>
-              <p className="font-cormorant text-xl text-muted-foreground mb-8 leading-relaxed">
+              <p className="font-cormorant text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 leading-relaxed">
                 Get a free consultation and detailed estimate from Atlanta's trusted contractors
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

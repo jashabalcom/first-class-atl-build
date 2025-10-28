@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { marked } from "marked";
 import DropCap from "./DropCap";
 import PullQuote from "./PullQuote";
 import Callout from "./Callout";
@@ -17,7 +18,7 @@ const BlogContentRenderer = ({ content }: BlogContentRendererProps) => {
     let currentIndex = 0;
     let key = 0;
 
-    // Enhanced markdown patterns
+    // Enhanced markdown patterns for custom shortcodes
     const patterns = {
       dropcap: /\[dropcap\](.*?)\[\/dropcap\]/gs,
       pullquote: /\[pullquote\](.*?)\[\/pullquote\]/gs,
@@ -119,16 +120,21 @@ const BlogContentRenderer = ({ content }: BlogContentRendererProps) => {
     // Sort segments by index
     segments.sort((a, b) => a.index - b.index);
 
-    // Build final output
+    // Build final output - process remaining text through markdown
     segments.forEach((segment) => {
       // Add text before this segment
       if (currentIndex < segment.index) {
         const textBefore = text.slice(currentIndex, segment.index);
+        const htmlContent = marked.parse(textBefore, { 
+          breaks: true,
+          gfm: true 
+        }) as string;
+        
         elements.push(
           <div
             key={`text-${key++}`}
-            className="font-cormorant text-[19px] leading-[1.8] text-foreground/90"
-            dangerouslySetInnerHTML={{ __html: textBefore.replace(/\n/g, "<br/>") }}
+            className="blog-content"
+            dangerouslySetInnerHTML={{ __html: htmlContent }}
           />
         );
       }
@@ -139,11 +145,16 @@ const BlogContentRenderer = ({ content }: BlogContentRendererProps) => {
     // Add remaining text
     if (currentIndex < text.length) {
       const remainingText = text.slice(currentIndex);
+      const htmlContent = marked.parse(remainingText, { 
+        breaks: true,
+        gfm: true 
+      }) as string;
+      
       elements.push(
         <div
           key={`text-${key++}`}
-          className="font-cormorant text-[19px] leading-[1.8] text-foreground/90"
-          dangerouslySetInnerHTML={{ __html: remainingText.replace(/\n/g, "<br/>") }}
+          className="blog-content"
+          dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
       );
     }
@@ -151,7 +162,7 @@ const BlogContentRenderer = ({ content }: BlogContentRendererProps) => {
     return elements;
   };
 
-  return <div className="space-y-6">{parseContent(content)}</div>;
+  return <div className="space-y-4">{parseContent(content)}</div>;
 };
 
 export default BlogContentRenderer;
