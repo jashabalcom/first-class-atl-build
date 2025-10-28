@@ -9,6 +9,7 @@ import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import ClientLogosCarousel from "@/components/ClientLogosCarousel";
+import GoogleTrustBadge from "@/components/GoogleTrustBadge";
 import { Home as HomeIcon, Building2, Calendar, UserCheck, ShieldCheck } from "lucide-react";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
@@ -29,6 +30,13 @@ const Home = () => {
         backgroundImage={heroKitchen}
         trustLine="Licensed • Bonded • Insured • DBE • MBE • 20+ Years in Atlanta"
       />
+
+      {/* Google Trust Badge Section */}
+      <section className="py-8 bg-background border-b">
+        <div className="container max-w-4xl">
+          <GoogleTrustBadge variant="full" className="max-w-md mx-auto" />
+        </div>
+      </section>
 
       {/* Services Section */}
       <section className="py-16 md:py-24 bg-background">
@@ -169,9 +177,8 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-8">
-            <div className="inline-flex items-center gap-4 text-sm">
-              <span className="font-semibold">★★★★★ Google Reviews</span>
-              <span>•</span>
+            <GoogleTrustBadge variant="compact" className="mx-auto" />
+            <div className="inline-flex items-center gap-4 text-sm mt-4">
               <span>Licensed • Bonded • Insured</span>
               <span>•</span>
               <span className="text-accent font-semibold">DBE • MBE</span>

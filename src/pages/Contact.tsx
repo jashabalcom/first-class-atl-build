@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import ContactForm from "@/components/ContactForm";
+import GoogleTrustBadge from "@/components/GoogleTrustBadge";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 const Contact = () => {
@@ -84,6 +85,9 @@ const Contact = () => {
 
               {/* Contact Info */}
               <div className="space-y-8">
+                {/* Google Trust Badge */}
+                <GoogleTrustBadge variant="full" />
+
                 <div>
                   <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
                   <div className="space-y-6">

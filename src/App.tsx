@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Commercial from "./pages/Commercial";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import GoHighLevelChat from "./components/GoHighLevelChat";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <GoHighLevelChat />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />

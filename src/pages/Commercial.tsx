@@ -8,6 +8,7 @@ import TestimonialCard from "@/components/TestimonialCard";
 import ProcessStep from "@/components/ProcessStep";
 import ContactForm from "@/components/ContactForm";
 import ProjectCard from "@/components/ProjectCard";
+import GoogleTrustBadge from "@/components/GoogleTrustBadge";
 import { Store, Utensils, Briefcase, Building2, Wrench } from "lucide-react";
 import heroCommercial from "@/assets/hero-commercial.jpg";
 import retailBuildout from "@/assets/retail-buildout.jpg";
@@ -105,6 +106,13 @@ const Commercial = () => {
           backgroundImage={heroCommercial}
           trustLine="Licensed • Bonded • Insured • DBE • MBE • 20+ Years in Atlanta"
         />
+
+        {/* Google Trust Badge Section */}
+        <section className="py-8 bg-background border-b">
+          <div className="container max-w-4xl">
+            <GoogleTrustBadge variant="full" className="max-w-md mx-auto" />
+          </div>
+        </section>
 
         {/* Problem/Empathy Section */}
         <section className="py-20 border-b">

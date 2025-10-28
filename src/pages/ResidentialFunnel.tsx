@@ -7,6 +7,7 @@ import ProcessStep from "@/components/ProcessStep";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
+import GoogleTrustBadge from "@/components/GoogleTrustBadge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Calendar, UserCheck, ShieldCheck, DollarSign, Hammer } from "lucide-react";
 import heroBathroom from "@/assets/hero-bathroom.jpg";
@@ -26,6 +27,13 @@ const ResidentialFunnel = () => {
         secondaryCTA="Or call 678-671-6336"
         backgroundImage={heroBathroom}
       />
+
+      {/* Google Trust Badge Section */}
+      <section className="py-8 bg-background border-b">
+        <div className="container max-w-4xl">
+          <GoogleTrustBadge variant="full" className="max-w-md mx-auto" />
+        </div>
+      </section>
 
       {/* Before/After Slider */}
       <section className="py-16 md:py-24 bg-muted/30">
@@ -178,9 +186,8 @@ const ResidentialFunnel = () => {
           </div>
 
           <div className="text-center mt-8">
-            <div className="inline-flex items-center gap-4 text-sm">
-              <span className="font-semibold">★★★★★ Google Reviews</span>
-              <span>•</span>
+            <GoogleTrustBadge variant="compact" className="mx-auto" />
+            <div className="inline-flex items-center gap-4 text-sm mt-4">
               <span>Licensed • Bonded • Insured</span>
               <span>•</span>
               <span className="text-accent font-semibold">DBE • MBE</span>
