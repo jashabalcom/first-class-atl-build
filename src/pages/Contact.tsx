@@ -1,18 +1,11 @@
-import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import ContactForm from "@/components/ContactForm";
 import GoogleTrustBadge from "@/components/GoogleTrustBadge";
-import GoogleMap from "@/components/GoogleMap";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 const Contact = () => {
-  const [apiKey, setApiKey] = useState("");
-  const [showMap, setShowMap] = useState(false);
-
   const contactInfo = [
     {
       icon: Phone,
@@ -166,62 +159,18 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Map Section */}
+        {/* Map Section - Placeholder */}
         <section className="py-12 bg-secondary/5 border-y">
           <div className="container">
             <div className="max-w-6xl mx-auto">
-              {!showMap ? (
-                <div className="aspect-[21/9] bg-muted rounded-lg flex items-center justify-center border p-8">
-                  <div className="text-center space-y-4 max-w-md">
-                    <MapPin className="h-12 w-12 text-muted-foreground mx-auto" />
-                    <div>
-                      <h3 className="font-semibold mb-2">View Our Service Area</h3>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        Enter your Google Maps API key to display an interactive map
-                      </p>
-                      <div className="flex gap-2">
-                        <Input
-                          type="text"
-                          placeholder="Enter Google Maps API Key"
-                          value={apiKey}
-                          onChange={(e) => setApiKey(e.target.value)}
-                          className="flex-1"
-                        />
-                        <Button 
-                          onClick={() => {
-                            if (apiKey.trim()) {
-                              setShowMap(true);
-                            }
-                          }}
-                          disabled={!apiKey.trim()}
-                        >
-                          Load Map
-                        </Button>
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-2">
-                        Get your API key at{" "}
-                        <a 
-                          href="https://console.cloud.google.com/google/maps-apis" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-accent hover:underline"
-                        >
-                          Google Cloud Console
-                        </a>
-                      </p>
-                    </div>
-                  </div>
+              <div className="aspect-[21/9] bg-muted rounded-lg flex items-center justify-center border">
+                <div className="text-center space-y-2">
+                  <MapPin className="h-12 w-12 text-muted-foreground mx-auto" />
+                  <p className="text-muted-foreground">
+                    Proudly serving Metro Atlanta and surrounding areas
+                  </p>
                 </div>
-              ) : (
-                <div className="aspect-[21/9] rounded-lg overflow-hidden border shadow-md">
-                  <GoogleMap 
-                    apiKey={apiKey}
-                    center={{ lat: 33.7490, lng: -84.3880 }}
-                    zoom={10}
-                    className="w-full h-full"
-                  />
-                </div>
-              )}
+              </div>
             </div>
           </div>
         </section>
