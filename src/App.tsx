@@ -18,6 +18,7 @@ import ViningsKitchenRemodeling from "./pages/ViningsKitchenRemodeling";
 import AtlantaBasementFinishing from "./pages/AtlantaBasementFinishing";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import AgencyProposal from "./pages/tools/AgencyProposal";
 import GoHighLevelChat from "./components/GoHighLevelChat";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/tools/agency-proposal" element={<AgencyProposal />} />
           <Route path="/areas/buckhead-kitchen-remodeling" element={<BuckheadKitchenRemodeling />} />
           <Route path="/areas/midtown-kitchen-remodeling" element={<MidtownKitchenRemodeling />} />
           <Route path="/areas/sandy-springs-bathroom-remodeling" element={<SandySpringsBasementRemodeling />} />
