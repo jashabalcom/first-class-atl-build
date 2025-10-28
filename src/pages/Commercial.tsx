@@ -6,7 +6,7 @@ import ServiceCard from "@/components/ServiceCard";
 import ValueCard from "@/components/ValueCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import ProcessStep from "@/components/ProcessStep";
-import ContactForm from "@/components/ContactForm";
+import { MultiStepCommercialForm } from "@/components/MultiStepCommercialForm";
 import ProjectCard from "@/components/ProjectCard";
 import GoogleTrustBadge from "@/components/GoogleTrustBadge";
 import { Store, Utensils, Briefcase, Building2, Wrench } from "lucide-react";
@@ -251,11 +251,13 @@ const Commercial = () => {
         {/* Contact Form */}
         <section id="contact-form" className="py-20 border-t">
           <div className="container">
-            <ContactForm
-              heading="Ready to Discuss Your Commercial Project?"
-              subheading="Tell us about your project and we'll provide a detailed proposal within one business day."
-              buttonText="Request My Consultation"
-            />
+            <div className="text-center space-y-4 mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold">Ready to Discuss Your Commercial Project?</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Tell us about your project and we'll provide a detailed proposal within one business day.
+              </p>
+            </div>
+            <MultiStepCommercialForm />
           </div>
         </section>
       </main>
