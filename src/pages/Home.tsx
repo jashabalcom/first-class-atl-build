@@ -167,25 +167,16 @@ const Home = () => {
 
       {/* Budget Estimator */}
       <AnimatedSection delay={300}>
-        <section id="budget-estimator" className="py-16 md:py-24 bg-muted/30 scroll-mt-20">
-          <div className="container">
-            <div className="text-center mb-12 animate-fade-in">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Estimate Your Project Budget</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Get an instant ballpark estimate for your renovation project. Choose your project type, scope, and finish level to see the potential investment.
-              </p>
-            </div>
-            
-            <div className="max-w-6xl mx-auto">
-              <BudgetEstimator 
-                onGetQuote={() => {
-                  document.getElementById('contact-form')?.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                  });
-                }}
-              />
-            </div>
+        <section id="budget-estimator" className="py-12 md:py-16 bg-muted/30 scroll-mt-20">
+          <div className="container max-w-6xl">
+            <BudgetEstimator 
+              onGetQuote={() => {
+                document.getElementById('contact-form')?.scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }}
+            />
           </div>
         </section>
       </AnimatedSection>
