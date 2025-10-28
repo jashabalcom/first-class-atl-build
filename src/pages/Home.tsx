@@ -24,12 +24,13 @@ const Home = () => {
       <Header />
       
       <Hero
-        title="Transform Your Space with Atlanta's Premier Construction Partner"
-        subtitle="Residential renovations and commercial build-outs—delivered on time, on budget, and built to last."
+        title="Atlanta's Premier Construction & Remodeling Company - Licensed, Bonded, DBE/MBE Certified"
+        subtitle="Residential renovations and commercial build-outs—delivered on time, on budget, and built to last. Serving Buckhead, Midtown, Decatur, Sandy Springs, and Metro Atlanta."
         primaryCTA="Request a Free Consultation"
         secondaryCTA="Call 678-671-6336"
         backgroundImage={heroKitchen}
         trustLine="Licensed • Bonded • Insured • DBE • MBE • 20+ Years in Atlanta"
+        useH1={true}
       />
 
       {/* Google Trust Badge Section */}
@@ -73,13 +74,16 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      {/* Why Atlanta Chooses First Class */}
       <section className="py-16 md:py-24 bg-muted/30">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Us</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Experience the First Class difference
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Atlanta Chooses First Class</h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto mb-6">
+              Serving Buckhead, Midtown, Decatur, Sandy Springs, Brookhaven, Dunwoody, Marietta, and Alpharetta 
+              with licensed, bonded, and insured construction services. As a DBE/MBE certified contractor, 
+              we bring professionalism and quality craftsmanship to every residential renovation and 
+              commercial build-out project across Metro Atlanta.
             </p>
           </div>
 
@@ -130,7 +134,7 @@ const Home = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             <ProjectCard
-              title="Modern Kitchen"
+              title="Modern Kitchen Remodel"
               subtitle="Buckhead Residence"
               description="Open layout, custom cabinetry, stone surfaces, architectural lighting."
               image={kitchenAfter}
@@ -138,14 +142,14 @@ const Home = () => {
             />
             <ProjectCard
               title="Retail Build-Out"
-              subtitle="Midtown Commercial"
+              subtitle="Midtown Atlanta Commercial"
               description="3,000 sq ft tenant improvement delivered in 6 weeks."
               image={retailBuildout}
               link="#"
             />
             <ProjectCard
               title="Office Renovation"
-              subtitle="Perimeter Business Park"
+              subtitle="Perimeter Business Park Atlanta"
               description="Phased construction with zero downtime for staff."
               image={officeRenovation}
               link="#"

@@ -99,12 +99,13 @@ const Commercial = () => {
       
       <main className="pb-24 md:pb-0">
         <Hero
-          title="Efficient Commercial Spaces That Keep Your Business Running"
-          subtitle="Build-outs and renovations for retail, restaurants, offices, and more—delivered on time with minimal disruption to your operations."
+          title="Commercial Build-Out Contractor Atlanta | Retail, Restaurant & Office Renovation"
+          subtitle="Build-outs and renovations for retail, restaurants, offices, and more—delivered on time with minimal disruption to your operations. Serving Metro Atlanta, Buckhead, Midtown, and Perimeter."
           primaryCTA="Request a Consultation"
           secondaryCTA="Call 678-671-6336"
           backgroundImage={heroCommercial}
           trustLine="Licensed • Bonded • Insured • DBE • MBE • 20+ Years in Atlanta"
+          useH1={true}
         />
 
         {/* Google Trust Badge Section */}

@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Commercial from "./pages/Commercial";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import BuckheadKitchenRemodeling from "./pages/BuckheadKitchenRemodeling";
 import GoHighLevelChat from "./components/GoHighLevelChat";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/areas/buckhead-kitchen-remodeling" element={<BuckheadKitchenRemodeling />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

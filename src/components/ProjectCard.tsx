@@ -17,7 +17,7 @@ const ProjectCard = ({ title, subtitle, description, image, link = "#" }: Projec
       <div className="aspect-[4/3] overflow-hidden">
         <img
           src={image}
-          alt={title}
+          alt={`${title} - ${subtitle} by First Class Construction Group Atlanta`}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         />
       </div>

@@ -22,11 +22,12 @@ const ResidentialFunnel = () => {
       <Header />
       
       <Hero
-        title="Breathe New Life Into Your Home — Without the Headaches"
-        subtitle="Atlanta's renovation experts for kitchens, baths, basements & additions. We handle everything from design to permits to final walkthrough—on time and on budget."
+        title="Kitchen & Bathroom Remodeling Atlanta | Licensed Residential Contractor"
+        subtitle="Atlanta's renovation experts for kitchens, baths, basements & additions. Serving Buckhead, Midtown, Decatur, and Sandy Springs. We handle everything from design to permits to final walkthrough—on time and on budget."
         primaryCTA="Get My Free Quote"
         secondaryCTA="Or call 678-671-6336"
         backgroundImage={heroBathroom}
+        useH1={true}
       />
 
       {/* Google Trust Badge Section */}

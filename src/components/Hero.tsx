@@ -8,6 +8,7 @@ interface HeroProps {
   secondaryCTA?: string;
   backgroundImage?: string;
   trustLine?: string;
+  useH1?: boolean;
 }
 
 const Hero = ({ 
@@ -16,8 +17,10 @@ const Hero = ({
   primaryCTA, 
   secondaryCTA, 
   backgroundImage = heroKitchen,
-  trustLine 
+  trustLine,
+  useH1 = false
 }: HeroProps) => {
+  const TitleTag = useH1 ? 'h1' : 'h2';
   return (
     <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -33,9 +36,9 @@ const Hero = ({
       {/* Content */}
       <div className="container relative z-10 px-4 py-20 sm:py-24 md:py-32">
         <div className="max-w-3xl mx-auto text-center text-white animate-fade-in-up">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance leading-tight">
+          <TitleTag className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance leading-tight">
             {title}
-          </h1>
+          </TitleTag>
           <p className="text-base sm:text-lg md:text-xl mb-8 text-gray-200 text-balance max-w-2xl mx-auto">
             {subtitle}
           </p>

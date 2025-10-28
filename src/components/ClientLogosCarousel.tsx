@@ -55,7 +55,7 @@ const ClientLogosCarousel = () => {
                 <div className="flex items-center justify-center p-8 bg-background rounded-lg border hover:shadow-lg transition-all duration-300 h-32">
                   <img
                     src={client.logo}
-                    alt={`${client.name} logo`}
+                    alt={`${client.name} - First Class Construction Group Atlanta client`}
                     className="max-h-20 max-w-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
                   />
                 </div>

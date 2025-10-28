@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <img src={logo} alt="First Class Construction Group" className="h-12 w-auto mb-4 brightness-0 invert" />
+            <img src={logo} alt="First Class Construction Group - Atlanta Licensed General Contractor" className="h-12 w-auto mb-4 brightness-0 invert" />
             <p className="text-sm opacity-90">
               You Imagine It. We Build It.
             </p>
