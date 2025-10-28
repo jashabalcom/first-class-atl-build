@@ -1,13 +1,14 @@
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import logo from "@/assets/fcc-logo.png";
 
 const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
-          <span className="text-xl font-bold text-primary">First Class Construction</span>
+          <img src={logo} alt="First Class Construction Group" className="h-12 w-auto" />
         </Link>
         
         <nav className="hidden md:flex items-center gap-6">

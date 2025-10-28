@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
+import logo from "@/assets/fcc-logo.png";
 
 const Footer = () => {
   return (
@@ -8,7 +9,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold">First Class Construction Group</h3>
+            <img src={logo} alt="First Class Construction Group" className="h-12 w-auto mb-4 brightness-0 invert" />
+            <p className="text-sm opacity-90">
+              You Imagine It. We Build It.
+            </p>
             <p className="text-sm opacity-90">
               Atlanta's trusted partner for residential renovations and commercial build-outs.
             </p>
