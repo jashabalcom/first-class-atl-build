@@ -191,3 +191,48 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* GoHighLevel Chat Widget Styling */
+[data-widget-id] {
+  z-index: 9999 !important;
+}
+
+.chat-widget-container,
+#chat-widget-container {
+  background: #2B2B2B !important;
+  border: 2px solid #B8956A !important;
+  border-radius: 12px !important;
+}
+
+.chat-bubble {
+  background: #B8956A !important;
+  box-shadow: 0 4px 12px rgba(184, 149, 106, 0.3) !important;
+}
+
+.chat-message-user {
+  background: #2B2B2B !important;
+  color: #FDFBF7 !important;
+}
+
+.chat-message-bot {
+  background: #FDFBF7 !important;
+  color: #2B2B2B !important;
+  border: 1px solid rgba(184, 149, 106, 0.2) !important;
+}
+
+.chat-widget-header {
+  background: #2B2B2B !important;
+  color: #FDFBF7 !important;
+  border-bottom: 2px solid #B8956A !important;
+}
+
+.chat-input {
+  background: #FDFBF7 !important;
+  color: #2B2B2B !important;
+  border: 1px solid rgba(184, 149, 106, 0.25) !important;
+}
+
+.chat-send-button {
+  background: #B8956A !important;
+  color: #FDFBF7 !important;
+}
