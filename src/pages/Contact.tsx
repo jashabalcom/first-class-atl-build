@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import ContactForm from "@/components/ContactForm";
 import GoogleTrustBadge from "@/components/GoogleTrustBadge";
-import { BudgetEstimator } from "@/components/BudgetEstimator";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 const Contact = () => {
@@ -69,31 +68,8 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Budget Estimator */}
-        <section className="py-16 md:py-20 bg-muted/20">
-          <div className="container">
-            <div className="text-center mb-10 animate-fade-in">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Get a Budget Estimate First</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Not sure what your project might cost? Use our estimator tool to get an instant ballpark figure before reaching out.
-              </p>
-            </div>
-            
-            <div className="max-w-5xl mx-auto">
-              <BudgetEstimator 
-                onGetQuote={() => {
-                  document.getElementById('contact-form-section')?.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                  });
-                }}
-              />
-            </div>
-          </div>
-        </section>
-
         {/* Contact Form + Info Section */}
-        <section id="contact-form-section" className="py-20 scroll-mt-20">
+        <section className="py-20">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
               {/* Contact Form */}
