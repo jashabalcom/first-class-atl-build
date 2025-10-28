@@ -12,6 +12,7 @@ import ClientLogosCarousel from "@/components/ClientLogosCarousel";
 import GoogleTrustBadge from "@/components/GoogleTrustBadge";
 import { BudgetEstimator } from "@/components/BudgetEstimator";
 import AnimatedSection from "@/components/AnimatedSection";
+import FeaturedBlogSection from "@/components/FeaturedBlogSection";
 import { Home as HomeIcon, Building2, Calendar, UserCheck, ShieldCheck } from "lucide-react";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
@@ -164,6 +165,9 @@ const Home = () => {
           </div>
         </section>
       </AnimatedSection>
+
+      {/* Featured Blog Section */}
+      <FeaturedBlogSection />
 
       {/* Budget Estimator */}
       <AnimatedSection delay={300}>
