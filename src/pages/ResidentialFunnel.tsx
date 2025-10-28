@@ -4,7 +4,7 @@ import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import ValueCard from "@/components/ValueCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import ProcessStep from "@/components/ProcessStep";
-import ContactForm from "@/components/ContactForm";
+import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import GoogleTrustBadge from "@/components/GoogleTrustBadge";
@@ -284,13 +284,15 @@ const ResidentialFunnel = () => {
         </div>
       </section>
 
-      <ContactForm
-        heading="Ready to Create Your Dream Home?"
-        subheading="Tell us about your project. We'll reply within one business day."
-        buttonText="Get My Free Quote"
-        showCity={true}
-        showTimeline={true}
-      />
+      <section id="contact-form" className="py-16 md:py-24 bg-background">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Create Your Dream Home?</h2>
+            <p className="text-muted-foreground text-lg">Tell us about your project. We'll reply within one business day.</p>
+          </div>
+          <MultiStepContactForm showCity={true} showTimeline={true} />
+        </div>
+      </section>
       
       <Footer />
       <MobileCallBar />
