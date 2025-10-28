@@ -5,6 +5,7 @@ import ValueCard from "@/components/ValueCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
+import { BudgetEstimator } from "@/components/BudgetEstimator";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import GoogleTrustBadge from "@/components/GoogleTrustBadge";
@@ -162,6 +163,17 @@ const ResidentialFunnel = () => {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Budget Estimator */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container">
+          <BudgetEstimator 
+            onGetQuote={() => {
+              document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          />
         </div>
       </section>
 
