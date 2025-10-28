@@ -442,11 +442,11 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
         <div className="text-center pt-6 border-t border-border">
           <p className="text-sm text-muted-foreground mb-3">Prefer to talk? Call us now</p>
           <a
-            href="tel:+1234567890"
+            href="tel:+16786716336"
             className="inline-flex items-center gap-2 text-primary hover:underline font-semibold"
           >
             <Phone className="h-4 w-4" />
-            (123) 456-7890
+            (678) 671-6336
           </a>
         </div>
       </form>

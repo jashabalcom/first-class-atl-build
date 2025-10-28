@@ -254,7 +254,7 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
               size="lg" 
               variant="outline"
               onClick={() => {
-                toast.info("Call us at (123) 456-7890 to discuss your project");
+                toast.info("Call us at (678) 671-6336 to discuss your project");
               }}
               className="gap-2 text-lg px-8"
             >
