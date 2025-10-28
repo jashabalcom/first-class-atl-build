@@ -19,12 +19,12 @@ const BuckheadKitchenRemodeling = () => {
       <Header />
       
       <Hero
-        title="Kitchen Remodeling in Buckhead | Licensed Atlanta Contractor"
+        benefitHeadline="Your Dream Buckhead Kitchen—Without the Contractor Headaches"
+        seoHeadline="Kitchen Remodeling Buckhead | Licensed Contractor Serving Atlanta Since 2000"
         subtitle="Transform your Buckhead kitchen with Atlanta's premier remodeling experts. Serving Buckhead residents since 2000 with on-time, on-budget kitchen renovations. Licensed, bonded, and DBE/MBE certified."
         primaryCTA="Get My Free Buckhead Quote"
         secondaryCTA="Call 678-671-6336"
         backgroundImage={heroKitchen}
-        useH1={true}
       />
 
       {/* Google Trust Badge */}

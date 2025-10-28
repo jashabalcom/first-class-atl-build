@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 
 interface HeroProps {
-  title: string;
+  title?: string;
   subtitle: string;
   primaryCTA: string;
   secondaryCTA?: string;
@@ -24,7 +24,9 @@ const Hero = ({
   benefitHeadline,
   seoHeadline
 }: HeroProps) => {
-  const TitleTag = useH1 ? 'h1' : 'h2';
+  // In hybrid mode (benefitHeadline + seoHeadline), seoHeadline is always H1
+  // In legacy mode (title only), respect useH1 prop
+  const TitleTag = (seoHeadline || useH1) ? 'h1' : 'h2';
   const displayTitle = benefitHeadline || title;
   
   return (
@@ -49,9 +51,9 @@ const Hero = ({
           
           {/* SEO Headline (H1 for Google, Secondary Visual) */}
           {seoHeadline && (
-            <TitleTag className="text-lg sm:text-xl text-gray-300/90 mb-6 font-medium animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+            <h1 className="text-lg sm:text-xl text-gray-300/90 mb-6 font-medium animate-fade-in-up" style={{ animationDelay: '100ms' }}>
               {seoHeadline}
-            </TitleTag>
+            </h1>
           )}
           
           {!seoHeadline && (
