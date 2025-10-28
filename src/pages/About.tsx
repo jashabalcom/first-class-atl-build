@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import StatsSection from "@/components/StatsSection";
 import CertificationBadges from "@/components/CertificationBadges";
+import ClientLogosCarousel from "@/components/ClientLogosCarousel";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Shield, Users, Award, CheckCircle } from "lucide-react";
@@ -126,6 +127,9 @@ const About = () => {
 
         {/* Certifications */}
         <CertificationBadges />
+
+        {/* Client Logos */}
+        <ClientLogosCarousel />
 
         {/* CTA Section */}
         <section className="py-20 bg-gradient-to-b from-background to-secondary/10">

@@ -8,6 +8,7 @@ import ProcessStep from "@/components/ProcessStep";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
+import ClientLogosCarousel from "@/components/ClientLogosCarousel";
 import { Home as HomeIcon, Building2, Calendar, UserCheck, ShieldCheck } from "lucide-react";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
@@ -229,6 +230,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Client Logos */}
+      <ClientLogosCarousel />
 
       <ContactForm />
       
