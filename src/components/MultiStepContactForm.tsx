@@ -43,6 +43,7 @@ interface MultiStepContactFormProps {
 export function MultiStepContactForm({ showCity = true, showTimeline = true }: MultiStepContactFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
   const steps = ["Basic Info", "Project Details", "Description", "Review"];
@@ -135,17 +136,12 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500));
       
-      toast.success("Quote request sent! We'll contact you within 24 hours.", {
-        duration: 5000,
-      });
-      
       // Clear saved progress
       localStorage.removeItem(STORAGE_KEY);
       
-      // Reset form
-      form.reset();
-      setCurrentStep(0);
-      setCompletedSteps([]);
+      // Show success state
+      setIsSubmitted(true);
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
       toast.error("Failed to send request. Please try again.");
     }
@@ -321,7 +317,61 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
 
   return (
     <div ref={formRef} className="w-full max-w-3xl mx-auto">
-      <FormStepIndicator steps={steps} currentStep={currentStep} completedSteps={completedSteps} />
+      {isSubmitted ? (
+        <div className="text-center space-y-6 py-12 animate-fade-in">
+          <div className="flex justify-center mb-6">
+            <div className="h-20 w-20 bg-primary/10 rounded-full flex items-center justify-center">
+              <Check className="h-10 w-10 text-primary" />
+            </div>
+          </div>
+          
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            Thank You for Your Request!
+          </h2>
+          
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            We've received your project details and will review them carefully. 
+            A member of our team will reach out to you within 24 hours to discuss your vision.
+          </p>
+          
+          <div className="bg-muted/50 rounded-lg p-6 max-w-md mx-auto">
+            <h3 className="font-semibold text-foreground mb-3">What Happens Next?</h3>
+            <ul className="text-sm text-muted-foreground space-y-2 text-left">
+              <li className="flex items-start gap-2">
+                <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <span>We'll review your project details</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <span>A project manager will contact you within 24 hours</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <span>Schedule your free in-home consultation</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <span>Receive your detailed, transparent quote</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div className="pt-6">
+            <p className="text-sm text-muted-foreground mb-3">
+              Need immediate assistance?
+            </p>
+            <a
+              href="tel:+16786716336"
+              className="inline-flex items-center gap-2 text-primary hover:underline font-semibold text-lg"
+            >
+              <Phone className="h-5 w-5" />
+              (678) 671-6336
+            </a>
+          </div>
+        </div>
+      ) : (
+        <>
+          <FormStepIndicator steps={steps} currentStep={currentStep} completedSteps={completedSteps} />
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         {renderStepContent()}
@@ -400,6 +450,8 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
           </a>
         </div>
       </form>
+      </>
+      )}
     </div>
   );
 }
