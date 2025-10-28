@@ -55,13 +55,13 @@ const Contact = () => {
       
       <main className="min-h-screen pb-24 md:pb-0">
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-b from-secondary/10 to-background">
+        <section className="relative py-12 md:py-20 bg-gradient-to-b from-secondary/10 to-background">
           <div className="container">
-            <div className="max-w-3xl mx-auto text-center space-y-6">
-              <h1 className="text-4xl md:text-5xl font-bold">
+            <div className="max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
                 Let's Turn Your Vision Into Reality
               </h1>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-lg md:text-xl text-muted-foreground">
                 Get in touch with First Class Construction Group. We're ready to discuss your project and provide a free consultation.
               </p>
             </div>
@@ -69,9 +69,9 @@ const Contact = () => {
         </section>
 
         {/* Contact Form + Info Section */}
-        <section className="py-20">
+        <section className="py-12 md:py-20">
           <div className="container">
-            <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
               {/* Contact Form */}
               <div>
                 <ContactForm
@@ -124,7 +124,7 @@ const Contact = () => {
                 {/* Service Areas */}
                 <div className="pt-8 border-t">
                   <h3 className="font-semibold mb-4">Service Areas</h3>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {serviceAreas.map((area, index) => (
                       <div 
                         key={index}
@@ -160,10 +160,10 @@ const Contact = () => {
         </section>
 
         {/* Map Section - Placeholder */}
-        <section className="py-12 bg-secondary/5 border-y">
+        <section className="py-8 md:py-12 bg-secondary/5 border-y">
           <div className="container">
             <div className="max-w-6xl mx-auto">
-              <div className="aspect-[21/9] bg-muted rounded-lg flex items-center justify-center border">
+              <div className="aspect-[16/9] md:aspect-[21/9] bg-muted rounded-lg flex items-center justify-center border">
                 <div className="text-center space-y-2">
                   <MapPin className="h-12 w-12 text-muted-foreground mx-auto" />
                   <p className="text-muted-foreground">

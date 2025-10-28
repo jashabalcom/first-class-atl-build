@@ -102,14 +102,14 @@ const ContactForm = ({
   };
 
   return (
-    <section id="contact-form" className="py-16 md:py-24 bg-muted/30">
+    <section id="contact-form" className="py-12 md:py-16 lg:py-24 bg-muted/30">
       <div className="container max-w-2xl">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>
-          <p className="text-muted-foreground text-lg">{subheading}</p>
+        <div className="text-center mb-6 md:mb-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">{heading}</h2>
+          <p className="text-muted-foreground text-base md:text-lg">{subheading}</p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-card p-8 rounded-lg shadow-lg">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-card p-4 sm:p-6 md:p-8 rounded-lg shadow-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FloatingInput
               label="Name *"
@@ -152,7 +152,7 @@ const ContactForm = ({
           {/* Project Type Cards */}
           <div className="space-y-3">
             <Label className="text-sm">Project Type *</Label>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
               {projectTypes.map((type) => (
                 <ProjectTypeCard
                   key={type.value}
@@ -205,16 +205,18 @@ const ContactForm = ({
           />
 
           {/* Trust Badges */}
-          <div className="flex items-center justify-center gap-6 py-4 border-y bg-muted/20">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 py-4 border-y bg-muted/20">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
               <Shield className="h-4 w-4 text-green-600" />
-              <span>Licensed & Insured</span>
+              <span className="hidden sm:inline">Licensed & Insured</span>
+              <span className="sm:hidden">Licensed</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
               <Lock className="h-4 w-4 text-blue-600" />
-              <span>Secure & Private</span>
+              <span className="hidden sm:inline">Secure & Private</span>
+              <span className="sm:hidden">Secure</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
               <Clock className="h-4 w-4 text-accent" />
               <span>24hr Response</span>
             </div>

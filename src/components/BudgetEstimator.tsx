@@ -119,26 +119,26 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
   return (
     <div className="w-full max-w-5xl mx-auto space-y-8">
       {/* Header */}
-      <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
-          <Calculator className="h-4 w-4" />
+      <div className="text-center space-y-2 md:space-y-3">
+        <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-primary/10 text-primary rounded-full text-xs md:text-sm font-medium">
+          <Calculator className="h-3 md:h-4 w-3 md:w-4" />
           Instant Budget Estimator
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
           Get Your Project Estimate
         </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+        <p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
           Get a realistic budget range in seconds. Select your project type, scope, and finish level below.
         </p>
       </div>
 
       {/* Project Type Selection */}
-      <Card className="p-6 space-y-4">
+      <Card className="p-4 md:p-6 space-y-3 md:space-y-4">
         <div>
-          <h3 className="text-lg font-semibold text-foreground mb-1">Project Type</h3>
-          <p className="text-sm text-muted-foreground">What are you looking to remodel?</p>
+          <h3 className="text-base md:text-lg font-semibold text-foreground mb-1">Project Type</h3>
+          <p className="text-xs md:text-sm text-muted-foreground">What are you looking to remodel?</p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-3">
           {projectTypes.map((type) => (
             <ProjectTypeCard
               key={type.id}
@@ -153,10 +153,10 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
       </Card>
 
       {/* Scope Slider */}
-      <Card className="p-6 space-y-4">
+      <Card className="p-4 md:p-6 space-y-3 md:space-y-4">
         <div>
-          <h3 className="text-lg font-semibold text-foreground mb-1">Project Scope</h3>
-          <p className="text-sm text-muted-foreground">How extensive is your remodel?</p>
+          <h3 className="text-base md:text-lg font-semibold text-foreground mb-1">Project Scope</h3>
+          <p className="text-xs md:text-sm text-muted-foreground">How extensive is your remodel?</p>
         </div>
         <div className="space-y-6">
           <div className="flex items-center justify-between text-sm">
@@ -178,12 +178,12 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
       </Card>
 
       {/* Finish Level */}
-      <Card className="p-6 space-y-4">
+      <Card className="p-4 md:p-6 space-y-3 md:space-y-4">
         <div>
-          <h3 className="text-lg font-semibold text-foreground mb-1">Finish Level</h3>
-          <p className="text-sm text-muted-foreground">Choose your quality tier</p>
+          <h3 className="text-base md:text-lg font-semibold text-foreground mb-1">Finish Level</h3>
+          <p className="text-xs md:text-sm text-muted-foreground">Choose your quality tier</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
           {finishLevels.map((level) => (
             <button
               key={level.id}
@@ -217,14 +217,14 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
       {/* Estimate Display */}
       {hasEstimate && (
         <Card className="p-8 space-y-6 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20 animate-fade-in">
-          <div className="text-center space-y-2">
-            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+            <div className="text-center space-y-2">
+            <p className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-wide">
               Your Estimated Investment Range
             </p>
-            <div className="text-4xl md:text-5xl font-bold text-foreground">
+            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
               {formatCurrency(estimate.min)} - {formatCurrency(estimate.max)}
             </div>
-            <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+            <p className="text-xs sm:text-sm text-muted-foreground max-w-xl mx-auto">
               Based on {getScopeLabel().toLowerCase()} with {finishLevels.find(l => l.id === finishLevel)?.title.toLowerCase()} finishes
             </p>
           </div>
@@ -245,7 +245,7 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
             <Button 
               size="lg" 
               onClick={onGetQuote}
-              className="gap-2 text-lg px-8"
+              className="gap-2 text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto h-12"
             >
               Get Exact Quote
               <ArrowRight className="h-5 w-5" />
@@ -256,7 +256,7 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
               onClick={() => {
                 toast.info("Call us at (678) 671-6336 to discuss your project");
               }}
-              className="gap-2 text-lg px-8"
+              className="gap-2 text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto h-12"
             >
               Schedule Consultation
             </Button>

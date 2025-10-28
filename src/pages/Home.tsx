@@ -47,7 +47,7 @@ const Home = () => {
 
       {/* Services Section */}
       <AnimatedSection>
-        <section className="py-16 md:py-24 bg-background">
+        <section className="py-12 md:py-16 lg:py-20 bg-background">
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">How We Can Help</h2>
@@ -82,7 +82,7 @@ const Home = () => {
       </AnimatedSection>
 
       {/* Why Atlanta Chooses First Class */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Atlanta Chooses First Class</h2>
@@ -134,7 +134,7 @@ const Home = () => {
 
       {/* Featured Projects */}
       <AnimatedSection delay={200}>
-        <section className="py-16 md:py-24 bg-background">
+        <section className="py-12 md:py-16 lg:py-20 bg-background">
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
@@ -188,7 +188,7 @@ const Home = () => {
 
       {/* Testimonials */}
       <AnimatedSection delay={100}>
-        <section className="py-16 md:py-24 bg-background">
+        <section className="py-12 md:py-16 lg:py-20 bg-background">
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
@@ -226,7 +226,7 @@ const Home = () => {
       <FeaturedBlogSection />
 
       {/* Process */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-12 md:py-16 lg:py-20 bg-background">
         <div className="container max-w-4xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">A Proven, Professional Process</h2>
@@ -261,7 +261,7 @@ const Home = () => {
       </section>
 
       {/* Service Areas */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Serving Metro Atlanta</h2>
           <p className="text-muted-foreground mb-8">

@@ -4,12 +4,12 @@ import logo from "@/assets/fcc-logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-primary-foreground py-12">
+    <footer className="bg-primary text-primary-foreground py-8 md:py-12">
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
           {/* Company Info */}
-          <div className="space-y-4">
-            <img src={logo} alt="First Class Construction Group - Atlanta Licensed General Contractor" className="h-12 w-auto mb-4 brightness-0 invert" />
+          <div className="space-y-3 md:space-y-4 text-center sm:text-left">
+            <img src={logo} alt="First Class Construction Group - Atlanta Licensed General Contractor" className="h-10 md:h-12 w-auto mb-2 md:mb-4 brightness-0 invert mx-auto sm:mx-0" />
             <p className="text-sm opacity-90">
               You Imagine It. We Build It.
             </p>
@@ -95,12 +95,12 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/20 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm opacity-90">
+        <div className="border-t border-white/20 pt-6 md:pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4 text-center md:text-left">
+            <p className="text-xs md:text-sm opacity-90">
               © {new Date().getFullYear()} First Class Construction Group. All rights reserved.
             </p>
-            <div className="flex gap-4 text-sm">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4 text-xs md:text-sm">
               <span className="opacity-90">Licensed • Bonded • Insured</span>
               <span className="text-accent font-semibold">DBE • MBE Certified</span>
             </div>

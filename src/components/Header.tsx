@@ -19,9 +19,9 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-14 md:h-16 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
-          <img src={logo} alt="First Class Construction Group - Atlanta Licensed General Contractor" className="h-12 w-auto" />
+          <img src={logo} alt="First Class Construction Group - Atlanta Licensed General Contractor" className="h-10 md:h-12 w-auto" />
         </Link>
         
         {/* Desktop Navigation */}
@@ -49,25 +49,25 @@ const Header = () => {
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="outline" size="sm" className="gap-2">
+              <Button variant="outline" size="sm" className="gap-2 h-11">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col gap-6 mt-8">
+            <SheetContent side="right" className="w-[280px] sm:w-[300px]">
+              <nav className="flex flex-col gap-4 mt-6">
                 {navLinks.map((link) => (
                   <Link
                     key={link.to}
                     to={link.to}
                     onClick={() => setIsOpen(false)}
-                    className="text-lg font-medium transition-colors hover:text-accent py-2"
+                    className="text-base font-medium transition-colors hover:text-accent py-2 min-h-[44px] flex items-center"
                   >
                     {link.label}
                   </Link>
                 ))}
-                <div className="pt-6 border-t">
+                <div className="pt-4 border-t mt-2">
                   <a href="tel:678-671-6336" className="w-full block">
-                    <Button variant="cta" size="lg" className="w-full gap-2">
+                    <Button variant="cta" size="lg" className="w-full gap-2 h-12">
                       <Phone className="h-5 w-5" />
                       Call 678-671-6336
                     </Button>

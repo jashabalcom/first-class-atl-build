@@ -18,7 +18,7 @@ export const ProjectTypeCard = React.forwardRef<HTMLButtonElement, ProjectTypeCa
         type="button"
         onClick={onClick}
         className={cn(
-          "relative flex flex-col items-center gap-3 p-4 rounded-lg border-2 transition-all duration-200",
+          "relative flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg border-2 transition-all duration-200 min-h-[80px] sm:min-h-[100px]",
           "hover:scale-105 hover:shadow-md active:scale-95",
           selected
             ? "border-accent bg-accent/10 shadow-sm"
@@ -26,16 +26,16 @@ export const ProjectTypeCard = React.forwardRef<HTMLButtonElement, ProjectTypeCa
         )}
       >
         <div className={cn(
-          "p-3 rounded-full transition-colors",
+          "p-2 sm:p-3 rounded-full transition-colors",
           selected ? "bg-accent/20" : "bg-muted"
         )}>
           <Icon className={cn(
-            "h-6 w-6 transition-colors",
+            "h-5 w-5 sm:h-6 sm:w-6 transition-colors",
             selected ? "text-accent" : "text-muted-foreground"
           )} />
         </div>
         <span className={cn(
-          "text-sm font-medium text-center transition-colors",
+          "text-xs sm:text-sm font-medium text-center transition-colors leading-tight",
           selected ? "text-accent" : "text-foreground"
         )}>
           {title}

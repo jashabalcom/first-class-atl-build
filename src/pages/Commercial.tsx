@@ -136,7 +136,7 @@ const Commercial = () => {
 
         {/* Services Section */}
         <AnimatedSection>
-          <section className="py-20 bg-secondary/5">
+          <section className="py-12 md:py-16 lg:py-20 bg-secondary/5">
             <div className="container space-y-12">
             <div className="text-center space-y-4">
               <h2 className="text-3xl md:text-4xl font-bold">Commercial Services We Offer</h2>
@@ -145,7 +145,7 @@ const Commercial = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {services.map((service, index) => {
                 const Icon = service.icon;
                 return (
@@ -167,7 +167,7 @@ const Commercial = () => {
 
         {/* Benefits Section */}
         <AnimatedSection delay={100}>
-          <section className="py-20 border-y">
+          <section className="py-12 md:py-16 lg:py-20 border-y">
           <div className="container space-y-12">
             <div className="text-center space-y-4">
               <h2 className="text-3xl md:text-4xl font-bold">The First Class Difference</h2>
@@ -193,7 +193,7 @@ const Commercial = () => {
 
         {/* Featured Projects */}
         <AnimatedSection delay={200}>
-          <section className="py-20 bg-secondary/5">
+          <section className="py-12 md:py-16 lg:py-20 bg-secondary/5">
             <div className="container space-y-12">
               <div className="text-center space-y-4">
                 <h2 className="text-3xl md:text-4xl font-bold">Featured Commercial Projects</h2>
@@ -210,7 +210,7 @@ const Commercial = () => {
 
         {/* Testimonials */}
         <AnimatedSection delay={100}>
-          <section className="py-20 border-y">
+          <section className="py-12 md:py-16 lg:py-20 border-y">
           <div className="container space-y-12">
             <div className="text-center space-y-4">
               <h2 className="text-3xl md:text-4xl font-bold">What Business Owners Say</h2>
@@ -227,7 +227,7 @@ const Commercial = () => {
 
         {/* Process */}
         <AnimatedSection delay={200}>
-          <section className="py-20 bg-secondary/5">
+          <section className="py-12 md:py-16 lg:py-20 bg-secondary/5">
             <div className="container space-y-12">
               <div className="text-center space-y-4">
                 <h2 className="text-3xl md:text-4xl font-bold">Our Commercial Process</h2>
@@ -236,7 +236,7 @@ const Commercial = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
               <ProcessStep
                 number={1}
                 title="Site Assessment"
@@ -263,7 +263,7 @@ const Commercial = () => {
         </AnimatedSection>
 
       {/* Contact Form */}
-      <section id="contact-form" className="py-20 border-t">
+      <section id="contact-form" className="py-12 md:py-20 border-t">
           <div className="container">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl md:text-4xl font-bold">Ready to Discuss Your Commercial Project?</h2>
