@@ -8,11 +8,15 @@ import brookstone from "@/assets/clients/brookstone-logo.png";
 import tgiFridays from "@/assets/clients/tgi-fridays-logo.png";
 import armLogo from "@/assets/clients/arm-logo.png";
 import caribouCoffee from "@/assets/clients/caribou-coffee-logo.png";
+import inmotion from "@/assets/clients/inmotion-logo.png";
+import laQuinta from "@/assets/clients/la-quinta-logo.png";
 
 const ClientLogosCarousel = () => {
   const clients = [
     { name: "Brookstone", logo: brookstone },
     { name: "TGI Fridays", logo: tgiFridays },
+    { name: "InMotion Entertainment", logo: inmotion },
+    { name: "La Quinta Inns & Suites", logo: laQuinta },
     { name: "Airport Retail Management", logo: armLogo },
     { name: "Caribou Coffee", logo: caribouCoffee },
   ];
