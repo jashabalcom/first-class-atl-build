@@ -8,6 +8,8 @@ import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { formatPhoneNumber, unformatPhoneNumber } from "@/lib/phone-formatter";
 import { Label } from "@/components/ui/label";
+import { ProjectTypeCard } from "@/components/ui/project-type-card";
+import { Home, Droplet, Layers, Plus, Building2, Store, Shield, Lock, Clock } from "lucide-react";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -40,6 +42,15 @@ const ContactForm = ({
   showTimeline = false
 }: ContactFormProps) => {
   const { toast } = useToast();
+
+  const projectTypes = [
+    { value: "kitchen", label: "Kitchen Remodeling", icon: Home },
+    { value: "bathroom", label: "Bathroom Remodeling", icon: Droplet },
+    { value: "basement", label: "Basement Finishing", icon: Layers },
+    { value: "addition", label: "Home Addition", icon: Plus },
+    { value: "whole-home", label: "Whole-Home Renovation", icon: Building2 },
+    { value: "commercial", label: "Commercial Build-Out", icon: Store },
+  ];
   
   const {
     register,
@@ -138,53 +149,50 @@ const ContactForm = ({
             )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="projectType" className="text-sm">Project Type *</Label>
-              <Select
-                {...register("projectType")}
-                onValueChange={(value) => setValue("projectType", value, { shouldValidate: true, shouldDirty: true })}
-              >
-                <SelectTrigger id="projectType" className={errors.projectType ? "border-destructive" : ""}>
-                  <SelectValue placeholder="Select project type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="kitchen">Kitchen Remodeling</SelectItem>
-                  <SelectItem value="bathroom">Bathroom Remodeling</SelectItem>
-                  <SelectItem value="basement">Basement Finishing</SelectItem>
-                  <SelectItem value="addition">Home Addition</SelectItem>
-                  <SelectItem value="whole-home">Whole-Home Renovation</SelectItem>
-                  <SelectItem value="commercial">Commercial Build-Out</SelectItem>
-                </SelectContent>
-              </Select>
-              {errors.projectType && (
-                <p className="text-xs text-destructive animate-fade-in">
-                  {errors.projectType.message}
-                </p>
-              )}
+          {/* Project Type Cards */}
+          <div className="space-y-3">
+            <Label className="text-sm">Project Type *</Label>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {projectTypes.map((type) => (
+                <ProjectTypeCard
+                  key={type.value}
+                  icon={type.icon}
+                  title={type.label}
+                  value={type.value}
+                  selected={watch("projectType") === type.value}
+                  onClick={() => setValue("projectType", type.value, { shouldValidate: true, shouldDirty: true, shouldTouch: true })}
+                />
+              ))}
             </div>
-
-            {showTimeline && (
-              <div className="space-y-2">
-                <Label htmlFor="timeline" className="text-sm">Ideal Timeline</Label>
-                <Select
-                  {...register("timeline")}
-                  onValueChange={(value) => setValue("timeline", value, { shouldValidate: true, shouldDirty: true })}
-                >
-                  <SelectTrigger id="timeline">
-                    <SelectValue placeholder="Select timeline" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="asap">As soon as possible</SelectItem>
-                    <SelectItem value="1-3months">1-3 months</SelectItem>
-                    <SelectItem value="3-6months">3-6 months</SelectItem>
-                    <SelectItem value="6plus">6+ months</SelectItem>
-                    <SelectItem value="planning">Just planning</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+            {errors.projectType && (
+              <p className="text-xs text-destructive animate-fade-in flex items-center gap-1">
+                <span className="text-base">⚠</span>
+                {errors.projectType.message}
+              </p>
             )}
           </div>
+
+          {/* Timeline Dropdown */}
+          {showTimeline && (
+            <div className="space-y-2">
+              <Label htmlFor="timeline" className="text-sm">Ideal Timeline</Label>
+              <Select
+                {...register("timeline")}
+                onValueChange={(value) => setValue("timeline", value, { shouldValidate: true, shouldDirty: true })}
+              >
+                <SelectTrigger id="timeline" className="bg-background">
+                  <SelectValue placeholder="Select timeline" />
+                </SelectTrigger>
+                <SelectContent className="bg-popover z-50">
+                  <SelectItem value="asap">As soon as possible</SelectItem>
+                  <SelectItem value="1-3months">1-3 months</SelectItem>
+                  <SelectItem value="3-6months">3-6 months</SelectItem>
+                  <SelectItem value="6plus">6+ months</SelectItem>
+                  <SelectItem value="planning">Just planning</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          )}
 
           <FloatingTextarea
             label="Tell us about your project *"
@@ -196,26 +204,50 @@ const ContactForm = ({
             showCharCount
           />
 
+          {/* Trust Badges */}
+          <div className="flex items-center justify-center gap-6 py-4 border-y bg-muted/20">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Shield className="h-4 w-4 text-green-600" />
+              <span>Licensed & Insured</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Lock className="h-4 w-4 text-blue-600" />
+              <span>Secure & Private</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Clock className="h-4 w-4 text-accent" />
+              <span>24hr Response</span>
+            </div>
+          </div>
+
           <div className="space-y-4">
             <Button 
               type="submit" 
               variant="cta" 
               size="lg" 
-              className="w-full transition-all" 
+              className="w-full transition-all hover:scale-[1.02] active:scale-[0.98]" 
               disabled={isSubmitting}
             >
               <span className={isSubmitting ? "animate-pulse" : ""}>
-                {isSubmitting ? "Sending..." : buttonText}
+                {isSubmitting ? (
+                  <>
+                    <span className="inline-block animate-spin mr-2">⏳</span>
+                    Sending...
+                  </>
+                ) : (
+                  buttonText
+                )}
               </span>
             </Button>
             
-            <p className="text-xs text-muted-foreground text-center">
+            <p className="text-xs text-muted-foreground text-center flex items-center justify-center gap-1.5">
+              <Lock className="h-3 w-3" />
               Your information is confidential. No spam—ever.
             </p>
             
             <p className="text-sm text-center">
               Prefer to talk now?{" "}
-              <a href="tel:678-671-6336" className="text-accent font-semibold hover:underline">
+              <a href="tel:678-671-6336" className="text-accent font-semibold hover:underline transition-all hover:scale-105 inline-block">
                 Call 678-671-6336
               </a>
             </p>
