@@ -10,8 +10,8 @@ import GoogleTrustBadge from "@/components/GoogleTrustBadge";
 import MobileCallBar from "@/components/MobileCallBar";
 import { Award, Users, Clock, DollarSign, Shield, Sparkles } from "lucide-react";
 import heroBathroom from "@/assets/hero-bathroom.jpg";
-import kitchenBefore from "@/assets/kitchen-before.jpg";
-import kitchenAfter from "@/assets/kitchen-after.jpg";
+import bathroomBefore from "@/assets/bathroom-before.jpg";
+import bathroomAfter from "@/assets/bathroom-after.jpg";
 
 const SandySpringsBasementRemodeling = () => {
   return (
@@ -73,8 +73,8 @@ const SandySpringsBasementRemodeling = () => {
             Sandy Springs Bathroom Transformations
           </h2>
           <BeforeAfterSlider
-            beforeImage={kitchenBefore}
-            afterImage={kitchenAfter}
+            beforeImage={bathroomBefore}
+            afterImage={bathroomAfter}
           />
         </div>
       </section>
