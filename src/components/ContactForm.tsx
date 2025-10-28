@@ -1,19 +1,28 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { FloatingInput } from "@/components/ui/floating-input";
+import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
+import { formatPhoneNumber, unformatPhoneNumber } from "@/lib/phone-formatter";
+import { Label } from "@/components/ui/label";
 
 const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Invalid email address").max(255),
-  phone: z.string().trim().optional(),
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Please enter a valid email address").max(255, "Email must be less than 255 characters"),
+  phone: z.string().optional().refine(
+    (val) => !val || unformatPhoneNumber(val).length === 10,
+    "Please enter a valid 10-digit phone number"
+  ),
+  city: z.string().optional(),
   projectType: z.string().min(1, "Please select a project type"),
-  message: z.string().trim().min(1, "Message is required").max(1000),
+  timeline: z.string().optional(),
+  message: z.string().trim().min(10, "Please provide at least 10 characters").max(1000, "Message must be less than 1000 characters"),
 });
+
+type ContactFormData = z.infer<typeof contactSchema>;
 
 interface ContactFormProps {
   heading?: string;
@@ -31,25 +40,37 @@ const ContactForm = ({
   showTimeline = false
 }: ContactFormProps) => {
   const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    city: "",
-    projectType: "",
-    timeline: "",
-    message: "",
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, touchedFields, dirtyFields },
+    reset,
+    setValue,
+    watch,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    mode: "onBlur",
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      city: "",
+      projectType: "",
+      timeline: "",
+      message: "",
+    },
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  const phoneValue = watch("phone");
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setValue("phone", formatted, { shouldValidate: true, shouldDirty: true });
+  };
+
+  const onSubmit = async (data: ContactFormData) => {
     try {
-      // Validate form data
-      contactSchema.parse(formData);
-
       // Simulate form submission
       await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -59,31 +80,13 @@ const ContactForm = ({
       });
 
       // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        city: "",
-        projectType: "",
-        timeline: "",
-        message: "",
-      });
+      reset();
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        toast({
-          title: "Validation Error",
-          description: error.errors[0].message,
-          variant: "destructive",
-        });
-      } else {
-        toast({
-          title: "Error",
-          description: "Something went wrong. Please try again.",
-          variant: "destructive",
-        });
-      }
-    } finally {
-      setLoading(false);
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -95,63 +98,54 @@ const ContactForm = ({
           <p className="text-muted-foreground text-lg">{subheading}</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-lg shadow-lg">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-card p-8 rounded-lg shadow-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="name">Name *</Label>
-              <Input
-                id="name"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                required
-                maxLength={100}
-              />
-            </div>
+            <FloatingInput
+              label="Name *"
+              {...register("name")}
+              error={errors.name?.message}
+              success={touchedFields.name && !errors.name && dirtyFields.name}
+              maxLength={100}
+            />
 
-            <div className="space-y-2">
-              <Label htmlFor="email">Email *</Label>
-              <Input
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                required
-                maxLength={255}
-              />
-            </div>
+            <FloatingInput
+              label="Email *"
+              type="email"
+              {...register("email")}
+              error={errors.email?.message}
+              success={touchedFields.email && !errors.email && dirtyFields.email}
+              maxLength={255}
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="phone">Phone</Label>
-              <Input
-                id="phone"
-                type="tel"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              />
-            </div>
+            <FloatingInput
+              label="Phone"
+              type="tel"
+              value={phoneValue}
+              onChange={handlePhoneChange}
+              error={errors.phone?.message}
+              success={touchedFields.phone && !errors.phone && dirtyFields.phone}
+            />
 
             {showCity && (
-              <div className="space-y-2">
-                <Label htmlFor="city">City/Neighborhood</Label>
-                <Input
-                  id="city"
-                  value={formData.city}
-                  onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                />
-              </div>
+              <FloatingInput
+                label="City/Neighborhood"
+                {...register("city")}
+                error={errors.city?.message}
+                success={touchedFields.city && !errors.city && dirtyFields.city}
+              />
             )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="projectType">Project Type *</Label>
+              <Label htmlFor="projectType" className="text-sm">Project Type *</Label>
               <Select
-                value={formData.projectType}
-                onValueChange={(value) => setFormData({ ...formData, projectType: value })}
+                {...register("projectType")}
+                onValueChange={(value) => setValue("projectType", value, { shouldValidate: true, shouldDirty: true })}
               >
-                <SelectTrigger id="projectType">
+                <SelectTrigger id="projectType" className={errors.projectType ? "border-destructive" : ""}>
                   <SelectValue placeholder="Select project type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -163,14 +157,19 @@ const ContactForm = ({
                   <SelectItem value="commercial">Commercial Build-Out</SelectItem>
                 </SelectContent>
               </Select>
+              {errors.projectType && (
+                <p className="text-xs text-destructive animate-fade-in">
+                  {errors.projectType.message}
+                </p>
+              )}
             </div>
 
             {showTimeline && (
               <div className="space-y-2">
-                <Label htmlFor="timeline">Ideal Timeline</Label>
+                <Label htmlFor="timeline" className="text-sm">Ideal Timeline</Label>
                 <Select
-                  value={formData.timeline}
-                  onValueChange={(value) => setFormData({ ...formData, timeline: value })}
+                  {...register("timeline")}
+                  onValueChange={(value) => setValue("timeline", value, { shouldValidate: true, shouldDirty: true })}
                 >
                   <SelectTrigger id="timeline">
                     <SelectValue placeholder="Select timeline" />
@@ -187,21 +186,27 @@ const ContactForm = ({
             )}
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="message">Tell us about your project *</Label>
-            <Textarea
-              id="message"
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              rows={5}
-              required
-              maxLength={1000}
-            />
-          </div>
+          <FloatingTextarea
+            label="Tell us about your project *"
+            {...register("message")}
+            error={errors.message?.message}
+            success={touchedFields.message && !errors.message && dirtyFields.message}
+            rows={5}
+            maxLength={1000}
+            showCharCount
+          />
 
           <div className="space-y-4">
-            <Button type="submit" variant="cta" size="lg" className="w-full" disabled={loading}>
-              {loading ? "Sending..." : buttonText}
+            <Button 
+              type="submit" 
+              variant="cta" 
+              size="lg" 
+              className="w-full transition-all" 
+              disabled={isSubmitting}
+            >
+              <span className={isSubmitting ? "animate-pulse" : ""}>
+                {isSubmitting ? "Sending..." : buttonText}
+              </span>
             </Button>
             
             <p className="text-xs text-muted-foreground text-center">
