@@ -13,6 +13,7 @@ import GoogleTrustBadge from "@/components/GoogleTrustBadge";
 import { BudgetEstimator } from "@/components/BudgetEstimator";
 import AnimatedSection from "@/components/AnimatedSection";
 import FeaturedBlogSection from "@/components/FeaturedBlogSection";
+import BlogTeaser from "@/components/BlogTeaser";
 import { Home as HomeIcon, Building2, Calendar, UserCheck, ShieldCheck } from "lucide-react";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
@@ -128,6 +129,9 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Blog Teaser - Touch Point #1 */}
+      <BlogTeaser />
+
       {/* Featured Projects */}
       <AnimatedSection delay={200}>
         <section className="py-16 md:py-24 bg-background">
@@ -165,9 +169,6 @@ const Home = () => {
           </div>
         </section>
       </AnimatedSection>
-
-      {/* Featured Blog Section */}
-      <FeaturedBlogSection />
 
       {/* Budget Estimator */}
       <AnimatedSection delay={300}>
@@ -220,6 +221,9 @@ const Home = () => {
           </div>
         </section>
       </AnimatedSection>
+
+      {/* Featured Blog Section - Touch Point #2 */}
+      <FeaturedBlogSection />
 
       {/* Process */}
       <section className="py-16 md:py-24 bg-background">
