@@ -5,8 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, TrendingUp, Clock, Users, Zap, Target, BarChart3 } from "lucide-react";
 
 // EDIT THESE VARIABLES FOR EACH PROPOSAL
-const CLIENT_NAME = "[Client Name]";
-const CLIENT_COMPANY = "[Client Company Name]";
+const CLIENT_NAME = "Gessan";
+const CLIENT_COMPANY = "First Class Construction";
 const PROPOSAL_DATE = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 const YOUR_NAME = "Major Leads Agency";
 const YOUR_PHONE = "(404) 555-0123";
