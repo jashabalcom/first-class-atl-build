@@ -116,6 +116,15 @@ All colors MUST be HSL.
     text-wrap: balance;
   }
   
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
   .animate-fade-in-up {
     animation: fadeInUp 0.6s ease-out forwards;
   }

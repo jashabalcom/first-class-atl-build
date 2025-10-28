@@ -18,7 +18,7 @@ import basementFinished from "@/assets/basement-finished.jpg";
 
 const ResidentialFunnel = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-24 md:pb-0">
       <Header />
       
       <Hero

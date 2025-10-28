@@ -41,18 +41,23 @@ const Gallery = () => {
         {/* Filter Tabs */}
         <section className="border-b bg-background sticky top-16 z-40">
           <div className="container py-4">
-            <div className="flex gap-2 overflow-x-auto scrollbar-hide">
-              {filters.map((filter) => (
-                <Button
-                  key={filter.id}
-                  variant={activeFilter === filter.id ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setActiveFilter(filter.id)}
-                  className="whitespace-nowrap"
-                >
-                  {filter.label}
-                </Button>
-              ))}
+            <div className="relative">
+              <div className="flex gap-2 overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth pb-2">
+                {filters.map((filter) => (
+                  <Button
+                    key={filter.id}
+                    variant={activeFilter === filter.id ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setActiveFilter(filter.id)}
+                    className="whitespace-nowrap snap-start flex-shrink-0"
+                  >
+                    {filter.label}
+                  </Button>
+                ))}
+              </div>
+              {/* Gradient fade indicators */}
+              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none md:hidden" />
+              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none md:hidden" />
             </div>
           </div>
         </section>

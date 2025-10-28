@@ -97,7 +97,7 @@ const Commercial = () => {
       <Header />
       <MobileCallBar />
       
-      <main>
+      <main className="pb-24 md:pb-0">
         <Hero
           title="Efficient Commercial Spaces That Keep Your Business Running"
           subtitle="Build-outs and renovations for retail, restaurants, offices, and more—delivered on time with minimal disruption to your operations."

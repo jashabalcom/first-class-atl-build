@@ -38,7 +38,7 @@ const About = () => {
       <Header />
       <MobileCallBar />
       
-      <main className="min-h-screen">
+      <main className="min-h-screen pb-24 md:pb-0">
         {/* Hero Section */}
         <section 
           className="relative py-32 bg-cover bg-center"

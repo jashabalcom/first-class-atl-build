@@ -53,7 +53,7 @@ const Contact = () => {
       <Header />
       <MobileCallBar />
       
-      <main className="min-h-screen">
+      <main className="min-h-screen pb-24 md:pb-0">
         {/* Hero Section */}
         <section className="relative py-20 bg-gradient-to-b from-secondary/10 to-background">
           <div className="container">

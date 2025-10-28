@@ -195,7 +195,7 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
               <label className="block text-sm font-medium text-foreground mb-4">
                 Project Type *
               </label>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 {projectTypes.map((type) => (
                   <ProjectTypeCard
                     key={type.id}

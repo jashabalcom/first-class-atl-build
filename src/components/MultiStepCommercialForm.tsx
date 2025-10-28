@@ -223,7 +223,7 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
               <label className="block text-sm font-medium mb-3">
                 Select Project Type *
               </label>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 {commercialProjectTypes.map((type) => (
                   <ProjectTypeCard
                     key={type.id}
