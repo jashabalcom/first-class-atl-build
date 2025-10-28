@@ -13,6 +13,7 @@ import { Store, Utensils, Briefcase, Building2, Wrench } from "lucide-react";
 import heroCommercial from "@/assets/hero-commercial.jpg";
 import retailBuildout from "@/assets/retail-buildout.jpg";
 import officeRenovation from "@/assets/office-renovation.jpg";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const Commercial = () => {
   const services = [
@@ -99,12 +100,14 @@ const Commercial = () => {
       
       <main className="pb-24 md:pb-0">
         <Hero
-          title="Commercial Build-Out Contractor Atlanta | Retail, Restaurant & Office Renovation"
-          subtitle="Build-outs and renovations for retail, restaurants, offices, and more—delivered on time with minimal disruption to your operations. Serving Metro Atlanta, Buckhead, Midtown, and Perimeter."
+          benefitHeadline="Build Your Business Success—On Time, On Budget, Zero Drama"
+          seoHeadline="Commercial Build-Out Contractor Atlanta | Retail, Restaurant & Office Renovation"
+          title="Build Your Business Success—On Time, On Budget, Zero Drama"
+          subtitle="Professional build-outs and tenant improvements that minimize downtime and maximize results. Serving Metro Atlanta's retail, restaurant, and office markets."
           primaryCTA="Request a Consultation"
           secondaryCTA="Call 678-671-6336"
           backgroundImage={heroCommercial}
-          trustLine="Licensed • Bonded • Insured • DBE • MBE • 20+ Years in Atlanta"
+          trustLine="Licensed • Bonded • Insured • DBE • MBE • 20+ Years in Metro Atlanta"
           useH1={true}
         />
 
@@ -132,8 +135,9 @@ const Commercial = () => {
         </section>
 
         {/* Services Section */}
-        <section className="py-20 bg-secondary/5">
-          <div className="container space-y-12">
+        <AnimatedSection>
+          <section className="py-20 bg-secondary/5">
+            <div className="container space-y-12">
             <div className="text-center space-y-4">
               <h2 className="text-3xl md:text-4xl font-bold">Commercial Services We Offer</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -156,12 +160,14 @@ const Commercial = () => {
                   </div>
                 );
               })}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </AnimatedSection>
 
         {/* Benefits Section */}
-        <section className="py-20 border-y">
+        <AnimatedSection delay={100}>
+          <section className="py-20 border-y">
           <div className="container space-y-12">
             <div className="text-center space-y-4">
               <h2 className="text-3xl md:text-4xl font-bold">The First Class Difference</h2>
@@ -180,27 +186,31 @@ const Commercial = () => {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </AnimatedSection>
 
         {/* Featured Projects */}
-        <section className="py-20 bg-secondary/5">
-          <div className="container space-y-12">
-            <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold">Featured Commercial Projects</h2>
-            </div>
+        <AnimatedSection delay={200}>
+          <section className="py-20 bg-secondary/5">
+            <div className="container space-y-12">
+              <div className="text-center space-y-4">
+                <h2 className="text-3xl md:text-4xl font-bold">Featured Commercial Projects</h2>
+              </div>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              {projects.map((project, index) => (
-                <ProjectCard key={index} {...project} />
-              ))}
+              <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                {projects.map((project, index) => (
+                  <ProjectCard key={index} {...project} />
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </AnimatedSection>
 
         {/* Testimonials */}
-        <section className="py-20 border-y">
+        <AnimatedSection delay={100}>
+          <section className="py-20 border-y">
           <div className="container space-y-12">
             <div className="text-center space-y-4">
               <h2 className="text-3xl md:text-4xl font-bold">What Business Owners Say</h2>
@@ -210,15 +220,17 @@ const Commercial = () => {
               {testimonials.map((testimonial, index) => (
                 <TestimonialCard key={index} {...testimonial} />
               ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </AnimatedSection>
 
         {/* Process */}
-        <section className="py-20 bg-secondary/5">
-          <div className="container space-y-12">
-            <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold">Our Commercial Process</h2>
+        <AnimatedSection delay={200}>
+          <section className="py-20 bg-secondary/5">
+            <div className="container space-y-12">
+              <div className="text-center space-y-4">
+                <h2 className="text-3xl md:text-4xl font-bold">Our Commercial Process</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Transparent, efficient, and designed to minimize disruption.
               </p>
@@ -245,12 +257,13 @@ const Commercial = () => {
                 title="Inspection & Handover"
                 description="Final walkthrough, code inspections, and warranty documentation."
               />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </AnimatedSection>
 
-        {/* Contact Form */}
-        <section id="contact-form" className="py-20 border-t">
+      {/* Contact Form */}
+      <section id="contact-form" className="py-20 border-t">
           <div className="container">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl md:text-4xl font-bold">Ready to Discuss Your Commercial Project?</h2>

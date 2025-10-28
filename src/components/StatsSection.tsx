@@ -1,4 +1,5 @@
 import { Trophy, Users, Shield, Calendar } from "lucide-react";
+import StatsCounter from "./StatsCounter";
 
 const StatsSection = () => {
   const stats = [
@@ -31,25 +32,12 @@ const StatsSection = () => {
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <div 
+              <StatsCounter
                 key={index}
-                className="text-center space-y-4 animate-fade-in-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="flex justify-center">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
-                    <Icon className="h-8 w-8 text-accent" />
-                  </div>
-                </div>
-                <div>
-                  <div className="text-3xl md:text-4xl font-bold text-accent mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm md:text-base text-muted-foreground">
-                    {stat.label}
-                  </div>
-                </div>
-              </div>
+                value={stat.value}
+                label={stat.label}
+                icon={<Icon className="h-8 w-8 text-accent" />}
+              />
             );
           })}
         </div>

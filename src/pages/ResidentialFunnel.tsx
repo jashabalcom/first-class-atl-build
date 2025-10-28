@@ -6,6 +6,7 @@ import TestimonialCard from "@/components/TestimonialCard";
 import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import { BudgetEstimator } from "@/components/BudgetEstimator";
+import AnimatedSection from "@/components/AnimatedSection";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import GoogleTrustBadge from "@/components/GoogleTrustBadge";
@@ -22,11 +23,14 @@ const ResidentialFunnel = () => {
       <Header />
       
       <Hero
-        title="Kitchen & Bathroom Remodeling Atlanta | Licensed Residential Contractor"
-        subtitle="Atlanta's renovation experts for kitchens, baths, basements & additions. Serving Buckhead, Midtown, Decatur, and Sandy Springs. We handle everything from design to permits to final walkthrough—on time and on budget."
-        primaryCTA="Get My Free Quote"
-        secondaryCTA="Or call 678-671-6336"
+        benefitHeadline="Breathe New Life Into Your Home—Without the Contractor Headaches"
+        seoHeadline="Kitchen & Bathroom Remodeling Atlanta | Licensed Residential Contractor"
+        title="Breathe New Life Into Your Home—Without the Contractor Headaches"
+        subtitle="Expert renovations for kitchens, bathrooms, basements & whole homes. Serving Buckhead, Midtown, Decatur, and Sandy Springs with quality craftsmanship you can trust."
+        primaryCTA="Get Your Free Consultation"
+        secondaryCTA="Call 678-671-6336"
         backgroundImage={heroBathroom}
+        trustLine="Licensed • Insured • 20+ Years in Metro Atlanta • 98% Customer Satisfaction"
         useH1={true}
       />
 
@@ -38,22 +42,24 @@ const ResidentialFunnel = () => {
       </section>
 
       {/* Before/After Slider */}
-      <section className="py-16 md:py-24 bg-muted/30">
-        <div className="container max-w-5xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">See the Transformation</h2>
-            <p className="text-muted-foreground text-lg">
-              Real projects, real results from Atlanta homeowners
-            </p>
+      <AnimatedSection>
+        <section className="py-16 md:py-24 bg-muted/30">
+          <div className="container max-w-5xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">See the Transformation</h2>
+              <p className="text-muted-foreground text-lg">
+                Real projects, real results from Atlanta homeowners
+              </p>
+            </div>
+            
+            <BeforeAfterSlider
+              beforeImage={kitchenBefore}
+              afterImage={kitchenAfter}
+              alt="Kitchen renovation in Buckhead"
+            />
           </div>
-          
-          <BeforeAfterSlider
-            beforeImage={kitchenBefore}
-            afterImage={kitchenAfter}
-            alt="Kitchen renovation in Buckhead"
-          />
-        </div>
-      </section>
+        </section>
+      </AnimatedSection>
 
       {/* Empathy Section */}
       <section className="py-16 md:py-24 bg-background">
@@ -71,101 +77,105 @@ const ResidentialFunnel = () => {
       </section>
 
       {/* The First Class Difference */}
-      <section className="py-16 md:py-24 bg-muted/30">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">The First Class Difference</h2>
-            <p className="text-muted-foreground text-lg">
-              Why Atlanta homeowners trust us with their most important projects
-            </p>
-          </div>
+      <AnimatedSection delay={100}>
+        <section className="py-16 md:py-24 bg-muted/30">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">The First Class Difference</h2>
+              <p className="text-muted-foreground text-lg">
+                Why Atlanta homeowners trust us with their most important projects
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <ValueCard
-              icon={UserCheck}
-              title="Dedicated Project Manager"
-              description="One point of contact, daily/weekly updates, no guesswork."
-            />
-            <ValueCard
-              icon={DollarSign}
-              title="Transparent, Detailed Quotes"
-              description="Clear scopes and line items. No bait-and-switch."
-            />
-            <ValueCard
-              icon={Calendar}
-              title="On-Time, On-Budget"
-              description="A schedule you can plan your life around."
-            />
-            <ValueCard
-              icon={Hammer}
-              title="Quality Craftsmanship"
-              description="Vetted pros, inspected milestones, lasting finishes."
-            />
-            <ValueCard
-              icon={ShieldCheck}
-              title="Licensed, Bonded & Insured"
-              description="Certified DBE/MBE. Work done right and protected."
-            />
-          </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              <ValueCard
+                icon={UserCheck}
+                title="Dedicated Project Manager"
+                description="One point of contact, daily/weekly updates, no guesswork."
+              />
+              <ValueCard
+                icon={DollarSign}
+                title="Transparent, Detailed Quotes"
+                description="Clear scopes and line items. No bait-and-switch."
+              />
+              <ValueCard
+                icon={Calendar}
+                title="On-Time, On-Budget"
+                description="A schedule you can plan your life around."
+              />
+              <ValueCard
+                icon={Hammer}
+                title="Quality Craftsmanship"
+                description="Vetted pros, inspected milestones, lasting finishes."
+              />
+              <ValueCard
+                icon={ShieldCheck}
+                title="Licensed, Bonded & Insured"
+                description="Certified DBE/MBE. Work done right and protected."
+              />
+            </div>
 
-          <div className="text-center mt-8">
-            <a href="#contact-form">
-              <span className="inline-block text-accent font-semibold hover:underline cursor-pointer">
-                Ready to plan your project? Get My Free Quote →
-              </span>
-            </a>
+            <div className="text-center mt-8">
+              <a href="#contact-form">
+                <span className="inline-block text-accent font-semibold hover:underline cursor-pointer">
+                  Ready to plan your project? Get My Free Quote →
+                </span>
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </AnimatedSection>
 
       {/* Services */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Renovation Services We Offer</h2>
-            <p className="text-muted-foreground text-lg">
-              From single rooms to whole-home transformations
-            </p>
-          </div>
+      <AnimatedSection delay={200}>
+        <section className="py-16 md:py-24 bg-background">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Renovation Services We Offer</h2>
+              <p className="text-muted-foreground text-lg">
+                From single rooms to whole-home transformations
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-bold mb-3">Kitchen Remodeling</h3>
-              <p className="text-sm text-muted-foreground">
-                Layouts, custom cabinetry, countertops, lighting, and appliances for everyday luxury.
-              </p>
-            </div>
-            
-            <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-bold mb-3">Bathroom Remodeling</h3>
-              <p className="text-sm text-muted-foreground">
-                Spa-level finishes, smart storage, flawless tile & fixtures.
-              </p>
-            </div>
-            
-            <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-bold mb-3">Basement Finishing</h3>
-              <p className="text-sm text-muted-foreground">
-                Turn unused space into a media room, gym, in-law suite, or office.
-              </p>
-            </div>
-            
-            <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-bold mb-3">Home Additions</h3>
-              <p className="text-sm text-muted-foreground">
-                Seamless expansions—more room, more value, perfectly integrated.
-              </p>
-            </div>
-            
-            <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow md:col-span-2 lg:col-span-1">
-              <h3 className="text-xl font-bold mb-3">Whole-Home Renovations</h3>
-              <p className="text-sm text-muted-foreground">
-                Cohesive design, efficient timelines, and single-team accountability.
-              </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
+                <h3 className="text-xl font-bold mb-3">Kitchen Remodeling</h3>
+                <p className="text-sm text-muted-foreground">
+                  Layouts, custom cabinetry, countertops, lighting, and appliances for everyday luxury.
+                </p>
+              </div>
+              
+              <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
+                <h3 className="text-xl font-bold mb-3">Bathroom Remodeling</h3>
+                <p className="text-sm text-muted-foreground">
+                  Spa-level finishes, smart storage, flawless tile & fixtures.
+                </p>
+              </div>
+              
+              <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
+                <h3 className="text-xl font-bold mb-3">Basement Finishing</h3>
+                <p className="text-sm text-muted-foreground">
+                  Turn unused space into a media room, gym, in-law suite, or office.
+                </p>
+              </div>
+              
+              <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
+                <h3 className="text-xl font-bold mb-3">Home Additions</h3>
+                <p className="text-sm text-muted-foreground">
+                  Seamless expansions—more room, more value, perfectly integrated.
+                </p>
+              </div>
+              
+              <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow md:col-span-2 lg:col-span-1">
+                <h3 className="text-xl font-bold mb-3">Whole-Home Renovations</h3>
+                <p className="text-sm text-muted-foreground">
+                  Cohesive design, efficient timelines, and single-team accountability.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </AnimatedSection>
 
       {/* Budget Estimator */}
       <section className="py-16 md:py-24 bg-background">
@@ -179,35 +189,37 @@ const ResidentialFunnel = () => {
       </section>
 
       {/* Social Proof */}
-      <section className="py-16 md:py-24 bg-muted/30">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Atlanta Homeowners Say</h2>
-          </div>
+      <AnimatedSection delay={100}>
+        <section className="py-16 md:py-24 bg-muted/30">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">What Atlanta Homeowners Say</h2>
+            </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <TestimonialCard
-              quote="They finished two weeks early and the quality is outstanding. The process was simple and communication was constant."
-              author="Sarah T."
-              location="Buckhead"
-            />
-            <TestimonialCard
-              quote="No surprise costs, clean crew, and the bathroom looks like a boutique hotel. Five stars."
-              author="Marcus J."
-              location="Decatur"
-            />
-          </div>
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              <TestimonialCard
+                quote="They finished two weeks early and the quality is outstanding. The process was simple and communication was constant."
+                author="Sarah T."
+                location="Buckhead"
+              />
+              <TestimonialCard
+                quote="No surprise costs, clean crew, and the bathroom looks like a boutique hotel. Five stars."
+                author="Marcus J."
+                location="Decatur"
+              />
+            </div>
 
-          <div className="text-center mt-8">
-            <GoogleTrustBadge variant="compact" className="mx-auto" />
-            <div className="inline-flex items-center gap-4 text-sm mt-4">
-              <span>Licensed • Bonded • Insured</span>
-              <span>•</span>
-              <span className="text-accent font-semibold">DBE • MBE</span>
+            <div className="text-center mt-8">
+              <GoogleTrustBadge variant="compact" className="mx-auto" />
+              <div className="inline-flex items-center gap-4 text-sm mt-4">
+                <span>Licensed • Bonded • Insured</span>
+                <span>•</span>
+                <span className="text-accent font-semibold">DBE • MBE</span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </AnimatedSection>
 
       {/* Process */}
       <section className="py-16 md:py-24 bg-background">

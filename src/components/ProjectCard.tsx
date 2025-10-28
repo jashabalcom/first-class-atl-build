@@ -12,14 +12,15 @@ const ProjectCard = ({ title, subtitle, description, image, link = "#" }: Projec
   return (
     <a 
       href={link}
-      className="group block overflow-hidden rounded-lg border bg-card shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+      className="group block overflow-hidden rounded-lg border bg-card shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-accent/50"
     >
-      <div className="aspect-[4/3] overflow-hidden">
+      <div className="aspect-[4/3] overflow-hidden relative">
         <img
           src={image}
           alt={`${title} - ${subtitle} by First Class Construction Group Atlanta`}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
       
       <div className="p-6">

@@ -13,14 +13,14 @@ interface ServiceCardProps {
 
 const ServiceCard = ({ title, description, services, tagline, ctaText, ctaLink, icon }: ServiceCardProps) => {
   return (
-    <div className="group relative overflow-hidden rounded-lg border bg-card p-8 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+    <div className="group relative overflow-hidden rounded-lg border bg-card p-8 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-accent/50">
       {icon && (
-        <div className="mb-4 text-accent">
+        <div className="mb-4 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
           {icon}
         </div>
       )}
       
-      <h3 className="text-2xl font-bold mb-3">{title}</h3>
+      <h3 className="text-2xl font-bold mb-3 group-hover:text-accent transition-colors">{title}</h3>
       
       <div className="mb-4 text-sm text-muted-foreground">
         {services.join(" • ")}
