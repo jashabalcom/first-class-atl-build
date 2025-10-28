@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import ClientLogosCarousel from "@/components/ClientLogosCarousel";
 import GoogleTrustBadge from "@/components/GoogleTrustBadge";
+import { BudgetEstimator } from "@/components/BudgetEstimator";
 import { Home as HomeIcon, Building2, Calendar, UserCheck, ShieldCheck } from "lucide-react";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
@@ -153,8 +154,31 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Budget Estimator */}
+      <section id="budget-estimator" className="py-16 md:py-24 bg-muted/30 scroll-mt-20">
+        <div className="container">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Estimate Your Project Budget</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Get an instant ballpark estimate for your renovation project. Choose your project type, scope, and finish level to see the potential investment.
+            </p>
+          </div>
+          
+          <div className="max-w-6xl mx-auto">
+            <BudgetEstimator 
+              onGetQuote={() => {
+                document.getElementById('contact-form')?.scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
@@ -241,7 +265,9 @@ const Home = () => {
       {/* Client Logos */}
       <ClientLogosCarousel />
 
-      <ContactForm />
+      <div id="contact-form">
+        <ContactForm />
+      </div>
       
       <Footer />
       <MobileCallBar />
