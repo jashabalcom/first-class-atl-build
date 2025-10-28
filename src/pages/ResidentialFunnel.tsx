@@ -178,15 +178,20 @@ const ResidentialFunnel = () => {
       </AnimatedSection>
 
       {/* Budget Estimator */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container">
-          <BudgetEstimator 
-            onGetQuote={() => {
-              document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-          />
-        </div>
-      </section>
+      <AnimatedSection delay={300}>
+        <section id="budget-estimator" className="py-12 md:py-16 bg-muted/30 scroll-mt-20">
+          <div className="container max-w-6xl">
+            <BudgetEstimator 
+              onGetQuote={() => {
+                document.getElementById('contact-form')?.scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }}
+            />
+          </div>
+        </section>
+      </AnimatedSection>
 
       {/* Social Proof */}
       <AnimatedSection delay={100}>
