@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -43,6 +43,7 @@ interface MultiStepContactFormProps {
 export function MultiStepContactForm({ showCity = true, showTimeline = true }: MultiStepContactFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const formRef = useRef<HTMLDivElement>(null);
 
   const steps = ["Basic Info", "Project Details", "Description", "Review"];
 
@@ -116,7 +117,7 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
     if (isValid) {
       setCompletedSteps([...completedSteps, currentStep]);
       setCurrentStep(currentStep + 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {
       toast.error("Please fill in all required fields correctly");
     }
@@ -124,7 +125,7 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
 
   const handlePrevious = () => {
     setCurrentStep(currentStep - 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const onSubmit = async (data: ContactFormData) => {
@@ -319,7 +320,7 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div ref={formRef} className="w-full max-w-3xl mx-auto">
       <FormStepIndicator steps={steps} currentStep={currentStep} completedSteps={completedSteps} />
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
