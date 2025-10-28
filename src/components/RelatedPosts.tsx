@@ -14,28 +14,28 @@ const RelatedPosts = ({ posts, currentSlug }: RelatedPostsProps) => {
   if (relatedPosts.length === 0) return null;
 
   return (
-    <section className="py-12 bg-muted/30">
-      <div className="container max-w-6xl">
-        <h2 className="text-3xl font-bold mb-8">Related Articles</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+    <section className="py-16 bg-card/30 border-t border-[hsl(var(--editorial-border))]">
+      <div className="container max-w-7xl">
+        <h2 className="font-playfair text-4xl font-bold mb-12 text-center">Related Articles</h2>
+        <div className="grid md:grid-cols-3 gap-8">
           {relatedPosts.map((post) => (
             <Link key={post.slug} to={`/blog/${post.slug}`}>
-              <Card className="h-full hover:shadow-lg transition-shadow group">
-                <div className="relative aspect-video overflow-hidden bg-muted">
+              <Card className="h-full hover:shadow-xl transition-all duration-300 group bg-card border-[hsl(var(--editorial-border))]">
+                <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                   <img
                     src={post.featuredImage}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
                 <CardHeader>
-                  <h3 className="font-bold group-hover:text-accent transition-colors line-clamp-2">
+                  <h3 className="font-playfair text-xl font-bold group-hover:text-accent transition-colors line-clamp-2">
                     {post.title}
                   </h3>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Clock className="h-4 w-4" />
+                  <div className="flex items-center gap-2 font-inter text-xs uppercase tracking-wider text-muted-foreground">
+                    <Clock className="h-3 w-3" />
                     {post.readTime} min read
                   </div>
                 </CardContent>

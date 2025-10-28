@@ -9,6 +9,8 @@ import { Clock, Calendar, ArrowLeft, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
+import BlogContentRenderer from "@/components/blog/BlogContentRenderer";
+import ReadingProgress from "@/components/blog/ReadingProgress";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -69,8 +71,10 @@ const BlogPost = () => {
   };
 
   return (
-    <div className="min-h-screen pb-24 md:pb-0">
-      <Helmet>
+    <>
+      <ReadingProgress />
+      <div className="min-h-screen pb-24 md:pb-0 bg-[hsl(var(--editorial-cream))]">
+        <Helmet>
         <title>{post.title} | First Class Construction Atlanta</title>
         <meta name="description" content={post.metaDescription} />
         <meta name="keywords" content={post.tags.join(", ")} />
@@ -102,52 +106,60 @@ const BlogPost = () => {
       <Header />
 
       {/* Breadcrumbs */}
-      <nav className="bg-muted/30 border-b">
-        <div className="container max-w-6xl py-4">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+      <nav className="bg-card/50 border-b border-[hsl(var(--editorial-border))]">
+        <div className="container max-w-7xl py-3">
+          <div className="flex items-center gap-2 font-inter text-xs uppercase tracking-wider text-muted-foreground">
             <Link to="/" className="hover:text-accent transition-colors">
               Home
             </Link>
-            <span>›</span>
+            <span className="text-[hsl(var(--editorial-border))]">•</span>
             <Link to="/blog" className="hover:text-accent transition-colors">
               Blog
             </Link>
-            <span>›</span>
+            <span className="text-[hsl(var(--editorial-border))]">•</span>
             <span className="text-foreground">{post.category}</span>
           </div>
         </div>
       </nav>
 
-      {/* Article Header */}
+      {/* Article Header - Magazine Style */}
       <article>
-        <header className="py-12 md:py-16 bg-gradient-to-b from-muted/50 to-background">
+        <header className="py-16 md:py-20 bg-card/30">
           <div className="container max-w-4xl">
             <AnimatedSection>
-              <Badge className="mb-4">{post.category}</Badge>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">{post.title}</h1>
-              <p className="text-xl text-muted-foreground mb-6">{post.excerpt}</p>
-              
-              <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
-                  <time dateTime={post.publishDate}>{formatDate(post.publishDate)}</time>
+              <div className="text-center">
+                <span className="font-inter text-xs uppercase tracking-[0.2em] text-accent font-medium">
+                  {post.category}
+                </span>
+                <h1 className="font-playfair text-5xl md:text-7xl font-bold mt-6 mb-8 leading-[1.1] text-balance">
+                  {post.title}
+                </h1>
+                <p className="font-cormorant text-2xl md:text-3xl text-muted-foreground/80 mb-8 leading-[1.5] max-w-3xl mx-auto font-light">
+                  {post.excerpt}
+                </p>
+                
+                <div className="flex flex-wrap items-center justify-center gap-4 font-inter text-xs uppercase tracking-wider text-muted-foreground">
+                  <time dateTime={post.publishDate} className="flex items-center gap-2">
+                    <Calendar className="h-3.5 w-3.5" />
+                    {formatDate(post.publishDate)}
+                  </time>
+                  <span className="text-[hsl(var(--editorial-border))]">•</span>
+                  <span className="flex items-center gap-2">
+                    <Clock className="h-3.5 w-3.5" />
+                    {post.readTime} min read
+                  </span>
+                  <span className="text-[hsl(var(--editorial-border))]">•</span>
+                  <span>{post.author}</span>
                 </div>
-                <span>•</span>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4" />
-                  {post.readTime} min read
-                </div>
-                <span>•</span>
-                <span>By {post.author}</span>
               </div>
             </AnimatedSection>
           </div>
         </header>
 
-        {/* Featured Image */}
+        {/* Featured Image - Full Bleed Editorial Style */}
         <AnimatedSection delay={100}>
-          <div className="container max-w-6xl mb-12">
-            <div className="relative aspect-[21/9] rounded-lg overflow-hidden shadow-xl">
+          <div className="container max-w-7xl mb-16">
+            <div className="relative aspect-[16/10] rounded-sm overflow-hidden shadow-2xl">
               <img
                 src={post.featuredImage}
                 alt={post.title}
@@ -157,47 +169,63 @@ const BlogPost = () => {
           </div>
         </AnimatedSection>
 
-        {/* Article Content */}
+        {/* Article Content - Magazine Typography */}
         <AnimatedSection delay={200}>
-          <div className="container max-w-4xl">
-            <div
-              className="prose prose-lg max-w-none mb-12 prose-headings:font-bold prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-p:mb-4 prose-ul:my-4 prose-li:my-2 prose-strong:font-semibold prose-a:text-accent hover:prose-a:underline"
-              dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, "<br/>") }}
-            />
+          <div className="container max-w-4xl px-6">
+            {/* Lead paragraph styling via content renderer */}
+            <div className="mb-16">
+              <BlogContentRenderer content={post.content} />
+            </div>
 
-            {/* CTA Box */}
-            <div className="bg-accent text-accent-foreground rounded-lg p-8 text-center mb-12">
-              <h3 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h3>
-              <p className="text-lg mb-6 opacity-90">
+            {/* Elegant CTA Box */}
+            <div className="bg-card/50 border-2 border-accent/20 rounded-sm p-10 text-center mb-16">
+              <h3 className="font-playfair text-3xl font-semibold mb-4 text-foreground">
+                Ready to Start Your Project?
+              </h3>
+              <p className="font-cormorant text-xl text-muted-foreground mb-8 leading-relaxed">
                 Get a free consultation and detailed estimate from Atlanta's trusted contractors
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="tel:678-671-6336">
-                  <Button size="lg" variant="secondary" className="gap-2">
+                  <Button 
+                    size="lg" 
+                    className="gap-2 bg-accent text-accent-foreground hover:bg-accent/90 font-inter tracking-wide"
+                  >
                     <Phone className="h-5 w-5" />
                     Call 678-671-6336
                   </Button>
                 </a>
                 <Link to="/contact">
-                  <Button size="lg" variant="outline" className="border-background text-background hover:bg-background hover:text-foreground">
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-accent text-accent hover:bg-accent hover:text-accent-foreground font-inter tracking-wide"
+                  >
                     Request Free Consultation
                   </Button>
                 </Link>
               </div>
             </div>
 
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mb-12">
+            {/* Tags - Magazine Style */}
+            <div className="flex flex-wrap gap-2 mb-12 pb-12 border-b border-[hsl(var(--editorial-border))]">
               {post.tags.map((tag) => (
-                <Badge key={tag} variant="secondary">
+                <Badge 
+                  key={tag} 
+                  variant="outline" 
+                  className="font-inter text-xs uppercase tracking-wider border-[hsl(var(--editorial-border))] hover:border-accent hover:text-accent transition-colors"
+                >
                   {tag}
                 </Badge>
               ))}
             </div>
 
-            {/* Back to Blog */}
+            {/* Back to Blog - Editorial Style */}
             <Link to="/blog">
-              <Button variant="outline" className="gap-2">
+              <Button 
+                variant="ghost" 
+                className="gap-2 font-inter uppercase tracking-wider text-sm hover:text-accent"
+              >
                 <ArrowLeft className="h-4 w-4" />
                 Back to All Articles
               </Button>
@@ -209,9 +237,10 @@ const BlogPost = () => {
       {/* Related Posts */}
       <RelatedPosts posts={blogPosts} currentSlug={post.slug} />
 
-      <Footer />
-      <MobileCallBar />
-    </div>
+        <Footer />
+        <MobileCallBar />
+      </div>
+    </>
   );
 };
 

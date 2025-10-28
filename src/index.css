@@ -8,9 +8,14 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Premium Construction Palette - All HSL */
-    --background: 42 15% 98%;
-    --foreground: 0 0% 10%;
+    /* Editorial Magazine Palette - Architectural Digest Style */
+    --background: 35 44% 98%; /* Warm ivory #FDFBF7 */
+    --foreground: 0 0% 17%; /* Charcoal #2B2B2B */
+    
+    /* Editorial tokens */
+    --editorial-cream: 35 44% 98%;
+    --editorial-gold: 38 35% 57%; /* #B8956A */
+    --editorial-border: 35 20% 88%; /* #E5E0D8 */
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 10%;
@@ -29,16 +34,16 @@ All colors MUST be HSL.
     --muted: 220 13% 91%;
     --muted-foreground: 215 16% 47%;
 
-    /* Construction brass accent for CTAs */
-    --accent: 28 80% 44%;
+    /* Editorial gold accent for sophisticated highlights */
+    --accent: 38 35% 57%; /* #B8956A editorial gold */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 28 80% 44%;
+    --border: 35 20% 88%; /* Editorial border */
+    --input: 35 20% 88%;
+    --ring: 38 35% 57%; /* Editorial gold */
 
     --radius: 0.5rem;
 

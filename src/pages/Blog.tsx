@@ -18,7 +18,7 @@ const Blog = () => {
   const featuredPost = blogPosts.find((post) => post.featured);
 
   return (
-    <div className="min-h-screen pb-24 md:pb-0">
+    <div className="min-h-screen pb-24 md:pb-0 bg-[hsl(var(--editorial-cream))]">
       <Helmet>
         <title>Construction Blog - Expert Tips & Guides | First Class Construction Atlanta</title>
         <meta
@@ -34,16 +34,16 @@ const Blog = () => {
 
       <Header />
 
-      {/* Hero Section with Featured Post */}
+      {/* Hero Section with Featured Post - Magazine Style */}
       {featuredPost && (
-        <section className="py-16 md:py-24 bg-gradient-to-b from-muted/50 to-background">
-          <div className="container max-w-6xl">
+        <section className="py-16 md:py-24 bg-[hsl(var(--editorial-cream))]">
+          <div className="container max-w-7xl">
             <AnimatedSection>
-              <div className="text-center mb-12">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <div className="text-center mb-16">
+                <h1 className="font-playfair text-5xl md:text-6xl font-bold mb-6 text-balance">
                   Construction Insights & Expert Guides
                 </h1>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                <p className="font-cormorant text-2xl text-muted-foreground/80 max-w-3xl mx-auto leading-relaxed">
                   Practical advice, cost breakdowns, and design inspiration from Atlanta's
                   licensed construction professionals
                 </p>
@@ -51,29 +51,30 @@ const Blog = () => {
             </AnimatedSection>
 
             <AnimatedSection delay={100}>
-              <div className="grid md:grid-cols-2 gap-8 items-center bg-card rounded-lg overflow-hidden shadow-lg">
-                <div className="relative aspect-video md:aspect-auto md:h-full">
+              <div className="grid md:grid-cols-5 gap-0 bg-card rounded-sm overflow-hidden shadow-2xl border border-[hsl(var(--editorial-border))]">
+                <div className="relative md:col-span-3 aspect-[16/10] md:aspect-auto md:h-full overflow-hidden">
                   <img
                     src={featuredPost.featuredImage}
                     alt={featuredPost.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                   />
                 </div>
-                <div className="p-8">
-                  <span className="text-accent font-semibold text-sm uppercase tracking-wide">
+                <div className="md:col-span-2 p-10 flex flex-col justify-center">
+                  <span className="font-inter text-xs uppercase tracking-[0.2em] text-accent font-medium mb-4">
                     Featured Article
                   </span>
-                  <h2 className="text-3xl font-bold mt-2 mb-4">
+                  <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 leading-tight">
                     {featuredPost.title}
                   </h2>
-                  <p className="text-muted-foreground mb-6">
+                  <p className="font-cormorant text-lg text-muted-foreground mb-6 leading-relaxed">
                     {featuredPost.excerpt}
                   </p>
                   <a
                     href={`/blog/${featuredPost.slug}`}
-                    className="text-accent font-semibold hover:underline inline-flex items-center gap-2"
+                    className="group inline-flex items-center gap-2 font-inter text-sm uppercase tracking-wider text-accent hover:text-accent/80 transition-colors"
                   >
-                    Read Full Article →
+                    Read Full Article 
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </a>
                 </div>
               </div>
@@ -84,7 +85,7 @@ const Blog = () => {
 
       {/* Categories Filter */}
       <AnimatedSection delay={200}>
-        <section className="py-8 border-b bg-background sticky top-16 z-40">
+        <section className="py-8 border-b border-[hsl(var(--editorial-border))] bg-card/50 sticky top-16 z-40">
           <div className="container max-w-6xl">
             <BlogCategories
               categories={blogCategories}
@@ -97,13 +98,13 @@ const Blog = () => {
 
       {/* Blog Posts Grid */}
       <AnimatedSection delay={300}>
-        <section className="py-16 bg-background">
+        <section className="py-16 bg-[hsl(var(--editorial-cream))]">
           <div className="container max-w-6xl">
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold">
+            <div className="mb-12">
+              <h2 className="font-playfair text-3xl font-bold">
                 {selectedCategory ? `${selectedCategory} Articles` : "All Articles"}
               </h2>
-              <p className="text-muted-foreground">
+              <p className="font-inter text-sm uppercase tracking-wider text-muted-foreground mt-2">
                 {filteredPosts.length} {filteredPosts.length === 1 ? "article" : "articles"}
               </p>
             </div>
@@ -128,22 +129,22 @@ const Blog = () => {
       </AnimatedSection>
 
       {/* CTA Section */}
-      <section className="py-16 bg-accent text-accent-foreground">
+      <section className="py-16 bg-card border-t border-[hsl(var(--editorial-border))]">
         <div className="container max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-4">
             Ready to Start Your Project?
           </h2>
-          <p className="text-lg mb-8 opacity-90">
+          <p className="font-cormorant text-xl text-muted-foreground mb-8 leading-relaxed">
             Get expert guidance and a detailed estimate from Atlanta's trusted construction team
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:678-671-6336">
-              <button className="px-8 py-3 bg-background text-foreground rounded-lg font-semibold hover:bg-background/90 transition-colors">
+              <button className="px-8 py-3 bg-accent text-accent-foreground rounded-sm font-inter tracking-wide hover:bg-accent/90 transition-colors">
                 Call 678-671-6336
               </button>
             </a>
             <a href="/contact">
-              <button className="px-8 py-3 border-2 border-background text-background rounded-lg font-semibold hover:bg-background hover:text-foreground transition-colors">
+              <button className="px-8 py-3 border-2 border-accent text-accent rounded-sm font-inter tracking-wide hover:bg-accent hover:text-accent-foreground transition-colors">
                 Request Free Consultation
               </button>
             </a>
