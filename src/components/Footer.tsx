@@ -47,16 +47,16 @@ const Footer = () => {
                 <Link to="/residential" className="hover:text-accent transition-colors">Residential</Link>
               </li>
               <li>
-                <Link to="/" className="hover:text-accent transition-colors">Commercial</Link>
+                <Link to="/commercial" className="hover:text-accent transition-colors">Commercial</Link>
               </li>
               <li>
-                <Link to="/" className="hover:text-accent transition-colors">Gallery</Link>
+                <Link to="/gallery" className="hover:text-accent transition-colors">Gallery</Link>
               </li>
               <li>
-                <Link to="/" className="hover:text-accent transition-colors">About</Link>
+                <Link to="/about" className="hover:text-accent transition-colors">About</Link>
               </li>
               <li>
-                <a href="#contact-form" className="hover:text-accent transition-colors">Contact</a>
+                <Link to="/contact" className="hover:text-accent transition-colors">Contact</Link>
               </li>
             </ul>
           </div>

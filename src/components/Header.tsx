@@ -12,19 +12,19 @@ const Header = () => {
         </Link>
         
         <nav className="hidden md:flex items-center gap-6">
-          <Link to="/" className="text-sm font-medium transition-colors hover:text-accent">
+          <Link to="/residential" className="text-sm font-medium transition-colors hover:text-accent">
             Residential
           </Link>
-          <Link to="/" className="text-sm font-medium transition-colors hover:text-accent">
+          <Link to="/commercial" className="text-sm font-medium transition-colors hover:text-accent">
             Commercial
           </Link>
-          <Link to="/" className="text-sm font-medium transition-colors hover:text-accent">
+          <Link to="/gallery" className="text-sm font-medium transition-colors hover:text-accent">
             Gallery
           </Link>
-          <Link to="/" className="text-sm font-medium transition-colors hover:text-accent">
+          <Link to="/about" className="text-sm font-medium transition-colors hover:text-accent">
             About
           </Link>
-          <Link to="/" className="text-sm font-medium transition-colors hover:text-accent">
+          <Link to="/contact" className="text-sm font-medium transition-colors hover:text-accent">
             Contact
           </Link>
         </nav>

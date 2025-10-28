@@ -56,7 +56,7 @@ const Home = () => {
               services={["Retail", "Restaurants", "Offices", "Tenant Improvements", "Facilities"]}
               tagline="Efficient, code-compliant spaces that minimize downtime."
               ctaText="Explore Commercial"
-              ctaLink="#contact-form"
+              ctaLink="/commercial"
               icon={<Building2 className="h-12 w-12" />}
             />
           </div>
