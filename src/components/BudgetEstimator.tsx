@@ -83,6 +83,10 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
   const [projectType, setProjectType] = useState<string>("");
   const [scope, setScope] = useState<number>(50); // 0-100 percentage
   const [finishLevel, setFinishLevel] = useState<string>("standard");
+  const [showEmailCapture, setShowEmailCapture] = useState(false);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const calculateEstimate = () => {
     if (!projectType) return { min: 0, max: 0 };
@@ -114,6 +118,62 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
     if (scope < 35) return "Partial Update";
     if (scope < 70) return "Standard Remodel";
     return "Complete Transformation";
+  };
+
+  const handleGetQuote = () => {
+    if (hasEstimate) {
+      setShowEmailCapture(true);
+    }
+  };
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email || !name) {
+      toast.error("Please enter your name and email");
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const { supabase } = await import("@/integrations/supabase/client");
+      
+      const estimateText = `${formatCurrency(estimate.min)} - ${formatCurrency(estimate.max)}`;
+      const projectDetails = `${projectTypes.find(p => p.id === projectType)?.title} - ${getScopeLabel()} - ${finishLevels.find(l => l.id === finishLevel)?.title}`;
+      
+      const { error } = await supabase.functions.invoke('ghl-submit', {
+        body: {
+          name,
+          email,
+          phone: '',
+          projectType,
+          estimatedBudget: estimateText,
+          message: `Budget Estimator: ${projectDetails}. Estimated range: ${estimateText}`,
+          formSource: 'budget'
+        }
+      });
+
+      if (error) {
+        console.error('GHL submission error:', error);
+        toast.error("Failed to send estimate. Please try again or call us at 678-671-6336.");
+        return;
+      }
+
+      toast.success("We've received your estimate request and will send you a detailed quote shortly!");
+      setShowEmailCapture(false);
+      setEmail("");
+      setName("");
+      
+      if (onGetQuote) {
+        onGetQuote();
+      }
+    } catch (error) {
+      console.error('Budget estimator submission error:', error);
+      toast.error("Failed to send estimate. Please try again or call us at 678-671-6336.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -241,26 +301,68 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button 
-              size="lg" 
-              onClick={onGetQuote}
-              className="gap-2 text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto h-12"
-            >
-              Get Exact Quote
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              onClick={() => {
-                toast.info("Call us at (678) 671-6336 to discuss your project");
-              }}
-              className="gap-2 text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto h-12"
-            >
-              Schedule Consultation
-            </Button>
-          </div>
+          {!showEmailCapture ? (
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button 
+                size="lg" 
+                onClick={handleGetQuote}
+                className="gap-2 text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto h-12"
+              >
+                Get Exact Quote
+                <ArrowRight className="h-5 w-5" />
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={() => {
+                  toast.info("Call us at (678) 671-6336 to discuss your project");
+                }}
+                className="gap-2 text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto h-12"
+              >
+                Schedule Consultation
+              </Button>
+            </div>
+          ) : (
+            <form onSubmit={handleEmailSubmit} className="space-y-4 max-w-md mx-auto">
+              <div className="space-y-3">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  required
+                />
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="flex-1"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Send Me Quote"}
+                </Button>
+                <Button
+                  type="button"
+                  size="lg"
+                  variant="outline"
+                  onClick={() => setShowEmailCapture(false)}
+                  disabled={isSubmitting}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </form>
+          )}
         </Card>
       )}
 

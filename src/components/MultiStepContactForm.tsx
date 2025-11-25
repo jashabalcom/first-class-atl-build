@@ -130,20 +130,34 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
   };
 
   const onSubmit = async (data: ContactFormData) => {
-    console.log("Form submitted:", data);
-    
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const { supabase } = await import("@/integrations/supabase/client");
       
-      // Clear saved progress
+      const { error } = await supabase.functions.invoke('ghl-submit', {
+        body: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          projectType: data.projectType,
+          city: data.city,
+          timeline: data.timeline,
+          message: data.message,
+          formSource: 'multistep'
+        }
+      });
+
+      if (error) {
+        console.error('GHL submission error:', error);
+        toast.error("Failed to send request. Please try again or call us at 678-671-6336.");
+        return;
+      }
+
       localStorage.removeItem(STORAGE_KEY);
-      
-      // Show success state
       setIsSubmitted(true);
       formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
-      toast.error("Failed to send request. Please try again.");
+      console.error('Form submission error:', error);
+      toast.error("Failed to send request. Please try again or call us at 678-671-6336.");
     }
   };
 
