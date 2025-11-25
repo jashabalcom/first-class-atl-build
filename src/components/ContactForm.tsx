@@ -82,20 +82,42 @@ const ContactForm = ({
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { supabase } = await import("@/integrations/supabase/client");
+      
+      const { error } = await supabase.functions.invoke('ghl-submit', {
+        body: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone || '',
+          projectType: data.projectType,
+          city: data.city,
+          timeline: data.timeline,
+          message: data.message,
+          formSource: 'contact'
+        }
+      });
+
+      if (error) {
+        console.error('GHL submission error:', error);
+        toast({
+          title: "Error",
+          description: "Something went wrong. Please try again or call us at 678-671-6336.",
+          variant: "destructive",
+        });
+        return;
+      }
 
       toast({
         title: "Thanks—We Received Your Request",
         description: "A project specialist will contact you within one business day to discuss next steps.",
       });
 
-      // Reset form
       reset();
     } catch (error) {
+      console.error('Form submission error:', error);
       toast({
         title: "Error",
-        description: "Something went wrong. Please try again.",
+        description: "Something went wrong. Please try again or call us at 678-671-6336.",
         variant: "destructive",
       });
     }
