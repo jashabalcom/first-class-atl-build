@@ -6,7 +6,7 @@ const GoHighLevelChat = () => {
     // To activate: Replace 'YOUR_LOCATION_ID' with your actual GHL Location ID
     // Find this in: GHL Settings > Sites > Chat Widget
     
-    const GHL_LOCATION_ID = "69001e4b61260772ee842619";
+    const GHL_LOCATION_ID = "692e4338cf45951594003170";
     
     const script = document.createElement("script");
     script.src = `https://widgets.leadconnectorhq.com/loader.js`;
