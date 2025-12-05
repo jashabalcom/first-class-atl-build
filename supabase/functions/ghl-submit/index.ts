@@ -52,8 +52,12 @@ function validateFormData(data: any): { valid: boolean; errors: string[] } {
   if (!data.email || typeof data.email !== 'string' || !data.email.includes('@') || data.email.length > 255) {
     errors.push('Valid email is required');
   }
-  if (!data.phone || typeof data.phone !== 'string' || data.phone.length < 10 || data.phone.length > 20) {
-    errors.push('Valid phone number is required');
+  // Phone is optional, but if provided must be valid
+  if (data.phone && typeof data.phone === 'string' && data.phone.length > 0) {
+    const digitsOnly = data.phone.replace(/\D/g, '');
+    if (digitsOnly.length < 10 || digitsOnly.length > 15) {
+      errors.push('Phone number must be 10-15 digits');
+    }
   }
   if (!data.formSource || typeof data.formSource !== 'string') {
     errors.push('Form source is required');
