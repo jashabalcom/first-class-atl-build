@@ -101,14 +101,32 @@ async function appendToGoogleSheets(lead: FormSubmission & { created_at: string 
     const payloadB64 = toBase64Url(encoder.encode(JSON.stringify(payload)));
     const signatureInput = `${headerB64}.${payloadB64}`;
 
-    // Import private key and sign - handle escaped newlines from env
-    const cleanedKey = privateKey
-      .replace(/\\n/g, '\n')  // Handle escaped newlines from env
-      .replace('-----BEGIN PRIVATE KEY-----', '')
-      .replace('-----END PRIVATE KEY-----', '')
+    // Debug: Log raw key info (first/last chars only for security)
+    console.log('Raw private key length:', privateKey.length);
+    console.log('Key starts with:', privateKey.substring(0, 50));
+    console.log('Key ends with:', privateKey.substring(privateKey.length - 30));
+    
+    // Import private key and sign - handle various escaped newline formats
+    let processedKey = privateKey;
+    
+    // Handle literal \n strings (from JSON/env)
+    processedKey = processedKey.replace(/\\n/g, '\n');
+    // Handle \\n that became \n in string
+    processedKey = processedKey.replace(/\\\\n/g, '\n');
+    
+    // Extract the base64 content
+    const cleanedKey = processedKey
+      .replace(/-----BEGIN PRIVATE KEY-----/g, '')
+      .replace(/-----END PRIVATE KEY-----/g, '')
       .replace(/[\s\n\r]/g, '');
     
-    console.log('Private key length after cleaning:', cleanedKey.length);
+    console.log('Cleaned key length:', cleanedKey.length);
+    
+    if (cleanedKey.length < 1000) {
+      console.error('Private key seems too short. Expected ~1700 chars, got:', cleanedKey.length);
+      console.log('Make sure you copied the ENTIRE private_key value from the service account JSON, including the -----BEGIN/END----- markers');
+      return false;
+    }
     
     const binaryKey = Uint8Array.from(atob(cleanedKey), c => c.charCodeAt(0));
     
