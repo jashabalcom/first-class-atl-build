@@ -4,6 +4,7 @@ import MobileCallBar from "@/components/MobileCallBar";
 import StatsSection from "@/components/StatsSection";
 import CertificationBadges from "@/components/CertificationBadges";
 import ClientLogosCarousel from "@/components/ClientLogosCarousel";
+import SectionLabel from "@/components/SectionLabel";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Shield, Users, Award, CheckCircle } from "lucide-react";
@@ -44,11 +45,12 @@ const About = () => {
           className="relative py-32 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroCommercial})` }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/75 to-black/55" />
           <div className="container relative z-10">
             <div className="max-w-3xl mx-auto text-center text-white space-y-6">
-              <h1 className="text-4xl md:text-5xl font-bold animate-fade-in-up">
-                About First Class Construction Group
+              <SectionLabel className="text-accent">Our Story</SectionLabel>
+              <h1 className="font-playfair text-4xl md:text-5xl font-bold animate-fade-in-up mt-3">
+                About First Class <span className="text-accent">Construction Group</span>
               </h1>
               <p className="text-xl opacity-90">
                 Building trust, quality, and lasting relationships across Atlanta for over 20 years.
@@ -62,7 +64,11 @@ const About = () => {
           <div className="container">
             <div className="max-w-4xl mx-auto space-y-8">
               <div className="text-center space-y-4">
-                <h2 className="text-3xl md:text-4xl font-bold">Who We Are</h2>
+                <SectionLabel>Who We Are</SectionLabel>
+                <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-3">
+                  Two Decades of <span className="text-accent">Excellence</span>
+                </h2>
+                <div className="section-divider" />
               </div>
               
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
@@ -94,10 +100,14 @@ const About = () => {
           <div className="container">
             <div className="max-w-4xl mx-auto space-y-12">
               <div className="text-center space-y-4">
-                <h2 className="text-3xl md:text-4xl font-bold">Our Core Values</h2>
+                <SectionLabel>Our Values</SectionLabel>
+                <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-3">
+                  Our Core <span className="text-accent">Values</span>
+                </h2>
                 <p className="text-lg text-muted-foreground">
                   The principles that guide every decision, every project, every interaction.
                 </p>
+                <div className="section-divider" />
               </div>
 
               <div className="grid md:grid-cols-2 gap-8">
@@ -106,7 +116,7 @@ const About = () => {
                   return (
                     <div 
                       key={index}
-                      className="flex gap-4 p-6 rounded-lg border bg-card hover:shadow-md transition-shadow"
+                      className="flex gap-4 p-6 rounded-lg border bg-card border-l-2 border-l-transparent hover:border-l-accent hover:shadow-md transition-all duration-300"
                     >
                       <div className="flex-shrink-0">
                         <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
@@ -114,7 +124,7 @@ const About = () => {
                         </div>
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold mb-2">{value.title}</h3>
+                        <h3 className="font-playfair text-xl font-bold mb-2">{value.title}</h3>
                         <p className="text-muted-foreground">{value.description}</p>
                       </div>
                     </div>
@@ -135,18 +145,20 @@ const About = () => {
         <section className="py-20 bg-gradient-to-b from-background to-secondary/10">
           <div className="container">
             <div className="max-w-3xl mx-auto text-center space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold">
-                Let's Build Something Great Together
+              <SectionLabel>Get Started</SectionLabel>
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-3">
+                Let's Build Something <span className="text-accent">Great Together</span>
               </h2>
               <p className="text-lg text-muted-foreground">
                 Experience the First Class difference. Request your free consultation today.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="section-divider" />
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Link to="/residential">
-                  <Button variant="cta" size="lg">Get Your Free Quote</Button>
+                  <Button variant="default" size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">Get Your Free Quote</Button>
                 </Link>
                 <a href="tel:678-671-6336">
-                  <Button variant="outline" size="lg">Call 678-671-6336</Button>
+                  <Button variant="outline" size="lg" className="border-accent/50 hover:border-accent hover:text-accent">Call 678-671-6336</Button>
                 </a>
               </div>
             </div>

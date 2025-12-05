@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import ContactForm from "@/components/ContactForm";
 import GoogleTrustBadge from "@/components/GoogleTrustBadge";
+import SectionLabel from "@/components/SectionLabel";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 const Contact = () => {
@@ -58,12 +59,14 @@ const Contact = () => {
         <section className="relative py-12 md:py-20 bg-gradient-to-b from-secondary/10 to-background">
           <div className="container">
             <div className="max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-                Let's Turn Your Vision Into Reality
+              <SectionLabel>Contact Us</SectionLabel>
+              <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold mt-3">
+                Let's Turn Your Vision <span className="text-accent">Into Reality</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground">
                 Get in touch with First Class Construction Group. We're ready to discuss your project and provide a free consultation.
               </p>
+              <div className="section-divider" />
             </div>
           </div>
         </section>
@@ -89,7 +92,7 @@ const Contact = () => {
                 <GoogleTrustBadge variant="full" />
 
                 <div>
-                  <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
+                  <h2 className="font-playfair text-2xl font-bold mb-6">Contact Information</h2>
                   <div className="space-y-6">
                     {contactInfo.map((info, index) => {
                       const Icon = info.icon;
@@ -123,7 +126,7 @@ const Contact = () => {
 
                 {/* Service Areas */}
                 <div className="pt-8 border-t">
-                  <h3 className="font-semibold mb-4">Service Areas</h3>
+                  <h3 className="font-playfair font-semibold text-lg mb-4">Service Areas</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {serviceAreas.map((area, index) => (
                       <div 
@@ -140,16 +143,16 @@ const Contact = () => {
                 {/* Trust Badges */}
                 <div className="pt-8 border-t">
                   <div className="flex flex-wrap gap-3 text-sm">
-                    <div className="px-3 py-1.5 rounded-full border bg-card">
+                    <div className="px-3 py-1.5 rounded-full border bg-card hover:border-accent transition-colors">
                       ✓ Licensed
                     </div>
-                    <div className="px-3 py-1.5 rounded-full border bg-card">
+                    <div className="px-3 py-1.5 rounded-full border bg-card hover:border-accent transition-colors">
                       ✓ Bonded
                     </div>
-                    <div className="px-3 py-1.5 rounded-full border bg-card">
+                    <div className="px-3 py-1.5 rounded-full border bg-card hover:border-accent transition-colors">
                       ✓ Insured
                     </div>
-                    <div className="px-3 py-1.5 rounded-full border bg-card">
+                    <div className="px-3 py-1.5 rounded-full border bg-card text-accent font-semibold">
                       ✓ DBE/MBE
                     </div>
                   </div>
@@ -165,7 +168,7 @@ const Contact = () => {
             <div className="max-w-6xl mx-auto">
               <div className="aspect-[16/9] md:aspect-[21/9] bg-muted rounded-lg flex items-center justify-center border">
                 <div className="text-center space-y-2">
-                  <MapPin className="h-12 w-12 text-muted-foreground mx-auto" />
+                  <MapPin className="h-12 w-12 text-accent mx-auto" />
                   <p className="text-muted-foreground">
                     Proudly serving Metro Atlanta and surrounding areas
                   </p>
