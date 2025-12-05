@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
+import PageTransition from "./components/PageTransition";
 import Index from "./pages/Index";
 import Home from "./pages/Home";
 import ResidentialFunnel from "./pages/ResidentialFunnel";
@@ -65,60 +66,62 @@ const App = () => (
       <GoHighLevelChat />
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/residential" element={<ResidentialFunnel />} />
-          <Route path="/commercial" element={<Commercial />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/tools/agency-proposal" element={<AgencyProposal />} />
-          
-          {/* Existing Area Pages */}
-          <Route path="/areas/buckhead-kitchen-remodeling" element={<BuckheadKitchenRemodeling />} />
-          <Route path="/areas/midtown-kitchen-remodeling" element={<MidtownKitchenRemodeling />} />
-          <Route path="/areas/sandy-springs-bathroom-remodeling" element={<SandySpringsBasementRemodeling />} />
-          <Route path="/areas/vinings-kitchen-remodeling" element={<ViningsKitchenRemodeling />} />
-          <Route path="/services/basement-finishing-atlanta" element={<AtlantaBasementFinishing />} />
-          
-          {/* Priority Location Pages */}
-          <Route path="/atlanta" element={<Atlanta />} />
-          <Route path="/buckhead" element={<Buckhead />} />
-          <Route path="/midtown" element={<Midtown />} />
-          <Route path="/sandy-springs" element={<SandySprings />} />
-          <Route path="/brookhaven" element={<Brookhaven />} />
-          <Route path="/dunwoody" element={<Dunwoody />} />
-          
-          {/* Other Location Pages */}
-          <Route path="/roswell" element={<Roswell />} />
-          <Route path="/decatur" element={<Decatur />} />
-          <Route path="/johns-creek" element={<JohnsCreek />} />
-          <Route path="/marietta" element={<Marietta />} />
-          <Route path="/alpharetta" element={<Alpharetta />} />
-          <Route path="/smyrna" element={<Smyrna />} />
-          <Route path="/duluth" element={<Duluth />} />
-          <Route path="/douglasville" element={<Douglasville />} />
-          <Route path="/norcross" element={<Norcross />} />
-          <Route path="/snellville" element={<Snellville />} />
-          <Route path="/kirkwood" element={<Kirkwood />} />
-          <Route path="/east-atlanta-village" element={<EastAtlantaVillage />} />
-          <Route path="/east-lake" element={<EastLake />} />
-          <Route path="/downtown" element={<Downtown />} />
-          <Route path="/candler-park" element={<CandlerPark />} />
-          <Route path="/inman-park" element={<InmanPark />} />
-          <Route path="/lake-claire" element={<LakeClaire />} />
-          <Route path="/oakhurst" element={<Oakhurst />} />
-          <Route path="/avondale-estates" element={<AvondaleEstates />} />
-          <Route path="/mableton" element={<Mableton />} />
-          <Route path="/powder-springs" element={<PowderSprings />} />
-          <Route path="/austell" element={<Austell />} />
-          <Route path="/lithia-springs" element={<LithiaSprings />} />
-          
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <PageTransition>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/residential" element={<ResidentialFunnel />} />
+            <Route path="/commercial" element={<Commercial />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/tools/agency-proposal" element={<AgencyProposal />} />
+            
+            {/* Existing Area Pages */}
+            <Route path="/areas/buckhead-kitchen-remodeling" element={<BuckheadKitchenRemodeling />} />
+            <Route path="/areas/midtown-kitchen-remodeling" element={<MidtownKitchenRemodeling />} />
+            <Route path="/areas/sandy-springs-bathroom-remodeling" element={<SandySpringsBasementRemodeling />} />
+            <Route path="/areas/vinings-kitchen-remodeling" element={<ViningsKitchenRemodeling />} />
+            <Route path="/services/basement-finishing-atlanta" element={<AtlantaBasementFinishing />} />
+            
+            {/* Priority Location Pages */}
+            <Route path="/atlanta" element={<Atlanta />} />
+            <Route path="/buckhead" element={<Buckhead />} />
+            <Route path="/midtown" element={<Midtown />} />
+            <Route path="/sandy-springs" element={<SandySprings />} />
+            <Route path="/brookhaven" element={<Brookhaven />} />
+            <Route path="/dunwoody" element={<Dunwoody />} />
+            
+            {/* Other Location Pages */}
+            <Route path="/roswell" element={<Roswell />} />
+            <Route path="/decatur" element={<Decatur />} />
+            <Route path="/johns-creek" element={<JohnsCreek />} />
+            <Route path="/marietta" element={<Marietta />} />
+            <Route path="/alpharetta" element={<Alpharetta />} />
+            <Route path="/smyrna" element={<Smyrna />} />
+            <Route path="/duluth" element={<Duluth />} />
+            <Route path="/douglasville" element={<Douglasville />} />
+            <Route path="/norcross" element={<Norcross />} />
+            <Route path="/snellville" element={<Snellville />} />
+            <Route path="/kirkwood" element={<Kirkwood />} />
+            <Route path="/east-atlanta-village" element={<EastAtlantaVillage />} />
+            <Route path="/east-lake" element={<EastLake />} />
+            <Route path="/downtown" element={<Downtown />} />
+            <Route path="/candler-park" element={<CandlerPark />} />
+            <Route path="/inman-park" element={<InmanPark />} />
+            <Route path="/lake-claire" element={<LakeClaire />} />
+            <Route path="/oakhurst" element={<Oakhurst />} />
+            <Route path="/avondale-estates" element={<AvondaleEstates />} />
+            <Route path="/mableton" element={<Mableton />} />
+            <Route path="/powder-springs" element={<PowderSprings />} />
+            <Route path="/austell" element={<Austell />} />
+            <Route path="/lithia-springs" element={<LithiaSprings />} />
+            
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </PageTransition>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
