@@ -10,7 +10,7 @@ import { FormStepIndicator } from "@/components/ui/form-step-indicator";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { formatPhoneNumber } from "@/lib/phone-formatter";
-import { submitToGHLWebhook } from "@/lib/ghl-webhook";
+import { submitLead } from "@/lib/lead-submission";
 import { Shield, Lock, Clock, ArrowLeft, ArrowRight, Check, Phone, Hammer, Bath, Home, PlusCircle, Building2, Wrench } from "lucide-react";
 
 const contactSchema = z.object({
@@ -132,48 +132,26 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      const nameParts = data.name.trim().split(' ');
-      const firstName = nameParts[0] || '';
-      const lastName = nameParts.slice(1).join(' ') || '';
-
-      const tags = ['Website-Lead', 'MultiStep-Form'];
-      if (data.projectType) {
-        tags.push(data.projectType);
-      }
-      if (data.timeline) {
-        tags.push(`Timeline-${data.timeline}`);
-      }
-
-      const customFields = [
-        { key: 'project_type', value: data.projectType },
-        { key: 'message', value: data.message },
-        { key: 'form_source', value: 'multistep' }
-      ];
-
-      if (data.city) {
-        customFields.push({ key: 'city', value: data.city });
-      }
-      if (data.timeline) {
-        customFields.push({ key: 'timeline', value: data.timeline });
-      }
-
-      await submitToGHLWebhook({
-        webhookUrl: import.meta.env.VITE_GHL_WEBHOOK_CONTACT,
-        data: {
-          firstName,
-          lastName,
-          email: data.email,
-          phone: data.phone || '',
-          tags,
-          customFields,
-        }
+      const result = await submitLead({
+        name: data.name,
+        email: data.email,
+        phone: data.phone || '',
+        projectType: data.projectType,
+        city: data.city,
+        timeline: data.timeline,
+        message: data.message,
+        formSource: 'multistep',
       });
 
-      localStorage.removeItem(STORAGE_KEY);
-      setIsSubmitted(true);
-      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (result.success) {
+        localStorage.removeItem(STORAGE_KEY);
+        setIsSubmitted(true);
+        formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        throw new Error(result.error);
+      }
     } catch (error) {
-      console.error('MultiStep form webhook submission error:', error);
+      console.error('MultiStep form submission error:', error);
       toast.error("Failed to send request. Please try again or call us at 678-671-6336.");
     }
   };

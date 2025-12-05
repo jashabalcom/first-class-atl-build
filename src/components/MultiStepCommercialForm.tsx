@@ -10,6 +10,7 @@ import { FormStepIndicator } from "@/components/ui/form-step-indicator";
 import { toast } from "sonner";
 import { Store, Utensils, Briefcase, Building2, Wrench, PlusCircle, Phone, Check } from "lucide-react";
 import { formatPhoneNumber, unformatPhoneNumber } from "@/lib/phone-formatter";
+import { submitLead } from "@/lib/lead-submission";
 
 // Define schema for form validation
 const commercialSchema = z.object({
@@ -147,26 +148,21 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
 
   const onSubmit = async (data: CommercialFormData) => {
     try {
-      const { supabase } = await import("@/integrations/supabase/client");
-      
-      const { error } = await supabase.functions.invoke('ghl-submit', {
-        body: {
-          name: data.name,
-          email: data.email,
-          phone: unformatPhoneNumber(data.phone),
-          projectType: data.projectType,
-          companyName: data.companyName,
-          businessType: data.businessType,
-          squareFootage: data.squareFootage,
-          city: data.city,
-          timeline: data.timeline,
-          message: data.message,
-          formSource: 'commercial'
-        }
+      const result = await submitLead({
+        name: data.name,
+        email: data.email,
+        phone: unformatPhoneNumber(data.phone),
+        projectType: data.projectType,
+        companyName: data.companyName,
+        businessType: data.businessType,
+        squareFootage: data.squareFootage,
+        city: data.city,
+        timeline: data.timeline,
+        message: data.message,
+        formSource: 'commercial'
       });
 
-      if (error) {
-        console.error('GHL submission error:', error);
+      if (!result.success) {
         toast.error("Failed to send request. Please try again or call us at 678-671-6336.");
         return;
       }
