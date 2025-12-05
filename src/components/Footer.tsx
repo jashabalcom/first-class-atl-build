@@ -3,10 +3,40 @@ import { Phone, Mail, MapPin } from "lucide-react";
 import logo from "@/assets/fcc-logo.png";
 
 const Footer = () => {
+  const serviceAreas = [
+    { name: "Atlanta", link: "/services/basement-finishing-atlanta" },
+    { name: "Buckhead", link: "/areas/buckhead-kitchen-remodeling" },
+    { name: "Midtown", link: "/areas/midtown-kitchen-remodeling" },
+    { name: "Decatur", link: "/decatur" },
+    { name: "Sandy Springs", link: "/areas/sandy-springs-bathroom-remodeling" },
+    { name: "Roswell", link: "/roswell" },
+    { name: "Alpharetta", link: "/alpharetta" },
+    { name: "Marietta", link: "/marietta" },
+    { name: "Johns Creek", link: "/johns-creek" },
+    { name: "Duluth", link: "/duluth" },
+    { name: "Smyrna", link: "/smyrna" },
+    { name: "Douglasville", link: "/douglasville" },
+  ];
+
+  const moreAreas = [
+    { name: "Norcross", link: "/norcross" },
+    { name: "Snellville", link: "/snellville" },
+    { name: "Kirkwood", link: "/kirkwood" },
+    { name: "East Atlanta", link: "/east-atlanta-village" },
+    { name: "East Lake", link: "/east-lake" },
+    { name: "Downtown", link: "/downtown" },
+    { name: "Candler Park", link: "/candler-park" },
+    { name: "Inman Park", link: "/inman-park" },
+    { name: "Lake Claire", link: "/lake-claire" },
+    { name: "Oakhurst", link: "/oakhurst" },
+    { name: "Avondale Estates", link: "/avondale-estates" },
+    { name: "Vinings", link: "/areas/vinings-kitchen-remodeling" },
+  ];
+
   return (
     <footer className="bg-primary text-primary-foreground py-8 md:py-12">
       <div className="container">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 mb-6 md:mb-8">
           {/* Company Info */}
           <div className="space-y-3 md:space-y-4 text-center sm:text-left">
             <img src={logo} alt="First Class Construction Group - Atlanta Licensed General Contractor" className="h-10 md:h-12 w-auto mb-2 md:mb-4 brightness-0 invert mx-auto sm:mx-0" />
@@ -25,7 +55,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-accent" />
-                <a href="mailto:info@firstclassconstructionatlanta.com" className="hover:text-accent transition-colors">
+                <a href="mailto:info@firstclassconstructionatlanta.com" className="hover:text-accent transition-colors text-xs">
                   info@firstclassconstructionatlanta.com
                 </a>
               </div>
@@ -71,8 +101,10 @@ const Footer = () => {
               <li>Kitchen Remodeling</li>
               <li>Bathroom Remodeling</li>
               <li>Basement Finishing</li>
-              <li>Home Additions</li>
-              <li>Whole-Home Renovations</li>
+              <li>Custom Decks</li>
+              <li>Flooring Installation</li>
+              <li>Interior Painting</li>
+              <li>Custom Carpentry</li>
               <li>Commercial Build-Outs</li>
             </ul>
           </div>
@@ -81,15 +113,27 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Service Areas</h4>
             <ul className="space-y-2 text-sm opacity-90">
-              <li>Atlanta</li>
-              <li>Buckhead</li>
-              <li>Midtown</li>
-              <li>Decatur</li>
-              <li>Sandy Springs</li>
-              <li>Brookhaven</li>
-              <li>Dunwoody</li>
-              <li>Marietta</li>
-              <li>Alpharetta</li>
+              {serviceAreas.map((area) => (
+                <li key={area.name}>
+                  <Link to={area.link} className="hover:text-accent transition-colors">
+                    {area.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* More Areas */}
+          <div>
+            <h4 className="font-semibold mb-4">More Areas</h4>
+            <ul className="space-y-2 text-sm opacity-90">
+              {moreAreas.map((area) => (
+                <li key={area.name}>
+                  <Link to={area.link} className="hover:text-accent transition-colors">
+                    {area.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
