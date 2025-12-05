@@ -1,67 +1,241 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Pages -->
   <url>
-    <loc>https://www.firstclassconstructionatlanta.com/</loc>
+    <loc>https://www.fcconstruct.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.firstclassconstructionatlanta.com/residential</loc>
+    <loc>https://www.fcconstruct.com/residential</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.firstclassconstructionatlanta.com/commercial</loc>
+    <loc>https://www.fcconstruct.com/commercial</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.firstclassconstructionatlanta.com/about</loc>
+    <loc>https://www.fcconstruct.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.firstclassconstructionatlanta.com/gallery</loc>
+    <loc>https://www.fcconstruct.com/gallery</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.firstclassconstructionatlanta.com/contact</loc>
+    <loc>https://www.fcconstruct.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.firstclassconstructionatlanta.com/areas/buckhead-kitchen-remodeling</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.firstclassconstructionatlanta.com/blog</loc>
+    <loc>https://www.fcconstruct.com/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- Priority Location Pages -->
   <url>
-    <loc>https://www.firstclassconstructionatlanta.com/blog/kitchen-remodeling-cost-guide-atlanta-2025</loc>
+    <loc>https://www.fcconstruct.com/atlanta</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/buckhead</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/midtown</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/decatur</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/sandy-springs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/brookhaven</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/dunwoody</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/marietta</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/alpharetta</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Other Location Pages -->
+  <url>
+    <loc>https://www.fcconstruct.com/roswell</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.firstclassconstructionatlanta.com/blog/bathroom-renovation-timeline-what-to-expect</loc>
+    <loc>https://www.fcconstruct.com/johns-creek</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.firstclassconstructionatlanta.com/blog/basement-finishing-permits-atlanta-complete-guide</loc>
+    <loc>https://www.fcconstruct.com/duluth</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.firstclassconstructionatlanta.com/blog/5-signs-you-need-commercial-space-renovation</loc>
+    <loc>https://www.fcconstruct.com/smyrna</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/douglasville</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/norcross</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/snellville</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/kirkwood</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/east-atlanta-village</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/east-lake</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/downtown</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/candler-park</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/inman-park</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/lake-claire</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/oakhurst</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/avondale-estates</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/mableton</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/powder-springs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/austell</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/lithia-springs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Legacy Area Pages -->
+  <url>
+    <loc>https://www.fcconstruct.com/areas/buckhead-kitchen-remodeling</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.firstclassconstructionatlanta.com/blog/buckhead-kitchen-design-trends-2025</loc>
+    <loc>https://www.fcconstruct.com/areas/midtown-kitchen-remodeling</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/areas/sandy-springs-bathroom-remodeling</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/areas/vinings-kitchen-remodeling</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/services/basement-finishing-atlanta</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://www.fcconstruct.com/blog/kitchen-remodeling-cost-guide-atlanta-2025</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/blog/bathroom-renovation-timeline-what-to-expect</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/blog/basement-finishing-permits-atlanta-complete-guide</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/blog/5-signs-you-need-commercial-space-renovation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.fcconstruct.com/blog/buckhead-kitchen-design-trends-2025</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
