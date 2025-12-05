@@ -21,7 +21,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 md:h-20 items-center justify-between">
         <Link to="/" className="flex flex-col items-start">
-          <img src={logo} alt="First Class Construction Group - Atlanta Licensed General Contractor" className="h-10 md:h-12 lg:h-14 w-auto" />
+          <img src={logo} alt="First Class Construction Group - Atlanta Licensed General Contractor" className="h-12 md:h-12 lg:h-14 w-auto" />
           <span className="text-[9px] md:text-[10px] uppercase tracking-[0.12em] text-muted-foreground mt-0.5 hidden sm:block">
             Licensed Contractor · Atlanta Metro
           </span>
