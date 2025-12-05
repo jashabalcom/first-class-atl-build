@@ -201,7 +201,7 @@ async function appendToGoogleSheets(lead: FormSubmission & { created_at: string 
       lead.formSource,
     ];
 
-    // Append to sheet (use A:M without sheet name to append to first sheet)
+    // Append to first sheet
     const appendResponse = await fetch(
       `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A:M:append?valueInputOption=USER_ENTERED`,
       {
