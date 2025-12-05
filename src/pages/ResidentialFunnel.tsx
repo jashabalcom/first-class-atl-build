@@ -167,7 +167,7 @@ const ResidentialFunnel = () => {
               </div>
               
               <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow md:col-span-2 lg:col-span-1">
-                <h3 className="text-xl font-bold mb-3">Whole-Home Renovations</h3>
+                <h3 className="text-xl font-bold mb-3">Home Renovations</h3>
                 <p className="text-sm text-muted-foreground">
                   Cohesive design, efficient timelines, and single-team accountability.
                 </p>

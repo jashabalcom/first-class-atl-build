@@ -17,7 +17,7 @@ const EastLake = () => {
         "Bathroom Renovation",
         "Kitchen Remodeling",
         "Custom Deck Building",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Interior & Exterior Painting",
         "Flooring Installation",
         "Custom Carpentry",

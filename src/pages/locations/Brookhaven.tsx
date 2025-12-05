@@ -25,7 +25,7 @@ const Brookhaven = () => {
         "Basement Finishing",
         "Interior & Exterior Painting",
         "Flooring Installation",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Custom Carpentry"
       ]}
       neighborhoods={[

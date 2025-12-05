@@ -48,7 +48,7 @@ const Atlanta = () => {
       ]}
       testimonials={[
         {
-          quote: "First Class Construction delivered exceptional quality on our whole-home renovation. Professional team, clear communication, and outstanding results. Best general contractor in Atlanta!",
+          quote: "First Class Construction delivered exceptional quality on our home renovation. Professional team, clear communication, and outstanding results. Best general contractor in Atlanta!",
           author: "Michael & Sarah T.",
           location: "Buckhead"
         },

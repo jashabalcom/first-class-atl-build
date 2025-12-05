@@ -22,7 +22,7 @@ const Smyrna = () => {
         "Custom Deck Building",
         "Interior & Exterior Painting",
         "Retail Build-Outs",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Flooring Installation",
         "Custom Carpentry"
       ]}

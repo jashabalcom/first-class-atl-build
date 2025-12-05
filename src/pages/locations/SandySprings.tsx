@@ -25,7 +25,7 @@ const SandySprings = () => {
         "Flooring Installation",
         "Interior & Exterior Painting",
         "Basement Finishing",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Commercial Construction"
       ]}
       neighborhoods={[

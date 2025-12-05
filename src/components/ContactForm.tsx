@@ -49,7 +49,7 @@ const ContactForm = ({
     { value: "bathroom", label: "Bathroom Remodeling", icon: Droplet },
     { value: "basement", label: "Basement Finishing", icon: Layers },
     { value: "addition", label: "Home Addition", icon: Plus },
-    { value: "whole-home", label: "Whole-Home Renovation", icon: Building2 },
+    { value: "whole-home", label: "Home Renovation", icon: Building2 },
     { value: "commercial", label: "Commercial Build-Out", icon: Store },
   ];
   

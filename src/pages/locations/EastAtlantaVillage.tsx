@@ -7,7 +7,7 @@ const EastAtlantaVillage = () => {
       metaTitle="East Atlanta Village Renovation Contractor | Painting, Home Renovations GA"
       metaDescription="Expert East Atlanta Village home renovation and painting services. Residential renovations and professional painting. Licensed Atlanta contractor since 2000. Call 678-671-6336."
       heroHeadline="East Atlanta Village Home Renovation & Painting Experts"
-      heroSubtitle="Premium painting services and whole-home renovations for East Atlanta Village residents. Licensed, bonded, and DBE/MBE certified since 2000."
+      heroSubtitle="Premium painting services and home renovations for East Atlanta Village residents. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[
         "painting contractors in east atlanta",
         "east atlanta painting company",
@@ -15,7 +15,7 @@ const EastAtlantaVillage = () => {
       ]}
       services={[
         "Interior & Exterior Painting",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Kitchen Remodeling",
         "Bathroom Renovation",
         "Custom Carpentry",

@@ -21,7 +21,7 @@ const Douglasville = () => {
         "Custom Deck Building",
         "Flooring Installation",
         "Interior & Exterior Painting",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Basement Finishing",
         "Custom Carpentry"
       ]}

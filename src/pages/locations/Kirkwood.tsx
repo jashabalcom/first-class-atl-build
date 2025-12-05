@@ -18,7 +18,7 @@ const Kirkwood = () => {
         "Kitchen Remodeling",
         "Bathroom Renovation",
         "Interior & Exterior Painting",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Custom Carpentry",
         "Flooring Installation",
         "Basement Finishing",
