@@ -69,12 +69,31 @@ function validateFormData(data: any): { valid: boolean; errors: string[] } {
 // Append row to Google Sheets
 async function appendToGoogleSheets(lead: FormSubmission & { created_at: string }): Promise<boolean> {
   try {
-    const privateKey = Deno.env.get('GOOGLE_SHEETS_PRIVATE_KEY');
+    let privateKey = Deno.env.get('GOOGLE_SHEETS_PRIVATE_KEY');
     const clientEmail = Deno.env.get('GOOGLE_SHEETS_CLIENT_EMAIL');
     const spreadsheetId = Deno.env.get('GOOGLE_SHEETS_SPREADSHEET_ID');
     
     if (!privateKey || !clientEmail || !spreadsheetId) {
       console.log('Google Sheets credentials not configured, skipping...');
+      return false;
+    }
+
+    // Handle if the entire JSON file was pasted instead of just the private_key
+    if (privateKey.includes('"private_key"')) {
+      try {
+        const jsonData = JSON.parse(privateKey);
+        if (jsonData.private_key) {
+          privateKey = jsonData.private_key;
+          console.log('Extracted private_key from JSON object');
+        }
+      } catch {
+        console.error('Could not parse private key JSON');
+      }
+    }
+
+    // Verify we still have a private key after potential extraction
+    if (!privateKey) {
+      console.error('Private key is missing after extraction');
       return false;
     }
 
