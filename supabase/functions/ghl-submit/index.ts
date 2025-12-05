@@ -101,12 +101,16 @@ async function appendToGoogleSheets(lead: FormSubmission & { created_at: string 
     const payloadB64 = toBase64Url(encoder.encode(JSON.stringify(payload)));
     const signatureInput = `${headerB64}.${payloadB64}`;
 
-    // Import private key and sign
-    const pemContents = privateKey
+    // Import private key and sign - handle escaped newlines from env
+    const cleanedKey = privateKey
+      .replace(/\\n/g, '\n')  // Handle escaped newlines from env
       .replace('-----BEGIN PRIVATE KEY-----', '')
       .replace('-----END PRIVATE KEY-----', '')
-      .replace(/\s/g, '');
-    const binaryKey = Uint8Array.from(atob(pemContents), c => c.charCodeAt(0));
+      .replace(/[\s\n\r]/g, '');
+    
+    console.log('Private key length after cleaning:', cleanedKey.length);
+    
+    const binaryKey = Uint8Array.from(atob(cleanedKey), c => c.charCodeAt(0));
     
     const cryptoKey = await crypto.subtle.importKey(
       'pkcs8',
