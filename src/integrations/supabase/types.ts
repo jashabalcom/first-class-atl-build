@@ -14,7 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          business_type: string | null
+          city: string | null
+          company_name: string | null
+          created_at: string
+          email: string
+          estimated_budget: string | null
+          form_source: string
+          ghl_contact_id: string | null
+          id: string
+          message: string | null
+          name: string
+          phone: string
+          project_type: string | null
+          square_footage: string | null
+          sync_errors: Json | null
+          synced_to_ghl: boolean | null
+          synced_to_sheets: boolean | null
+          timeline: string | null
+        }
+        Insert: {
+          business_type?: string | null
+          city?: string | null
+          company_name?: string | null
+          created_at?: string
+          email: string
+          estimated_budget?: string | null
+          form_source: string
+          ghl_contact_id?: string | null
+          id?: string
+          message?: string | null
+          name: string
+          phone: string
+          project_type?: string | null
+          square_footage?: string | null
+          sync_errors?: Json | null
+          synced_to_ghl?: boolean | null
+          synced_to_sheets?: boolean | null
+          timeline?: string | null
+        }
+        Update: {
+          business_type?: string | null
+          city?: string | null
+          company_name?: string | null
+          created_at?: string
+          email?: string
+          estimated_budget?: string | null
+          form_source?: string
+          ghl_contact_id?: string | null
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string
+          project_type?: string | null
+          square_footage?: string | null
+          sync_errors?: Json | null
+          synced_to_ghl?: boolean | null
+          synced_to_sheets?: boolean | null
+          timeline?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

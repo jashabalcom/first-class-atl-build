@@ -5,6 +5,7 @@ import { Slider } from "@/components/ui/slider";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { Hammer, Bath, Home, PlusCircle, Building2, Calculator, ArrowRight, Info } from "lucide-react";
 import { toast } from "sonner";
+import { submitLead } from "@/lib/lead-submission";
 
 // Conservative pricing matrix (in thousands)
 const PRICING_DATA = {
@@ -137,25 +138,20 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
     setIsSubmitting(true);
     
     try {
-      const { supabase } = await import("@/integrations/supabase/client");
-      
       const estimateText = `${formatCurrency(estimate.min)} - ${formatCurrency(estimate.max)}`;
       const projectDetails = `${projectTypes.find(p => p.id === projectType)?.title} - ${getScopeLabel()} - ${finishLevels.find(l => l.id === finishLevel)?.title}`;
       
-      const { error } = await supabase.functions.invoke('ghl-submit', {
-        body: {
-          name,
-          email,
-          phone: '',
-          projectType,
-          estimatedBudget: estimateText,
-          message: `Budget Estimator: ${projectDetails}. Estimated range: ${estimateText}`,
-          formSource: 'budget'
-        }
+      const result = await submitLead({
+        name,
+        email,
+        phone: '',
+        projectType,
+        estimatedBudget: estimateText,
+        message: `Budget Estimator: ${projectDetails}. Estimated range: ${estimateText}`,
+        formSource: 'budget'
       });
 
-      if (error) {
-        console.error('GHL submission error:', error);
+      if (!result.success) {
         toast.error("Failed to send estimate. Please try again or call us at 678-671-6336.");
         return;
       }

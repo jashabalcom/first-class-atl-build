@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -6,7 +7,7 @@ import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
-import { submitToGHLWebhook } from "@/lib/ghl-webhook";
+import { submitLead } from "@/lib/lead-submission";
 import { formatPhoneNumber, unformatPhoneNumber } from "@/lib/phone-formatter";
 import { Label } from "@/components/ui/label";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
@@ -81,58 +82,40 @@ const ContactForm = ({
     setValue("phone", formatted, { shouldValidate: true, shouldDirty: true });
   };
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
     try {
-      const nameParts = data.name.trim().split(' ');
-      const firstName = nameParts[0] || '';
-      const lastName = nameParts.slice(1).join(' ') || '';
-
-      const tags = ['Website-Lead', 'Contact-Form'];
-      if (data.projectType) {
-        tags.push(data.projectType);
-      }
-      if (data.timeline) {
-        tags.push(`Timeline-${data.timeline}`);
-      }
-
-      const customFields = [
-        { key: 'project_type', value: data.projectType },
-        { key: 'message', value: data.message },
-        { key: 'form_source', value: 'contact' }
-      ];
-
-      if (data.city) {
-        customFields.push({ key: 'city', value: data.city });
-      }
-      if (data.timeline) {
-        customFields.push({ key: 'timeline', value: data.timeline });
-      }
-
-      await submitToGHLWebhook({
-        webhookUrl: import.meta.env.VITE_GHL_WEBHOOK_CONTACT,
-        data: {
-          firstName,
-          lastName,
-          email: data.email,
-          phone: data.phone || '',
-          tags,
-          customFields,
-        }
+      const result = await submitLead({
+        name: data.name,
+        email: data.email,
+        phone: data.phone || '',
+        projectType: data.projectType,
+        city: data.city,
+        timeline: data.timeline,
+        message: data.message,
+        formSource: 'contact',
       });
 
-      toast({
-        title: "Thanks—We Received Your Request",
-        description: "A project specialist will contact you within one business day to discuss next steps.",
-      });
-
-      reset();
+      if (result.success) {
+        toast({
+          title: "Thanks—We Received Your Request",
+          description: "A project specialist will contact you within one business day to discuss next steps.",
+        });
+        reset();
+      } else {
+        throw new Error(result.error);
+      }
     } catch (error) {
-      console.error('Contact form webhook submission error:', error);
+      console.error('Contact form submission error:', error);
       toast({
         title: "Error",
         description: "Something went wrong. Please try again or call us at 678-671-6336.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
