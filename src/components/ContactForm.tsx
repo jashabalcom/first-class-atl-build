@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -82,10 +82,9 @@ const ContactForm = ({
     setValue("phone", formatted, { shouldValidate: true, shouldDirty: true });
   };
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  
 
   const onSubmit = async (data: ContactFormData) => {
-    setIsSubmitting(true);
     try {
       const result = await submitLead({
         name: data.name,
@@ -114,8 +113,6 @@ const ContactForm = ({
         description: "Something went wrong. Please try again or call us at 678-671-6336.",
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
