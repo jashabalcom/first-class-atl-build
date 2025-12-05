@@ -14,6 +14,7 @@ import { BudgetEstimator } from "@/components/BudgetEstimator";
 import AnimatedSection from "@/components/AnimatedSection";
 import FeaturedBlogSection from "@/components/FeaturedBlogSection";
 import BlogTeaser from "@/components/BlogTeaser";
+import SectionLabel from "@/components/SectionLabel";
 import { Home as HomeIcon, Building2, Calendar, UserCheck, ShieldCheck } from "lucide-react";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
@@ -36,6 +37,7 @@ const Home = () => {
         backgroundImage={heroKitchen}
         trustLine="Licensed • Bonded • Insured • DBE • MBE • 20+ Years Serving Metro Atlanta"
         useH1={true}
+        fullHeight={true}
       />
 
       {/* Google Trust Badge Section */}
@@ -50,10 +52,14 @@ const Home = () => {
         <section className="py-12 md:py-16 lg:py-20 bg-background">
           <div className="container">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">How We Can Help</h2>
+              <SectionLabel>Our Services</SectionLabel>
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 mt-3">
+                How We Can <span className="text-accent">Help</span>
+              </h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Expert construction services for both residential and commercial projects
               </p>
+              <div className="section-divider mt-6" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -85,13 +91,17 @@ const Home = () => {
       <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Atlanta Chooses First Class</h2>
+            <SectionLabel>Why Choose Us</SectionLabel>
+            <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 mt-3">
+              Why Atlanta Chooses <span className="text-accent">First Class</span>
+            </h2>
             <p className="text-muted-foreground text-lg max-w-3xl mx-auto mb-6">
               Serving Buckhead, Midtown, Decatur, Sandy Springs, Brookhaven, Dunwoody, Marietta, and Alpharetta 
               with licensed, bonded, and insured construction services. As a DBE/MBE certified contractor, 
               we bring professionalism and quality craftsmanship to every residential renovation and 
               commercial build-out project across Metro Atlanta.
             </p>
+            <div className="section-divider" />
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -137,10 +147,14 @@ const Home = () => {
         <section className="py-12 md:py-16 lg:py-20 bg-background">
           <div className="container">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
+              <SectionLabel>Portfolio</SectionLabel>
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 mt-3">
+                Featured <span className="text-accent">Projects</span>
+              </h2>
               <p className="text-muted-foreground text-lg">
                 See the quality and craftsmanship that sets us apart
               </p>
+              <div className="section-divider mt-6" />
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -150,6 +164,7 @@ const Home = () => {
                 description="Open layout, custom cabinetry, stone surfaces, architectural lighting."
                 image={kitchenAfter}
                 link="#"
+                badge="Residential"
               />
               <ProjectCard
                 title="Retail Build-Out"
@@ -157,6 +172,7 @@ const Home = () => {
                 description="3,000 sq ft tenant improvement delivered in 6 weeks."
                 image={retailBuildout}
                 link="#"
+                badge="Commercial"
               />
               <ProjectCard
                 title="Office Renovation"
@@ -164,6 +180,7 @@ const Home = () => {
                 description="Phased construction with zero downtime for staff."
                 image={officeRenovation}
                 link="#"
+                badge="Commercial"
               />
             </div>
           </div>
@@ -191,10 +208,14 @@ const Home = () => {
         <section className="py-12 md:py-16 lg:py-20 bg-background">
           <div className="container">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
+              <SectionLabel>Testimonials</SectionLabel>
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 mt-3">
+                What Our Clients <span className="text-accent">Say</span>
+              </h2>
               <p className="text-muted-foreground text-lg">
                 Trusted by homeowners and businesses across Atlanta
               </p>
+              <div className="section-divider mt-6" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -229,13 +250,17 @@ const Home = () => {
       <section className="py-12 md:py-16 lg:py-20 bg-background">
         <div className="container max-w-4xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">A Proven, Professional Process</h2>
+            <SectionLabel>Our Process</SectionLabel>
+            <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 mt-3">
+              A Proven, Professional <span className="text-accent">Process</span>
+            </h2>
             <p className="text-muted-foreground text-lg">
               Clarity, communication, and craftsmanship at every step
             </p>
+            <div className="section-divider mt-6" />
           </div>
 
-          <div className="grid gap-8">
+          <div className="grid gap-0">
             <ProcessStep
               number={1}
               title="Consult"
@@ -255,6 +280,7 @@ const Home = () => {
               number={4}
               title="Final Walkthrough/Warranty"
               description="Punch list complete. We stand behind our work."
+              isLast={true}
             />
           </div>
         </div>
@@ -263,14 +289,17 @@ const Home = () => {
       {/* Service Areas */}
       <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
         <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Serving Metro Atlanta</h2>
+          <SectionLabel>Coverage Area</SectionLabel>
+          <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 mt-3">
+            Serving <span className="text-accent">Metro Atlanta</span>
+          </h2>
           <p className="text-muted-foreground mb-8">
             Proud to serve communities across the Atlanta metropolitan area
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm">
             {["Atlanta", "Buckhead", "Midtown", "Decatur", "Sandy Springs", "Brookhaven", 
               "Dunwoody", "Marietta", "Alpharetta", "and surrounding areas"].map((area) => (
-              <span key={area} className="px-4 py-2 bg-card border rounded-full">{area}</span>
+              <span key={area} className="px-4 py-2 bg-card border rounded-full hover:border-accent transition-colors">{area}</span>
             ))}
           </div>
         </div>

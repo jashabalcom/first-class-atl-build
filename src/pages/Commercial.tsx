@@ -9,6 +9,7 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepCommercialForm } from "@/components/MultiStepCommercialForm";
 import ProjectCard from "@/components/ProjectCard";
 import GoogleTrustBadge from "@/components/GoogleTrustBadge";
+import SectionLabel from "@/components/SectionLabel";
 import { Store, Utensils, Briefcase, Building2, Wrench } from "lucide-react";
 import heroCommercial from "@/assets/hero-commercial.jpg";
 import retailBuildout from "@/assets/retail-buildout.jpg";
@@ -84,12 +85,14 @@ const Commercial = () => {
       subtitle: "3,000 sq ft | Midtown Atlanta",
       description: "Complete tenant improvement delivered in 6 weeks with custom fixtures, lighting, and point-of-sale infrastructure.",
       image: retailBuildout,
+      badge: "Retail",
     },
     {
       title: "Office Renovation",
       subtitle: "5,000 sq ft | Perimeter",
       description: "Phased construction with zero downtime for staff. Modern open floor plan with collaborative workspaces.",
       image: officeRenovation,
+      badge: "Office",
     },
   ];
 
@@ -122,14 +125,16 @@ const Commercial = () => {
         <section className="py-20 border-b">
           <div className="container">
             <div className="max-w-3xl mx-auto text-center space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold">
-                Commercial Projects Demand More
+              <SectionLabel>The Challenge</SectionLabel>
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-3">
+                Commercial Projects Demand <span className="text-accent">More</span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 Delays cost revenue. Code violations cost time and money. Poor communication creates chaos. 
                 With First Class Construction Group, you get a contractor who understands the stakes—because 
                 we've been building commercial spaces across Atlanta for over 20 years.
               </p>
+              <div className="section-divider" />
             </div>
           </div>
         </section>
@@ -139,22 +144,26 @@ const Commercial = () => {
           <section className="py-12 md:py-16 lg:py-20 bg-secondary/5">
             <div className="container space-y-12">
             <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold">Commercial Services We Offer</h2>
+              <SectionLabel>What We Do</SectionLabel>
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-3">
+                Commercial Services <span className="text-accent">We Offer</span>
+              </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 From retail to restaurants to office spaces—we build environments that work.
               </p>
+              <div className="section-divider" />
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {services.map((service, index) => {
                 const Icon = service.icon;
                 return (
-                  <div key={index} className="flex flex-col items-start gap-4 p-6 rounded-lg bg-card border hover:shadow-md transition-shadow">
-                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">
+                  <div key={index} className="flex flex-col items-start gap-4 p-6 rounded-lg bg-card border border-l-2 border-l-transparent hover:border-l-accent hover:shadow-md transition-all duration-300">
+                    <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
                       <Icon className="h-6 w-6 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg mb-2">{service.title}</h3>
+                      <h3 className="font-playfair font-semibold text-lg mb-2">{service.title}</h3>
                       <p className="text-sm text-muted-foreground">{service.description}</p>
                     </div>
                   </div>
@@ -170,18 +179,22 @@ const Commercial = () => {
           <section className="py-12 md:py-16 lg:py-20 border-y">
           <div className="container space-y-12">
             <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold">The First Class Difference</h2>
+              <SectionLabel>Why Us</SectionLabel>
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-3">
+                The First Class <span className="text-accent">Difference</span>
+              </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 What sets us apart from other commercial contractors.
               </p>
+              <div className="section-divider" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {values.map((value, index) => (
-                <div key={index} className="flex items-start gap-4 p-6 rounded-lg bg-card border hover:shadow-md transition-shadow">
+                <div key={index} className="flex items-start gap-4 p-6 rounded-lg bg-card border border-l-2 border-l-transparent hover:border-l-accent hover:shadow-md transition-all duration-300">
                   <div className="flex-shrink-0 w-3 h-3 rounded-full bg-accent mt-1.5" />
                   <div>
-                    <h3 className="font-semibold mb-2">{value.title}</h3>
+                    <h3 className="font-playfair font-semibold mb-2">{value.title}</h3>
                     <p className="text-sm text-muted-foreground">{value.description}</p>
                   </div>
                 </div>
@@ -196,7 +209,11 @@ const Commercial = () => {
           <section className="py-12 md:py-16 lg:py-20 bg-secondary/5">
             <div className="container space-y-12">
               <div className="text-center space-y-4">
-                <h2 className="text-3xl md:text-4xl font-bold">Featured Commercial Projects</h2>
+                <SectionLabel>Portfolio</SectionLabel>
+                <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-3">
+                  Featured Commercial <span className="text-accent">Projects</span>
+                </h2>
+                <div className="section-divider" />
               </div>
 
               <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -213,7 +230,11 @@ const Commercial = () => {
           <section className="py-12 md:py-16 lg:py-20 border-y">
           <div className="container space-y-12">
             <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold">What Business Owners Say</h2>
+              <SectionLabel>Testimonials</SectionLabel>
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-3">
+                What Business Owners <span className="text-accent">Say</span>
+              </h2>
+              <div className="section-divider" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -230,10 +251,14 @@ const Commercial = () => {
           <section className="py-12 md:py-16 lg:py-20 bg-secondary/5">
             <div className="container space-y-12">
               <div className="text-center space-y-4">
-                <h2 className="text-3xl md:text-4xl font-bold">Our Commercial Process</h2>
+                <SectionLabel>How It Works</SectionLabel>
+                <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-3">
+                  Our Commercial <span className="text-accent">Process</span>
+                </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Transparent, efficient, and designed to minimize disruption.
               </p>
+              <div className="section-divider" />
             </div>
 
             <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
@@ -241,21 +266,25 @@ const Commercial = () => {
                 number={1}
                 title="Site Assessment"
                 description="We evaluate your space, timeline, and budget to create a detailed proposal."
+                isLast={true}
               />
               <ProcessStep
                 number={2}
                 title="Design & Planning"
                 description="Architectural plans, permitting, and material selections—all coordinated."
+                isLast={true}
               />
               <ProcessStep
                 number={3}
                 title="Build & Communicate"
                 description="Professional crew with daily updates and minimal business disruption."
+                isLast={true}
               />
               <ProcessStep
                 number={4}
                 title="Inspection & Handover"
                 description="Final walkthrough, code inspections, and warranty documentation."
+                isLast={true}
               />
               </div>
             </div>
@@ -266,10 +295,14 @@ const Commercial = () => {
       <section id="contact-form" className="py-12 md:py-20 border-t">
           <div className="container">
             <div className="text-center space-y-4 mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold">Ready to Discuss Your Commercial Project?</h2>
+              <SectionLabel>Get Started</SectionLabel>
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-3">
+                Ready to Discuss Your <span className="text-accent">Commercial Project?</span>
+              </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Tell us about your project and we'll provide a detailed proposal within one business day.
               </p>
+              <div className="section-divider" />
             </div>
             <MultiStepCommercialForm />
           </div>

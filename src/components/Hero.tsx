@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import ScrollIndicator from "./ScrollIndicator";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 
 interface HeroProps {
@@ -11,6 +13,8 @@ interface HeroProps {
   useH1?: boolean;
   benefitHeadline?: string;
   seoHeadline?: string;
+  fullHeight?: boolean;
+  showScrollIndicator?: boolean;
 }
 
 const Hero = ({ 
@@ -22,20 +26,37 @@ const Hero = ({
   trustLine,
   useH1 = false,
   benefitHeadline,
-  seoHeadline
+  seoHeadline,
+  fullHeight = false,
+  showScrollIndicator = true
 }: HeroProps) => {
   // In hybrid mode (benefitHeadline + seoHeadline), seoHeadline is always H1
   // In legacy mode (title only), respect useH1 prop
   const TitleTag = (seoHeadline || useH1) ? 'h1' : 'h2';
   const displayTitle = benefitHeadline || title;
   
+  // Split headline for gold accent treatment
+  const renderHeadlineWithAccent = (headline: string) => {
+    const words = headline.split(' ');
+    const midpoint = Math.ceil(words.length / 2);
+    const firstPart = words.slice(0, midpoint).join(' ');
+    const secondPart = words.slice(midpoint).join(' ');
+    
+    return (
+      <>
+        <span>{firstPart}</span>
+        {secondPart && <span className="text-accent"> {secondPart}</span>}
+      </>
+    );
+  };
+  
   return (
-    <section className="relative min-h-[500px] md:min-h-[600px] flex items-center justify-center overflow-hidden">
+    <section className={`relative ${fullHeight ? 'min-h-screen' : 'min-h-[500px] md:min-h-[600px]'} flex items-center justify-center overflow-hidden`}>
       {/* Background Image with Parallax Effect */}
       <div 
         className="absolute inset-0 z-0 bg-fixed"
         style={{
-          backgroundImage: `linear-gradient(135deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.45)), url(${backgroundImage})`,
+          backgroundImage: `linear-gradient(135deg, rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.50)), url(${backgroundImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -45,8 +66,8 @@ const Hero = ({
       <div className="container relative z-10 px-4 py-16 sm:py-20 md:py-24 lg:py-32">
         <div className="max-w-3xl mx-auto text-center text-white">
           {/* Benefit-Driven Headline (Primary Visual) */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-balance leading-tight bg-gradient-to-r from-white via-white to-white/90 bg-clip-text text-transparent animate-fade-in-up">
-            {displayTitle}
+          <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-balance leading-tight animate-fade-in-up">
+            {renderHeadlineWithAccent(displayTitle || '')}
           </h2>
           
           {/* SEO Headline (H1 for Google, Secondary Visual) */}
@@ -56,8 +77,8 @@ const Hero = ({
             </h1>
           )}
           
-          {!seoHeadline && (
-            <TitleTag className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-balance leading-tight animate-fade-in-up">
+          {!seoHeadline && title && (
+            <TitleTag className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-balance leading-tight animate-fade-in-up">
               {title}
             </TitleTag>
           )}
@@ -67,24 +88,32 @@ const Hero = ({
           
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
             <a href="#contact-form" className="w-full sm:w-auto">
-              <Button variant="hero" size="lg" className="w-full sm:w-auto animate-pulse-glow h-12">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto h-12 border-2 border-accent text-accent-foreground bg-accent hover:bg-accent/90 gap-2 group">
                 {primaryCTA}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </a>
             {secondaryCTA && (
-              <a href="tel:678-671-6336" className="text-white hover:text-accent transition-colors text-center min-h-[44px] flex items-center justify-center">
+              <a href="tel:678-671-6336" className="text-white/90 hover:text-accent transition-colors text-center min-h-[44px] flex items-center justify-center text-sm underline underline-offset-4 decoration-white/30 hover:decoration-accent">
                 {secondaryCTA}
               </a>
             )}
           </div>
 
           {trustLine && (
-            <p className="text-xs sm:text-sm text-gray-300 border-t border-white/20 pt-3 md:pt-4 mt-6 md:mt-8 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
+            <p className="text-xs sm:text-sm text-gray-300/80 border-t border-white/20 pt-3 md:pt-4 mt-6 md:mt-8 animate-fade-in-up tracking-wide" style={{ animationDelay: '400ms' }}>
               {trustLine}
             </p>
           )}
         </div>
       </div>
+
+      {/* Scroll Indicator */}
+      {showScrollIndicator && (
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+          <ScrollIndicator />
+        </div>
+      )}
     </section>
   );
 };
