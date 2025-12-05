@@ -66,16 +66,21 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
   const { handleSubmit, setValue, watch, formState: { errors, isSubmitting } } = form;
   const formValues = watch();
 
-  // Load saved progress on mount
+  // Load saved progress on mount - only if meaningful data exists
   useEffect(() => {
     const savedData = localStorage.getItem(STORAGE_KEY);
     if (savedData) {
       try {
         const parsed = JSON.parse(savedData);
-        Object.keys(parsed).forEach((key) => {
-          setValue(key as keyof ContactFormData, parsed[key]);
-        });
-        toast.info("We restored your previous form progress");
+        // Only restore if there's actual meaningful user-entered data
+        const hasMeaningfulData = parsed.name || parsed.email || parsed.phone || parsed.message;
+        
+        if (hasMeaningfulData) {
+          Object.keys(parsed).forEach((key) => {
+            setValue(key as keyof ContactFormData, parsed[key]);
+          });
+          toast.info("We restored your previous form progress");
+        }
       } catch (e) {
         console.error("Failed to restore form data:", e);
       }
