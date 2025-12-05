@@ -4,21 +4,23 @@ import logo from "@/assets/fcc-logo.png";
 
 const Footer = () => {
   const serviceAreas = [
-    { name: "Atlanta", link: "/services/basement-finishing-atlanta" },
-    { name: "Buckhead", link: "/areas/buckhead-kitchen-remodeling" },
-    { name: "Midtown", link: "/areas/midtown-kitchen-remodeling" },
+    { name: "Atlanta", link: "/atlanta" },
+    { name: "Buckhead", link: "/buckhead" },
+    { name: "Midtown", link: "/midtown" },
     { name: "Decatur", link: "/decatur" },
-    { name: "Sandy Springs", link: "/areas/sandy-springs-bathroom-remodeling" },
+    { name: "Sandy Springs", link: "/sandy-springs" },
+    { name: "Brookhaven", link: "/brookhaven" },
+    { name: "Dunwoody", link: "/dunwoody" },
     { name: "Roswell", link: "/roswell" },
     { name: "Alpharetta", link: "/alpharetta" },
     { name: "Marietta", link: "/marietta" },
     { name: "Johns Creek", link: "/johns-creek" },
     { name: "Duluth", link: "/duluth" },
-    { name: "Smyrna", link: "/smyrna" },
-    { name: "Douglasville", link: "/douglasville" },
   ];
 
   const moreAreas = [
+    { name: "Smyrna", link: "/smyrna" },
+    { name: "Douglasville", link: "/douglasville" },
     { name: "Norcross", link: "/norcross" },
     { name: "Snellville", link: "/snellville" },
     { name: "Kirkwood", link: "/kirkwood" },
@@ -30,6 +32,10 @@ const Footer = () => {
     { name: "Lake Claire", link: "/lake-claire" },
     { name: "Oakhurst", link: "/oakhurst" },
     { name: "Avondale Estates", link: "/avondale-estates" },
+    { name: "Mableton", link: "/mableton" },
+    { name: "Powder Springs", link: "/powder-springs" },
+    { name: "Austell", link: "/austell" },
+    { name: "Lithia Springs", link: "/lithia-springs" },
     { name: "Vinings", link: "/areas/vinings-kitchen-remodeling" },
   ];
 

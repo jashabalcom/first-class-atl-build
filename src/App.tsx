@@ -21,7 +21,15 @@ import BlogPost from "./pages/BlogPost";
 import AgencyProposal from "./pages/tools/AgencyProposal";
 import GoHighLevelChat from "./components/GoHighLevelChat";
 
-// Location Pages
+// Priority Location Pages
+import Atlanta from "./pages/locations/Atlanta";
+import Buckhead from "./pages/locations/Buckhead";
+import Midtown from "./pages/locations/Midtown";
+import SandySprings from "./pages/locations/SandySprings";
+import Brookhaven from "./pages/locations/Brookhaven";
+import Dunwoody from "./pages/locations/Dunwoody";
+
+// Other Location Pages
 import Roswell from "./pages/locations/Roswell";
 import Decatur from "./pages/locations/Decatur";
 import JohnsCreek from "./pages/locations/JohnsCreek";
@@ -73,7 +81,15 @@ const App = () => (
           <Route path="/areas/vinings-kitchen-remodeling" element={<ViningsKitchenRemodeling />} />
           <Route path="/services/basement-finishing-atlanta" element={<AtlantaBasementFinishing />} />
           
-          {/* Location Pages */}
+          {/* Priority Location Pages */}
+          <Route path="/atlanta" element={<Atlanta />} />
+          <Route path="/buckhead" element={<Buckhead />} />
+          <Route path="/midtown" element={<Midtown />} />
+          <Route path="/sandy-springs" element={<SandySprings />} />
+          <Route path="/brookhaven" element={<Brookhaven />} />
+          <Route path="/dunwoody" element={<Dunwoody />} />
+          
+          {/* Other Location Pages */}
           <Route path="/roswell" element={<Roswell />} />
           <Route path="/decatur" element={<Decatur />} />
           <Route path="/johns-creek" element={<JohnsCreek />} />
