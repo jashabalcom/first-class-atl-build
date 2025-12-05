@@ -21,7 +21,7 @@ const Duluth = () => {
         "Bathroom Renovation",
         "Flooring Installation",
         "Interior & Exterior Painting",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Custom Carpentry",
         "Basement Finishing",
         "Deck Building"

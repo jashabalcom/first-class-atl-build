@@ -23,7 +23,7 @@ const Decatur = () => {
         "Custom Deck Building",
         "Interior & Exterior Painting",
         "Flooring Installation",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Custom Carpentry",
         "Basement Finishing"
       ]}

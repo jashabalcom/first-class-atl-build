@@ -17,7 +17,7 @@ const InmanPark = () => {
         "Kitchen Remodeling",
         "Historic Home Renovation",
         "Bathroom Renovation",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Custom Carpentry",
         "Flooring Installation",
         "Interior Painting"

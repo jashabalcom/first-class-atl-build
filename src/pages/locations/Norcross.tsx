@@ -5,9 +5,9 @@ const Norcross = () => {
     <LocationPageTemplate
       city="Norcross"
       metaTitle="Norcross Home Renovation Contractor | Kitchen, Bathroom Remodel GA"
-      metaDescription="Expert Norcross home renovation services. Kitchen remodel, bathroom remodel, whole-home renovation. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Expert Norcross home renovation services. Kitchen remodel, bathroom remodel, home renovation. Licensed Atlanta contractor since 2000. Call 678-671-6336."
       heroHeadline="Expert Home Renovation Services for Norcross Homeowners"
-      heroSubtitle="Premium kitchen remodeling, bathroom renovations, and whole-home renovation services for Norcross families. Licensed, bonded, and DBE/MBE certified since 2000."
+      heroSubtitle="Premium kitchen remodeling, bathroom renovations, and home renovation services for Norcross families. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[
         "bathroom remodel norcross",
         "home renovation company norcross",
@@ -16,7 +16,7 @@ const Norcross = () => {
       services={[
         "Kitchen Remodeling",
         "Bathroom Renovation",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Flooring Installation",
         "Interior & Exterior Painting",
         "Custom Carpentry",

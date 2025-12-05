@@ -26,7 +26,7 @@ const Marietta = () => {
         "Basement Finishing",
         "Deck Building & Construction",
         "Flooring Installation",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Interior & Exterior Painting"
       ]}
       neighborhoods={[

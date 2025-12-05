@@ -16,7 +16,7 @@ const Snellville = () => {
         "Outdoor Living Spaces",
         "Kitchen Remodeling",
         "Bathroom Renovation",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Flooring Installation",
         "Interior & Exterior Painting",
         "Basement Finishing"

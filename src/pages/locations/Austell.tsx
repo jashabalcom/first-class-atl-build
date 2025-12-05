@@ -17,7 +17,7 @@ const Austell = () => {
         "Flooring Installation",
         "Kitchen Remodeling",
         "Bathroom Renovation",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Interior Painting",
         "Custom Carpentry",
         "Deck Building"

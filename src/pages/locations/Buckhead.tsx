@@ -24,7 +24,7 @@ const Buckhead = () => {
         "Basement Finishing",
         "Interior & Exterior Painting",
         "Commercial Build-Outs",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Custom Carpentry",
         "Flooring Installation"
       ]}

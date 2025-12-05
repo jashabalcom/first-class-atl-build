@@ -21,7 +21,7 @@ const JohnsCreek = () => {
         "Bathroom Renovation",
         "Basement Finishing",
         "Interior & Exterior Painting",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Custom Carpentry",
         "Flooring Installation",
         "Home Additions"

@@ -25,7 +25,7 @@ const Midtown = () => {
         "Custom Deck Building",
         "Condo Renovations",
         "High-Rise Remodeling",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Interior Painting"
       ]}
       neighborhoods={[

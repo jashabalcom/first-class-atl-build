@@ -15,7 +15,7 @@ const LithiaSprings = () => {
         "Custom Deck Building",
         "Kitchen Remodeling",
         "Bathroom Renovation",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Flooring Installation",
         "Interior Painting",
         "Custom Carpentry",

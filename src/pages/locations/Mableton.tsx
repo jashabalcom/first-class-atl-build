@@ -16,7 +16,7 @@ const Mableton = () => {
         "Custom Deck Building",
         "Bathroom Renovation",
         "Kitchen Remodeling",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Flooring Installation",
         "Interior Painting",
         "Custom Carpentry",

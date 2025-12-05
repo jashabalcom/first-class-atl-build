@@ -17,7 +17,7 @@ const LakeClaire = () => {
         "Custom Deck Building",
         "Kitchen Remodeling",
         "Bathroom Renovation",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Custom Carpentry",
         "Flooring Installation",
         "Interior Painting",

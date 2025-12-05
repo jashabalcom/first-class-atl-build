@@ -16,7 +16,7 @@ const CandlerPark = () => {
         "Kitchen Remodeling",
         "Bathroom Renovation",
         "Historic Home Renovation",
-        "Whole-Home Renovation",
+        "Home Renovation",
         "Custom Carpentry",
         "Flooring Installation",
         "Interior Painting",
