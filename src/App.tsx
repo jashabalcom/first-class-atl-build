@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import ResidentialFunnel from "./pages/ResidentialFunnel";
 import Gallery from "./pages/Gallery";
 import About from "./pages/About";
+import Book from "./pages/Book";
 import Commercial from "./pages/Commercial";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -74,6 +75,7 @@ const App = () => (
             <Route path="/commercial" element={<Commercial />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/about" element={<About />} />
+            <Route path="/book" element={<Book />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
