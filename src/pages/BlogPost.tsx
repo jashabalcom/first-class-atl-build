@@ -170,8 +170,10 @@ const BlogPost = () => {
         </AnimatedSection>
 
         {/* Article Content - Magazine Typography */}
-        <AnimatedSection delay={200}>
-          <div className="container max-w-3xl px-4 sm:px-6">
+        <div 
+          className="container max-w-3xl px-4 sm:px-6 animate-fade-in"
+          style={{ animationDelay: '200ms', animationFillMode: 'both' }}
+        >
             {/* Lead paragraph styling via content renderer */}
             <article className="mb-12 md:mb-16">
               <BlogContentRenderer content={post.content} />
@@ -231,7 +233,6 @@ const BlogPost = () => {
               </Button>
             </Link>
           </div>
-        </AnimatedSection>
       </article>
 
       {/* Related Posts */}
