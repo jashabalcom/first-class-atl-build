@@ -25,21 +25,20 @@ const Book = () => {
 
       <main className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="relative py-12 lg:py-16 bg-gradient-to-b from-primary/5 to-background">
+        <section className="relative py-6 sm:py-8 lg:py-12 bg-gradient-to-b from-primary/5 to-background">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <SectionLabel className="mb-3 animate-fade-in-up">Book Now</SectionLabel>
-              <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+              <SectionLabel className="mb-2 animate-fade-in-up">Book Now</SectionLabel>
+              <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-2 sm:mb-3 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
                 Schedule Your{" "}
                 <span className="text-accent">Free Consultation</span>
               </h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-5 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-                Take the first step toward your dream renovation. Choose a convenient 
-                time for a no-obligation consultation with our expert team.
+              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-3 sm:mb-4 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+                Take the first step toward your dream renovation.
               </p>
 
               {/* Trust Indicators */}
-              <div className="flex flex-wrap justify-center gap-6 mb-6 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mb-4 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Shield className="h-5 w-5 text-accent" />
                   <span>Licensed & Insured</span>
