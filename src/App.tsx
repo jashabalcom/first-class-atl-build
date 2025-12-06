@@ -21,6 +21,7 @@ import AtlantaBasementFinishing from "./pages/AtlantaBasementFinishing";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import AgencyProposal from "./pages/tools/AgencyProposal";
+import Admin from "./pages/Admin";
 import GoHighLevelChat from "./components/GoHighLevelChat";
 
 // Priority Location Pages
@@ -117,6 +118,9 @@ const App = () => (
             <Route path="/powder-springs" element={<PowderSprings />} />
             <Route path="/austell" element={<Austell />} />
             <Route path="/lithia-springs" element={<LithiaSprings />} />
+            
+            {/* Admin Page */}
+            <Route path="/admin" element={<Admin />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
