@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      gallery_projects: {
+        Row: {
+          after_image_url: string
+          before_image_url: string | null
+          category: string
+          created_at: string
+          description: string | null
+          display_order: number | null
+          featured: boolean | null
+          id: string
+          location: string | null
+          title: string
+        }
+        Insert: {
+          after_image_url: string
+          before_image_url?: string | null
+          category: string
+          created_at?: string
+          description?: string | null
+          display_order?: number | null
+          featured?: boolean | null
+          id?: string
+          location?: string | null
+          title: string
+        }
+        Update: {
+          after_image_url?: string
+          before_image_url?: string | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          display_order?: number | null
+          featured?: boolean | null
+          id?: string
+          location?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           business_type: string | null
