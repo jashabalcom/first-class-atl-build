@@ -9,7 +9,6 @@ import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import ClientLogosCarousel from "@/components/ClientLogosCarousel";
-import GoogleTrustBadge from "@/components/GoogleTrustBadge";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import { BudgetEstimator } from "@/components/BudgetEstimator";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -40,13 +39,6 @@ const Home = () => {
         useH1={true}
         fullHeight={true}
       />
-
-      {/* Google Trust Badge Section */}
-      <section className="py-8 bg-background border-b">
-        <div className="container max-w-4xl">
-          <GoogleTrustBadge variant="full" className="max-w-md mx-auto" />
-        </div>
-      </section>
 
       {/* Services Section */}
       <AnimatedSection>
@@ -238,8 +230,7 @@ const Home = () => {
             </div>
 
             <div className="text-center mt-8">
-              <GoogleTrustBadge variant="compact" className="mx-auto" />
-              <div className="inline-flex items-center gap-4 text-sm mt-4">
+              <div className="inline-flex items-center gap-4 text-sm">
                 <span>Licensed • Bonded • Insured</span>
                 <span>•</span>
                 <span className="text-accent font-semibold">DBE • MBE</span>
