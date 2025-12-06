@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -5,9 +6,10 @@ import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import ValueCard from "@/components/ValueCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import ProcessStep from "@/components/ProcessStep";
+import SectionLabel from "@/components/SectionLabel";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import MobileCallBar from "@/components/MobileCallBar";
-import { Award, Users, Clock, DollarSign, Shield, Sparkles } from "lucide-react";
+import { Award, Clock, Sparkles } from "lucide-react";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenBefore from "@/assets/kitchen-before.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
@@ -16,6 +18,16 @@ import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 const ViningsKitchenRemodeling = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Kitchen Remodeling Vinings GA | Luxury Kitchen Contractor</title>
+        <meta 
+          name="description" 
+          content="Premier kitchen remodeling in Vinings, GA. Licensed Cobb County contractor specializing in luxury kitchen renovations. DBE/MBE certified. Call 678-671-6336." 
+        />
+        <meta name="keywords" content="kitchen remodeling vinings ga, vinings kitchen contractor, luxury kitchen renovation vinings, cobb county kitchen remodeling" />
+        <link rel="canonical" href="https://firstclassconstructionatl.com/areas/vinings-kitchen-remodeling" />
+      </Helmet>
+
       <Header />
       
       <Hero
@@ -28,33 +40,35 @@ const ViningsKitchenRemodeling = () => {
       />
 
       {/* Local Expertise Section */}
-      <section className="py-12 md:py-16 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Vinings Kitchen Remodeling Experts
+            <SectionLabel>Local Expertise</SectionLabel>
+            <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              Vinings <span className="text-accent">Kitchen Remodeling</span> Experts
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <div className="section-divider" />
+            <p className="text-lg text-muted-foreground mt-6">
               We understand Vinings' unique character—from historic homes in Vinings Village to luxury estates overlooking the Chattahoochee. 
               Our team specializes in creating kitchens that match the sophistication Vinings is known for.
             </p>
           </div>
 
           <div className="grid md:grid-cols-4 gap-6 mb-12">
-            <div className="text-center p-6 bg-card rounded-lg">
-              <div className="text-4xl font-bold text-primary mb-2">175+</div>
+            <div className="text-center p-6 bg-card rounded-lg border border-border hover:border-accent transition-colors">
+              <div className="font-playfair text-4xl font-bold text-accent mb-2">175+</div>
               <div className="text-sm text-muted-foreground">Vinings Kitchens Completed</div>
             </div>
-            <div className="text-center p-6 bg-card rounded-lg">
-              <div className="text-4xl font-bold text-primary mb-2">5.0★</div>
+            <div className="text-center p-6 bg-card rounded-lg border border-border hover:border-accent transition-colors">
+              <div className="font-playfair text-4xl font-bold text-accent mb-2">5.0★</div>
               <div className="text-sm text-muted-foreground">Average Vinings Rating</div>
             </div>
-            <div className="text-center p-6 bg-card rounded-lg">
-              <div className="text-4xl font-bold text-primary mb-2">4-8</div>
+            <div className="text-center p-6 bg-card rounded-lg border border-border hover:border-accent transition-colors">
+              <div className="font-playfair text-4xl font-bold text-accent mb-2">4-8</div>
               <div className="text-sm text-muted-foreground">Weeks Typical Timeline</div>
             </div>
-            <div className="text-center p-6 bg-card rounded-lg">
-              <div className="text-4xl font-bold text-primary mb-2">100%</div>
+            <div className="text-center p-6 bg-card rounded-lg border border-border hover:border-accent transition-colors">
+              <div className="font-playfair text-4xl font-bold text-accent mb-2">100%</div>
               <div className="text-sm text-muted-foreground">Cobb Permits Handled</div>
             </div>
           </div>
@@ -62,25 +76,31 @@ const ViningsKitchenRemodeling = () => {
       </section>
 
       {/* Before & After */}
-      <section className="py-12 md:py-16 bg-muted/30">
+      <section className="py-16 md:py-24 bg-muted/30">
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Vinings Kitchen Transformations
+          <SectionLabel>Transformations</SectionLabel>
+          <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
+            Vinings Kitchen <span className="text-accent">Transformations</span>
           </h2>
-          <BeforeAfterSlider
-            beforeImage={kitchenBefore}
-            afterImage={kitchenAfter}
-          />
+          <div className="section-divider" />
+          <div className="mt-12">
+            <BeforeAfterSlider
+              beforeImage={kitchenBefore}
+              afterImage={kitchenAfter}
+            />
+          </div>
         </div>
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-12 md:py-16 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Why Vinings Homeowners Choose First Class Construction
+          <SectionLabel>Why Choose Us</SectionLabel>
+          <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
+            Why Vinings Homeowners Choose <span className="text-accent">First Class</span>
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="section-divider" />
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
             <ValueCard
               icon={Award}
               title="Luxury Home Expertise"
@@ -101,12 +121,14 @@ const ViningsKitchenRemodeling = () => {
       </section>
 
       {/* Services */}
-      <section className="py-12 md:py-16 bg-muted/30">
+      <section className="py-16 md:py-24 bg-muted/30">
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Vinings Kitchen Remodeling Services
+          <SectionLabel>Our Services</SectionLabel>
+          <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
+            Vinings Kitchen <span className="text-accent">Remodeling Services</span>
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="section-divider" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
             {[
               "Luxury Kitchen Renovations",
               "Chef's Kitchen Design",
@@ -118,8 +140,8 @@ const ViningsKitchenRemodeling = () => {
               "Premium Stone Countertops",
               "Smart Kitchen Technology"
             ].map((service) => (
-              <div key={service} className="flex items-center gap-3 p-4 bg-card rounded-lg">
-                <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0" />
+              <div key={service} className="flex items-center gap-3 p-4 bg-card rounded-lg border-l-2 border-l-transparent hover:border-l-accent transition-colors">
+                <div className="w-2 h-2 bg-accent rounded-full flex-shrink-0" />
                 <span className="font-medium">{service}</span>
               </div>
             ))}
@@ -128,91 +150,93 @@ const ViningsKitchenRemodeling = () => {
       </section>
 
       {/* Pricing Tiers */}
-      <section className="py-12 md:py-16 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            Vinings Kitchen Remodeling Investment
+          <SectionLabel>Investment Tiers</SectionLabel>
+          <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
+            Vinings Kitchen <span className="text-accent">Remodeling Investment</span>
           </h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <div className="section-divider" />
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto mt-6">
             Premium craftsmanship for discerning homeowners. Final investment depends on materials, appliances, and custom features.
           </p>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="bg-card p-8 rounded-lg border-2 border-border">
-              <h3 className="text-2xl font-bold mb-2">Premium</h3>
-              <div className="text-3xl font-bold text-primary mb-4">$50K-$75K</div>
+            <div className="bg-card p-8 rounded-lg border border-border hover:border-accent transition-colors">
+              <h3 className="font-playfair text-2xl font-bold mb-2">Premium</h3>
+              <div className="font-playfair text-3xl font-bold text-accent mb-4">$50K-$75K</div>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Semi-custom cabinetry</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Quartz or granite countertops</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Professional-grade appliances</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Designer lighting & fixtures</span>
                 </li>
               </ul>
             </div>
 
-            <div className="bg-card p-8 rounded-lg border-2 border-primary">
-              <div className="inline-block px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full mb-2">
+            <div className="bg-card p-8 rounded-lg border-2 border-accent">
+              <div className="inline-block px-3 py-1 bg-accent text-accent-foreground text-xs font-semibold rounded-full mb-2">
                 MOST POPULAR
               </div>
-              <h3 className="text-2xl font-bold mb-2">Luxury</h3>
-              <div className="text-3xl font-bold text-primary mb-4">$75K-$125K</div>
+              <h3 className="font-playfair text-2xl font-bold mb-2">Luxury</h3>
+              <div className="font-playfair text-3xl font-bold text-accent mb-4">$75K-$125K</div>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Fully custom cabinetry</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Exotic stone countertops</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>High-end appliance packages</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Butler's pantry or wine room</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Smart home integration</span>
                 </li>
               </ul>
             </div>
 
-            <div className="bg-card p-8 rounded-lg border-2 border-border">
-              <h3 className="text-2xl font-bold mb-2">Estate</h3>
-              <div className="text-3xl font-bold text-primary mb-4">$125K-$250K+</div>
+            <div className="bg-card p-8 rounded-lg border border-border hover:border-accent transition-colors">
+              <h3 className="font-playfair text-2xl font-bold mb-2">Estate</h3>
+              <div className="font-playfair text-3xl font-bold text-accent mb-4">$125K-$250K+</div>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Bespoke custom design</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Premium imported materials</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Chef-grade appliance suites</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Architectural modifications</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                   <span>Multi-room integration</span>
                 </li>
               </ul>
@@ -222,12 +246,14 @@ const ViningsKitchenRemodeling = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-12 md:py-16 bg-muted/30">
+      <section className="py-16 md:py-24 bg-muted/30">
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            What Vinings Clients Say
+          <SectionLabel>Testimonials</SectionLabel>
+          <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
+            What Vinings <span className="text-accent">Clients Say</span>
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="section-divider" />
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
             <TestimonialCard
               quote="We've lived in Vinings for 15 years and finally found contractors who understand luxury. Our new chef's kitchen exceeded our expectations in every way."
               author="Catherine & James H."
@@ -253,12 +279,14 @@ const ViningsKitchenRemodeling = () => {
       </section>
 
       {/* Process */}
-      <section className="py-12 md:py-16 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Our Vinings Kitchen Remodeling Process
+          <SectionLabel>Our Process</SectionLabel>
+          <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
+            Our Vinings Kitchen <span className="text-accent">Remodeling Process</span>
           </h2>
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="section-divider" />
+          <div className="grid md:grid-cols-4 gap-8 mt-12">
             <ProcessStep
               number={1}
               title="Private Consultation"
@@ -284,12 +312,14 @@ const ViningsKitchenRemodeling = () => {
       </section>
 
       {/* Neighborhoods Served */}
-      <section className="py-12 md:py-16 bg-muted/30">
+      <section className="py-16 md:py-24 bg-muted/30">
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-            Vinings Neighborhoods We Serve
+          <SectionLabel>Coverage Area</SectionLabel>
+          <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
+            Vinings <span className="text-accent">Neighborhoods</span> We Serve
           </h2>
-          <div className="max-w-4xl mx-auto">
+          <div className="section-divider" />
+          <div className="max-w-4xl mx-auto mt-12">
             <div className="grid md:grid-cols-3 gap-4 text-center">
               {[
                 "Vinings Village",
@@ -302,7 +332,7 @@ const ViningsKitchenRemodeling = () => {
                 "Chattahoochee Overlook",
                 "Vinings Quarters"
               ].map((neighborhood) => (
-                <div key={neighborhood} className="p-4 bg-card rounded-lg font-medium">
+                <div key={neighborhood} className="p-4 bg-card rounded-lg font-medium border border-border hover:border-accent transition-colors">
                   {neighborhood}
                 </div>
               ))}
@@ -312,13 +342,15 @@ const ViningsKitchenRemodeling = () => {
       </section>
 
       {/* Contact Form */}
-      <section id="contact-form" className="py-12 md:py-16 bg-background scroll-mt-20">
+      <section id="contact-form" className="py-16 md:py-24 bg-background scroll-mt-20">
         <div className="container max-w-4xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Transform Your Vinings Kitchen?
+            <SectionLabel>Get Started</SectionLabel>
+            <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              Ready to Transform Your <span className="text-accent">Vinings Kitchen</span>?
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <div className="section-divider" />
+            <p className="text-lg text-muted-foreground mt-6">
               Schedule your private consultation today. Most Vinings quotes delivered within 24 hours.
             </p>
           </div>
