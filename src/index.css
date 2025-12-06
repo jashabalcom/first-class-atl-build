@@ -323,6 +323,29 @@ All colors MUST be HSL.
   z-index: 9999 !important;
 }
 
+/* Mobile optimization: move chat widget higher to avoid MobileCallBar overlap */
+@media (max-width: 767px) {
+  [data-widget-id],
+  .chat-widget-container,
+  #chat-widget-container,
+  .lc_text-widget-open-btn,
+  [class*="chat-bubble"],
+  [class*="widget-bubble"] {
+    bottom: 80px !important; /* Above MobileCallBar */
+    right: 16px !important;
+  }
+  
+  /* Adjust expanded chat window on mobile */
+  .chat-widget-window,
+  [class*="chat-widget-window"] {
+    bottom: 80px !important;
+    right: 8px !important;
+    left: 8px !important;
+    max-height: calc(100vh - 160px) !important;
+    width: auto !important;
+  }
+}
+
 .chat-widget-container,
 #chat-widget-container {
   background: #2B2B2B !important;
