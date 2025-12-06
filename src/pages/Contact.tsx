@@ -4,6 +4,7 @@ import MobileCallBar from "@/components/MobileCallBar";
 import ContactForm from "@/components/ContactForm";
 import SectionLabel from "@/components/SectionLabel";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import CertificationBadges from "@/components/CertificationBadges";
 
@@ -36,18 +37,18 @@ const Contact = () => {
   ];
 
   const serviceAreas = [
-    "Atlanta",
-    "Buckhead",
-    "Midtown",
-    "Decatur",
-    "Sandy Springs",
-    "Brookhaven",
-    "Dunwoody",
-    "Marietta",
-    "Alpharetta",
-    "Roswell",
-    "Johns Creek",
-    "Smyrna",
+    { name: "Atlanta", path: "/locations/atlanta" },
+    { name: "Buckhead", path: "/locations/buckhead" },
+    { name: "Midtown", path: "/locations/midtown" },
+    { name: "Decatur", path: "/locations/decatur" },
+    { name: "Sandy Springs", path: "/locations/sandy-springs" },
+    { name: "Brookhaven", path: "/locations/brookhaven" },
+    { name: "Dunwoody", path: "/locations/dunwoody" },
+    { name: "Marietta", path: "/locations/marietta" },
+    { name: "Alpharetta", path: "/locations/alpharetta" },
+    { name: "Roswell", path: "/locations/roswell" },
+    { name: "Johns Creek", path: "/locations/johns-creek" },
+    { name: "Smyrna", path: "/locations/smyrna" },
   ];
 
   return (
@@ -128,13 +129,14 @@ const Contact = () => {
                   <h3 className="font-playfair font-semibold text-lg mb-4">Service Areas</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {serviceAreas.map((area, index) => (
-                      <div 
+                      <Link 
                         key={index}
-                        className="text-sm text-muted-foreground flex items-center gap-2"
+                        to={area.path}
+                        className="text-sm text-muted-foreground flex items-center gap-2 hover:text-accent transition-colors"
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-                        {area}
-                      </div>
+                        {area.name}
+                      </Link>
                     ))}
                   </div>
                 </div>
