@@ -9,8 +9,25 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { Trash2, Edit, Plus, Lock, LogOut, Upload, X } from 'lucide-react';
+import { Trash2, Edit, Plus, Lock, LogOut, Upload, X, GripVertical } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 const ADMIN_PASSWORD = 'mla2024admin'; // Simple password protection
 
@@ -37,6 +54,67 @@ const categories = [
   'Painting'
 ];
 
+interface SortableProjectCardProps {
+  project: GalleryProject;
+  onEdit: (project: GalleryProject) => void;
+  onDelete: (id: string) => void;
+}
+
+function SortableProjectCard({ project, onEdit, onDelete }: SortableProjectCardProps) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: project.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
+
+  return (
+    <Card ref={setNodeRef} style={style} className={isDragging ? 'shadow-lg' : ''}>
+      <CardContent className="p-4">
+        <div className="flex items-center gap-4">
+          <button
+            className="cursor-grab active:cursor-grabbing touch-none p-1 text-muted-foreground hover:text-foreground"
+            {...attributes}
+            {...listeners}
+          >
+            <GripVertical className="w-5 h-5" />
+          </button>
+          <img
+            src={project.after_image_url}
+            alt={project.title}
+            className="w-20 h-20 object-cover rounded"
+          />
+          <div className="flex-1">
+            <h3 className="font-semibold text-foreground">{project.title}</h3>
+            <p className="text-sm text-muted-foreground">
+              {project.category} {project.location && `• ${project.location}`}
+            </p>
+            {project.featured && (
+              <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Featured</span>
+            )}
+          </div>
+          <div className="flex gap-2">
+            <Button variant="outline" size="icon" onClick={() => onEdit(project)}>
+              <Edit className="w-4 h-4" />
+            </Button>
+            <Button variant="destructive" size="icon" onClick={() => onDelete(project.id)}>
+              <Trash2 className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
@@ -58,6 +136,13 @@ export default function Admin() {
   });
 
   const navigate = useNavigate();
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   useEffect(() => {
     const saved = sessionStorage.getItem('admin_authenticated');
@@ -98,6 +183,33 @@ export default function Admin() {
       setProjects(data || []);
     }
     setLoading(false);
+  };
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      const oldIndex = projects.findIndex((p) => p.id === active.id);
+      const newIndex = projects.findIndex((p) => p.id === over.id);
+
+      const newProjects = arrayMove(projects, oldIndex, newIndex);
+      setProjects(newProjects);
+
+      // Update display_order in database
+      const updates = newProjects.map((project, index) => ({
+        id: project.id,
+        display_order: index,
+      }));
+
+      for (const update of updates) {
+        await supabase
+          .from('gallery_projects')
+          .update({ display_order: update.display_order })
+          .eq('id', update.id);
+      }
+
+      toast.success('Order updated');
+    }
   };
 
   const uploadImage = async (file: File, type: 'before' | 'after'): Promise<string | null> => {
@@ -458,41 +570,34 @@ export default function Admin() {
           </DialogContent>
         </Dialog>
 
+        <p className="text-sm text-muted-foreground mb-4">
+          Drag and drop projects to reorder them in the gallery.
+        </p>
+
         {loading && !projects.length ? (
           <div className="text-center py-12 text-muted-foreground">Loading...</div>
         ) : (
-          <div className="grid gap-4">
-            {projects.map((project) => (
-              <Card key={project.id}>
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={project.after_image_url}
-                      alt={project.title}
-                      className="w-20 h-20 object-cover rounded"
-                    />
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-foreground">{project.title}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {project.category} {project.location && `• ${project.location}`}
-                      </p>
-                      {project.featured && (
-                        <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Featured</span>
-                      )}
-                    </div>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="icon" onClick={() => openEditDialog(project)}>
-                        <Edit className="w-4 h-4" />
-                      </Button>
-                      <Button variant="destructive" size="icon" onClick={() => handleDelete(project.id)}>
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext
+              items={projects.map(p => p.id)}
+              strategy={verticalListSortingStrategy}
+            >
+              <div className="grid gap-4">
+                {projects.map((project) => (
+                  <SortableProjectCard
+                    key={project.id}
+                    project={project}
+                    onEdit={openEditDialog}
+                    onDelete={handleDelete}
+                  />
+                ))}
+              </div>
+            </SortableContext>
+          </DndContext>
         )}
 
         {!loading && projects.length === 0 && (
