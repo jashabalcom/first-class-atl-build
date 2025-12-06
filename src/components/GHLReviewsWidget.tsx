@@ -20,15 +20,17 @@ const GHLReviewsWidget = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full mt-8">
-      <iframe
-        className="lc_reviews_widget"
-        src="https://reputationhub.site/reputation/widgets/review_widget/aolw7GuGFLtbks1OI4n3"
-        frameBorder={0}
-        scrolling="no"
-        style={{ minWidth: "100%", width: "100%" }}
-        title="Google Reviews"
-      />
+    <div ref={containerRef} className="w-full mt-8 flex justify-center">
+      <div className="w-full max-w-3xl">
+        <iframe
+          className="lc_reviews_widget"
+          src="https://reputationhub.site/reputation/widgets/review_widget/aolw7GuGFLtbks1OI4n3"
+          frameBorder={0}
+          scrolling="no"
+          style={{ minWidth: "100%", width: "100%" }}
+          title="Google Reviews"
+        />
+      </div>
     </div>
   );
 };
