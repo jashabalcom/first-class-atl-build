@@ -25,21 +25,21 @@ const Book = () => {
 
       <main className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="relative py-20 lg:py-28 bg-gradient-to-b from-primary/5 to-background">
+        <section className="relative py-12 lg:py-16 bg-gradient-to-b from-primary/5 to-background">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <SectionLabel className="mb-4 animate-fade-in-up">Book Now</SectionLabel>
-              <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+              <SectionLabel className="mb-3 animate-fade-in-up">Book Now</SectionLabel>
+              <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
                 Schedule Your{" "}
                 <span className="text-accent">Free Consultation</span>
               </h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-5 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
                 Take the first step toward your dream renovation. Choose a convenient 
                 time for a no-obligation consultation with our expert team.
               </p>
 
               {/* Trust Indicators */}
-              <div className="flex flex-wrap justify-center gap-6 mb-12 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+              <div className="flex flex-wrap justify-center gap-6 mb-6 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Shield className="h-5 w-5 text-accent" />
                   <span>Licensed & Insured</span>
@@ -58,12 +58,12 @@ const Book = () => {
         </section>
 
         {/* Calendar Section */}
-        <section className="py-12 lg:py-20 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
+        <section className="pt-0 pb-12 lg:pb-16 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               {/* Calendar Container */}
               <div className="bg-card rounded-lg shadow-xl border-t-4 border-accent overflow-hidden">
-                <div className="p-6 md:p-8 bg-muted/30 border-b border-border">
+                <div className="p-4 md:p-6 bg-muted/30 border-b border-border">
                   <h2 className="font-playfair text-2xl font-semibold text-foreground text-center">
                     Select a Date & Time
                   </h2>
