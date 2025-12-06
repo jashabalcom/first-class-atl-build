@@ -11,6 +11,7 @@ import { Award, Users, Clock, DollarSign, Shield, Sparkles } from "lucide-react"
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenBefore from "@/assets/kitchen-before.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
+import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 
 const ViningsKitchenRemodeling = () => {
   return (
@@ -246,6 +247,8 @@ const ViningsKitchenRemodeling = () => {
               rating={5}
             />
           </div>
+          
+          <GHLReviewsWidget />
         </div>
       </section>
 

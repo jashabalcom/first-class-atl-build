@@ -15,6 +15,7 @@ import heroBathroom from "@/assets/hero-bathroom.jpg";
 import kitchenBefore from "@/assets/kitchen-before.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
 import basementFinished from "@/assets/basement-finished.jpg";
+import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 
 const ResidentialFunnel = () => {
   return (
@@ -213,6 +214,8 @@ const ResidentialFunnel = () => {
                 <span className="text-accent font-semibold">DBE • MBE</span>
               </div>
             </div>
+            
+            <GHLReviewsWidget />
           </div>
         </section>
       </AnimatedSection>

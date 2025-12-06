@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Shield, Users, Award, CheckCircle } from "lucide-react";
 import heroCommercial from "@/assets/hero-commercial.jpg";
+import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 
 const About = () => {
   const values = [
@@ -140,6 +141,13 @@ const About = () => {
 
         {/* Client Logos */}
         <ClientLogosCarousel />
+
+        {/* Reviews Widget */}
+        <section className="py-12 bg-secondary/5">
+          <div className="container">
+            <GHLReviewsWidget />
+          </div>
+        </section>
 
         {/* CTA Section */}
         <section className="py-20 bg-gradient-to-b from-background to-secondary/10">
