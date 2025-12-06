@@ -1,5 +1,6 @@
-import { Phone } from "lucide-react";
+import { Phone, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const MobileCallBar = () => {
   return (
@@ -11,11 +12,12 @@ const MobileCallBar = () => {
             Call 678-671-6336
           </Button>
         </a>
-        <a href="#contact-form" className="flex-1">
-          <Button variant="outline" size="lg" className="w-full h-14 text-base">
-            Free Quote
+        <Link to="/book" className="flex-1">
+          <Button variant="outline" size="lg" className="w-full h-14 text-base gap-2">
+            <Calendar className="h-5 w-5" />
+            Book Now
           </Button>
-        </a>
+        </Link>
       </div>
     </div>
   );

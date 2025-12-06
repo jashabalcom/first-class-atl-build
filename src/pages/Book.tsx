@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -7,6 +8,8 @@ import CertificationBadges from "@/components/CertificationBadges";
 import { Shield, Clock, Award } from "lucide-react";
 
 const Book = () => {
+  const [calendarLoaded, setCalendarLoaded] = useState(false);
+
   return (
     <>
       <Helmet>
@@ -25,18 +28,18 @@ const Book = () => {
         <section className="relative py-20 lg:py-28 bg-gradient-to-b from-primary/5 to-background">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <SectionLabel className="mb-4">Book Now</SectionLabel>
-              <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+              <SectionLabel className="mb-4 animate-fade-in-up">Book Now</SectionLabel>
+              <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
                 Schedule Your{" "}
                 <span className="text-accent">Free Consultation</span>
               </h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
                 Take the first step toward your dream renovation. Choose a convenient 
                 time for a no-obligation consultation with our expert team.
               </p>
 
               {/* Trust Indicators */}
-              <div className="flex flex-wrap justify-center gap-6 mb-12">
+              <div className="flex flex-wrap justify-center gap-6 mb-12 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Shield className="h-5 w-5 text-accent" />
                   <span>Licensed & Insured</span>
@@ -55,7 +58,7 @@ const Book = () => {
         </section>
 
         {/* Calendar Section */}
-        <section className="py-12 lg:py-20">
+        <section className="py-12 lg:py-20 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               {/* Calendar Container */}
@@ -65,7 +68,15 @@ const Book = () => {
                     Select a Date & Time
                   </h2>
                 </div>
-                <div className="p-4 md:p-8">
+                <div className="p-4 md:p-8 relative">
+                  {/* Skeleton Loader */}
+                  {!calendarLoaded && (
+                    <div className="absolute inset-4 md:inset-8 flex flex-col items-center justify-center bg-muted/50 rounded-lg animate-pulse">
+                      <div className="w-16 h-16 rounded-full bg-muted mb-4" />
+                      <div className="h-4 w-48 bg-muted rounded mb-2" />
+                      <div className="h-3 w-32 bg-muted rounded" />
+                    </div>
+                  )}
                   <iframe
                     src="https://api.leadconnectorhq.com/widget/booking/ITabl42VTFSLL9X27hGf"
                     style={{
@@ -73,10 +84,13 @@ const Book = () => {
                       border: "none",
                       overflow: "hidden",
                       minHeight: "700px",
+                      opacity: calendarLoaded ? 1 : 0,
+                      transition: "opacity 0.3s ease-in-out",
                     }}
                     scrolling="no"
                     id="ITabl42VTFSLL9X27hGf_1765057687412"
                     title="Schedule Appointment"
+                    onLoad={() => setCalendarLoaded(true)}
                   />
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import { Phone, Menu } from "lucide-react";
+import { Phone, Menu, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link } from "react-router-dom";
@@ -41,6 +41,13 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center gap-3">
+          <Link to="/book" className="hidden sm:block">
+            <Button variant="cta" size="sm" className="gap-2">
+              <Calendar className="h-4 w-4" />
+              <span className="hidden lg:inline">Book Now</span>
+              <span className="lg:hidden">Book</span>
+            </Button>
+          </Link>
           <a href="tel:678-671-6336" className="hidden sm:block">
             <Button variant="outline" size="sm" className="gap-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300">
               <Phone className="h-4 w-4" />
@@ -68,7 +75,13 @@ const Header = () => {
                     {link.label}
                   </Link>
                 ))}
-                <div className="pt-4 border-t mt-2">
+                <div className="pt-4 border-t mt-2 space-y-3">
+                  <Link to="/book" onClick={() => setIsOpen(false)} className="w-full block">
+                    <Button variant="cta" size="lg" className="w-full gap-2 h-12">
+                      <Calendar className="h-5 w-5" />
+                      Book Consultation
+                    </Button>
+                  </Link>
                   <a href="tel:678-671-6336" className="w-full block">
                     <Button variant="outline" size="lg" className="w-full gap-2 h-12 border-accent text-accent hover:bg-accent hover:text-accent-foreground">
                       <Phone className="h-5 w-5" />
