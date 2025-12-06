@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import ContactForm from "@/components/ContactForm";
 import SectionLabel from "@/components/SectionLabel";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import CertificationBadges from "@/components/CertificationBadges";
@@ -174,6 +175,29 @@ const Contact = () => {
         <section className="py-12 bg-muted/30">
           <div className="container">
             <CertificationBadges />
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 md:py-24 bg-secondary text-secondary-foreground">
+          <div className="container">
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold">
+                Ready to Get <span className="text-accent">Started?</span>
+              </h2>
+              <p className="text-lg text-secondary-foreground/80">
+                Skip the back-and-forth. Book a free consultation directly on our calendar and let's discuss your project in detail.
+              </p>
+              <Link to="/book">
+                <Button size="lg" className="mt-4 gap-2 text-base px-8 py-6">
+                  <Calendar className="h-5 w-5" />
+                  Book Your Free Consultation
+                </Button>
+              </Link>
+              <p className="text-sm text-secondary-foreground/60">
+                No obligation · Same-day response · 100% free estimate
+              </p>
+            </div>
           </div>
         </section>
       </main>
