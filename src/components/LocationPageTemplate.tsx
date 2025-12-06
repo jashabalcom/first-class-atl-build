@@ -7,7 +7,6 @@ import ValueCard from "@/components/ValueCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
-import GoogleTrustBadge from "@/components/GoogleTrustBadge";
 import SectionLabel from "@/components/SectionLabel";
 import { Award, Clock, Shield, Home, Users, Sparkles } from "lucide-react";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
@@ -68,13 +67,6 @@ const LocationPageTemplate = ({
         secondaryCTA="Call 678-671-6336"
         backgroundImage={heroImages[heroImage]}
       />
-
-      {/* Google Trust Badge */}
-      <section className="py-8 bg-background border-b">
-        <div className="container max-w-4xl">
-          <GoogleTrustBadge variant="full" className="max-w-md mx-auto" />
-        </div>
-      </section>
 
       {/* City-Specific Intro */}
       <section className="py-16 md:py-24 bg-background">
@@ -213,9 +205,6 @@ const LocationPageTemplate = ({
             ))}
           </div>
 
-          <div className="text-center mt-8">
-            <GoogleTrustBadge variant="compact" className="mx-auto" />
-          </div>
         </div>
       </section>
 

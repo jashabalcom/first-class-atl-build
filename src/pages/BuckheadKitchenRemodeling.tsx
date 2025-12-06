@@ -7,7 +7,6 @@ import ValueCard from "@/components/ValueCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
-import GoogleTrustBadge from "@/components/GoogleTrustBadge";
 import { Calendar, UserCheck, ShieldCheck, DollarSign, Home as HomeIcon } from "lucide-react";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenBefore from "@/assets/kitchen-before.jpg";
@@ -26,13 +25,6 @@ const BuckheadKitchenRemodeling = () => {
         secondaryCTA="Call 678-671-6336"
         backgroundImage={heroKitchen}
       />
-
-      {/* Google Trust Badge */}
-      <section className="py-8 bg-background border-b">
-        <div className="container max-w-4xl">
-          <GoogleTrustBadge variant="full" className="max-w-md mx-auto" />
-        </div>
-      </section>
 
       {/* Buckhead-Specific Intro */}
       <section className="py-16 md:py-24 bg-background">
@@ -278,9 +270,6 @@ const BuckheadKitchenRemodeling = () => {
             />
           </div>
 
-          <div className="text-center mt-8">
-            <GoogleTrustBadge variant="compact" className="mx-auto" />
-          </div>
         </div>
       </section>
 

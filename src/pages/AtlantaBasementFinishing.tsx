@@ -6,7 +6,6 @@ import ValueCard from "@/components/ValueCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
-import GoogleTrustBadge from "@/components/GoogleTrustBadge";
 import MobileCallBar from "@/components/MobileCallBar";
 import { Award, Users, Clock, DollarSign, Shield, Sparkles } from "lucide-react";
 import basementImage from "@/assets/basement-finished.jpg";
@@ -26,11 +25,6 @@ const AtlantaBasementFinishing = () => {
         secondaryCTA="Call 678-671-6336"
         backgroundImage={basementImage}
       />
-
-      {/* Google Trust Badge */}
-      <div className="container py-8">
-        <GoogleTrustBadge />
-      </div>
 
       {/* Local Expertise Section */}
       <section className="py-12 md:py-16 bg-background">
