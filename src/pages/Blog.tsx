@@ -84,49 +84,55 @@ const Blog = () => {
       )}
 
       {/* Categories Filter */}
-      <AnimatedSection delay={200}>
-        <section className="py-8 border-b border-[hsl(var(--editorial-border))] bg-card/50 sticky top-16 z-40">
-          <div className="container max-w-6xl">
-            <BlogCategories
-              categories={blogCategories}
-              selectedCategory={selectedCategory}
-              onSelectCategory={setSelectedCategory}
-            />
-          </div>
-        </section>
-      </AnimatedSection>
+      <section 
+        className="py-8 border-b border-[hsl(var(--editorial-border))] bg-card/50 sticky top-16 z-40 animate-fade-in"
+        style={{ animationDelay: '200ms', animationFillMode: 'both' }}
+      >
+        <div className="container max-w-6xl">
+          <BlogCategories
+            categories={blogCategories}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+          />
+        </div>
+      </section>
 
       {/* Blog Posts Grid */}
-      <AnimatedSection delay={300}>
-        <section className="py-16 bg-[hsl(var(--editorial-cream))]">
-          <div className="container max-w-6xl">
-            <div className="mb-12">
-              <h2 className="font-playfair text-3xl font-bold">
-                {selectedCategory ? `${selectedCategory} Articles` : "All Articles"}
-              </h2>
-              <p className="font-inter text-sm uppercase tracking-wider text-muted-foreground mt-2">
-                {filteredPosts.length} {filteredPosts.length === 1 ? "article" : "articles"}
+      <section 
+        className="py-16 bg-[hsl(var(--editorial-cream))] animate-fade-in"
+        style={{ animationDelay: '300ms', animationFillMode: 'both' }}
+      >
+        <div className="container max-w-6xl">
+          <div className="mb-12">
+            <h2 className="font-playfair text-3xl font-bold">
+              {selectedCategory ? `${selectedCategory} Articles` : "All Articles"}
+            </h2>
+            <p className="font-inter text-sm uppercase tracking-wider text-muted-foreground mt-2">
+              {filteredPosts.length} {filteredPosts.length === 1 ? "article" : "articles"}
+            </p>
+          </div>
+
+          {filteredPosts.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPosts.map((post, index) => (
+                <div 
+                  key={post.slug} 
+                  className="animate-fade-in"
+                  style={{ animationDelay: `${400 + index * 50}ms`, animationFillMode: 'both' }}
+                >
+                  <BlogCard {...post} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg">
+                No articles found in this category.
               </p>
             </div>
-
-            {filteredPosts.length > 0 ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredPosts.map((post, index) => (
-                  <AnimatedSection key={post.slug} delay={index * 50}>
-                    <BlogCard {...post} />
-                  </AnimatedSection>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-muted-foreground text-lg">
-                  No articles found in this category.
-                </p>
-              </div>
-            )}
-          </div>
-        </section>
-      </AnimatedSection>
+          )}
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="py-16 bg-card border-t border-[hsl(var(--editorial-border))]">
