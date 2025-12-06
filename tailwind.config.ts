@@ -125,10 +125,13 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in-up": "fade-in-up 0.6s ease-out",
+        "fade-in-up": "fade-in-up 0.6s ease-out forwards",
         "scale-in": "scale-in 0.5s ease-out",
         "slide-in-right": "slide-in-right 0.3s ease-out",
         "bounce-subtle": "bounce-subtle 2s ease-in-out infinite",
+      },
+      transitionDuration: {
+        '350': '350ms',
       },
     },
   },

@@ -5,10 +5,10 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Small delay to allow PageTransition to complete before scrolling
+    // Delay to coordinate with PageTransition fade
     const timer = setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "instant" });
-    }, 60);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100);
 
     return () => clearTimeout(timer);
   }, [pathname]);

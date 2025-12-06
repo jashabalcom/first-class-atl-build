@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import ScrollIndicator from "./ScrollIndicator";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 
@@ -87,12 +88,12 @@ const Hero = ({
           </p>
           
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-            <a href="#contact-form" className="w-full sm:w-auto">
+            <Link to="/book" className="w-full sm:w-auto">
               <Button variant="outline" size="lg" className="w-full sm:w-auto h-12 border-2 border-accent text-accent-foreground bg-accent hover:bg-accent/90 gap-2 group">
                 {primaryCTA}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-            </a>
+            </Link>
             {secondaryCTA && (
               <a href="tel:678-671-6336" className="text-white/90 hover:text-accent transition-colors text-center min-h-[44px] flex items-center justify-center text-sm underline underline-offset-4 decoration-white/30 hover:decoration-accent">
                 {secondaryCTA}
