@@ -5,6 +5,7 @@ import ContactForm from "@/components/ContactForm";
 import SectionLabel from "@/components/SectionLabel";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
+import CertificationBadges from "@/components/CertificationBadges";
 
 const Contact = () => {
   const contactInfo = [
@@ -59,11 +60,11 @@ const Contact = () => {
         <section className="relative py-12 md:py-20 bg-gradient-to-b from-secondary/10 to-background">
           <div className="container">
             <div className="max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
-              <SectionLabel>Contact Us</SectionLabel>
-              <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold mt-3">
+              <SectionLabel className="animate-fade-in-up">Contact Us</SectionLabel>
+              <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold mt-3 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
                 Let's Turn Your Vision <span className="text-accent">Into Reality</span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground">
+              <p className="text-lg md:text-xl text-muted-foreground animate-fade-in-up" style={{ animationDelay: '200ms' }}>
                 Get in touch with First Class Construction Group. We're ready to discuss your project and provide a free consultation.
               </p>
               <div className="section-divider" />
@@ -76,7 +77,7 @@ const Contact = () => {
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
               {/* Contact Form */}
-              <div>
+              <div className="animate-fade-in-up" style={{ animationDelay: '300ms' }}>
                 <ContactForm
                   heading="Send Us a Message"
                   subheading="Fill out the form below and we'll get back to you within one business day."
@@ -87,7 +88,7 @@ const Contact = () => {
               </div>
 
               {/* Contact Info */}
-              <div className="space-y-8">
+              <div className="space-y-8 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
 
                 <div>
                   <h2 className="font-playfair text-2xl font-bold mb-6">Contact Information</h2>
@@ -161,25 +162,16 @@ const Contact = () => {
         </section>
 
         {/* Reviews Widget */}
-        <section className="py-12 bg-background">
+        <section className="py-12 bg-background animate-fade-in-up" style={{ animationDelay: '500ms' }}>
           <div className="container">
             <GHLReviewsWidget />
           </div>
         </section>
 
-        {/* Map Section - Placeholder */}
-        <section className="py-8 md:py-12 bg-secondary/5 border-y">
+        {/* Certification Badges */}
+        <section className="py-12 bg-muted/30">
           <div className="container">
-            <div className="max-w-6xl mx-auto">
-              <div className="aspect-[16/9] md:aspect-[21/9] bg-muted rounded-lg flex items-center justify-center border">
-                <div className="text-center space-y-2">
-                  <MapPin className="h-12 w-12 text-accent mx-auto" />
-                  <p className="text-muted-foreground">
-                    Proudly serving Metro Atlanta and surrounding areas
-                  </p>
-                </div>
-              </div>
-            </div>
+            <CertificationBadges />
           </div>
         </section>
       </main>
