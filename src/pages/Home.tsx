@@ -59,7 +59,7 @@ const Home = () => {
               <ServiceCard
                 title="Residential Renovations"
                 description="Transform your home with our expert renovation services"
-                services={["Kitchens", "Bathrooms", "Basements", "Additions", "Whole-Home Remodels"]}
+                services={["Kitchens", "Bathrooms", "Basements", "Additions", "Home Remodels"]}
                 tagline="We make home upgrades simple, beautiful, and stress-free."
                 ctaText="Explore Residential"
                 ctaLink="/residential"

@@ -46,7 +46,7 @@ const projectTypes = [
   { id: "bathroom", title: "Bathroom Remodel", icon: Bath },
   { id: "basement", title: "Basement Finish", icon: Home },
   { id: "addition", title: "Home Addition", icon: PlusCircle },
-  { id: "whole-home", title: "Whole Home Remodel", icon: Building2 },
+  { id: "whole-home", title: "Home Remodel", icon: Building2 },
 ];
 
 const finishLevels = [
