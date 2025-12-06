@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import ClientLogosCarousel from "@/components/ClientLogosCarousel";
 import GoogleTrustBadge from "@/components/GoogleTrustBadge";
+import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import { BudgetEstimator } from "@/components/BudgetEstimator";
 import AnimatedSection from "@/components/AnimatedSection";
 import FeaturedBlogSection from "@/components/FeaturedBlogSection";
@@ -229,6 +230,11 @@ const Home = () => {
                 author="A. Coleman"
                 location="Homeowner"
               />
+            </div>
+
+            {/* GHL Google Reviews Widget */}
+            <div className="max-w-4xl mx-auto">
+              <GHLReviewsWidget />
             </div>
 
             <div className="text-center mt-8">
