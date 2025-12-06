@@ -1,21 +1,83 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import BlogCard from "@/components/BlogCard";
 import BlogCategories from "@/components/BlogCategories";
-import { blogPosts, blogCategories } from "@/data/blogPosts";
+import { blogPosts as hardcodedPosts, blogCategories } from "@/data/blogPosts";
 import AnimatedSection from "@/components/AnimatedSection";
+import { supabase } from "@/integrations/supabase/client";
+
+interface DatabasePost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  content: string;
+  author: string;
+  publish_date: string;
+  category: string;
+  tags: string[];
+  featured_image: string | null;
+  read_time: number;
+  featured: boolean | null;
+  meta_description: string | null;
+  status: string;
+}
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [dbPosts, setDbPosts] = useState<DatabasePost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("blog_posts")
+          .select("*")
+          .eq("status", "published")
+          .order("publish_date", { ascending: false });
+
+        if (error) throw error;
+        setDbPosts(data || []);
+      } catch (error) {
+        console.error("Error fetching blog posts:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  // Combine database posts with hardcoded posts (DB posts take priority)
+  const allPosts = [
+    ...dbPosts.map((post) => ({
+      slug: post.slug,
+      title: post.title,
+      excerpt: post.excerpt || "",
+      content: post.content,
+      author: post.author,
+      publishDate: post.publish_date,
+      category: post.category,
+      tags: post.tags || [],
+      featuredImage: post.featured_image || "/assets/kitchen-after.jpg",
+      readTime: post.read_time,
+      featured: post.featured || false,
+      metaDescription: post.meta_description || "",
+    })),
+    ...hardcodedPosts.filter(
+      (hp) => !dbPosts.some((dp) => dp.slug === hp.slug)
+    ),
+  ];
 
   const filteredPosts = selectedCategory
-    ? blogPosts.filter((post) => post.category === selectedCategory)
-    : blogPosts;
+    ? allPosts.filter((post) => post.category === selectedCategory)
+    : allPosts;
 
-  const featuredPost = blogPosts.find((post) => post.featured);
+  const featuredPost = allPosts.find((post) => post.featured);
 
   return (
     <div className="min-h-screen pb-24 md:pb-0 bg-[hsl(var(--editorial-cream))]">

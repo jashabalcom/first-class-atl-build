@@ -21,6 +21,7 @@ import ViningsKitchenRemodeling from "./pages/ViningsKitchenRemodeling";
 import AtlantaBasementFinishing from "./pages/AtlantaBasementFinishing";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import BlogAdmin from "./pages/BlogAdmin";
 import AgencyProposal from "./pages/tools/AgencyProposal";
 import Admin from "./pages/Admin";
 import GoHighLevelChat from "./components/GoHighLevelChat";
@@ -121,8 +122,9 @@ const App = () => (
             <Route path="/austell" element={<Austell />} />
             <Route path="/lithia-springs" element={<LithiaSprings />} />
             
-            {/* Admin Page */}
+            {/* Admin Pages */}
             <Route path="/admin" element={<Admin />} />
+            <Route path="/blog-admin" element={<BlogAdmin />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

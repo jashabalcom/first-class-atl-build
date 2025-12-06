@@ -1,20 +1,106 @@
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import RelatedPosts from "@/components/RelatedPosts";
-import { blogPosts } from "@/data/blogPosts";
+import { blogPosts as hardcodedPosts } from "@/data/blogPosts";
 import { Clock, Calendar, ArrowLeft, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
 import BlogContentRenderer from "@/components/blog/BlogContentRenderer";
 import ReadingProgress from "@/components/blog/ReadingProgress";
+import { supabase } from "@/integrations/supabase/client";
+
+interface DatabasePost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  content: string;
+  author: string;
+  publish_date: string;
+  updated_date: string | null;
+  category: string;
+  tags: string[];
+  featured_image: string | null;
+  read_time: number;
+  featured: boolean | null;
+  meta_description: string | null;
+  status: string;
+}
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = blogPosts.find((p) => p.slug === slug);
+  const [dbPost, setDbPost] = useState<DatabasePost | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      if (!slug) return;
+      
+      try {
+        const { data, error } = await supabase
+          .from("blog_posts")
+          .select("*")
+          .eq("slug", slug)
+          .eq("status", "published")
+          .maybeSingle();
+
+        if (!error && data) {
+          setDbPost(data);
+        }
+      } catch (error) {
+        console.error("Error fetching blog post:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPost();
+  }, [slug]);
+
+  // Try database first, then fall back to hardcoded
+  const hardcodedPost = hardcodedPosts.find((p) => p.slug === slug);
+  
+  const post = dbPost
+    ? {
+        slug: dbPost.slug,
+        title: dbPost.title,
+        excerpt: dbPost.excerpt || "",
+        content: dbPost.content,
+        author: dbPost.author,
+        publishDate: dbPost.publish_date,
+        updatedDate: dbPost.updated_date,
+        category: dbPost.category,
+        tags: dbPost.tags || [],
+        featuredImage: dbPost.featured_image || "/assets/kitchen-after.jpg",
+        readTime: dbPost.read_time,
+        featured: dbPost.featured || false,
+        metaDescription: dbPost.meta_description || "",
+      }
+    : hardcodedPost;
+
+  // Get all posts for related posts section
+  const allPosts = hardcodedPosts;
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen pb-24 md:pb-0">
+        <Header />
+        <div className="container max-w-4xl py-16 text-center">
+          <div className="animate-pulse">
+            <div className="h-8 bg-muted rounded w-3/4 mx-auto mb-4" />
+            <div className="h-4 bg-muted rounded w-1/2 mx-auto" />
+          </div>
+        </div>
+        <Footer />
+        <MobileCallBar />
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -236,7 +322,7 @@ const BlogPost = () => {
       </article>
 
       {/* Related Posts */}
-      <RelatedPosts posts={blogPosts} currentSlug={post.slug} />
+      <RelatedPosts posts={allPosts} currentSlug={post.slug} />
 
         <Footer />
         <MobileCallBar />
