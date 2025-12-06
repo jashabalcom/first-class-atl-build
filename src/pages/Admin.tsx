@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { Trash2, Edit, Plus, Lock, LogOut, Upload, X, GripVertical } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -123,6 +125,7 @@ export default function Admin() {
   const [editingProject, setEditingProject] = useState<GalleryProject | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<string>('all');
   
   const [formData, setFormData] = useState({
     title: '',
@@ -136,6 +139,21 @@ export default function Admin() {
   });
 
   const navigate = useNavigate();
+
+  // Get category counts for badges
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: projects.length };
+    projects.forEach(p => {
+      counts[p.category] = (counts[p.category] || 0) + 1;
+    });
+    return counts;
+  }, [projects]);
+
+  // Filter projects by active category
+  const filteredProjects = useMemo(() => {
+    if (activeCategory === 'all') return projects;
+    return projects.filter(p => p.category === activeCategory);
+  }, [projects, activeCategory]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -570,13 +588,40 @@ export default function Admin() {
           </DialogContent>
         </Dialog>
 
+        {/* Category Filter Tabs */}
+        <div className="mb-6">
+          <Tabs value={activeCategory} onValueChange={setActiveCategory}>
+            <TabsList className="flex-wrap h-auto gap-1 bg-muted/50 p-1">
+              <TabsTrigger value="all" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                All
+                <Badge variant="secondary" className="ml-2 text-xs">{categoryCounts.all || 0}</Badge>
+              </TabsTrigger>
+              {categories.map(cat => (
+                <TabsTrigger 
+                  key={cat} 
+                  value={cat}
+                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                >
+                  {cat}
+                  {categoryCounts[cat] && (
+                    <Badge variant="secondary" className="ml-2 text-xs">{categoryCounts[cat]}</Badge>
+                  )}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+        </div>
+
         <p className="text-sm text-muted-foreground mb-4">
-          Drag and drop projects to reorder them in the gallery.
+          {activeCategory === 'all' 
+            ? 'Drag and drop projects to reorder them in the gallery.'
+            : `Showing ${filteredProjects.length} ${activeCategory} project${filteredProjects.length !== 1 ? 's' : ''}.`
+          }
         </p>
 
         {loading && !projects.length ? (
           <div className="text-center py-12 text-muted-foreground">Loading...</div>
-        ) : (
+        ) : activeCategory === 'all' ? (
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
@@ -598,11 +643,47 @@ export default function Admin() {
               </div>
             </SortableContext>
           </DndContext>
+        ) : (
+          <div className="grid gap-4">
+            {filteredProjects.map((project) => (
+              <Card key={project.id}>
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={project.after_image_url}
+                      alt={project.title}
+                      className="w-20 h-20 object-cover rounded"
+                    />
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-foreground">{project.title}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        {project.category} {project.location && `• ${project.location}`}
+                      </p>
+                      {project.featured && (
+                        <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Featured</span>
+                      )}
+                    </div>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="icon" onClick={() => openEditDialog(project)}>
+                        <Edit className="w-4 h-4" />
+                      </Button>
+                      <Button variant="destructive" size="icon" onClick={() => handleDelete(project.id)}>
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         )}
 
-        {!loading && projects.length === 0 && (
+        {!loading && filteredProjects.length === 0 && (
           <div className="text-center py-12 text-muted-foreground">
-            No projects yet. Add your first project!
+            {activeCategory === 'all' 
+              ? 'No projects yet. Add your first project!'
+              : `No ${activeCategory} projects found.`
+            }
           </div>
         )}
       </div>
