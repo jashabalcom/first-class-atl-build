@@ -14,6 +14,41 @@ export type Database = {
   }
   public: {
     Tables: {
+      gallery_project_images: {
+        Row: {
+          created_at: string
+          display_order: number | null
+          id: string
+          image_type: string
+          image_url: string
+          project_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          image_type?: string
+          image_url: string
+          project_id: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          image_type?: string
+          image_url?: string
+          project_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gallery_project_images_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "gallery_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       gallery_projects: {
         Row: {
           after_image_url: string
@@ -21,6 +56,7 @@ export type Database = {
           category: string
           created_at: string
           description: string | null
+          display_mode: string | null
           display_order: number | null
           featured: boolean | null
           id: string
@@ -33,6 +69,7 @@ export type Database = {
           category: string
           created_at?: string
           description?: string | null
+          display_mode?: string | null
           display_order?: number | null
           featured?: boolean | null
           id?: string
@@ -45,6 +82,7 @@ export type Database = {
           category?: string
           created_at?: string
           description?: string | null
+          display_mode?: string | null
           display_order?: number | null
           featured?: boolean | null
           id?: string

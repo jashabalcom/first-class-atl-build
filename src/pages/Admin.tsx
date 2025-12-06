@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
-import { Trash2, Edit, Plus, Lock, LogOut, Upload, X, GripVertical } from 'lucide-react';
+import { Trash2, Edit, Plus, Lock, LogOut, Upload, X, GripVertical, Images, Layers } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import {
   DndContext,
@@ -33,6 +33,14 @@ import { CSS } from '@dnd-kit/utilities';
 
 const ADMIN_PASSWORD = 'mla2024admin'; // Simple password protection
 
+interface ProjectImage {
+  id: string;
+  project_id: string;
+  image_url: string;
+  image_type: 'before' | 'after' | 'gallery';
+  display_order: number;
+}
+
 interface GalleryProject {
   id: string;
   title: string;
@@ -43,26 +51,31 @@ interface GalleryProject {
   after_image_url: string;
   featured: boolean | null;
   display_order: number | null;
+  display_mode: 'single' | 'slideshow' | 'before_after' | null;
 }
 
 const categories = [
-  'Kitchen Remodel',
-  'Bathroom Remodel',
-  'Basement Finishing',
-  'Commercial',
-  'Deck & Outdoor',
-  'Flooring',
-  'Full Renovation',
-  'Painting'
+  'kitchen',
+  'bathroom',
+  'basement',
+  'commercial',
+  'exterior'
 ];
+
+const displayModeLabels = {
+  single: 'Single Image',
+  slideshow: 'Slideshow',
+  before_after: 'Before & After'
+};
 
 interface SortableProjectCardProps {
   project: GalleryProject;
   onEdit: (project: GalleryProject) => void;
   onDelete: (id: string) => void;
+  imageCount: number;
 }
 
-function SortableProjectCard({ project, onEdit, onDelete }: SortableProjectCardProps) {
+function SortableProjectCard({ project, onEdit, onDelete, imageCount }: SortableProjectCardProps) {
   const {
     attributes,
     listeners,
@@ -77,6 +90,8 @@ function SortableProjectCard({ project, onEdit, onDelete }: SortableProjectCardP
     transition,
     opacity: isDragging ? 0.5 : 1,
   };
+
+  const displayMode = project.display_mode || 'single';
 
   return (
     <Card ref={setNodeRef} style={style} className={isDragging ? 'shadow-lg' : ''}>
@@ -99,9 +114,17 @@ function SortableProjectCard({ project, onEdit, onDelete }: SortableProjectCardP
             <p className="text-sm text-muted-foreground">
               {project.category} {project.location && `• ${project.location}`}
             </p>
-            {project.featured && (
-              <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Featured</span>
-            )}
+            <div className="flex gap-2 mt-1">
+              {project.featured && (
+                <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Featured</span>
+              )}
+              <span className="text-xs bg-secondary text-secondary-foreground px-2 py-0.5 rounded flex items-center gap-1">
+                {displayMode === 'slideshow' && <Layers className="w-3 h-3" />}
+                {displayMode === 'before_after' && <Images className="w-3 h-3" />}
+                {displayModeLabels[displayMode]}
+                {imageCount > 0 && ` (${imageCount})`}
+              </span>
+            </div>
           </div>
           <div className="flex gap-2">
             <Button variant="outline" size="icon" onClick={() => onEdit(project)}>
@@ -121,11 +144,15 @@ export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [projects, setProjects] = useState<GalleryProject[]>([]);
+  const [projectImages, setProjectImages] = useState<Record<string, ProjectImage[]>>({});
   const [loading, setLoading] = useState(false);
   const [editingProject, setEditingProject] = useState<GalleryProject | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>('all');
+  
+  // Multi-image state
+  const [currentProjectImages, setCurrentProjectImages] = useState<ProjectImage[]>([]);
   
   const [formData, setFormData] = useState({
     title: '',
@@ -135,7 +162,8 @@ export default function Admin() {
     before_image_url: '',
     after_image_url: '',
     featured: false,
-    display_order: 0
+    display_order: 0,
+    display_mode: 'single' as 'single' | 'slideshow' | 'before_after'
   });
 
   const navigate = useNavigate();
@@ -198,9 +226,50 @@ export default function Admin() {
     if (error) {
       toast.error('Failed to fetch projects');
     } else {
-      setProjects(data || []);
+      const typedProjects = (data || []).map(p => ({
+        ...p,
+        display_mode: (p.display_mode as 'single' | 'slideshow' | 'before_after' | null) || 'single'
+      })) as GalleryProject[];
+      setProjects(typedProjects);
+      // Fetch all project images
+      if (data && data.length > 0) {
+        const { data: imagesData } = await supabase
+          .from('gallery_project_images')
+          .select('*')
+          .order('display_order', { ascending: true });
+        
+        if (imagesData) {
+          const imagesByProject: Record<string, ProjectImage[]> = {};
+          imagesData.forEach((img) => {
+            const typedImg: ProjectImage = {
+              id: img.id,
+              project_id: img.project_id,
+              image_url: img.image_url,
+              image_type: img.image_type as 'before' | 'after' | 'gallery',
+              display_order: img.display_order
+            };
+            if (!imagesByProject[typedImg.project_id]) {
+              imagesByProject[typedImg.project_id] = [];
+            }
+            imagesByProject[typedImg.project_id].push(typedImg);
+          });
+          setProjectImages(imagesByProject);
+        }
+      }
     }
     setLoading(false);
+  };
+
+  const fetchProjectImages = async (projectId: string) => {
+    const { data, error } = await supabase
+      .from('gallery_project_images')
+      .select('*')
+      .eq('project_id', projectId)
+      .order('display_order', { ascending: true });
+    
+    if (!error && data) {
+      setCurrentProjectImages(data as ProjectImage[]);
+    }
   };
 
   const handleDragEnd = async (event: DragEndEvent) => {
@@ -230,7 +299,7 @@ export default function Admin() {
     }
   };
 
-  const uploadImage = async (file: File, type: 'before' | 'after'): Promise<string | null> => {
+  const uploadImage = async (file: File, type: string): Promise<string | null> => {
     const fileExt = file.name.split('.').pop();
     const fileName = `${Date.now()}-${type}.${fileExt}`;
     const filePath = `${fileName}`;
@@ -241,7 +310,7 @@ export default function Admin() {
       .upload(filePath, file);
 
     if (uploadError) {
-      toast.error(`Failed to upload ${type} image`);
+      toast.error(`Failed to upload image`);
       setUploading(false);
       return null;
     }
@@ -269,6 +338,31 @@ export default function Admin() {
     }
   };
 
+  const handleMultiImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, imageType: 'before' | 'after' | 'gallery') => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const url = await uploadImage(file, `${imageType}-${i}`);
+      if (url) {
+        const newImage: ProjectImage = {
+          id: `temp-${Date.now()}-${i}`,
+          project_id: editingProject?.id || '',
+          image_url: url,
+          image_type: imageType,
+          display_order: currentProjectImages.filter(img => img.image_type === imageType).length + i
+        };
+        setCurrentProjectImages(prev => [...prev, newImage]);
+      }
+    }
+    toast.success(`${files.length} image(s) uploaded`);
+  };
+
+  const removeMultiImage = (imageId: string) => {
+    setCurrentProjectImages(prev => prev.filter(img => img.id !== imageId));
+  };
+
   const resetForm = () => {
     setFormData({
       title: '',
@@ -278,12 +372,14 @@ export default function Admin() {
       before_image_url: '',
       after_image_url: '',
       featured: false,
-      display_order: 0
+      display_order: 0,
+      display_mode: 'single'
     });
     setEditingProject(null);
+    setCurrentProjectImages([]);
   };
 
-  const openEditDialog = (project: GalleryProject) => {
+  const openEditDialog = async (project: GalleryProject) => {
     setEditingProject(project);
     setFormData({
       title: project.title,
@@ -293,8 +389,10 @@ export default function Admin() {
       before_image_url: project.before_image_url || '',
       after_image_url: project.after_image_url,
       featured: project.featured || false,
-      display_order: project.display_order || 0
+      display_order: project.display_order || 0,
+      display_mode: project.display_mode || 'single'
     });
+    await fetchProjectImages(project.id);
     setIsDialogOpen(true);
   };
 
@@ -306,8 +404,19 @@ export default function Admin() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.title || !formData.category || !formData.after_image_url) {
-      toast.error('Please fill in required fields (title, category, after image)');
+    // For single/slideshow modes, after_image_url is required
+    // For before_after mode with multi-images, we can skip the single after_image requirement
+    const needsAfterImage = formData.display_mode === 'single' || 
+      (formData.display_mode === 'slideshow' && currentProjectImages.filter(i => i.image_type === 'gallery').length === 0) ||
+      (formData.display_mode === 'before_after' && currentProjectImages.filter(i => i.image_type === 'after').length === 0);
+    
+    if (!formData.title || !formData.category) {
+      toast.error('Please fill in required fields (title, category)');
+      return;
+    }
+
+    if (needsAfterImage && !formData.after_image_url) {
+      toast.error('Please add at least one image');
       return;
     }
 
@@ -319,10 +428,13 @@ export default function Admin() {
       location: formData.location || null,
       description: formData.description || null,
       before_image_url: formData.before_image_url || null,
-      after_image_url: formData.after_image_url,
+      after_image_url: formData.after_image_url || currentProjectImages.find(i => i.image_type === 'after' || i.image_type === 'gallery')?.image_url || '',
       featured: formData.featured,
-      display_order: formData.display_order
+      display_order: formData.display_order,
+      display_mode: formData.display_mode
     };
+
+    let projectId = editingProject?.id;
 
     if (editingProject) {
       const { error } = await supabase
@@ -332,25 +444,56 @@ export default function Admin() {
 
       if (error) {
         toast.error('Failed to update project');
-      } else {
-        toast.success('Project updated');
-        setIsDialogOpen(false);
-        fetchProjects();
+        setLoading(false);
+        return;
       }
     } else {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('gallery_projects')
-        .insert([projectData]);
+        .insert([projectData])
+        .select()
+        .single();
 
-      if (error) {
+      if (error || !data) {
         toast.error('Failed to add project');
-      } else {
-        toast.success('Project added');
-        setIsDialogOpen(false);
-        fetchProjects();
+        setLoading(false);
+        return;
+      }
+      projectId = data.id;
+    }
+
+    // Handle multi-images
+    if (projectId && (formData.display_mode === 'slideshow' || formData.display_mode === 'before_after')) {
+      // Delete existing images for this project
+      await supabase
+        .from('gallery_project_images')
+        .delete()
+        .eq('project_id', projectId);
+
+      // Insert new images
+      const imagesToInsert = currentProjectImages
+        .filter(img => img.image_url)
+        .map((img, index) => ({
+          project_id: projectId,
+          image_url: img.image_url,
+          image_type: img.image_type,
+          display_order: index
+        }));
+
+      if (imagesToInsert.length > 0) {
+        const { error: imgError } = await supabase
+          .from('gallery_project_images')
+          .insert(imagesToInsert);
+
+        if (imgError) {
+          console.error('Failed to save images:', imgError);
+        }
       }
     }
 
+    toast.success(editingProject ? 'Project updated' : 'Project added');
+    setIsDialogOpen(false);
+    fetchProjects();
     setLoading(false);
   };
 
@@ -467,13 +610,20 @@ export default function Admin() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="display_order">Display Order</Label>
-                  <Input
-                    id="display_order"
-                    type="number"
-                    value={formData.display_order}
-                    onChange={(e) => setFormData(prev => ({ ...prev, display_order: parseInt(e.target.value) || 0 }))}
-                  />
+                  <Label htmlFor="display_mode">Display Mode</Label>
+                  <Select
+                    value={formData.display_mode}
+                    onValueChange={(value: 'single' | 'slideshow' | 'before_after') => setFormData(prev => ({ ...prev, display_mode: value }))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="single">Single Image</SelectItem>
+                      <SelectItem value="slideshow">Slideshow (Multiple Photos)</SelectItem>
+                      <SelectItem value="before_after">Before & After</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
@@ -488,84 +638,205 @@ export default function Admin() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label>Before Image</Label>
-                  <div className="flex gap-2">
-                    <Input
-                      value={formData.before_image_url}
-                      onChange={(e) => setFormData(prev => ({ ...prev, before_image_url: e.target.value }))}
-                      placeholder="URL or upload"
-                      className="flex-1"
-                    />
-                    <label className="cursor-pointer">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        onChange={(e) => handleImageUpload(e, 'before')}
-                        disabled={uploading}
+              {/* Single Image Mode */}
+              {formData.display_mode === 'single' && (
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>Before Image (Optional)</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        value={formData.before_image_url}
+                        onChange={(e) => setFormData(prev => ({ ...prev, before_image_url: e.target.value }))}
+                        placeholder="URL or upload"
+                        className="flex-1"
                       />
-                      <Button type="button" variant="outline" size="icon" disabled={uploading} asChild>
-                        <span><Upload className="w-4 h-4" /></span>
-                      </Button>
-                    </label>
-                  </div>
-                  {formData.before_image_url && (
-                    <div className="relative">
-                      <img src={formData.before_image_url} alt="Before preview" className="w-full h-24 object-cover rounded" />
-                      <Button
-                        type="button"
-                        variant="destructive"
-                        size="icon"
-                        className="absolute top-1 right-1 w-6 h-6"
-                        onClick={() => setFormData(prev => ({ ...prev, before_image_url: '' }))}
-                      >
-                        <X className="w-3 h-3" />
-                      </Button>
+                      <label className="cursor-pointer">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => handleImageUpload(e, 'before')}
+                          disabled={uploading}
+                        />
+                        <Button type="button" variant="outline" size="icon" disabled={uploading} asChild>
+                          <span><Upload className="w-4 h-4" /></span>
+                        </Button>
+                      </label>
                     </div>
-                  )}
-                </div>
+                    {formData.before_image_url && (
+                      <div className="relative">
+                        <img src={formData.before_image_url} alt="Before preview" className="w-full h-24 object-cover rounded" />
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="icon"
+                          className="absolute top-1 right-1 w-6 h-6"
+                          onClick={() => setFormData(prev => ({ ...prev, before_image_url: '' }))}
+                        >
+                          <X className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    )}
+                  </div>
 
-                <div className="space-y-2">
-                  <Label>After Image *</Label>
-                  <div className="flex gap-2">
-                    <Input
-                      value={formData.after_image_url}
-                      onChange={(e) => setFormData(prev => ({ ...prev, after_image_url: e.target.value }))}
-                      placeholder="URL or upload"
-                      className="flex-1"
-                      required
-                    />
+                  <div className="space-y-2">
+                    <Label>After Image *</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        value={formData.after_image_url}
+                        onChange={(e) => setFormData(prev => ({ ...prev, after_image_url: e.target.value }))}
+                        placeholder="URL or upload"
+                        className="flex-1"
+                        required
+                      />
+                      <label className="cursor-pointer">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => handleImageUpload(e, 'after')}
+                          disabled={uploading}
+                        />
+                        <Button type="button" variant="outline" size="icon" disabled={uploading} asChild>
+                          <span><Upload className="w-4 h-4" /></span>
+                        </Button>
+                      </label>
+                    </div>
+                    {formData.after_image_url && (
+                      <div className="relative">
+                        <img src={formData.after_image_url} alt="After preview" className="w-full h-24 object-cover rounded" />
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="icon"
+                          className="absolute top-1 right-1 w-6 h-6"
+                          onClick={() => setFormData(prev => ({ ...prev, after_image_url: '' }))}
+                        >
+                          <X className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Slideshow Mode */}
+              {formData.display_mode === 'slideshow' && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <Label>Gallery Images</Label>
                     <label className="cursor-pointer">
                       <input
                         type="file"
                         accept="image/*"
+                        multiple
                         className="hidden"
-                        onChange={(e) => handleImageUpload(e, 'after')}
+                        onChange={(e) => handleMultiImageUpload(e, 'gallery')}
                         disabled={uploading}
                       />
-                      <Button type="button" variant="outline" size="icon" disabled={uploading} asChild>
-                        <span><Upload className="w-4 h-4" /></span>
+                      <Button type="button" variant="outline" size="sm" disabled={uploading} asChild>
+                        <span><Upload className="w-4 h-4 mr-2" />Add Images</span>
                       </Button>
                     </label>
                   </div>
-                  {formData.after_image_url && (
-                    <div className="relative">
-                      <img src={formData.after_image_url} alt="After preview" className="w-full h-24 object-cover rounded" />
-                      <Button
-                        type="button"
-                        variant="destructive"
-                        size="icon"
-                        className="absolute top-1 right-1 w-6 h-6"
-                        onClick={() => setFormData(prev => ({ ...prev, after_image_url: '' }))}
-                      >
-                        <X className="w-3 h-3" />
-                      </Button>
-                    </div>
+                  <div className="grid grid-cols-4 gap-2">
+                    {currentProjectImages.filter(img => img.image_type === 'gallery').map((img) => (
+                      <div key={img.id} className="relative">
+                        <img src={img.image_url} alt="Gallery" className="w-full h-20 object-cover rounded" />
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="icon"
+                          className="absolute top-1 right-1 w-5 h-5"
+                          onClick={() => removeMultiImage(img.id)}
+                        >
+                          <X className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                  {currentProjectImages.filter(img => img.image_type === 'gallery').length === 0 && (
+                    <p className="text-sm text-muted-foreground">No images added yet. Upload images to create a slideshow.</p>
                   )}
                 </div>
-              </div>
+              )}
+
+              {/* Before & After Mode */}
+              {formData.display_mode === 'before_after' && (
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <Label>Before Images</Label>
+                        <label className="cursor-pointer">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            className="hidden"
+                            onChange={(e) => handleMultiImageUpload(e, 'before')}
+                            disabled={uploading}
+                          />
+                          <Button type="button" variant="outline" size="sm" disabled={uploading} asChild>
+                            <span><Upload className="w-4 h-4" /></span>
+                          </Button>
+                        </label>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        {currentProjectImages.filter(img => img.image_type === 'before').map((img) => (
+                          <div key={img.id} className="relative">
+                            <img src={img.image_url} alt="Before" className="w-full h-16 object-cover rounded" />
+                            <Button
+                              type="button"
+                              variant="destructive"
+                              size="icon"
+                              className="absolute top-1 right-1 w-5 h-5"
+                              onClick={() => removeMultiImage(img.id)}
+                            >
+                              <X className="w-3 h-3" />
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <Label>After Images</Label>
+                        <label className="cursor-pointer">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            className="hidden"
+                            onChange={(e) => handleMultiImageUpload(e, 'after')}
+                            disabled={uploading}
+                          />
+                          <Button type="button" variant="outline" size="sm" disabled={uploading} asChild>
+                            <span><Upload className="w-4 h-4" /></span>
+                          </Button>
+                        </label>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        {currentProjectImages.filter(img => img.image_type === 'after').map((img) => (
+                          <div key={img.id} className="relative">
+                            <img src={img.image_url} alt="After" className="w-full h-16 object-cover rounded" />
+                            <Button
+                              type="button"
+                              variant="destructive"
+                              size="icon"
+                              className="absolute top-1 right-1 w-5 h-5"
+                              onClick={() => removeMultiImage(img.id)}
+                            >
+                              <X className="w-3 h-3" />
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               <div className="flex items-center space-x-2">
                 <Switch
@@ -638,6 +909,7 @@ export default function Admin() {
                     project={project}
                     onEdit={openEditDialog}
                     onDelete={handleDelete}
+                    imageCount={projectImages[project.id]?.length || 0}
                   />
                 ))}
               </div>
@@ -659,9 +931,14 @@ export default function Admin() {
                       <p className="text-sm text-muted-foreground">
                         {project.category} {project.location && `• ${project.location}`}
                       </p>
-                      {project.featured && (
-                        <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Featured</span>
-                      )}
+                      <div className="flex gap-2 mt-1">
+                        {project.featured && (
+                          <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Featured</span>
+                        )}
+                        <span className="text-xs bg-secondary text-secondary-foreground px-2 py-0.5 rounded">
+                          {displayModeLabels[project.display_mode || 'single']}
+                        </span>
+                      </div>
                     </div>
                     <div className="flex gap-2">
                       <Button variant="outline" size="icon" onClick={() => openEditDialog(project)}>
