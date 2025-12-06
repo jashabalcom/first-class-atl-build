@@ -140,7 +140,7 @@ const Footer = () => {
             {/* More Areas */}
             <div>
               <h4 className="font-playfair text-lg font-semibold mb-4">More Areas</h4>
-              <ul className="space-y-2 text-sm opacity-80">
+              <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm opacity-80">
                 {moreAreas.map((area) => (
                   <li key={area.name}>
                     <Link to={area.link} className="hover:text-accent hover:opacity-100 transition-colors">
