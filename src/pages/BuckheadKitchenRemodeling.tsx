@@ -11,6 +11,7 @@ import { Calendar, UserCheck, ShieldCheck, DollarSign, Home as HomeIcon } from "
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenBefore from "@/assets/kitchen-before.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
+import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 
 const BuckheadKitchenRemodeling = () => {
   return (
@@ -270,6 +271,7 @@ const BuckheadKitchenRemodeling = () => {
             />
           </div>
 
+          <GHLReviewsWidget />
         </div>
       </section>
 

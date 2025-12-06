@@ -11,6 +11,7 @@ import { Award, Users, Clock, DollarSign, Shield, Sparkles } from "lucide-react"
 import heroBathroom from "@/assets/hero-bathroom.jpg";
 import bathroomBefore from "@/assets/bathroom-before.jpg";
 import bathroomAfter from "@/assets/bathroom-after.jpg";
+import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 
 const SandySpringsBasementRemodeling = () => {
   return (
@@ -246,6 +247,8 @@ const SandySpringsBasementRemodeling = () => {
               rating={5}
             />
           </div>
+          
+          <GHLReviewsWidget />
         </div>
       </section>
 

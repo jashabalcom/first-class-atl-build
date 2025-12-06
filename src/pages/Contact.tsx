@@ -4,6 +4,7 @@ import MobileCallBar from "@/components/MobileCallBar";
 import ContactForm from "@/components/ContactForm";
 import SectionLabel from "@/components/SectionLabel";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 
 const Contact = () => {
   const contactInfo = [
@@ -156,6 +157,13 @@ const Contact = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Reviews Widget */}
+        <section className="py-12 bg-background">
+          <div className="container">
+            <GHLReviewsWidget />
           </div>
         </section>
 

@@ -9,6 +9,7 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import SectionLabel from "@/components/SectionLabel";
 import { Award, Clock, Shield, Home, Users, Sparkles } from "lucide-react";
+import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import heroBathroom from "@/assets/hero-bathroom.jpg";
 import heroCommercial from "@/assets/hero-commercial.jpg";
@@ -205,6 +206,7 @@ const LocationPageTemplate = ({
             ))}
           </div>
 
+          <GHLReviewsWidget />
         </div>
       </section>
 

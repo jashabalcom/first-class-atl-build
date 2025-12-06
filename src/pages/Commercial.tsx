@@ -14,6 +14,7 @@ import heroCommercial from "@/assets/hero-commercial.jpg";
 import retailBuildout from "@/assets/retail-buildout.jpg";
 import officeRenovation from "@/assets/office-renovation.jpg";
 import AnimatedSection from "@/components/AnimatedSection";
+import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 
 const Commercial = () => {
   const services = [
@@ -234,6 +235,8 @@ const Commercial = () => {
                 <TestimonialCard key={index} {...testimonial} />
               ))}
               </div>
+              
+              <GHLReviewsWidget />
             </div>
           </section>
         </AnimatedSection>
