@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
-import { Trash2, Edit, Plus, Lock, LogOut, Upload, X, GripVertical, Images, Layers } from 'lucide-react';
+import { Trash2, Edit, Plus, Lock, LogOut, Upload, X, GripVertical, Images, Layers, FolderUp } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import {
   DndContext,
@@ -148,11 +148,23 @@ export default function Admin() {
   const [loading, setLoading] = useState(false);
   const [editingProject, setEditingProject] = useState<GalleryProject | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isBulkUploadOpen, setIsBulkUploadOpen] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>('all');
   
   // Multi-image state
   const [currentProjectImages, setCurrentProjectImages] = useState<ProjectImage[]>([]);
+  
+  // Bulk upload state
+  interface BulkUploadItem {
+    file: File;
+    preview: string;
+    projectId: string;
+    imageType: 'gallery' | 'before' | 'after';
+    uploading: boolean;
+    uploaded: boolean;
+  }
+  const [bulkUploadItems, setBulkUploadItems] = useState<BulkUploadItem[]>([]);
   
   const [formData, setFormData] = useState({
     title: '',
@@ -363,6 +375,102 @@ export default function Admin() {
     setCurrentProjectImages(prev => prev.filter(img => img.id !== imageId));
   };
 
+  // Bulk upload functions
+  const handleBulkFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const newItems: BulkUploadItem[] = Array.from(files).map(file => ({
+      file,
+      preview: URL.createObjectURL(file),
+      projectId: '',
+      imageType: 'gallery' as const,
+      uploading: false,
+      uploaded: false
+    }));
+
+    setBulkUploadItems(prev => [...prev, ...newItems]);
+  };
+
+  const updateBulkItem = (index: number, updates: Partial<BulkUploadItem>) => {
+    setBulkUploadItems(prev => prev.map((item, i) => 
+      i === index ? { ...item, ...updates } : item
+    ));
+  };
+
+  const removeBulkItem = (index: number) => {
+    setBulkUploadItems(prev => {
+      const item = prev[index];
+      if (item?.preview) URL.revokeObjectURL(item.preview);
+      return prev.filter((_, i) => i !== index);
+    });
+  };
+
+  const processBulkUpload = async () => {
+    const itemsToUpload = bulkUploadItems.filter(item => item.projectId && !item.uploaded);
+    
+    if (itemsToUpload.length === 0) {
+      toast.error('Please assign projects to at least one image');
+      return;
+    }
+
+    setUploading(true);
+    let successCount = 0;
+
+    for (let i = 0; i < bulkUploadItems.length; i++) {
+      const item = bulkUploadItems[i];
+      if (!item.projectId || item.uploaded) continue;
+
+      updateBulkItem(i, { uploading: true });
+
+      const url = await uploadImage(item.file, `bulk-${i}`);
+      
+      if (url) {
+        // Insert into gallery_project_images
+        const { error } = await supabase
+          .from('gallery_project_images')
+          .insert({
+            project_id: item.projectId,
+            image_url: url,
+            image_type: item.imageType,
+            display_order: 0
+          });
+
+        if (!error) {
+          // Also update the project's display_mode to slideshow if it was single
+          const project = projects.find(p => p.id === item.projectId);
+          if (project && project.display_mode === 'single') {
+            await supabase
+              .from('gallery_projects')
+              .update({ 
+                display_mode: item.imageType === 'gallery' ? 'slideshow' : 'before_after',
+                after_image_url: project.after_image_url || url
+              })
+              .eq('id', item.projectId);
+          }
+          
+          updateBulkItem(i, { uploading: false, uploaded: true });
+          successCount++;
+        } else {
+          updateBulkItem(i, { uploading: false });
+        }
+      } else {
+        updateBulkItem(i, { uploading: false });
+      }
+    }
+
+    setUploading(false);
+    toast.success(`${successCount} image(s) uploaded successfully`);
+    fetchProjects();
+  };
+
+  const clearBulkUpload = () => {
+    bulkUploadItems.forEach(item => {
+      if (item.preview) URL.revokeObjectURL(item.preview);
+    });
+    setBulkUploadItems([]);
+  };
+
   const resetForm = () => {
     setFormData({
       title: '',
@@ -558,13 +666,125 @@ export default function Admin() {
           </div>
         </div>
 
+        <div className="flex gap-2 mb-6">
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogTrigger asChild>
+              <Button onClick={openAddDialog}>
+                <Plus className="w-4 h-4 mr-2" />
+                Add Project
+              </Button>
+            </DialogTrigger>
+          </Dialog>
+
+          <Dialog open={isBulkUploadOpen} onOpenChange={(open) => {
+            setIsBulkUploadOpen(open);
+            if (!open) clearBulkUpload();
+          }}>
+            <DialogTrigger asChild>
+              <Button variant="outline" onClick={() => setIsBulkUploadOpen(true)}>
+                <FolderUp className="w-4 h-4 mr-2" />
+                Bulk Upload
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>Bulk Upload Images</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4">
+                <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-8 text-center">
+                  <label className="cursor-pointer">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      className="hidden"
+                      onChange={handleBulkFileSelect}
+                      disabled={uploading}
+                    />
+                    <div className="flex flex-col items-center gap-2">
+                      <FolderUp className="w-12 h-12 text-muted-foreground" />
+                      <p className="text-muted-foreground">Click to select images or drag and drop</p>
+                      <Button type="button" variant="outline" disabled={uploading}>
+                        Select Images
+                      </Button>
+                    </div>
+                  </label>
+                </div>
+
+                {bulkUploadItems.length > 0 && (
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <p className="text-sm text-muted-foreground">{bulkUploadItems.length} image(s) selected</p>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm" onClick={clearBulkUpload} disabled={uploading}>
+                          Clear All
+                        </Button>
+                        <Button size="sm" onClick={processBulkUpload} disabled={uploading}>
+                          {uploading ? 'Uploading...' : 'Upload All'}
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="grid gap-3 max-h-96 overflow-y-auto">
+                      {bulkUploadItems.map((item, index) => (
+                        <div key={index} className={`flex items-center gap-3 p-3 border rounded-lg ${item.uploaded ? 'bg-green-50 border-green-200' : ''}`}>
+                          <img src={item.preview} alt="Preview" className="w-16 h-16 object-cover rounded" />
+                          <div className="flex-1 grid grid-cols-2 gap-2">
+                            <Select
+                              value={item.projectId}
+                              onValueChange={(value) => updateBulkItem(index, { projectId: value })}
+                              disabled={item.uploaded || item.uploading}
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select project" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {projects.map(p => (
+                                  <SelectItem key={p.id} value={p.id}>{p.title}</SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <Select
+                              value={item.imageType}
+                              onValueChange={(value: 'gallery' | 'before' | 'after') => updateBulkItem(index, { imageType: value })}
+                              disabled={item.uploaded || item.uploading}
+                            >
+                              <SelectTrigger>
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="gallery">Gallery</SelectItem>
+                                <SelectItem value="before">Before</SelectItem>
+                                <SelectItem value="after">After</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            {item.uploading && <span className="text-xs text-muted-foreground">Uploading...</span>}
+                            {item.uploaded && <span className="text-xs text-green-600">✓ Done</span>}
+                            {!item.uploaded && (
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => removeBulkItem(index)}
+                                disabled={item.uploading}
+                              >
+                                <X className="w-4 h-4" />
+                              </Button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
+
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button onClick={openAddDialog} className="mb-6">
-              <Plus className="w-4 h-4 mr-2" />
-              Add Project
-            </Button>
-          </DialogTrigger>
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>{editingProject ? 'Edit Project' : 'Add New Project'}</DialogTitle>
