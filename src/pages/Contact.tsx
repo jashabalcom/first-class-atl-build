@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import { useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
@@ -10,8 +11,15 @@ import { Link } from "react-router-dom";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import CertificationBadges from "@/components/CertificationBadges";
 
+type ContactInfoItem = {
+  icon: typeof Phone;
+  title: string;
+  content: string;
+  link: string | null;
+};
+
 const Contact = () => {
-  const contactInfo = [
+  const contactInfo: ContactInfoItem[] = [
     {
       icon: Phone,
       title: "Call Us",
@@ -52,6 +60,80 @@ const Contact = () => {
     { name: "Johns Creek", path: "/johns-creek" },
     { name: "Smyrna", path: "/smyrna" },
   ];
+
+  // Staggered animation component for contact info cards
+  const ContactInfoCards = ({ contactInfo }: { contactInfo: ContactInfoItem[] }) => {
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.2 }
+      );
+
+      if (sectionRef.current) {
+        observer.observe(sectionRef.current);
+      }
+
+      return () => observer.disconnect();
+    }, []);
+
+    return (
+      <section ref={sectionRef} className="py-10 md:py-14 bg-muted/30">
+        <div className="container">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            {contactInfo.map((info, index) => {
+              const Icon = info.icon;
+              return (
+                <div 
+                  key={index}
+                  className={`group relative p-5 rounded-xl bg-card border hover:border-accent transition-all duration-300 hover:shadow-lg
+                    ${isVisible 
+                      ? 'opacity-100 translate-y-0' 
+                      : 'opacity-0 translate-y-6'
+                    }`}
+                  style={{
+                    transitionDelay: isVisible ? `${index * 100}ms` : '0ms',
+                    transitionProperty: 'opacity, transform, border-color, box-shadow',
+                    transitionDuration: '500ms',
+                    transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
+                  }}
+                >
+                  <div className="absolute inset-y-0 left-0 w-1 bg-accent/0 group-hover:bg-accent rounded-l-xl transition-all duration-300" />
+                  <div className="space-y-3">
+                    <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                      <Icon className="h-5 w-5 text-accent" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
+                        {info.title}
+                      </h3>
+                      {info.link ? (
+                        <a 
+                          href={info.link}
+                          className="text-foreground hover:text-accent transition-colors font-medium text-sm md:text-base break-all"
+                        >
+                          {info.content}
+                        </a>
+                      ) : (
+                        <p className="text-foreground text-sm md:text-base">{info.content}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    );
+  };
 
   return (
     <>
@@ -150,44 +232,8 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Contact Info Cards */}
-        <section className="py-10 md:py-14 bg-muted/30">
-          <div className="container">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
-              {contactInfo.map((info, index) => {
-                const Icon = info.icon;
-                return (
-                  <div 
-                    key={index}
-                    className="group relative p-5 rounded-xl bg-card border hover:border-accent transition-all duration-300 hover:shadow-lg"
-                  >
-                    <div className="absolute inset-y-0 left-0 w-1 bg-accent/0 group-hover:bg-accent rounded-l-xl transition-all duration-300" />
-                    <div className="space-y-3">
-                      <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                        <Icon className="h-5 w-5 text-accent" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-                          {info.title}
-                        </h3>
-                        {info.link ? (
-                          <a 
-                            href={info.link}
-                            className="text-foreground hover:text-accent transition-colors font-medium text-sm md:text-base break-all"
-                          >
-                            {info.content}
-                          </a>
-                        ) : (
-                          <p className="text-foreground text-sm md:text-base">{info.content}</p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        {/* Contact Info Cards with Stagger Animation */}
+        <ContactInfoCards contactInfo={contactInfo} />
 
         {/* Service Areas - Pill Style */}
         <section className="py-10 md:py-14">
