@@ -18,6 +18,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import ClientLogosCarousel from "@/components/ClientLogosCarousel";
 import AIVisualizerCTA from "@/components/AIVisualizerCTA";
+import StickyAICTA from "@/components/StickyAICTA";
 import { Link } from "react-router-dom";
 
 const Commercial = () => {
@@ -376,6 +377,7 @@ const Commercial = () => {
         </section>
       </main>
 
+      <StickyAICTA roomType="commercial space" />
       <Footer />
     </>
   );
