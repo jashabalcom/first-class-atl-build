@@ -16,6 +16,7 @@ import retailBuildout from "@/assets/retail-buildout.jpg";
 import officeRenovation from "@/assets/office-renovation.jpg";
 import AnimatedSection from "@/components/AnimatedSection";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
+import ClientLogosCarousel from "@/components/ClientLogosCarousel";
 import { Link } from "react-router-dom";
 
 const Commercial = () => {
@@ -291,6 +292,8 @@ const Commercial = () => {
             </div>
           </section>
         </AnimatedSection>
+
+        <ClientLogosCarousel />
 
         {/* Process */}
         <AnimatedSection delay={200}>

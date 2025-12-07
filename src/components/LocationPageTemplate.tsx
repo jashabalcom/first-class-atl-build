@@ -10,6 +10,7 @@ import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import SectionLabel from "@/components/SectionLabel";
 import { Award, Clock, Shield, Home, Users, Sparkles } from "lucide-react";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
+import ClientLogosCarousel from "@/components/ClientLogosCarousel";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import heroBathroom from "@/assets/hero-bathroom.jpg";
 import heroCommercial from "@/assets/hero-commercial.jpg";
@@ -210,6 +211,8 @@ const LocationPageTemplate = ({
           <GHLReviewsWidget />
         </div>
       </section>
+
+      <ClientLogosCarousel />
 
       {/* Process */}
       <section className="py-16 md:py-24 bg-background">
