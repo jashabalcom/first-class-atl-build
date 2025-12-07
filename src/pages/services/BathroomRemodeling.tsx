@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import { Phone, CheckCircle, Shield, Clock, Award, Users, Sparkles, Droplets, Bath, Palette, Wrench, Lightbulb } from "lucide-react";
+import { Shield, Clock, Award, Users, Sparkles, Droplets, Bath, Palette, Calendar, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import AIVisualizerCTA from "@/components/AIVisualizerCTA";
 import { BudgetEstimator } from "@/components/BudgetEstimator";
 import Header from "@/components/Header";
@@ -216,12 +217,13 @@ const BathroomRemodeling = () => {
         />
 
         {/* Introduction Section */}
-        <AnimatedSection className="py-16 lg:py-24 bg-background">
-          <div className="container mx-auto px-4">
+        <AnimatedSection className="py-16 md:py-20 bg-background">
+          <div className="container">
             <div className="max-w-3xl mx-auto text-center">
               <SectionLabel>Bathroom Remodeling Atlanta</SectionLabel>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
-                Your Dream Bathroom <span className="text-primary">Awaits</span>
+              <div className="section-divider mt-6" />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-6 mb-6">
+                Your Dream Bathroom <span className="text-accent">Awaits</span>
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                 At First Class Construction Group, we specialize in creating beautiful, functional bathrooms that enhance your daily routine and add value to your home. Whether you're looking for a complete master bath renovation, a guest bathroom update, or accessibility modifications, our experienced team delivers exceptional results on time and within budget.
@@ -234,8 +236,8 @@ const BathroomRemodeling = () => {
         </AnimatedSection>
 
         {/* Featured Image Section */}
-        <AnimatedSection className="py-16 bg-secondary/30">
-          <div className="container mx-auto px-4">
+        <AnimatedSection className="py-16 md:py-20 bg-muted/30">
+          <div className="container">
             <div className="max-w-5xl mx-auto">
               <div className="relative rounded-lg overflow-hidden shadow-2xl">
                 <img 
@@ -244,7 +246,7 @@ const BathroomRemodeling = () => {
                   className="w-full h-auto"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                  <p className="text-white text-lg font-medium">
+                  <p className="text-white text-lg font-medium font-playfair">
                     Recent bathroom transformation in Buckhead, Atlanta
                   </p>
                 </div>
@@ -254,24 +256,25 @@ const BathroomRemodeling = () => {
         </AnimatedSection>
 
         {/* Services Grid */}
-        <AnimatedSection className="py-16 lg:py-24 bg-background">
-          <div className="container mx-auto px-4">
+        <AnimatedSection className="py-16 md:py-20 bg-background">
+          <div className="container">
             <div className="text-center mb-12">
               <SectionLabel>Our Expertise</SectionLabel>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
-                Bathroom Remodeling <span className="text-primary">Services</span>
+              <div className="section-divider mt-6" />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-6">
+                Bathroom Remodeling <span className="text-accent">Services</span>
               </h2>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
               {bathroomServices.map((service, index) => (
                 <div 
                   key={index}
-                  className="bg-card border border-border rounded-lg p-6 hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
+                  className="group bg-card border border-l-2 border-l-transparent hover:border-l-accent hover:border-accent/50 rounded-lg p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                 >
-                  <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                    <service.icon className="w-7 h-7 text-primary" />
+                  <div className="text-accent mb-4 transition-transform duration-300 group-hover:scale-110">
+                    <service.icon className="w-8 h-8" />
                   </div>
-                  <h3 className="font-display text-xl text-foreground mb-2">{service.title}</h3>
+                  <h3 className="font-playfair text-xl font-bold mb-2 group-hover:text-accent transition-colors">{service.title}</h3>
                   <p className="text-muted-foreground text-sm">{service.description}</p>
                 </div>
               ))}
@@ -280,60 +283,58 @@ const BathroomRemodeling = () => {
         </AnimatedSection>
 
         {/* AI Room Visualizer CTA */}
-        <section className="py-8 bg-background">
-          <div className="container max-w-4xl">
-            <AIVisualizerCTA />
-          </div>
-        </section>
+        <AIVisualizerCTA />
 
         {/* Budget Estimator */}
-        <section className="py-16 lg:py-24 bg-muted/30">
+        <AnimatedSection className="py-16 md:py-20 bg-muted/30">
           <div className="container">
+            <div className="text-center mb-8">
+              <SectionLabel>Budget Planning</SectionLabel>
+              <div className="section-divider mt-6" />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-6 mb-4">
+                Estimate Your <span className="text-accent">Investment</span>
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Get a preliminary estimate for your bathroom remodel based on your preferences and requirements.
+              </p>
+            </div>
             <BudgetEstimator />
           </div>
-        </section>
+        </AnimatedSection>
 
         {/* Features Checklist */}
-        <AnimatedSection className="py-16 lg:py-24 bg-secondary/30">
-          <div className="container mx-auto px-4">
+        <AnimatedSection className="py-16 md:py-20 bg-muted/30">
+          <div className="container">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
                   <SectionLabel>What We Offer</SectionLabel>
-                  <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-                    Complete Bathroom <span className="text-primary">Solutions</span>
+                  <div className="section-divider mt-6" />
+                  <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-6 mb-6">
+                    Complete Bathroom <span className="text-accent">Solutions</span>
                   </h2>
                   <p className="text-muted-foreground text-lg mb-8">
                     From small updates to full-scale renovations, we handle every aspect of your bathroom remodel with expert precision and attention to detail.
                   </p>
-                  <div className="grid sm:grid-cols-2 gap-3">
+                  <div className="grid sm:grid-cols-2 gap-4">
                     {features.map((feature, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                        <span className="text-foreground text-sm">{feature}</span>
+                      <div key={index} className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-accent rounded-full flex-shrink-0" />
+                        <span className="text-sm">{feature}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-                <div className="bg-card border border-border rounded-lg p-8">
-                  <h3 className="font-display text-2xl text-foreground mb-4">Ready to Get Started?</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Schedule your free in-home consultation today. We'll discuss your vision, assess your space, and provide a detailed estimate.
-                  </p>
-                  <div className="space-y-4">
-                    <Link 
-                      to="/contact"
-                      className="block w-full bg-primary text-primary-foreground text-center py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
-                    >
-                      Get Free Estimate
-                    </Link>
-                    <a 
-                      href="tel:+16786716336"
-                      className="flex items-center justify-center gap-2 w-full border border-primary text-primary py-3 rounded-lg font-medium hover:bg-primary/10 transition-colors"
-                    >
-                      <Phone className="w-4 h-4" />
-                      Call 678-671-6336
-                    </a>
+                <div className="relative">
+                  <img 
+                    src={bathroomAfterImage} 
+                    alt="Luxury bathroom remodel" 
+                    className="rounded-lg shadow-xl"
+                    loading="lazy"
+                  />
+                  <div className="absolute -bottom-6 -left-6 bg-accent text-accent-foreground p-4 rounded-lg shadow-lg">
+                    <p className="font-playfair text-2xl font-bold">500+</p>
+                    <p className="text-sm">Bathrooms Completed</p>
                   </div>
                 </div>
               </div>
@@ -342,59 +343,51 @@ const BathroomRemodeling = () => {
         </AnimatedSection>
 
         {/* Why Choose Us */}
-        <AnimatedSection className="py-16 lg:py-24 bg-background">
-          <div className="container mx-auto px-4">
+        <AnimatedSection className="py-16 md:py-20 bg-background">
+          <div className="container">
             <div className="text-center mb-12">
               <SectionLabel>The First Class Difference</SectionLabel>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
-                Why Choose <span className="text-primary">Us</span>
+              <div className="section-divider mt-6" />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-6">
+                Why Choose <span className="text-accent">Us</span>
               </h2>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              <ValueCard
-                icon={Users}
-                title="Dedicated Project Manager"
-                description="One point of contact throughout your entire project for seamless communication and coordination."
-              />
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <ValueCard
                 icon={Shield}
-                title="Transparent Pricing"
-                description="Detailed estimates with no hidden fees. Know exactly what you're paying for before work begins."
-              />
-              <ValueCard
-                icon={Clock}
-                title="On-Time Completion"
-                description="We respect your schedule and work efficiently to complete your project on the agreed timeline."
+                title="Licensed & Insured"
+                description="Full protection for your home and investment throughout the project."
               />
               <ValueCard
                 icon={Award}
-                title="Quality Craftsmanship"
-                description="Skilled craftsmen with attention to detail ensure beautiful, lasting results you'll love for years."
+                title="Quality Materials"
+                description="Premium fixtures, tiles, and finishes that stand the test of time."
               />
               <ValueCard
-                icon={Wrench}
-                title="Licensed & Insured"
-                description="Fully licensed Georgia contractor with comprehensive insurance for your complete peace of mind."
+                icon={Clock}
+                title="On-Time Delivery"
+                description="We respect your schedule and complete projects when promised."
               />
               <ValueCard
-                icon={Lightbulb}
-                title="Design Expertise"
-                description="Our team helps you select the perfect fixtures, finishes, and layouts to maximize your space."
+                icon={Users}
+                title="Expert Team"
+                description="Skilled craftsmen with specialized bathroom remodeling experience."
               />
             </div>
           </div>
         </AnimatedSection>
 
         {/* Testimonials */}
-        <AnimatedSection className="py-16 lg:py-24 bg-secondary/30">
-          <div className="container mx-auto px-4">
+        <AnimatedSection className="py-16 md:py-20 bg-muted/30">
+          <div className="container">
             <div className="text-center mb-12">
-              <SectionLabel>Customer Reviews</SectionLabel>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
-                What Our <span className="text-primary">Clients Say</span>
+              <SectionLabel>Client Stories</SectionLabel>
+              <div className="section-divider mt-6" />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-6">
+                What Our <span className="text-accent">Clients</span> Say
               </h2>
             </div>
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {testimonials.map((testimonial, index) => (
                 <TestimonialCard
                   key={index}
@@ -405,26 +398,41 @@ const BathroomRemodeling = () => {
                 />
               ))}
             </div>
+          </div>
+        </AnimatedSection>
+
+        {/* GHL Reviews Widget */}
+        <AnimatedSection className="py-16 md:py-20 bg-background">
+          <div className="container">
+            <div className="text-center mb-8">
+              <SectionLabel>Customer Reviews</SectionLabel>
+              <div className="section-divider mt-6" />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-6">
+                See What <span className="text-accent">Others</span> Are Saying
+              </h2>
+            </div>
             <GHLReviewsWidget />
           </div>
         </AnimatedSection>
 
         {/* Process */}
-        <AnimatedSection className="py-16 lg:py-24 bg-background">
-          <div className="container mx-auto px-4">
+        <AnimatedSection className="py-16 md:py-20 bg-muted/30">
+          <div className="container">
             <div className="text-center mb-12">
               <SectionLabel>Our Process</SectionLabel>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
-                How We <span className="text-primary">Work</span>
+              <div className="section-divider mt-6" />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-6">
+                How We <span className="text-accent">Work</span>
               </h2>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-              {processSteps.map((step) => (
+            <div className="max-w-2xl mx-auto">
+              {processSteps.map((step, index) => (
                 <ProcessStep
                   key={step.number}
                   number={step.number}
                   title={step.title}
                   description={step.description}
+                  isLast={index === processSteps.length - 1}
                 />
               ))}
             </div>
@@ -432,23 +440,21 @@ const BathroomRemodeling = () => {
         </AnimatedSection>
 
         {/* Service Areas */}
-        <AnimatedSection className="py-16 lg:py-24 bg-secondary/30">
-          <div className="container mx-auto px-4">
+        <AnimatedSection className="py-16 md:py-20 bg-background">
+          <div className="container">
             <div className="text-center mb-12">
               <SectionLabel>Service Areas</SectionLabel>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
-                Bathroom Remodeling Across <span className="text-primary">Metro Atlanta</span>
+              <div className="section-divider mt-6" />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-6">
+                Serving <span className="text-accent">Metro Atlanta</span>
               </h2>
-              <p className="text-muted-foreground text-lg mt-4 max-w-2xl mx-auto">
-                We proudly serve homeowners throughout the greater Atlanta area with expert bathroom renovation services.
-              </p>
             </div>
             <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
               {serviceAreas.map((area) => (
                 <Link
                   key={area.path}
                   to={area.path}
-                  className="px-4 py-2 bg-card border border-border rounded-full text-foreground hover:border-primary hover:text-primary transition-colors text-sm"
+                  className="px-4 py-2 bg-card border border-border rounded-full text-sm hover:border-accent hover:text-accent transition-colors"
                 >
                   {area.name}
                 </Link>
@@ -458,43 +464,50 @@ const BathroomRemodeling = () => {
         </AnimatedSection>
 
         {/* CTA Section */}
-        <AnimatedSection className="py-16 lg:py-24 bg-primary text-primary-foreground">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl mb-6">
-              Ready to Transform Your Bathroom?
-            </h2>
-            <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-              Schedule your free consultation today and take the first step toward the bathroom of your dreams.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/book"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-white/90 transition-colors"
-              >
-                Book Free Consultation
-              </Link>
-              <a
-                href="tel:+16786716336"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
-              >
-                <Phone className="w-5 h-5" />
-                Call 678-671-6336
-              </a>
+        <AnimatedSection className="py-16 md:py-20 bg-gradient-to-b from-background to-muted/30">
+          <div className="container">
+            <div className="text-center mb-12">
+              <SectionLabel>Get Started</SectionLabel>
+              <div className="section-divider mt-6" />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-6 mb-4">
+                Ready to Transform Your <span className="text-accent">Bathroom?</span>
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+                Take the first step toward your dream bathroom. Schedule a free consultation today.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/contact">
+                  <Button variant="cta" size="lg" className="gap-2">
+                    Get Your Free Quote
+                    <ArrowRight className="h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link to="/book">
+                  <Button variant="outline" size="lg" className="gap-2 border-accent/50 hover:border-accent hover:bg-accent hover:text-accent-foreground">
+                    <Calendar className="h-5 w-5" />
+                    Book Consultation
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </AnimatedSection>
 
         {/* Contact Form */}
-        <AnimatedSection className="py-16 lg:py-24 bg-background">
-          <div className="container mx-auto px-4">
+        <AnimatedSection className="py-16 md:py-20 border-t border-border">
+          <div className="container">
             <div className="max-w-2xl mx-auto">
               <div className="text-center mb-8">
-                <SectionLabel>Get Started</SectionLabel>
-                <h2 className="font-display text-3xl md:text-4xl text-foreground">
-                  Request Your <span className="text-primary">Free Estimate</span>
+                <SectionLabel>Contact Us</SectionLabel>
+                <div className="section-divider mt-6" />
+                <h2 className="font-playfair text-3xl md:text-4xl font-bold mt-6 mb-4">
+                  Start Your <span className="text-accent">Project</span>
                 </h2>
+                <p className="text-muted-foreground">
+                  Tell us about your bathroom remodeling project and we'll get back to you within 24 hours.
+                </p>
               </div>
-              <MultiStepContactForm />
+              <MultiStepContactForm showCity={true} showTimeline={true} />
             </div>
           </div>
         </AnimatedSection>
