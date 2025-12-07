@@ -28,6 +28,10 @@ import AgencyProposal from "./pages/tools/AgencyProposal";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
 import KitchenRemodeling from "./pages/services/KitchenRemodeling";
+import OfficeRenovation from "./pages/services/OfficeRenovation";
+import RestaurantRemodeling from "./pages/services/RestaurantRemodeling";
+import RetailConstruction from "./pages/services/RetailConstruction";
+import TenantBuildout from "./pages/services/TenantBuildout";
 
 // Location Pages
 import Atlanta from "./pages/locations/Atlanta";
@@ -91,6 +95,10 @@ const App = () => (
             <Route path="/areas/vinings-kitchen-remodeling" element={<ViningsKitchenRemodeling />} />
             <Route path="/services/basement-finishing-atlanta" element={<AtlantaBasementFinishing />} />
             <Route path="/kitchen-remodeling" element={<KitchenRemodeling />} />
+            <Route path="/office-renovation" element={<OfficeRenovation />} />
+            <Route path="/restaurant-remodeling" element={<RestaurantRemodeling />} />
+            <Route path="/retail-construction" element={<RetailConstruction />} />
+            <Route path="/tenant-buildout" element={<TenantBuildout />} />
             <Route path="/atlanta" element={<Atlanta />} />
             <Route path="/buckhead" element={<Buckhead />} />
             <Route path="/midtown" element={<Midtown />} />
