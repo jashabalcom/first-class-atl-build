@@ -10,12 +10,13 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepCommercialForm } from "@/components/MultiStepCommercialForm";
 import ProjectCard from "@/components/ProjectCard";
 import SectionLabel from "@/components/SectionLabel";
-import { Store, Utensils, Briefcase, Building2, Wrench } from "lucide-react";
+import { Store, Utensils, Briefcase, Building2, Wrench, ArrowRight } from "lucide-react";
 import heroCommercial from "@/assets/hero-commercial.jpg";
 import retailBuildout from "@/assets/retail-buildout.jpg";
 import officeRenovation from "@/assets/office-renovation.jpg";
 import AnimatedSection from "@/components/AnimatedSection";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
+import { Link } from "react-router-dom";
 
 const Commercial = () => {
   const services = [
@@ -23,26 +24,31 @@ const Commercial = () => {
       icon: Store,
       title: "Retail Build-Outs",
       description: "Custom retail spaces that attract customers and maximize sales per square foot.",
+      link: "/retail-construction",
     },
     {
       icon: Utensils,
       title: "Restaurant Fit-Outs",
       description: "Code-compliant kitchens and dining spaces designed for efficiency and ambiance.",
+      link: "/restaurant-remodeling",
     },
     {
       icon: Briefcase,
       title: "Office Renovations",
       description: "Modern workspaces that boost productivity and reflect your brand.",
+      link: "/office-renovation",
     },
     {
       icon: Building2,
       title: "Tenant Improvements",
       description: "Transform leased spaces into functional, branded environments.",
+      link: "/tenant-buildout",
     },
     {
       icon: Wrench,
       title: "Facilities Management",
       description: "Ongoing maintenance and improvement for commercial properties.",
+      link: null,
     },
   ];
 
@@ -182,16 +188,29 @@ const Commercial = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {services.map((service, index) => {
                 const Icon = service.icon;
-                return (
-                  <div key={index} className="flex flex-col items-start gap-4 p-6 rounded-lg bg-card border border-l-2 border-l-transparent hover:border-l-accent hover:shadow-md transition-all duration-300">
+                const content = (
+                  <div className={`flex flex-col items-start gap-4 p-6 rounded-lg bg-card border border-l-2 border-l-transparent hover:border-l-accent hover:shadow-md transition-all duration-300 h-full ${service.link ? 'group cursor-pointer' : ''}`}>
                     <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
                       <Icon className="h-6 w-6 text-accent" />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <h3 className="font-playfair font-semibold text-lg mb-2">{service.title}</h3>
                       <p className="text-sm text-muted-foreground">{service.description}</p>
                     </div>
+                    {service.link && (
+                      <span className="inline-flex items-center gap-1 text-sm font-medium text-accent group-hover:underline">
+                        Learn More <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </span>
+                    )}
                   </div>
+                );
+
+                return service.link ? (
+                  <Link key={index} to={service.link} className="block">
+                    {content}
+                  </Link>
+                ) : (
+                  <div key={index}>{content}</div>
                 );
               })}
               </div>
