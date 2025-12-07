@@ -25,7 +25,8 @@ const ExitIntentPopup = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    contact: "",
+    email: "",
+    phone: "",
     projectType: "",
   });
   const { toast } = useToast();
@@ -45,7 +46,7 @@ const ExitIntentPopup = () => {
   const forceShowPopup = () => {
     sessionStorage.removeItem("exitIntentShown");
     setIsSuccess(false);
-    setFormData({ name: "", contact: "", projectType: "" });
+    setFormData({ name: "", email: "", phone: "", projectType: "" });
     setIsOpen(true);
     sessionStorage.setItem("exitIntentShown", "true");
   };
@@ -91,10 +92,10 @@ const ExitIntentPopup = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name.trim() || !formData.contact.trim()) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
       toast({
         title: "Please fill in all fields",
-        description: "We need your name and contact info to reach you.",
+        description: "We need your name, email, and phone to reach you.",
         variant: "destructive",
       });
       return;
@@ -102,13 +103,10 @@ const ExitIntentPopup = () => {
 
     setIsSubmitting(true);
 
-    // Determine if contact is email or phone
-    const isEmail = formData.contact.includes("@");
-
     const result = await submitLead({
       name: formData.name,
-      email: isEmail ? formData.contact : "",
-      phone: isEmail ? "" : formData.contact,
+      email: formData.email,
+      phone: formData.phone,
       projectType: formData.projectType || "General Inquiry",
       formSource: "exit-intent-offer",
       message: "Exit Intent Popup - Renovation Blueprint Package Request",
@@ -221,9 +219,17 @@ const ExitIntentPopup = () => {
                 required
               />
               <FloatingInput
-                label="Phone or Email"
-                value={formData.contact}
-                onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                label="Email Address"
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+              />
+              <FloatingInput
+                label="Phone Number"
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 required
               />
               <Select
