@@ -11,7 +11,6 @@ import SectionLabel from "@/components/SectionLabel";
 import { Award, Clock, Shield, Home, Users, Sparkles } from "lucide-react";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import ClientLogosCarousel from "@/components/ClientLogosCarousel";
-import TrustBadges from "@/components/TrustBadges";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import heroBathroom from "@/assets/hero-bathroom.jpg";
 import heroCommercial from "@/assets/hero-commercial.jpg";
@@ -164,9 +163,6 @@ const LocationPageTemplate = ({
         backgroundImage={heroImages[heroImage]}
         credentialBadge="Licensed Contractor · Atlanta Metro"
       />
-
-      {/* Trust Badges */}
-      <TrustBadges />
 
       {/* City-Specific Intro */}
       <section className="py-16 md:py-24 bg-background">
