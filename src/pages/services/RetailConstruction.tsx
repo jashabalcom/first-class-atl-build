@@ -13,7 +13,7 @@ import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Calendar, UserCheck, ShieldCheck, Clock, Hammer, CheckCircle, Store, Lightbulb, CreditCard, ShoppingBag } from "lucide-react";
-import heroCommercial from "@/assets/hero-commercial.jpg";
+import heroRetail from "@/assets/hero-retail.jpg";
 import retailBuildout from "@/assets/retail-buildout.jpg";
 
 const RetailConstruction = () => {
@@ -117,7 +117,7 @@ const RetailConstruction = () => {
           subtitle="Expert retail construction that maximizes your selling space and showcases your brand. Fast turnaround, quality construction, and on-budget delivery."
           primaryCTA="Request a Consultation"
           secondaryCTA="Call 678-671-6336"
-          backgroundImage={heroCommercial}
+          backgroundImage={heroRetail}
           trustLine="Licensed • Bonded • Insured • DBE/MBE • 20+ Years in Metro Atlanta"
           useH1={true}
         />

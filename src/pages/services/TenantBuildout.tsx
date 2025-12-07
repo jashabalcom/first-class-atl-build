@@ -13,7 +13,7 @@ import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Calendar, UserCheck, ShieldCheck, Clock, Hammer, CheckCircle, Building, FileText, Wrench, DollarSign } from "lucide-react";
-import heroCommercial from "@/assets/hero-commercial.jpg";
+import heroTenantBuildout from "@/assets/hero-tenant-buildout.jpg";
 
 const TenantBuildout = () => {
   const services = [
@@ -116,7 +116,7 @@ const TenantBuildout = () => {
           subtitle="Expert tenant buildouts that maximize your TI allowance and meet landlord requirements. From shell space to move-in ready, we handle it all."
           primaryCTA="Request a Consultation"
           secondaryCTA="Call 678-671-6336"
-          backgroundImage={heroCommercial}
+          backgroundImage={heroTenantBuildout}
           trustLine="Licensed • Bonded • Insured • DBE/MBE • 20+ Years in Metro Atlanta"
           useH1={true}
         />
