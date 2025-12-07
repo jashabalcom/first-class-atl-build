@@ -32,9 +32,6 @@ const ExitIntentPopup = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  // DEV ONLY: Test trigger
-  const isDev = import.meta.env.DEV;
-
   const showPopup = useCallback(() => {
     const hasShown = sessionStorage.getItem("exitIntentShown");
     if (!hasShown) {
@@ -42,14 +39,6 @@ const ExitIntentPopup = () => {
       sessionStorage.setItem("exitIntentShown", "true");
     }
   }, []);
-
-  const forceShowPopup = () => {
-    sessionStorage.removeItem("exitIntentShown");
-    setIsSuccess(false);
-    setFormData({ name: "", email: "", phone: "", projectType: "" });
-    setIsOpen(true);
-    sessionStorage.setItem("exitIntentShown", "true");
-  };
 
   useEffect(() => {
     // Desktop: Mouse leaves viewport toward top
@@ -139,20 +128,9 @@ const ExitIntentPopup = () => {
   ];
 
   return (
-    <>
-      {/* DEV ONLY: Test button */}
-      {isDev && (
-        <button
-          onClick={forceShowPopup}
-          className="fixed bottom-4 left-4 z-50 bg-accent text-accent-foreground px-3 py-2 rounded-md text-xs font-medium shadow-lg hover:bg-accent/90 transition-colors"
-        >
-          🧪 Test Exit Popup
-        </button>
-      )}
-
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-lg p-0 overflow-hidden bg-background border-accent/30">
-          {/* Close button */}
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent className="sm:max-w-lg p-0 overflow-hidden bg-background border-accent/30">
+        {/* Close button */}
         <button
           onClick={() => setIsOpen(false)}
           className="absolute right-4 top-4 z-10 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
@@ -297,10 +275,9 @@ const ExitIntentPopup = () => {
               </a>
             </div>
           </div>
-          )}
-        </DialogContent>
-      </Dialog>
-    </>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 };
 
