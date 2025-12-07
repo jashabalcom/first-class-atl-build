@@ -278,22 +278,22 @@ const Contact = () => {
         </section>
 
         {/* CTA Section - Streamlined */}
-        <section className="py-12 md:py-16 bg-secondary text-secondary-foreground">
+        <section className="py-16 md:py-20 bg-primary text-primary-foreground">
           <div className="container">
-            <div className="max-w-2xl mx-auto text-center space-y-5">
+            <div className="max-w-2xl mx-auto text-center space-y-6">
               <h2 className="font-playfair text-2xl md:text-3xl font-bold">
                 Ready to Get <span className="text-accent">Started?</span>
               </h2>
-              <p className="text-secondary-foreground/80">
+              <p className="text-primary-foreground/80">
                 Book a free consultation directly on our calendar.
               </p>
               <Link to="/book">
-                <Button size="lg" className="gap-2 px-8">
+                <Button size="lg" variant="secondary" className="gap-2 px-8">
                   <Calendar className="h-5 w-5" />
                   Book Consultation
                 </Button>
               </Link>
-              <p className="text-xs text-secondary-foreground/60">
+              <p className="text-xs text-primary-foreground/60">
                 No obligation · Same-day response · Free estimate
               </p>
             </div>
