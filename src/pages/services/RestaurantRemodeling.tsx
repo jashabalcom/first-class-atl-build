@@ -103,6 +103,46 @@ const RestaurantRemodeling = () => {
             "description": "Professional restaurant remodeling services including commercial kitchen construction, dining room design, bar buildouts, and complete restaurant renovations."
           })}
         </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much does a restaurant buildout cost in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Restaurant buildout costs in Atlanta range from $100-$400+ per sq ft. Fast-casual concepts run $100-$200/sq ft, full-service restaurants $150-$300/sq ft, and fine dining $250-$500+/sq ft including kitchen equipment."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does it take to build out a restaurant?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Restaurant buildouts typically take 8-16 weeks from permit approval. Simple spaces may take 6-8 weeks, while complex restaurants with custom kitchens and extensive finishes can take 12-20 weeks."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you handle health department requirements?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, we have extensive experience with Georgia health department requirements. We ensure your commercial kitchen meets all codes for hood ventilation, grease traps, floor drains, and food-safe surfaces."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can you install commercial kitchen equipment?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, we coordinate commercial kitchen equipment installation including walk-in coolers, hood systems, cooking equipment connections, and plumbing for commercial dishwashers and sinks."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />

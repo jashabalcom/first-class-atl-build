@@ -75,6 +75,46 @@ const Painting = () => {
         <meta property="og:url" content="https://fcconstruct.com/painting" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much does it cost to paint a house interior in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Interior painting in Atlanta costs $2-$6 per sq ft or $2,000-$6,000+ per average room. A 2,000 sq ft home typically costs $4,000-$10,000 depending on prep work, number of colors, and paint quality."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How much does exterior house painting cost in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Exterior painting in Atlanta costs $3,000-$10,000+ for an average single-story home, or $1.50-$4 per sq ft. Two-story homes run $5,000-$15,000+. Prep work, repairs, and premium paints affect final cost."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does it take to paint a house?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Interior painting takes 2-5 days for an average home. Exterior painting takes 3-7 days depending on size and prep work needed. We provide a detailed timeline during your free estimate."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What paint brands do you use?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We use premium paints from Sherwin-Williams, Benjamin Moore, and PPG. These professional-grade paints offer superior coverage, durability, and color accuracy compared to consumer-grade alternatives."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />

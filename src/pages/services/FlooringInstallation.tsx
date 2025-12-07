@@ -75,6 +75,46 @@ const FlooringInstallation = () => {
         <meta property="og:url" content="https://fcconstruct.com/flooring-installation" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much does flooring installation cost in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Flooring installation in Atlanta costs $3-$15+ per sq ft installed. Luxury vinyl (LVP) runs $4-$8/sq ft, hardwood $8-$15+/sq ft, tile $6-$12/sq ft, and carpet $3-$8/sq ft. We provide free estimates for your specific project."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What's the best flooring for Atlanta's humidity?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Luxury vinyl plank (LVP), tile, and engineered hardwood perform best in Atlanta's humid climate. Solid hardwood can work with proper HVAC. We help you choose the best option for your home and lifestyle."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does flooring installation take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Most flooring installations take 1-5 days depending on size and type. A typical room takes 1 day, while whole-home installations take 3-5 days. Hardwood refinishing adds 2-3 days for drying time."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you remove old flooring before installation?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, we provide complete flooring services including removal of old flooring, subfloor preparation and repair, moisture barriers, and new flooring installation. Everything is included in our estimates."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />

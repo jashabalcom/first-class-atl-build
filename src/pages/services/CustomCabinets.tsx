@@ -75,6 +75,46 @@ const CustomCabinets = () => {
         <meta property="og:url" content="https://fcconstruct.com/custom-cabinets" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much do custom kitchen cabinets cost in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Custom kitchen cabinets in Atlanta typically cost $15,000 to $50,000+ depending on size, materials, and features. Semi-custom options run $10,000-$25,000, while fully custom cabinets with premium woods and finishes run $25,000-$75,000+."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does custom cabinet installation take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Custom cabinets typically take 6-12 weeks from design approval to installation. This includes 4-8 weeks for fabrication and 1-2 weeks for installation. Rush orders may be available for additional cost."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What's the difference between custom and semi-custom cabinets?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Semi-custom cabinets offer standard sizes with customizable finishes and hardware. Fully custom cabinets are built to your exact specifications with unlimited design options, wood species, finishes, and organizational features."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can you reface existing cabinets instead of replacing them?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, cabinet refacing is a cost-effective alternative that replaces doors and drawer fronts while keeping existing cabinet boxes. This works well when your cabinet layout is functional but the appearance is dated."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />

@@ -86,6 +86,46 @@ const HomeRenovation = () => {
         <meta property="og:url" content="https://fcconstruct.com/home-renovation" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much does a whole home renovation cost in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Whole home renovation costs in Atlanta typically range from $100,000 to $300,000+ depending on size and scope. Costs vary based on square footage, materials, and complexity. We provide free detailed estimates for your specific project."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does a whole home renovation take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Complete home renovations typically take 3-6 months. Smaller projects may take 2-3 months, while extensive renovations with additions can take 6-12 months. We create detailed timelines during planning."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I live in my home during a renovation?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It depends on the scope. For partial renovations, many homeowners stay in unaffected areas. For complete renovations, temporary relocation is often recommended. We discuss living arrangements during your consultation."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you handle permits for home renovations in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, as a licensed general contractor, we handle all permit acquisition and inspections for your renovation project. This includes building, electrical, plumbing, and mechanical permits as required."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />

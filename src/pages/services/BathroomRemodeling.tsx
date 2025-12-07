@@ -156,6 +156,46 @@ const BathroomRemodeling = () => {
         <script type="application/ld+json">
           {JSON.stringify(serviceSchema)}
         </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much does a bathroom remodel cost in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Bathroom remodel costs in Atlanta range from $10,000 to $50,000+ depending on size and scope. A basic update runs $8,000-$15,000, mid-range remodel $15,000-$30,000, and high-end spa-like renovation $30,000-$75,000+. We provide free estimates."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does a bathroom remodel take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Most bathroom remodels take 2-4 weeks. Simple updates may take 1-2 weeks, while complete renovations with custom tile and fixtures can take 4-6 weeks. We provide a detailed timeline upfront."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can you add a bathroom to my Atlanta home?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, we specialize in bathroom additions including basement bathrooms, en-suite additions, and converting closets to half-baths. We handle all plumbing, electrical, and permit requirements."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What's the best tile for bathroom floors?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Porcelain tile is the best choice for bathroom floors—it's durable, water-resistant, and available in many styles. We also install ceramic, natural stone, and luxury vinyl tile. Our designers help you choose the best option."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />
