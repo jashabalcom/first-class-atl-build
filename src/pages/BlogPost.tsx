@@ -151,7 +151,7 @@ const BlogPost = () => {
       name: "First Class Construction Group",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.firstclassconstructionatlanta.com/assets/fcc-logo.png",
+        url: "https://www.fcconstruct.com/assets/fcc-logo.png",
       },
     },
   };
@@ -166,7 +166,7 @@ const BlogPost = () => {
         <meta name="keywords" content={post.tags.join(", ")} />
         <link
           rel="canonical"
-          href={`https://www.firstclassconstructionatlanta.com/blog/${post.slug}`}
+          href={`https://www.fcconstruct.com/blog/${post.slug}`}
         />
         
         {/* Open Graph */}
@@ -176,7 +176,7 @@ const BlogPost = () => {
         <meta property="og:image" content={post.featuredImage} />
         <meta
           property="og:url"
-          content={`https://www.firstclassconstructionatlanta.com/blog/${post.slug}`}
+          content={`https://www.fcconstruct.com/blog/${post.slug}`}
         />
         <meta property="article:published_time" content={post.publishDate} />
         <meta property="article:author" content={post.author} />
