@@ -42,23 +42,32 @@ interface FormSubmission {
   formSource: string;
 }
 
-// Simple validation
+// Simple validation - requires either valid email OR valid phone
 function validateFormData(data: any): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
   
   if (!data.name || typeof data.name !== 'string' || data.name.length < 1 || data.name.length > 100) {
     errors.push('Name is required and must be 1-100 characters');
   }
-  if (!data.email || typeof data.email !== 'string' || !data.email.includes('@') || data.email.length > 255) {
-    errors.push('Valid email is required');
-  }
-  // Phone is optional, but if provided must be valid
+  
+  // Check for valid email if provided
+  const hasValidEmail = data.email && typeof data.email === 'string' && data.email.includes('@') && data.email.length <= 255;
+  
+  // Check for valid phone if provided
+  let hasValidPhone = false;
   if (data.phone && typeof data.phone === 'string' && data.phone.length > 0) {
     const digitsOnly = data.phone.replace(/\D/g, '');
-    if (digitsOnly.length < 10 || digitsOnly.length > 15) {
+    hasValidPhone = digitsOnly.length >= 10 && digitsOnly.length <= 15;
+    if (!hasValidPhone && digitsOnly.length > 0) {
       errors.push('Phone number must be 10-15 digits');
     }
   }
+  
+  // Require at least one valid contact method
+  if (!hasValidEmail && !hasValidPhone) {
+    errors.push('Valid email or phone number is required');
+  }
+  
   if (!data.formSource || typeof data.formSource !== 'string') {
     errors.push('Form source is required');
   }
