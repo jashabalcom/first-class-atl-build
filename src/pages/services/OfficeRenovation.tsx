@@ -104,6 +104,46 @@ const OfficeRenovation = () => {
             "description": "Professional office renovation services including workspace design, conference rooms, open floor plans, and complete office buildouts."
           })}
         </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much does an office renovation cost in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Office renovation costs in Atlanta range from $50-$200+ per sq ft depending on scope. Basic updates run $50-$80/sq ft, mid-range renovations $80-$150/sq ft, and high-end buildouts $150-$250+/sq ft."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can you renovate our office without shutting down?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, we specialize in phased construction that minimizes business disruption. We can work in sections, during off-hours, or on weekends to keep your operations running during renovation."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does an office renovation take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Office renovations typically take 4-12 weeks depending on size and complexity. Small office updates may take 2-4 weeks, while complete floor renovations can take 8-16 weeks."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you handle ADA compliance for office renovations?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, all our office renovations meet ADA requirements including accessible doorways, restrooms, and workspaces. We ensure your space is compliant with current accessibility standards."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />

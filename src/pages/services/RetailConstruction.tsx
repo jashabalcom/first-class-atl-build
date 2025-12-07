@@ -104,6 +104,46 @@ const RetailConstruction = () => {
             "description": "Professional retail construction services including store buildouts, storefront construction, display fixtures, and complete retail space renovations."
           })}
         </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much does a retail buildout cost in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Retail buildout costs in Atlanta range from $50-$200+ per sq ft depending on store type and finishes. Basic retail spaces run $50-$100/sq ft, boutiques $100-$150/sq ft, and flagship stores $150-$300+/sq ft."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does a retail buildout take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Retail buildouts typically take 6-12 weeks from permit approval. Small stores may take 4-6 weeks, while larger stores with custom fixtures and complex MEP work can take 10-16 weeks."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can you work with my landlord's requirements?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, we regularly coordinate with landlords and property managers. We review lease requirements, obtain necessary approvals, and ensure all work meets building and landlord specifications."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you install custom retail fixtures and displays?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, we build and install custom display fixtures, shelving systems, checkout counters, fitting rooms, and specialty retail elements. We can also coordinate with fixture vendors you specify."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />

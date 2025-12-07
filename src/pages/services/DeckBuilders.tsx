@@ -75,6 +75,46 @@ const DeckBuilders = () => {
         <meta property="og:url" content="https://fcconstruct.com/deck-builders" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much does a deck cost in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Deck costs in Atlanta range from $15,000 to $50,000+ depending on size and materials. Pressure-treated wood decks run $25-$40 per sq ft, while composite decks (Trex, TimberTech) run $40-$75+ per sq ft including railings."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is composite or wood decking better for Atlanta weather?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Composite decking is ideal for Atlanta's humid climate—it resists rot, insects, and warping without staining or sealing. Wood is more affordable upfront but requires annual maintenance. We help you choose based on your budget and preferences."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need a permit to build a deck in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, deck construction in Atlanta and most metro area cities requires a building permit. Permits ensure structural safety and proper attachment to your home. We handle all permit acquisition and inspections."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does it take to build a deck?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Most decks take 1-3 weeks to build after permits are approved. Simple decks may take 3-5 days, while multi-level decks with custom features can take 2-4 weeks. Permit approval typically adds 1-2 weeks."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />

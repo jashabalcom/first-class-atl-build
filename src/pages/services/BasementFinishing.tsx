@@ -75,6 +75,46 @@ const BasementFinishing = () => {
         <meta property="og:url" content="https://fcconstruct.com/basement-finishing" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much does it cost to finish a basement in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Basement finishing costs in Atlanta typically range from $30,000 to $100,000+ depending on size and features. Basic finishing runs $25-$50 per sq ft, while high-end finishes with bathrooms and wet bars run $50-$100+ per sq ft."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need an egress window for a basement bedroom in Georgia?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, Georgia building code requires egress windows for basement bedrooms. The window must be at least 5.7 sq ft with a minimum opening of 20 inches wide and 24 inches high. We install code-compliant egress windows."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does basement finishing take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Most basement finishing projects take 4-8 weeks. Simple finishes may take 3-4 weeks, while complex projects with bathrooms, wet bars, and custom features can take 8-12 weeks."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can you add a bathroom to my basement?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, we regularly add bathrooms to basements. This includes rough-in plumbing, sewage ejector pumps if needed, full bathroom fixtures, tile work, and ventilation. We handle all permits and inspections."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />

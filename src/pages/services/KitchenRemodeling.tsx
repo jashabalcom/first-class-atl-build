@@ -112,6 +112,46 @@ const KitchenRemodeling = () => {
             }
           })}
         </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much does a kitchen remodel cost in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Kitchen remodel costs in Atlanta typically range from $25,000 to $75,000+ depending on scope. Basic updates run $15,000-$30,000, mid-range remodels $30,000-$60,000, and high-end renovations $60,000-$150,000+. We provide free detailed estimates for your specific project."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does a kitchen remodel take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Most kitchen remodels take 6-12 weeks from demolition to completion. Simple updates may take 4-6 weeks, while complete gut renovations can take 10-16 weeks. We provide a detailed timeline during your free consultation."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need permits for a kitchen remodel in Atlanta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, permits are typically required for electrical, plumbing, and structural work in Atlanta. As a licensed contractor, we handle all permit acquisition and inspections for you."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I stay in my home during a kitchen remodel?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, most homeowners stay in their homes during kitchen remodels. We set up a temporary kitchen area and work to minimize disruption. We also maintain a clean job site throughout the project."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />

@@ -103,6 +103,46 @@ const TenantBuildout = () => {
             "description": "Professional tenant buildout services including shell to suite construction, tenant improvement management, and lease-compliant commercial improvements."
           })}
         </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is a TI allowance and how does it work?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A Tenant Improvement (TI) allowance is money the landlord provides for buildout costs, typically $20-$80+ per sq ft. We help you maximize your TI allowance by creating efficient designs and value-engineered construction plans."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does a tenant buildout take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Tenant buildouts typically take 6-12 weeks from permit approval. Shell space buildouts may take 8-16 weeks, while second-generation space improvements can take 4-8 weeks."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you coordinate with building management?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, we handle all coordination with building management including construction rules, freight elevator scheduling, contractor insurance requirements, and building inspections."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What's included in a shell space buildout?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Shell space buildouts include demising walls, HVAC distribution, electrical and lighting, plumbing, flooring, ceiling systems, and finishes. We transform raw space into a complete, move-in ready environment."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />
