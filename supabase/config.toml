@@ -11,6 +11,3 @@ verify_jwt = false
 
 [functions.voice-transcribe]
 verify_jwt = false
-
-[functions.budget-breakdown]
-verify_jwt = false
