@@ -24,6 +24,7 @@ import BlogPost from "./pages/BlogPost";
 import BlogAdmin from "./pages/BlogAdmin";
 import AgencyProposal from "./pages/tools/AgencyProposal";
 import Admin from "./pages/Admin";
+import Auth from "./pages/Auth";
 import GoHighLevelChat from "./components/GoHighLevelChat";
 
 // Priority Location Pages
@@ -123,6 +124,7 @@ const App = () => (
             <Route path="/lithia-springs" element={<LithiaSprings />} />
             
             {/* Admin Pages */}
+            <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/blog-admin" element={<BlogAdmin />} />
             
