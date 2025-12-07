@@ -12,7 +12,7 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import MobileCallBar from "@/components/MobileCallBar";
-import heroKitchen from "@/assets/hero-kitchen.jpg";
+import heroPainting from "@/assets/hero-painting.jpg";
 
 const Painting = () => {
   const serviceSchema = {
@@ -86,7 +86,7 @@ const Painting = () => {
           subtitle="Fresh paint transforms any space. Our professional painters deliver flawless finishes for interiors, exteriors, and specialty projects across Atlanta."
           primaryCTA="Get Free Estimate"
           secondaryCTA="Call 678-671-6336"
-          backgroundImage={heroKitchen}
+          backgroundImage={heroPainting}
           showScrollIndicator={true}
           credentialBadge="Licensed Contractor · Atlanta Metro"
         />
