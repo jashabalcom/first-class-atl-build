@@ -110,6 +110,7 @@ const Painting = () => {
             <div className="text-center mb-12">
               <SectionLabel>Our Expertise</SectionLabel>
               <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground">Painting <span className="text-primary">Services</span></h2>
+              <div className="section-divider mt-6" />
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
               {services.map((service, index) => (
@@ -161,6 +162,7 @@ const Painting = () => {
             <div className="text-center mb-12">
               <SectionLabel>The First Class Difference</SectionLabel>
               <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground">Why Choose <span className="text-primary">Us</span></h2>
+              <div className="section-divider mt-6" />
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
               <ValueCard icon={Users} title="Professional Painters" description="Skilled craftsmen with years of painting experience." />
@@ -178,6 +180,7 @@ const Painting = () => {
             <div className="text-center mb-12">
               <SectionLabel>Customer Reviews</SectionLabel>
               <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground">What Our <span className="text-primary">Clients Say</span></h2>
+              <div className="section-divider mt-6" />
             </div>
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
               {testimonials.map((testimonial, index) => (
@@ -193,6 +196,7 @@ const Painting = () => {
             <div className="text-center mb-12">
               <SectionLabel>Our Process</SectionLabel>
               <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground">How We <span className="text-primary">Work</span></h2>
+              <div className="section-divider mt-6" />
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
               {processSteps.map((step) => (
@@ -207,6 +211,7 @@ const Painting = () => {
             <div className="text-center mb-12">
               <SectionLabel>Service Areas</SectionLabel>
               <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground">Painting Services Across <span className="text-primary">Metro Atlanta</span></h2>
+              <div className="section-divider mt-6" />
             </div>
             <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
               {serviceAreas.map((area) => (
