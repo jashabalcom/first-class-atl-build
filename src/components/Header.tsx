@@ -1,21 +1,12 @@
-import { Phone, Menu, Calendar, ChevronDown } from "lucide-react";
+import { Phone, Menu, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "@/assets/fccg-logo.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
 
   const navLinks = [
     { to: "/residential", label: "Residential" },
@@ -26,24 +17,6 @@ const Header = () => {
     { to: "/contact", label: "Contact" },
   ];
 
-  const residentialServices = [
-    { to: "/kitchen-remodeling", label: "Kitchen Remodeling" },
-    { to: "/bathroom-remodeling", label: "Bathroom Remodeling" },
-    { to: "/basement-finishing", label: "Basement Finishing" },
-    { to: "/home-renovation", label: "Home Renovation" },
-    { to: "/deck-builders", label: "Deck Building" },
-    { to: "/custom-cabinets", label: "Custom Cabinets" },
-    { to: "/flooring-installation", label: "Flooring Installation" },
-    { to: "/painting", label: "Painting Services" },
-  ];
-
-  const commercialServices = [
-    { to: "/office-renovation", label: "Office Renovation" },
-    { to: "/restaurant-remodeling", label: "Restaurant Remodeling" },
-    { to: "/retail-construction", label: "Retail Construction" },
-    { to: "/tenant-buildout", label: "Tenant Buildout" },
-  ];
-
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 md:h-20 items-center justify-between">
@@ -52,47 +25,7 @@ const Header = () => {
         </Link>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          {/* Services Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium transition-colors hover:text-accent nav-link-underline outline-none">
-              Services
-              <ChevronDown className="h-4 w-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent 
-              align="start" 
-              className="w-56 bg-background border border-border shadow-lg z-[100]"
-            >
-              <DropdownMenuLabel className="text-xs uppercase tracking-widest text-muted-foreground">
-                Residential
-              </DropdownMenuLabel>
-              {residentialServices.map((service) => (
-                <DropdownMenuItem key={service.to} asChild>
-                  <Link 
-                    to={service.to} 
-                    className="w-full cursor-pointer hover:text-accent"
-                  >
-                    {service.label}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-              <DropdownMenuSeparator />
-              <DropdownMenuLabel className="text-xs uppercase tracking-widest text-muted-foreground">
-                Commercial
-              </DropdownMenuLabel>
-              {commercialServices.map((service) => (
-                <DropdownMenuItem key={service.to} asChild>
-                  <Link 
-                    to={service.to} 
-                    className="w-full cursor-pointer hover:text-accent"
-                  >
-                    {service.label}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
+        <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link 
               key={link.to}
@@ -127,45 +60,8 @@ const Header = () => {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[340px] overflow-y-auto">
-              <nav className="flex flex-col gap-2 mt-6">
-                {/* Mobile Services Accordion */}
-                <div className="border-b pb-4">
-                  <button
-                    onClick={() => setServicesOpen(!servicesOpen)}
-                    className="flex items-center justify-between w-full text-base font-medium py-2 min-h-[44px]"
-                  >
-                    Services
-                    <ChevronDown className={`h-5 w-5 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
-                  </button>
-                  {servicesOpen && (
-                    <div className="pl-4 space-y-1 mt-2">
-                      <p className="text-xs uppercase tracking-widest text-muted-foreground py-1">Residential</p>
-                      {residentialServices.map((service) => (
-                        <Link
-                          key={service.to}
-                          to={service.to}
-                          onClick={() => setIsOpen(false)}
-                          className="block text-sm text-muted-foreground hover:text-accent py-2 min-h-[40px] flex items-center"
-                        >
-                          {service.label}
-                        </Link>
-                      ))}
-                      <p className="text-xs uppercase tracking-widest text-muted-foreground py-1 mt-3">Commercial</p>
-                      {commercialServices.map((service) => (
-                        <Link
-                          key={service.to}
-                          to={service.to}
-                          onClick={() => setIsOpen(false)}
-                          className="block text-sm text-muted-foreground hover:text-accent py-2 min-h-[40px] flex items-center"
-                        >
-                          {service.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
+            <SheetContent side="right" className="w-[280px] sm:w-[300px]">
+              <nav className="flex flex-col gap-4 mt-6">
                 {navLinks.map((link) => (
                   <Link
                     key={link.to}
