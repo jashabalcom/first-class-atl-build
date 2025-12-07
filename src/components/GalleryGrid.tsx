@@ -98,6 +98,11 @@ const GalleryGrid = ({ filter }: GalleryGridProps) => {
     );
   }
 
+  // Get slideshow images for current project
+  const currentProjectImages = currentProject 
+    ? projectImages.filter(img => img.project_id === currentProject.id)
+    : [];
+
   // Map database fields to component expected format
   const mappedProject = currentProject ? {
     id: currentProject.id,
@@ -107,6 +112,11 @@ const GalleryGrid = ({ filter }: GalleryGridProps) => {
     beforeImage: currentProject.before_image_url || currentProject.after_image_url,
     afterImage: currentProject.after_image_url,
     description: currentProject.description || '',
+    displayMode: currentProject.display_mode || 'single',
+    slideshowImages: currentProjectImages.map(img => ({
+      id: img.id,
+      image_url: img.image_url,
+    })),
   } : null;
 
   return (
