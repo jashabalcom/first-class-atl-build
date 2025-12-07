@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
-import { Trash2, Edit, Plus, Upload, X, GripVertical, Images, Layers, FolderUp } from 'lucide-react';
+import { Trash2, Edit, Plus, Upload, X, GripVertical, Images, Layers, FolderUp, ExternalLink, CheckCircle } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import {
   DndContext,
@@ -420,7 +420,7 @@ export default function AdminGallery() {
     }
 
     setUploading(false);
-    toast.success(`${successCount} image(s) uploaded successfully`);
+    toast.success(`✓ ${successCount} image(s) uploaded — now live on website!`);
     fetchProjects();
   };
 
@@ -550,7 +550,7 @@ export default function AdminGallery() {
       }
     }
 
-    toast.success(editingProject ? 'Project updated' : 'Project added');
+    toast.success(editingProject ? '✓ Project updated — changes are now live!' : '✓ Project added — now visible on website!');
     setIsDialogOpen(false);
     fetchProjects();
     setLoading(false);
@@ -574,7 +574,7 @@ export default function AdminGallery() {
 
   return (
     <div className="space-y-6">
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button onClick={openAddDialog}>
@@ -691,7 +691,8 @@ export default function AdminGallery() {
           </DialogContent>
         </Dialog>
 
-        <Button variant="outline" onClick={() => window.open('/gallery', '_blank')}>
+        <Button variant="outline" onClick={() => window.open('/gallery', '_blank')} className="gap-2">
+          <ExternalLink className="w-4 h-4" />
           View Gallery
         </Button>
       </div>
