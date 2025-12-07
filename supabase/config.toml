@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.project-recommendations]
 verify_jwt = false
+
+[functions.room-visualizer]
+verify_jwt = false

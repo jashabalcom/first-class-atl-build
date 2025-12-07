@@ -40,7 +40,8 @@ const Header = () => {
   const [residentialOpen, setResidentialOpen] = useState(false);
   const [commercialOpen, setCommercialOpen] = useState(false);
 
-  const otherNavLinks = [
+const otherNavLinks = [
+    { to: "/room-visualizer", label: "AI Visualizer", isNew: true },
     { to: "/gallery", label: "Gallery" },
     { to: "/blog", label: "Resources" },
     { to: "/about", label: "About" },
@@ -116,14 +117,21 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Other Nav Links */}
+{/* Other Nav Links */}
           {otherNavLinks.map((link) => (
             <Link 
               key={link.to}
               to={link.to} 
-              className="text-sm font-medium transition-colors hover:text-accent nav-link-underline"
+              className={`text-sm font-medium transition-colors hover:text-accent nav-link-underline ${
+                link.isNew ? 'flex items-center gap-1' : ''
+              }`}
             >
               {link.label}
+              {link.isNew && (
+                <span className="text-[10px] px-1.5 py-0.5 bg-accent text-accent-foreground rounded-full font-semibold">
+                  NEW
+                </span>
+              )}
             </Link>
           ))}
         </nav>
@@ -207,15 +215,22 @@ const Header = () => {
                   </CollapsibleContent>
                 </Collapsible>
 
-                {/* Other Nav Links */}
+{/* Other Nav Links */}
                 {otherNavLinks.map((link) => (
                   <Link
                     key={link.to}
                     to={link.to}
                     onClick={() => setIsOpen(false)}
-                    className="text-base font-medium transition-colors hover:text-accent py-2 min-h-[44px] flex items-center"
+                    className={`text-base font-medium transition-colors hover:text-accent py-2 min-h-[44px] flex items-center ${
+                      link.isNew ? 'gap-2' : ''
+                    }`}
                   >
                     {link.label}
+                    {link.isNew && (
+                      <span className="text-[10px] px-1.5 py-0.5 bg-accent text-accent-foreground rounded-full font-semibold">
+                        NEW
+                      </span>
+                    )}
                   </Link>
                 ))}
                 
