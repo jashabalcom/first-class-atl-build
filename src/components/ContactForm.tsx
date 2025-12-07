@@ -7,11 +7,12 @@ import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
-import { submitLead } from "@/lib/lead-submission";
+import { submitLead, getFormTimestamp } from "@/lib/lead-submission";
 import { formatPhoneNumber, unformatPhoneNumber } from "@/lib/phone-formatter";
 import { Label } from "@/components/ui/label";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { Home, Droplet, Layers, Plus, Building2, Store, Shield, Lock, Clock } from "lucide-react";
+import { useState } from "react";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -44,6 +45,11 @@ const ContactForm = ({
   showTimeline = false
 }: ContactFormProps) => {
   const { toast } = useToast();
+  
+  // Anti-spam: honeypot fields and timestamp
+  const [honeypotWebsite, setHoneypotWebsite] = useState('');
+  const [honeypotGotcha, setHoneypotGotcha] = useState('');
+  const [formTimestamp] = useState(() => getFormTimestamp());
 
   const projectTypes = [
     { value: "kitchen", label: "Kitchen Remodeling", icon: Home },
@@ -95,6 +101,10 @@ const ContactForm = ({
         timeline: data.timeline,
         message: data.message,
         formSource: 'contact',
+        // Anti-spam fields
+        website: honeypotWebsite,
+        _gotcha: honeypotGotcha,
+        _timestamp: formTimestamp,
       });
 
       if (result.success) {

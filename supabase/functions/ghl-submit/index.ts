@@ -42,6 +42,46 @@ interface FormSubmission {
   formSource: string;
 }
 
+// Spam detection patterns
+const SPAM_PATTERNS = {
+  // Common spam keywords in messages
+  spamKeywords: /\b(viagra|cialis|casino|lottery|bitcoin|crypto|investment|click here|buy now|limited time|act now|winner)\b/i,
+  // Excessive URLs in message
+  tooManyUrls: /(https?:\/\/[^\s]+){3,}/i,
+  // Suspicious email patterns
+  disposableEmails: /@(tempmail|throwaway|mailinator|guerrillamail|10minutemail|fakeinbox)/i,
+  // All caps message (common in spam)
+  allCaps: /^[A-Z\s\d!@#$%^&*()]{50,}$/,
+};
+
+// Check for spam indicators
+function detectSpamContent(data: FormSubmission): { isSpam: boolean; reason?: string } {
+  const message = data.message || '';
+  const email = data.email || '';
+  
+  // Check for spam keywords in message
+  if (SPAM_PATTERNS.spamKeywords.test(message)) {
+    return { isSpam: true, reason: 'spam_keywords' };
+  }
+  
+  // Check for excessive URLs
+  if (SPAM_PATTERNS.tooManyUrls.test(message)) {
+    return { isSpam: true, reason: 'too_many_urls' };
+  }
+  
+  // Check for disposable email addresses
+  if (SPAM_PATTERNS.disposableEmails.test(email)) {
+    return { isSpam: true, reason: 'disposable_email' };
+  }
+  
+  // Check for all caps message (spam indicator)
+  if (message.length > 50 && SPAM_PATTERNS.allCaps.test(message)) {
+    return { isSpam: true, reason: 'all_caps' };
+  }
+  
+  return { isSpam: false };
+}
+
 // Simple validation - requires name, email, AND phone
 function validateFormData(data: any): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
@@ -350,6 +390,17 @@ serve(async (req) => {
       return new Response(
         JSON.stringify({ error: 'Validation failed', details: validation.errors }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Check for spam content
+    const spamCheck = detectSpamContent(formData);
+    if (spamCheck.isSpam) {
+      console.warn('Spam detected in submission:', spamCheck.reason);
+      // Return fake success to not alert the spammer
+      return new Response(
+        JSON.stringify({ success: true, leadId: 'blocked' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
