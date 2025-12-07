@@ -60,9 +60,15 @@ import PowderSprings from "./pages/locations/PowderSprings";
 import Austell from "./pages/locations/Austell";
 import LithiaSprings from "./pages/locations/LithiaSprings";
 
+// Diagnostic logging - rebuild trigger v1
+console.log("[App.tsx] Module loaded");
+
 const queryClient = new QueryClient();
 
-const App = () => (
+const App = () => {
+  console.log("[App.tsx] App component rendering...");
+  
+  return (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -135,6 +141,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
-);
+  );
+};
 
 export default App;
