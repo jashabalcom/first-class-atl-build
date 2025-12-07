@@ -143,16 +143,16 @@ const BathroomRemodeling = () => {
           name="keywords" 
           content="bathroom remodel atlanta, bathroom remodeling atlanta ga, atlanta bathroom renovation, bathroom renovation atlanta, bathroom contractors atlanta, bathroom remodel contractors atlanta, shower remodel atlanta, vanity installation atlanta, tile contractor atlanta" 
         />
-        <link rel="canonical" href="https://fcconstruct.com/bathroom-remodeling" />
+        <link rel="canonical" href="https://www.fcconstruct.com/bathroom-remodeling" />
         <meta property="og:title" content="Bathroom Remodeling Atlanta | Expert Bathroom Contractors" />
         <meta property="og:description" content="Transform your bathroom with Atlanta's trusted remodeling experts. Custom showers, vanities, tile work & complete renovations. 20+ years experience. Free estimates!" />
-        <meta property="og:url" content="https://fcconstruct.com/bathroom-remodeling" />
+        <meta property="og:url" content="https://www.fcconstruct.com/bathroom-remodeling" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://fcconstruct.com/assets/bathroom-after.jpg" />
+        <meta property="og:image" content="https://www.fcconstruct.com/assets/bathroom-after.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Bathroom Remodeling Atlanta | First Class Construction" />
         <meta name="twitter:description" content="Expert bathroom remodeling in Atlanta. Custom showers, vanities, tile work & complete renovations. Licensed contractor. Free estimates!" />
-        <meta name="twitter:image" content="https://fcconstruct.com/assets/bathroom-after.jpg" />
+        <meta name="twitter:image" content="https://www.fcconstruct.com/assets/bathroom-after.jpg" />
         <script type="application/ld+json">
           {JSON.stringify(serviceSchema)}
         </script>

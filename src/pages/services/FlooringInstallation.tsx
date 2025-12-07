@@ -69,10 +69,10 @@ const FlooringInstallation = () => {
         <title>Flooring Installation Atlanta | Hardwood, Tile & LVP | First Class</title>
         <meta name="description" content="Atlanta flooring installation. Hardwood, tile, luxury vinyl & carpet. Licensed, 20+ years experience. Free estimates. 678-671-6336." />
         <meta name="keywords" content="flooring installation atlanta, hardwood floors atlanta, tile flooring atlanta, lvp flooring atlanta ga, flooring contractors atlanta, floor installation atlanta" />
-        <link rel="canonical" href="https://fcconstruct.com/flooring-installation" />
+        <link rel="canonical" href="https://www.fcconstruct.com/flooring-installation" />
         <meta property="og:title" content="Flooring Installation Atlanta | Hardwood, Tile & LVP Experts" />
         <meta property="og:description" content="Beautiful new floors installed by Atlanta's trusted flooring contractors. Hardwood, tile, LVP & carpet. Free estimates!" />
-        <meta property="og:url" content="https://fcconstruct.com/flooring-installation" />
+        <meta property="og:url" content="https://www.fcconstruct.com/flooring-installation" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
         <script type="application/ld+json">

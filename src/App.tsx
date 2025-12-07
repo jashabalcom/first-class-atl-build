@@ -7,6 +7,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import PageTransition from "./components/PageTransition";
 import GoHighLevelChat from "./components/GoHighLevelChat";
 import ExitIntentPopup from "./components/ExitIntentPopup";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { lazy, Suspense } from "react";
 
 // Core pages
@@ -82,14 +83,15 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <GoHighLevelChat />
-      <BrowserRouter>
-        <ExitIntentPopup />
-        <ScrollToTop />
-        <PageTransition>
-          <Routes>
+      <ErrorBoundary>
+        <Toaster />
+        <Sonner />
+        <GoHighLevelChat />
+        <BrowserRouter>
+          <ExitIntentPopup />
+          <ScrollToTop />
+          <PageTransition>
+            <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/residential" element={<ResidentialFunnel />} />
             <Route path="/commercial" element={<Commercial />} />
@@ -152,9 +154,10 @@ const App = () => (
             <Route path="/auth/reset-password" element={<ResetPassword />} />
             <Route path="/admin" element={<Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}><AdminDashboard /></Suspense>} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </PageTransition>
-      </BrowserRouter>
+            </Routes>
+          </PageTransition>
+        </BrowserRouter>
+      </ErrorBoundary>
     </TooltipProvider>
   </QueryClientProvider>
 );

@@ -75,10 +75,10 @@ const RetailConstruction = () => {
         <title>Retail Construction Atlanta | Retail Build-Out Contractor | First Class</title>
         <meta name="description" content="Atlanta retail construction & build-outs. Storefronts, display fixtures & complete retail spaces. Fast turnaround, on-budget. Licensed. 678-671-6336." />
         <meta name="keywords" content="retail construction atlanta, retail build out atlanta, retail buildout contractor, store construction atlanta, retail renovation atlanta, commercial retail construction, retail store buildout, storefront construction atlanta" />
-        <link rel="canonical" href="https://fcconstruct.com/retail-construction" />
+        <link rel="canonical" href="https://www.fcconstruct.com/retail-construction" />
         <meta property="og:title" content="Retail Construction Atlanta | Retail Build-Out Contractor" />
         <meta property="og:description" content="Expert retail construction: storefronts, display fixtures, fitting rooms & complete retail spaces in Metro Atlanta. Fast turnaround." />
-        <meta property="og:url" content="https://fcconstruct.com/retail-construction" />
+        <meta property="og:url" content="https://www.fcconstruct.com/retail-construction" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Retail Construction Atlanta | First Class Construction" />

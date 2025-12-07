@@ -74,10 +74,10 @@ const TenantBuildout = () => {
         <title>Tenant Buildout Atlanta | Tenant Improvement Contractor | First Class</title>
         <meta name="description" content="Atlanta tenant buildout contractor. Shell to suite, TI allowance management & lease-compliant improvements. Licensed & insured. 678-671-6336." />
         <meta name="keywords" content="tenant buildout atlanta, tenant improvement contractor, tenant build out contractors, commercial tenant improvement, tenant buildout contractor atlanta, TI contractor atlanta, leasehold improvement contractor, shell to suite atlanta" />
-        <link rel="canonical" href="https://fcconstruct.com/tenant-buildout" />
+        <link rel="canonical" href="https://www.fcconstruct.com/tenant-buildout" />
         <meta property="og:title" content="Tenant Buildout Atlanta | Tenant Improvement Contractor" />
         <meta property="og:description" content="Expert tenant buildout: shell to suite construction, TI allowance management, lease-compliant improvements in Metro Atlanta." />
-        <meta property="og:url" content="https://fcconstruct.com/tenant-buildout" />
+        <meta property="og:url" content="https://www.fcconstruct.com/tenant-buildout" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Tenant Buildout Atlanta | First Class Construction" />

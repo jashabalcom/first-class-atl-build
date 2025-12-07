@@ -74,12 +74,12 @@ const KitchenRemodeling = () => {
         <title>Kitchen Remodeling Atlanta | Kitchen Remodel Contractors | First Class</title>
         <meta name="description" content="Atlanta kitchen remodeling experts. Custom cabinets, countertops & complete renovations. Licensed, 20+ years experience. Free estimates. 678-671-6336." />
         <meta name="keywords" content="kitchen remodeling atlanta, kitchen remodel atlanta, atlanta kitchen renovation, kitchen renovation atlanta ga, kitchen contractors atlanta, kitchen cabinets atlanta, kitchen countertops atlanta, kitchen design atlanta, custom kitchen atlanta" />
-        <link rel="canonical" href="https://fcconstruct.com/kitchen-remodeling" />
+        <link rel="canonical" href="https://www.fcconstruct.com/kitchen-remodeling" />
         <meta property="og:title" content="Kitchen Remodeling Atlanta | Expert Kitchen Renovation Contractors" />
         <meta property="og:description" content="Expert kitchen remodeling in Atlanta. Custom cabinets, countertops, backsplash, flooring & complete renovations. Licensed contractor. Free estimates." />
-        <meta property="og:url" content="https://fcconstruct.com/kitchen-remodeling" />
+        <meta property="og:url" content="https://www.fcconstruct.com/kitchen-remodeling" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://fcconstruct.com/assets/kitchen-after.jpg" />
+        <meta property="og:image" content="https://www.fcconstruct.com/assets/kitchen-after.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Kitchen Remodeling Atlanta | First Class Construction" />
         <meta name="twitter:description" content="Expert kitchen remodeling: custom cabinets, countertops, backsplash, flooring & complete kitchen renovations in Metro Atlanta." />

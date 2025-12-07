@@ -20,8 +20,8 @@ const CommercialContractorAtlanta = () => {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "First Class Construction Group - Commercial Contractor Atlanta",
-    "@id": "https://fcconstruct.com/commercial-contractor-atlanta",
-    "url": "https://fcconstruct.com/commercial-contractor-atlanta",
+    "@id": "https://www.fcconstruct.com/commercial-contractor-atlanta",
+    "url": "https://www.fcconstruct.com/commercial-contractor-atlanta",
     "telephone": "+1-678-671-6336",
     "address": {
       "@type": "PostalAddress",
@@ -93,10 +93,10 @@ const CommercialContractorAtlanta = () => {
         <title>Commercial Contractor Atlanta | Licensed Business Build-Outs | First Class</title>
         <meta name="description" content="Licensed Atlanta commercial contractor. Office, restaurant, retail & tenant build-outs. DBE/MBE certified, 20+ years experience. Free estimates. 678-671-6336." />
         <meta name="keywords" content="commercial contractor atlanta, commercial construction atlanta, commercial remodeling atlanta, commercial build out atlanta, office contractor atlanta, restaurant contractor atlanta, retail contractor atlanta, tenant improvement atlanta" />
-        <link rel="canonical" href="https://fcconstruct.com/commercial-contractor-atlanta" />
+        <link rel="canonical" href="https://www.fcconstruct.com/commercial-contractor-atlanta" />
         <meta property="og:title" content="Commercial Contractor Atlanta | Licensed Business Build-Outs" />
         <meta property="og:description" content="Atlanta's trusted commercial contractor. Office, restaurant, retail & tenant build-outs. DBE/MBE certified, 20+ years experience. Free estimates!" />
-        <meta property="og:url" content="https://fcconstruct.com/commercial-contractor-atlanta" />
+        <meta property="og:url" content="https://www.fcconstruct.com/commercial-contractor-atlanta" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       </Helmet>

@@ -80,10 +80,10 @@ const HomeRenovation = () => {
         <title>Home Renovation Atlanta | Whole Home Remodeling Contractors | First Class</title>
         <meta name="description" content="Atlanta home renovation experts. Whole-home remodeling, room additions & interior transformations. Licensed, 20+ years experience. Free estimates. 678-671-6336." />
         <meta name="keywords" content="home renovation atlanta, whole home remodeling atlanta, home remodel atlanta ga, house renovation atlanta, home addition atlanta, interior remodeling atlanta, home renovation contractors atlanta" />
-        <link rel="canonical" href="https://fcconstruct.com/home-renovation" />
+        <link rel="canonical" href="https://www.fcconstruct.com/home-renovation" />
         <meta property="og:title" content="Home Renovation Atlanta | Whole Home Remodeling Experts" />
         <meta property="og:description" content="Transform your entire home with Atlanta's trusted renovation experts. Complete remodeling, additions & interior updates. 20+ years experience. Free estimates!" />
-        <meta property="og:url" content="https://fcconstruct.com/home-renovation" />
+        <meta property="og:url" content="https://www.fcconstruct.com/home-renovation" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
         <script type="application/ld+json">
