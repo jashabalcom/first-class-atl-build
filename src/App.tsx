@@ -23,6 +23,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import AgencyProposal from "./pages/tools/AgencyProposal";
 import Auth from "./pages/Auth";
+import ResetPassword from "./pages/ResetPassword";
 import { AdminDashboard } from "./pages/admin";
 import GoHighLevelChat from "./components/GoHighLevelChat";
 
@@ -124,6 +125,7 @@ const App = () => (
             
             {/* Admin Pages */}
             <Route path="/auth" element={<Auth />} />
+            <Route path="/auth/reset-password" element={<ResetPassword />} />
             <Route path="/admin" element={<AdminDashboard />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
