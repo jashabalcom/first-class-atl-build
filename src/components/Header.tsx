@@ -1,16 +1,46 @@
-import { Phone, Menu, Calendar } from "lucide-react";
+import { Phone, Menu, Calendar, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "@/assets/fccg-logo.png";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+
+const residentialServices = [
+  { to: "/kitchen-remodeling", label: "Kitchen Remodeling" },
+  { to: "/bathroom-remodeling", label: "Bathroom Remodeling" },
+  { to: "/home-renovation", label: "Home Renovation" },
+  { to: "/basement-finishing", label: "Basement Finishing" },
+  { to: "/deck-builders", label: "Deck Builders" },
+  { to: "/custom-cabinets", label: "Custom Cabinets" },
+  { to: "/flooring-installation", label: "Flooring Installation" },
+  { to: "/painting", label: "Painting" },
+];
+
+const commercialServices = [
+  { to: "/office-renovation", label: "Office Renovation" },
+  { to: "/restaurant-remodeling", label: "Restaurant Remodeling" },
+  { to: "/retail-construction", label: "Retail Construction" },
+  { to: "/tenant-buildout", label: "Tenant Buildout" },
+];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [residentialOpen, setResidentialOpen] = useState(false);
+  const [commercialOpen, setCommercialOpen] = useState(false);
 
-  const navLinks = [
-    { to: "/residential", label: "Residential" },
-    { to: "/commercial", label: "Commercial" },
+  const otherNavLinks = [
     { to: "/gallery", label: "Gallery" },
     { to: "/blog", label: "Resources" },
     { to: "/about", label: "About" },
@@ -25,8 +55,69 @@ const Header = () => {
         </Link>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+        <nav className="hidden md:flex items-center gap-6">
+          {/* Residential Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium transition-colors hover:text-accent outline-none">
+              Residential
+              <ChevronDown className="h-4 w-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-[320px] bg-background border border-border shadow-lg z-50 p-2" align="start">
+              <div className="grid grid-cols-2 gap-1">
+                {residentialServices.map((service) => (
+                  <DropdownMenuItem key={service.to} asChild>
+                    <Link 
+                      to={service.to} 
+                      className="cursor-pointer hover:text-accent hover:bg-accent/10 rounded-md px-3 py-2"
+                    >
+                      {service.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </div>
+              <DropdownMenuSeparator className="my-2" />
+              <DropdownMenuItem asChild>
+                <Link 
+                  to="/residential" 
+                  className="cursor-pointer text-accent font-medium hover:bg-accent/10 rounded-md px-3 py-2"
+                >
+                  View All Residential →
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Commercial Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium transition-colors hover:text-accent outline-none">
+              Commercial
+              <ChevronDown className="h-4 w-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-[200px] bg-background border border-border shadow-lg z-50 p-2" align="start">
+              {commercialServices.map((service) => (
+                <DropdownMenuItem key={service.to} asChild>
+                  <Link 
+                    to={service.to} 
+                    className="cursor-pointer hover:text-accent hover:bg-accent/10 rounded-md px-3 py-2"
+                  >
+                    {service.label}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+              <DropdownMenuSeparator className="my-2" />
+              <DropdownMenuItem asChild>
+                <Link 
+                  to="/commercial" 
+                  className="cursor-pointer text-accent font-medium hover:bg-accent/10 rounded-md px-3 py-2"
+                >
+                  View All Commercial →
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Other Nav Links */}
+          {otherNavLinks.map((link) => (
             <Link 
               key={link.to}
               to={link.to} 
@@ -61,8 +152,63 @@ const Header = () => {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] sm:w-[300px]">
-              <nav className="flex flex-col gap-4 mt-6">
-                {navLinks.map((link) => (
+              <nav className="flex flex-col gap-2 mt-6">
+                {/* Residential Collapsible */}
+                <Collapsible open={residentialOpen} onOpenChange={setResidentialOpen}>
+                  <CollapsibleTrigger className="flex items-center justify-between w-full text-base font-medium py-2 min-h-[44px] hover:text-accent transition-colors">
+                    Residential
+                    <ChevronDown className={`h-4 w-4 transition-transform ${residentialOpen ? 'rotate-180' : ''}`} />
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="pl-4 space-y-1">
+                    {residentialServices.map((service) => (
+                      <Link
+                        key={service.to}
+                        to={service.to}
+                        onClick={() => setIsOpen(false)}
+                        className="block text-sm py-2 min-h-[44px] flex items-center hover:text-accent transition-colors"
+                      >
+                        {service.label}
+                      </Link>
+                    ))}
+                    <Link
+                      to="/residential"
+                      onClick={() => setIsOpen(false)}
+                      className="block text-sm py-2 min-h-[44px] flex items-center text-accent font-medium"
+                    >
+                      View All →
+                    </Link>
+                  </CollapsibleContent>
+                </Collapsible>
+
+                {/* Commercial Collapsible */}
+                <Collapsible open={commercialOpen} onOpenChange={setCommercialOpen}>
+                  <CollapsibleTrigger className="flex items-center justify-between w-full text-base font-medium py-2 min-h-[44px] hover:text-accent transition-colors">
+                    Commercial
+                    <ChevronDown className={`h-4 w-4 transition-transform ${commercialOpen ? 'rotate-180' : ''}`} />
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="pl-4 space-y-1">
+                    {commercialServices.map((service) => (
+                      <Link
+                        key={service.to}
+                        to={service.to}
+                        onClick={() => setIsOpen(false)}
+                        className="block text-sm py-2 min-h-[44px] flex items-center hover:text-accent transition-colors"
+                      >
+                        {service.label}
+                      </Link>
+                    ))}
+                    <Link
+                      to="/commercial"
+                      onClick={() => setIsOpen(false)}
+                      className="block text-sm py-2 min-h-[44px] flex items-center text-accent font-medium"
+                    >
+                      View All →
+                    </Link>
+                  </CollapsibleContent>
+                </Collapsible>
+
+                {/* Other Nav Links */}
+                {otherNavLinks.map((link) => (
                   <Link
                     key={link.to}
                     to={link.to}
@@ -72,6 +218,7 @@ const Header = () => {
                     {link.label}
                   </Link>
                 ))}
+                
                 <div className="pt-4 border-t mt-2 space-y-3">
                   <Link to="/book" onClick={() => setIsOpen(false)} className="w-full block">
                     <Button variant="cta" size="lg" className="w-full gap-2 h-12">
