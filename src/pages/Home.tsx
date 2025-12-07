@@ -116,7 +116,8 @@ const Home = () => {
 
             {/* Quick Links to All Service Pages */}
             <div className="mt-12 max-w-5xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3 font-medium">Residential Services</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
                 <Link to="/kitchen-remodeling" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
                   <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
                   Kitchen Remodeling
@@ -148,6 +149,26 @@ const Home = () => {
                 <Link to="/painting" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
                   <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
                   Painting Services
+                </Link>
+              </div>
+              
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3 font-medium">Commercial Services</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <Link to="/office-renovation" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
+                  Office Renovation
+                </Link>
+                <Link to="/restaurant-remodeling" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
+                  Restaurant Remodeling
+                </Link>
+                <Link to="/retail-construction" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
+                  Retail Construction
+                </Link>
+                <Link to="/tenant-buildout" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
+                  Tenant Buildout
                 </Link>
               </div>
             </div>
