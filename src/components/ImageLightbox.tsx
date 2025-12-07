@@ -1,4 +1,5 @@
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useRef, useCallback } from "react";
+import { X } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import {
@@ -7,6 +8,7 @@ import {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 
 interface SlideshowImage {
@@ -29,13 +31,38 @@ interface ImageLightboxProps {
 }
 
 const ImageLightbox = ({ open, onClose, project }: ImageLightboxProps) => {
+  const carouselRef = useRef<CarouselApi | null>(null);
+
+  // Handle keyboard navigation
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (!carouselRef.current) return;
+    
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      carouselRef.current.scrollPrev();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      carouselRef.current.scrollNext();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (open && project?.displayMode === 'slideshow') {
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [open, project?.displayMode, handleKeyDown]);
+
   if (!project) return null;
 
   const renderContent = () => {
     // Slideshow mode - show carousel of images
     if (project.displayMode === 'slideshow' && project.slideshowImages && project.slideshowImages.length > 0) {
+      const setApi = (api: CarouselApi) => {
+        carouselRef.current = api;
+      };
       return (
-        <Carousel className="w-full" opts={{ loop: true }}>
+        <Carousel className="w-full" opts={{ loop: true }} setApi={setApi}>
           <CarouselContent>
             {project.slideshowImages.map((image) => (
               <CarouselItem key={image.id}>
