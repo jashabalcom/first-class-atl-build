@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { marked } from "marked";
+import DOMPurify from "dompurify";
 import DropCap from "./DropCap";
 import PullQuote from "./PullQuote";
 import Callout from "./Callout";
@@ -7,6 +8,17 @@ import ImageWithCaption from "./ImageWithCaption";
 import StatsGrid from "./StatsGrid";
 import Divider from "./Divider";
 import InlineImage from "./InlineImage";
+
+// Configure DOMPurify to allow safe HTML elements for blog content
+const sanitizeHtml = (html: string): string => {
+  return DOMPurify.sanitize(html, {
+    ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'b', 'i', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 
+                   'ul', 'ol', 'li', 'a', 'blockquote', 'code', 'pre', 'hr', 'img', 'table', 
+                   'thead', 'tbody', 'tr', 'th', 'td', 'span', 'div', 'sup', 'sub'],
+    ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'class', 'id', 'target', 'rel'],
+    ALLOW_DATA_ATTR: false,
+  });
+};
 
 interface BlogContentRendererProps {
   content: string;
@@ -134,7 +146,7 @@ const BlogContentRenderer = ({ content }: BlogContentRendererProps) => {
           <div
             key={`text-${key++}`}
             className="blog-content"
-            dangerouslySetInnerHTML={{ __html: htmlContent }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(htmlContent) }}
           />
         );
       }
@@ -154,7 +166,7 @@ const BlogContentRenderer = ({ content }: BlogContentRendererProps) => {
         <div
           key={`text-${key++}`}
           className="blog-content"
-          dangerouslySetInnerHTML={{ __html: htmlContent }}
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(htmlContent) }}
         />
       );
     }
