@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, ArrowUp } from "lucide-react";
 import logo from "@/assets/fccg-logo.png";
+import mlaLogo from "@/assets/mla-logo-white.png";
 
 const Footer = () => {
   const serviceAreas = [
@@ -178,6 +179,26 @@ const Footer = () => {
                   Admin
                 </Link>
               </div>
+            </div>
+            
+            {/* Agency Credit */}
+            <div className="border-t border-white/10 mt-6 pt-4 flex justify-center">
+              <a 
+                href="https://majorleadsagency.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 opacity-50 hover:opacity-100 transition-all duration-300"
+              >
+                <span className="text-xs tracking-wide">Website by</span>
+                <img 
+                  src={mlaLogo} 
+                  alt="Major Leads Agency" 
+                  className="h-5 w-auto group-hover:brightness-110 transition-all"
+                />
+                <span className="text-xs font-medium group-hover:text-accent transition-colors">
+                  Major Leads Agency
+                </span>
+              </a>
             </div>
           </div>
         </div>
