@@ -116,7 +116,7 @@ const HomeRenovation = () => {
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="py-16 lg:py-24 bg-secondary/30">
+        <AnimatedSection className="py-16 lg:py-24 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <SectionLabel>Our Expertise</SectionLabel>
@@ -171,7 +171,7 @@ const HomeRenovation = () => {
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="py-16 lg:py-24 bg-secondary/30">
+        <AnimatedSection className="py-16 lg:py-24 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <SectionLabel>The First Class Difference</SectionLabel>
@@ -203,7 +203,7 @@ const HomeRenovation = () => {
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="py-16 lg:py-24 bg-secondary/30">
+        <AnimatedSection className="py-16 lg:py-24 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <SectionLabel>Our Process</SectionLabel>
@@ -231,13 +231,15 @@ const HomeRenovation = () => {
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="py-16 lg:py-24 bg-primary text-primary-foreground">
+        <AnimatedSection className="py-16 lg:py-24 bg-gradient-to-b from-background to-muted/30">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl mb-6">Ready to Transform Your Home?</h2>
-            <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">Schedule your free consultation today.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/book" className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-white/90 transition-colors">Book Free Consultation</Link>
-              <a href="tel:+16786716336" className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors">
+            <SectionLabel>Get Started Today</SectionLabel>
+            <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold mb-6 mt-3">Ready to Transform Your <span className="text-accent">Home?</span></h2>
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">Schedule your free consultation today.</p>
+            <div className="section-divider" />
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <Link to="/book" className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors">Book Free Consultation</Link>
+              <a href="tel:+16786716336" className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-accent/50 hover:border-accent hover:text-accent font-semibold rounded-lg transition-colors">
                 <Phone className="w-5 h-5" />Call 678-671-6336
               </a>
             </div>
