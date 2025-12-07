@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
@@ -25,6 +26,39 @@ import officeRenovation from "@/assets/office-renovation.jpg";
 const Home = () => {
   return (
     <div className="min-h-screen pb-24 md:pb-0">
+      <Helmet>
+        <title>General Contractor Atlanta GA | Licensed Construction Company | First Class</title>
+        <meta name="description" content="First Class Construction Group is Atlanta's premier licensed general contractor. Kitchen remodeling, bathroom renovations, commercial build-outs & more. DBE/MBE certified. Free estimates. Call 678-671-6336." />
+        <meta name="keywords" content="general contractor atlanta ga, contractors atlanta ga, construction companies atlanta ga, licensed contractor atlanta, home remodeling atlanta, kitchen remodeling atlanta, bathroom remodel atlanta, commercial contractor atlanta, DBE contractor atlanta, MBE contractor atlanta" />
+        <link rel="canonical" href="https://fcconstruct.com/" />
+        <meta property="og:title" content="General Contractor Atlanta GA | Licensed Construction Company" />
+        <meta property="og:description" content="Atlanta's premier licensed general contractor. Kitchen remodeling, bathroom renovations, commercial build-outs & more. DBE/MBE certified. Free estimates." />
+        <meta property="og:url" content="https://fcconstruct.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="General Contractor Atlanta GA | First Class Construction Group" />
+        <meta name="twitter:description" content="Atlanta's premier licensed general contractor. Kitchen remodeling, bathroom renovations, commercial build-outs. DBE/MBE certified." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "GeneralContractor",
+            "name": "First Class Construction Group",
+            "description": "Licensed general contractor serving Metro Atlanta with residential renovations and commercial build-outs.",
+            "url": "https://fcconstruct.com",
+            "telephone": "678-671-6336",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Atlanta",
+              "addressRegion": "GA",
+              "addressCountry": "US"
+            },
+            "areaServed": ["Atlanta", "Buckhead", "Midtown", "Decatur", "Sandy Springs", "Brookhaven", "Dunwoody", "Marietta", "Alpharetta"],
+            "priceRange": "$$",
+            "openingHours": "Mo-Fr 08:00-18:00"
+          })}
+        </script>
+      </Helmet>
       <Header />
       
       <Hero

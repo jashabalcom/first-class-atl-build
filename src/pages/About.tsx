@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
@@ -37,6 +38,40 @@ const About = () => {
 
   return (
     <>
+      <Helmet>
+        <title>About First Class Construction Group | Atlanta's Trusted Contractor Since 2004</title>
+        <meta name="description" content="20+ years building trust across Atlanta. First Class Construction Group is a licensed, bonded, insured DBE/MBE certified contractor. Learn our story, values, and commitment to quality craftsmanship." />
+        <meta name="keywords" content="about first class construction, atlanta contractor history, DBE contractor atlanta, MBE certified contractor, licensed contractor atlanta ga, construction company atlanta history, trusted contractor atlanta" />
+        <link rel="canonical" href="https://fcconstruct.com/about" />
+        <meta property="og:title" content="About First Class Construction Group | Atlanta's Trusted Contractor" />
+        <meta property="og:description" content="20+ years building trust across Atlanta. Licensed, bonded, insured DBE/MBE certified contractor. Learn our story and commitment to quality." />
+        <meta property="og:url" content="https://fcconstruct.com/about" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About First Class Construction Group" />
+        <meta name="twitter:description" content="20+ years building trust across Atlanta. Licensed, bonded, insured DBE/MBE certified contractor." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "mainEntity": {
+              "@type": "GeneralContractor",
+              "name": "First Class Construction Group",
+              "foundingDate": "2004",
+              "description": "Licensed general contractor serving Metro Atlanta with residential renovations and commercial build-outs for over 20 years.",
+              "url": "https://fcconstruct.com/about",
+              "telephone": "678-671-6336",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Atlanta",
+                "addressRegion": "GA",
+                "addressCountry": "US"
+              },
+              "knowsAbout": ["General Contracting", "Kitchen Remodeling", "Bathroom Renovation", "Commercial Build-Out", "Tenant Improvement"]
+            }
+          })}
+        </script>
+      </Helmet>
       <Header />
       <MobileCallBar />
       

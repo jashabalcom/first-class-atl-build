@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
@@ -98,6 +99,37 @@ const Commercial = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Commercial Contractor Atlanta | Office, Retail & Restaurant Build-Outs</title>
+        <meta name="description" content="Commercial construction contractor in Atlanta. Retail build-outs, restaurant fit-outs, office renovations & tenant improvements. Licensed, bonded, insured. Minimize downtime. Call 678-671-6336." />
+        <meta name="keywords" content="commercial contractor atlanta, office renovation atlanta, restaurant remodeling atlanta, retail build out atlanta, tenant improvement contractor, commercial construction atlanta ga, office renovation contractor, restaurant remodel contractor, tenant buildout atlanta" />
+        <link rel="canonical" href="https://fcconstruct.com/commercial" />
+        <meta property="og:title" content="Commercial Contractor Atlanta | Office, Retail & Restaurant Build-Outs" />
+        <meta property="og:description" content="Commercial construction contractor in Atlanta. Retail build-outs, restaurant fit-outs, office renovations & tenant improvements. Licensed, bonded, insured." />
+        <meta property="og:url" content="https://fcconstruct.com/commercial" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Commercial Contractor Atlanta | First Class Construction" />
+        <meta name="twitter:description" content="Commercial construction: retail build-outs, restaurant fit-outs, office renovations & tenant improvements in Metro Atlanta." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "GeneralContractor",
+            "name": "First Class Construction Group - Commercial Services",
+            "description": "Commercial construction contractor specializing in retail build-outs, restaurant fit-outs, office renovations, and tenant improvements in Metro Atlanta.",
+            "url": "https://fcconstruct.com/commercial",
+            "telephone": "678-671-6336",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Atlanta",
+              "addressRegion": "GA",
+              "addressCountry": "US"
+            },
+            "areaServed": ["Atlanta", "Buckhead", "Midtown", "Perimeter", "Sandy Springs", "Marietta", "Alpharetta"],
+            "serviceType": ["Retail Build-Out", "Restaurant Fit-Out", "Office Renovation", "Tenant Improvement"]
+          })}
+        </script>
+      </Helmet>
       <Header />
       <MobileCallBar />
       

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
@@ -20,6 +21,37 @@ import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 const ResidentialFunnel = () => {
   return (
     <div className="min-h-screen pb-24 md:pb-0">
+      <Helmet>
+        <title>Residential Contractor Atlanta | Kitchen & Bathroom Remodeling</title>
+        <meta name="description" content="Expert residential contractor in Atlanta. Kitchen remodeling, bathroom renovations, basement finishing & home additions. Licensed, insured, 20+ years experience. Free consultation. Call 678-671-6336." />
+        <meta name="keywords" content="residential contractor atlanta, kitchen remodeling atlanta, bathroom remodel atlanta, bathroom renovation atlanta, basement finishing atlanta, home remodeling atlanta, kitchen renovation atlanta ga, bathroom remodeling atlanta ga, home addition contractor atlanta" />
+        <link rel="canonical" href="https://fcconstruct.com/residential" />
+        <meta property="og:title" content="Residential Contractor Atlanta | Kitchen & Bathroom Remodeling" />
+        <meta property="og:description" content="Expert residential contractor: kitchen remodeling, bathroom renovations, basement finishing & home additions in Metro Atlanta. Free consultation." />
+        <meta property="og:url" content="https://fcconstruct.com/residential" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Residential Contractor Atlanta | First Class Construction" />
+        <meta name="twitter:description" content="Kitchen remodeling, bathroom renovations, basement finishing & home additions. Licensed contractor serving Metro Atlanta." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HomeAndConstructionBusiness",
+            "name": "First Class Construction Group - Residential Services",
+            "description": "Residential contractor specializing in kitchen remodeling, bathroom renovations, basement finishing, and home additions in Metro Atlanta.",
+            "url": "https://fcconstruct.com/residential",
+            "telephone": "678-671-6336",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Atlanta",
+              "addressRegion": "GA",
+              "addressCountry": "US"
+            },
+            "areaServed": ["Atlanta", "Buckhead", "Midtown", "Decatur", "Sandy Springs", "Brookhaven", "Dunwoody"],
+            "serviceType": ["Kitchen Remodeling", "Bathroom Renovation", "Basement Finishing", "Home Addition"]
+          })}
+        </script>
+      </Helmet>
       <Header />
       
       <Hero
