@@ -6,6 +6,7 @@ import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { Hammer, Bath, Home, PlusCircle, Building2, Calculator, ArrowRight, Info, Sparkles, Loader2, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { submitLead } from "@/lib/lead-submission";
+import { CostBreakdownChart } from "@/components/CostBreakdownChart";
 
 const RECS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/project-recommendations`;
 
@@ -409,6 +410,15 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
                   Schedule Consultation
                 </Button>
               </div>
+
+              {/* AI Cost Breakdown */}
+              <CostBreakdownChart
+                projectType={projectType}
+                scope={getScopeLabel()}
+                finishLevel={finishLevel}
+                budgetMin={estimate.min}
+                budgetMax={estimate.max}
+              />
 
               {/* AI Design Ideas Button */}
               {!showAIIdeas && (
