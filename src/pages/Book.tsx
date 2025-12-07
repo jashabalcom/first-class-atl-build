@@ -78,11 +78,8 @@ const Book = () => {
                   )}
                   <iframe
                     src="https://api.leadconnectorhq.com/widget/booking/ITabl42VTFSLL9X27hGf"
+                    className="w-full border-none overflow-hidden min-h-[550px] sm:min-h-[600px] md:min-h-[700px]"
                     style={{
-                      width: "100%",
-                      border: "none",
-                      overflow: "hidden",
-                      minHeight: "700px",
                       opacity: calendarLoaded ? 1 : 0,
                       transition: "opacity 0.3s ease-in-out",
                     }}
