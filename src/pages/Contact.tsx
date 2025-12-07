@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
-import ContactForm from "@/components/ContactForm";
+import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import SectionLabel from "@/components/SectionLabel";
 import { Phone, Mail, MapPin, Clock, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -113,13 +113,7 @@ const Contact = () => {
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
               {/* Contact Form */}
               <div className="animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-                <ContactForm
-                  heading="Send Us a Message"
-                  subheading="Fill out the form below and we'll get back to you within one business day."
-                  buttonText="Send Message"
-                  showCity={true}
-                  showTimeline={true}
-                />
+                <MultiStepContactForm showCity={true} showTimeline={true} />
               </div>
 
               {/* Contact Info */}
