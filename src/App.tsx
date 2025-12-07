@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import PageTransition from "./components/PageTransition";
-import Index from "./pages/Index";
 import Home from "./pages/Home";
 import ResidentialFunnel from "./pages/ResidentialFunnel";
 import Gallery from "./pages/Gallery";
@@ -27,15 +26,13 @@ import ResetPassword from "./pages/ResetPassword";
 import { AdminDashboard } from "./pages/admin";
 import GoHighLevelChat from "./components/GoHighLevelChat";
 
-// Priority Location Pages
+// Location Pages
 import Atlanta from "./pages/locations/Atlanta";
 import Buckhead from "./pages/locations/Buckhead";
 import Midtown from "./pages/locations/Midtown";
 import SandySprings from "./pages/locations/SandySprings";
 import Brookhaven from "./pages/locations/Brookhaven";
 import Dunwoody from "./pages/locations/Dunwoody";
-
-// Other Location Pages
 import Roswell from "./pages/locations/Roswell";
 import Decatur from "./pages/locations/Decatur";
 import JohnsCreek from "./pages/locations/JohnsCreek";
@@ -60,15 +57,9 @@ import PowderSprings from "./pages/locations/PowderSprings";
 import Austell from "./pages/locations/Austell";
 import LithiaSprings from "./pages/locations/LithiaSprings";
 
-// Diagnostic logging - rebuild trigger v1
-console.log("[App.tsx] Module loaded");
-
 const queryClient = new QueryClient();
 
-const App = () => {
-  console.log("[App.tsx] App component rendering...");
-  
-  return (
+const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -88,23 +79,17 @@ const App = () => {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/tools/agency-proposal" element={<AgencyProposal />} />
-            
-            {/* Existing Area Pages */}
             <Route path="/areas/buckhead-kitchen-remodeling" element={<BuckheadKitchenRemodeling />} />
             <Route path="/areas/midtown-kitchen-remodeling" element={<MidtownKitchenRemodeling />} />
             <Route path="/areas/sandy-springs-bathroom-remodeling" element={<SandySpringsBasementRemodeling />} />
             <Route path="/areas/vinings-kitchen-remodeling" element={<ViningsKitchenRemodeling />} />
             <Route path="/services/basement-finishing-atlanta" element={<AtlantaBasementFinishing />} />
-            
-            {/* Priority Location Pages */}
             <Route path="/atlanta" element={<Atlanta />} />
             <Route path="/buckhead" element={<Buckhead />} />
             <Route path="/midtown" element={<Midtown />} />
             <Route path="/sandy-springs" element={<SandySprings />} />
             <Route path="/brookhaven" element={<Brookhaven />} />
             <Route path="/dunwoody" element={<Dunwoody />} />
-            
-            {/* Other Location Pages */}
             <Route path="/roswell" element={<Roswell />} />
             <Route path="/decatur" element={<Decatur />} />
             <Route path="/johns-creek" element={<JohnsCreek />} />
@@ -128,20 +113,15 @@ const App = () => {
             <Route path="/powder-springs" element={<PowderSprings />} />
             <Route path="/austell" element={<Austell />} />
             <Route path="/lithia-springs" element={<LithiaSprings />} />
-            
-            {/* Admin Pages */}
             <Route path="/auth" element={<Auth />} />
             <Route path="/auth/reset-password" element={<ResetPassword />} />
             <Route path="/admin" element={<AdminDashboard />} />
-            
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
-  );
-};
+);
 
 export default App;
