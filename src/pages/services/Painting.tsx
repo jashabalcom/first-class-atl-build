@@ -13,6 +13,7 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import MobileCallBar from "@/components/MobileCallBar";
+import StickyAICTA from "@/components/StickyAICTA";
 import heroPainting from "@/assets/hero-painting.jpg";
 
 const Painting = () => {
@@ -299,6 +300,7 @@ const Painting = () => {
 
       <Footer />
       <MobileCallBar />
+      <StickyAICTA roomType="painting" />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FormStepIndicatorProps {
@@ -6,6 +6,15 @@ interface FormStepIndicatorProps {
   currentStep: number;
   completedSteps: number[];
 }
+
+// Step descriptions for micro-copy
+const stepDescriptions: Record<string, string> = {
+  "Basic Info": "30 seconds",
+  "Project Details": "Pick your project",
+  "Description": "Tell us your vision",
+  "AI Insights": "🎁 Free AI tips",
+  "Review": "Almost done!"
+};
 
 export function FormStepIndicator({ steps, currentStep, completedSteps }: FormStepIndicatorProps) {
   return (
@@ -25,6 +34,7 @@ export function FormStepIndicator({ steps, currentStep, completedSteps }: FormSt
           const isCompleted = completedSteps.includes(index);
           const isCurrent = currentStep === index;
           const isPast = index < currentStep;
+          const isAIStep = step === "AI Insights";
 
           return (
             <div key={index} className="relative flex flex-col items-center gap-2 z-10">
@@ -35,11 +45,23 @@ export function FormStepIndicator({ steps, currentStep, completedSteps }: FormSt
                   isCurrent && "border-primary scale-110 shadow-lg shadow-primary/20",
                   isCompleted && "border-primary bg-primary",
                   !isCurrent && !isCompleted && !isPast && "border-border",
-                  isPast && !isCompleted && "border-primary"
+                  isPast && !isCompleted && "border-primary",
+                  // Special styling for AI step
+                  isAIStep && !isCompleted && !isCurrent && "border-accent/50 bg-accent/5",
+                  isAIStep && isCurrent && "border-accent scale-110 shadow-lg shadow-accent/30 bg-accent/10",
+                  isAIStep && isCompleted && "border-accent bg-accent"
                 )}
               >
                 {isCompleted ? (
-                  <Check className="h-5 w-5 text-primary-foreground animate-scale-in" />
+                  <Check className={cn(
+                    "h-5 w-5 animate-scale-in",
+                    isAIStep ? "text-accent-foreground" : "text-primary-foreground"
+                  )} />
+                ) : isAIStep ? (
+                  <Sparkles className={cn(
+                    "h-5 w-5 transition-colors",
+                    isCurrent ? "text-accent" : "text-accent/60"
+                  )} />
                 ) : (
                   <span
                     className={cn(
@@ -54,15 +76,28 @@ export function FormStepIndicator({ steps, currentStep, completedSteps }: FormSt
               </div>
 
               {/* Step label */}
-              <span
-                className={cn(
-                  "text-xs font-medium text-center transition-colors max-w-[80px]",
-                  isCurrent && "text-foreground",
-                  !isCurrent && "text-muted-foreground"
+              <div className="flex flex-col items-center">
+                <span
+                  className={cn(
+                    "text-xs font-medium text-center transition-colors max-w-[80px]",
+                    isCurrent && "text-foreground",
+                    !isCurrent && "text-muted-foreground",
+                    isAIStep && !isCurrent && "text-accent/70",
+                    isAIStep && isCurrent && "text-accent font-semibold"
+                  )}
+                >
+                  {step}
+                </span>
+                {/* Micro-copy - only show for current and upcoming steps */}
+                {(isCurrent || (!isCompleted && !isPast)) && (
+                  <span className={cn(
+                    "text-[10px] text-center max-w-[70px] leading-tight mt-0.5 hidden sm:block",
+                    isAIStep ? "text-accent/60" : "text-muted-foreground/70"
+                  )}>
+                    {stepDescriptions[step]}
+                  </span>
                 )}
-              >
-                {step}
-              </span>
+              </div>
             </div>
           );
         })}

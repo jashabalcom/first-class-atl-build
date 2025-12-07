@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Calendar, UserCheck, ShieldCheck, DollarSign, Hammer, CheckCircle, Ruler, Lightbulb, PaintBucket } from "lucide-react";
 import AIVisualizerCTA from "@/components/AIVisualizerCTA";
+import StickyAICTA from "@/components/StickyAICTA";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
 
@@ -451,6 +452,7 @@ const KitchenRemodeling = () => {
       </main>
 
       <Footer />
+      <StickyAICTA roomType="kitchen" />
     </>
   );
 };

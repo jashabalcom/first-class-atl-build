@@ -15,8 +15,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { submitLead } from "@/lib/lead-submission";
+import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import { Check, Gift, Clock, Phone, X } from "lucide-react";
+import { Check, Gift, Clock, Phone, X, Sparkles, Wand2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const ExitIntentPopup = () => {
@@ -120,10 +121,11 @@ const ExitIntentPopup = () => {
   };
 
   const valueItems = [
+    { text: "AI-Powered Design Recommendations", value: "NEW!", icon: Sparkles },
     { text: "Free In-Home Consultation", value: "$300 value" },
     { text: "Custom 3D Design Concept", value: "$500 value" },
     { text: "Detailed Line-by-Line Estimate", value: "$200 value" },
-    { text: "Personalized Material Guide", value: "$150 value" },
+    { text: "AI Room Visualizer Access", value: "Exclusive", icon: Wand2 },
     { text: "60-Day Price-Lock Guarantee", value: "Priceless" },
   ];
 
@@ -144,17 +146,17 @@ const ExitIntentPopup = () => {
             {/* Header */}
             <div className="bg-accent/10 px-6 pt-8 pb-6 text-center border-b border-accent/20">
               <div className="inline-flex items-center gap-2 bg-accent/20 text-accent px-3 py-1 rounded-full text-sm mb-3">
-                <Gift className="h-4 w-4" />
+                <Sparkles className="h-4 w-4" />
                 <span className="font-medium">Wait! Before You Go...</span>
               </div>
               <DialogHeader>
                 <DialogTitle className="font-playfair text-2xl md:text-3xl text-foreground leading-tight">
-                  Get Your <span className="text-accent">FREE</span><br />
-                  "Renovation Blueprint Package"
+                  See Your Remodel with <span className="text-accent">AI</span><br />
+                  Before Committing
                 </DialogTitle>
               </DialogHeader>
               <p className="text-muted-foreground text-sm mt-2">
-                Valued at <span className="text-accent font-semibold">$1,650+</span> — Yours FREE
+                Get your <span className="text-accent font-semibold">FREE Renovation Blueprint</span> — Valued at $1,650+
               </p>
             </div>
 
@@ -165,10 +167,19 @@ const ExitIntentPopup = () => {
                 {valueItems.map((item, index) => (
                   <div key={index} className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-accent flex-shrink-0" />
+                      {item.icon ? (
+                        <item.icon className="h-4 w-4 text-accent flex-shrink-0" />
+                      ) : (
+                        <Check className="h-4 w-4 text-accent flex-shrink-0" />
+                      )}
                       <span className="text-sm text-foreground">{item.text}</span>
                     </div>
-                    <span className="text-xs text-muted-foreground whitespace-nowrap">{item.value}</span>
+                    <span className={cn(
+                      "text-xs whitespace-nowrap",
+                      item.value === "NEW!" || item.value === "Exclusive" 
+                        ? "text-accent font-semibold" 
+                        : "text-muted-foreground"
+                    )}>{item.value}</span>
                   </div>
                 ))}
               </div>
