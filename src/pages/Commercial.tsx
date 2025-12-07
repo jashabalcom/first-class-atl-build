@@ -266,6 +266,16 @@ const Commercial = () => {
                   <ProjectCard key={index} {...project} />
                 ))}
               </div>
+
+              <div className="text-center pt-4">
+                <Link 
+                  to="/commercial-contractor-atlanta" 
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-card border rounded-full text-sm font-medium hover:border-accent hover:text-accent transition-colors group"
+                >
+                  View All Commercial Services
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </div>
           </section>
         </AnimatedSection>

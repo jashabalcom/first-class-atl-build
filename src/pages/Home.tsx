@@ -247,6 +247,13 @@ const Home = () => {
                   Office Renovation
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
+                <Link 
+                  to="/commercial-contractor-atlanta" 
+                  className="inline-flex items-center gap-1 px-4 py-2 bg-card border rounded-full text-sm hover:border-accent hover:text-accent transition-colors group"
+                >
+                  Commercial Contractor
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
               </div>
             </div>
           </div>
