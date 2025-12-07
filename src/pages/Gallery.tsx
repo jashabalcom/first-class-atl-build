@@ -7,6 +7,7 @@ import GalleryGrid from "@/components/GalleryGrid";
 import SectionLabel from "@/components/SectionLabel";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import AIVisualizerCTA from "@/components/AIVisualizerCTA";
 
 const Gallery = () => {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -97,6 +98,13 @@ const Gallery = () => {
         <section className="py-12 md:py-16">
           <div className="container">
             <GalleryGrid filter={activeFilter} />
+          </div>
+        </section>
+
+        {/* AI Room Visualizer CTA */}
+        <section className="py-8 md:py-12">
+          <div className="container max-w-3xl">
+            <AIVisualizerCTA variant="gallery" />
           </div>
         </section>
 

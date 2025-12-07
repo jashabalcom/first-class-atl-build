@@ -9,6 +9,7 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import SectionLabel from "@/components/SectionLabel";
 import { Award, Clock, Shield, Home, Users, Sparkles } from "lucide-react";
+import AIVisualizerCTA from "@/components/AIVisualizerCTA";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import ClientLogosCarousel from "@/components/ClientLogosCarousel";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
@@ -372,6 +373,13 @@ const LocationPageTemplate = ({
           </div>
         </section>
       )}
+
+      {/* AI Room Visualizer CTA */}
+      <section className="py-8 bg-background">
+        <div className="container max-w-4xl">
+          <AIVisualizerCTA />
+        </div>
+      </section>
 
       {/* Contact Form */}
       <section id="contact-form" className="py-16 md:py-24 bg-background">
