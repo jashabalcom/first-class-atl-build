@@ -12,6 +12,7 @@ import SectionLabel from "@/components/SectionLabel";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import TrustBadges from "@/components/TrustBadges";
 import { Calendar, UserCheck, ShieldCheck, DollarSign, Hammer, CheckCircle, Ruler, Lightbulb, PaintBucket } from "lucide-react";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
@@ -170,6 +171,9 @@ const KitchenRemodeling = () => {
           trustLine="Licensed • Insured • 20+ Years Serving Metro Atlanta • Free Estimates"
           useH1={true}
         />
+
+        {/* Trust Badges */}
+        <TrustBadges />
 
         {/* Intro Section */}
         <section className="py-16 md:py-20 bg-background">
