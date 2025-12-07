@@ -21,10 +21,9 @@ import ViningsKitchenRemodeling from "./pages/ViningsKitchenRemodeling";
 import AtlantaBasementFinishing from "./pages/AtlantaBasementFinishing";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
-import BlogAdmin from "./pages/BlogAdmin";
 import AgencyProposal from "./pages/tools/AgencyProposal";
-import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
+import { AdminDashboard } from "./pages/admin";
 import GoHighLevelChat from "./components/GoHighLevelChat";
 
 // Priority Location Pages
@@ -125,8 +124,7 @@ const App = () => (
             
             {/* Admin Pages */}
             <Route path="/auth" element={<Auth />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/blog-admin" element={<BlogAdmin />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
