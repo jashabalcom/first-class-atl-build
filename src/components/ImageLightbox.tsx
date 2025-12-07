@@ -88,8 +88,8 @@ const ImageLightbox = ({ open, onClose, project }: ImageLightboxProps) => {
       );
     }
 
-    // Before/After mode - show slider
-    if (project.displayMode === 'before-after' || (project.beforeImage && project.beforeImage !== project.afterImage)) {
+    // Before/After mode - show slider (check for both underscore and hyphen formats)
+    if (project.displayMode === 'before_after' || project.displayMode === 'before-after' || (project.beforeImage && project.beforeImage !== project.afterImage)) {
       return (
         <BeforeAfterSlider
           beforeImage={project.beforeImage}
