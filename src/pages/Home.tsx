@@ -28,7 +28,7 @@ const Home = () => {
       <Header />
       
       <Hero
-        credentialBadge="Licensed Contractor"
+        credentialBadge="Licensed Contractor · Atlanta Metro"
         benefitHeadline="Transform Your Space with Atlanta's Premier Construction Partner"
         seoHeadline="Licensed Construction & Remodeling Company — Serving Atlanta, Buckhead, Midtown & Sandy Springs"
         title="Transform Your Space with Atlanta's Premier Construction Partner"
