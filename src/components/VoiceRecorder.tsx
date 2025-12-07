@@ -13,6 +13,27 @@ interface VoiceRecorderProps {
 
 type RecordingState = 'idle' | 'recording' | 'processing' | 'transcribing' | 'polishing' | 'complete' | 'error';
 
+// Waveform visualization component
+const AudioWaveform: React.FC<{ levels: number[]; isActive: boolean }> = ({ levels, isActive }) => {
+  return (
+    <div className="flex items-center justify-center gap-0.5 h-8 px-3">
+      {levels.map((level, index) => (
+        <div
+          key={index}
+          className={cn(
+            "w-1 rounded-full transition-all duration-75",
+            isActive ? "bg-destructive" : "bg-muted-foreground/30"
+          )}
+          style={{
+            height: `${Math.max(4, level * 28)}px`,
+            transform: isActive ? `scaleY(${0.3 + level * 0.7})` : 'scaleY(0.3)',
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const VoiceRecorder: React.FC<VoiceRecorderProps> = ({ 
   onTranscription, 
   projectType,
@@ -26,6 +47,7 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
     startRecording, 
     stopRecording, 
     cancelRecording,
+    audioLevels,
     error: recordingError 
   } = useVoiceRecording({
     maxDuration: 60,
@@ -88,13 +110,14 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
     switch (state) {
       case 'recording':
         return (
-          <>
+          <div className="flex items-center">
             <span className="relative flex h-3 w-3 mr-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-destructive"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive-foreground opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-destructive-foreground"></span>
             </span>
-            Recording... (tap to stop)
-          </>
+            <span className="hidden sm:inline">Recording... (tap to stop)</span>
+            <span className="sm:hidden">Tap to stop</span>
+          </div>
         );
       case 'processing':
         return (
@@ -145,6 +168,13 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
 
   return (
     <div className={cn("flex flex-col gap-2", className)}>
+      {/* Waveform visualization */}
+      {state === 'recording' && (
+        <div className="flex items-center justify-center bg-destructive/10 rounded-lg py-2 animate-fade-in">
+          <AudioWaveform levels={audioLevels} isActive={isRecording} />
+        </div>
+      )}
+
       <div className="flex items-center gap-2">
         <Button
           type="button"
@@ -153,7 +183,7 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           disabled={isDisabled}
           className={cn(
             "flex-1 transition-all duration-200",
-            state === 'recording' && "animate-pulse"
+            state === 'recording' && "shadow-lg"
           )}
         >
           {getButtonContent()}
