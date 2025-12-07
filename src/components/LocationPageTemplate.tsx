@@ -108,6 +108,48 @@ const LocationPageTemplate = ({
             ]
           })}
         </script>
+        
+        {/* FAQ Schema JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": `How much does a kitchen remodel cost in ${city}?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": `Kitchen remodel costs in ${city} typically range from $25,000 to $75,000+ depending on size, materials, and scope. We provide free in-home consultations with detailed line-item estimates so you know exactly what to expect.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `How long does a home renovation take in ${city}?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": `Renovation timelines in ${city} vary by project scope. A bathroom remodel typically takes 2-4 weeks, kitchen remodels 4-8 weeks, and whole-home renovations 3-6 months. We provide realistic timelines upfront and keep you updated throughout.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Is First Class Construction licensed to work in ${city}?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": `Yes, First Class Construction Group is a fully licensed Georgia general contractor serving ${city} and the greater Atlanta metro area since 2000. We are bonded, insured, and DBE/MBE certified.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Do you offer free estimates for ${city} renovation projects?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": `Absolutely! We offer free in-home consultations for ${city} homeowners. We'll visit your home, discuss your vision, take measurements, and provide a detailed written estimate with no obligation.`
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />
