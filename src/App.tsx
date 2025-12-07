@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import PageTransition from "./components/PageTransition";
 import GoHighLevelChat from "./components/GoHighLevelChat";
+import ExitIntentPopup from "./components/ExitIntentPopup";
 import { lazy, Suspense } from "react";
 
 // Core pages
@@ -85,6 +86,7 @@ const App = () => (
       <Sonner />
       <GoHighLevelChat />
       <BrowserRouter>
+        <ExitIntentPopup />
         <ScrollToTop />
         <PageTransition>
           <Routes>
