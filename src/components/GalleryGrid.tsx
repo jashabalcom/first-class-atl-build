@@ -26,6 +26,7 @@ interface ProjectImage {
   id: string;
   project_id: string;
   image_url: string;
+  image_type: string;
   display_order: number | null;
 }
 
@@ -94,15 +95,21 @@ const GalleryGrid = ({ filter }: GalleryGridProps) => {
 
   const isLoading = projectsLoading || imagesLoading;
 
-  // Helper to get thumbnail for a project
+  // Helper to get thumbnail for a project - always prefer uploaded images
   const getThumbnail = (project: GalleryProject): string => {
-    // If slideshow mode and after_image_url is placeholder, use first slideshow image
-    if (project.display_mode === 'slideshow') {
-      const firstImage = projectImages.find(img => img.project_id === project.id);
-      if (firstImage) {
-        return firstImage.image_url;
+    const projectImgs = projectImages.filter(img => img.project_id === project.id);
+    
+    if (projectImgs.length > 0) {
+      // For before_after, prefer 'after' type image
+      if (project.display_mode === 'before_after') {
+        const afterImg = projectImgs.find(img => img.image_type === 'after');
+        if (afterImg) return afterImg.image_url;
       }
+      // For slideshow or any mode, use first image by display_order
+      return projectImgs[0].image_url;
     }
+    
+    // Only fallback to after_image_url if no uploaded images exist
     return project.after_image_url;
   };
 
@@ -134,14 +141,19 @@ const GalleryGrid = ({ filter }: GalleryGridProps) => {
     ? projectImages.filter(img => img.project_id === currentProject.id)
     : [];
 
+  // Get before/after images from gallery_project_images for before_after mode
+  const beforeImage = currentProjectImages.find(img => img.image_type === 'before');
+  const afterImage = currentProjectImages.find(img => img.image_type === 'after');
+
   // Map database fields to component expected format
   const mappedProject = currentProject ? {
     id: currentProject.id,
     title: currentProject.title,
     category: currentProject.category,
     location: currentProject.location || '',
-    beforeImage: currentProject.before_image_url || currentProject.after_image_url,
-    afterImage: currentProject.after_image_url,
+    // Use images from gallery_project_images if available
+    beforeImage: beforeImage?.image_url || afterImage?.image_url || currentProjectImages[0]?.image_url || currentProject.after_image_url,
+    afterImage: afterImage?.image_url || currentProjectImages[0]?.image_url || currentProject.after_image_url,
     description: currentProject.description || '',
     displayMode: currentProject.display_mode || 'single',
     slideshowImages: currentProjectImages.map(img => ({
