@@ -3,9 +3,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
-import { Hammer, Bath, Home, PlusCircle, Building2, Calculator, ArrowRight, Info } from "lucide-react";
+import { Hammer, Bath, Home, PlusCircle, Building2, Calculator, ArrowRight, Info, Sparkles, Loader2, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { submitLead } from "@/lib/lead-submission";
+
+const RECS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/project-recommendations`;
 
 // Conservative pricing matrix (in thousands)
 const PRICING_DATA = {
@@ -88,6 +90,9 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showAIIdeas, setShowAIIdeas] = useState(false);
+  const [aiIdeas, setAiIdeas] = useState("");
+  const [isLoadingAI, setIsLoadingAI] = useState(false);
 
   const calculateEstimate = () => {
     if (!projectType) return { min: 0, max: 0 };
@@ -125,6 +130,91 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
     if (hasEstimate) {
       setShowEmailCapture(true);
     }
+  };
+
+  const fetchAIIdeas = async () => {
+    setShowAIIdeas(true);
+    setIsLoadingAI(true);
+    setAiIdeas("");
+
+    const projectTitle = projectTypes.find(p => p.id === projectType)?.title || projectType;
+    const finishTitle = finishLevels.find(l => l.id === finishLevel)?.title || finishLevel;
+    const scopeLabel = getScopeLabel();
+    const budgetRange = `${formatCurrency(estimate.min)} - ${formatCurrency(estimate.max)}`;
+
+    try {
+      const resp = await fetch(RECS_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({
+          projectType: projectTitle,
+          message: `Budget: ${budgetRange}. Scope: ${scopeLabel}. Finish level: ${finishTitle}. Please provide design ideas and material suggestions for this budget range.`,
+          timeline: "Not specified",
+        }),
+      });
+
+      if (!resp.ok) {
+        throw new Error("Failed to get AI ideas");
+      }
+
+      if (!resp.body) {
+        throw new Error("No response body");
+      }
+
+      const reader = resp.body.getReader();
+      const decoder = new TextDecoder();
+      let textBuffer = "";
+      let fullContent = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        textBuffer += decoder.decode(value, { stream: true });
+
+        let newlineIndex: number;
+        while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
+          let line = textBuffer.slice(0, newlineIndex);
+          textBuffer = textBuffer.slice(newlineIndex + 1);
+
+          if (line.endsWith("\r")) line = line.slice(0, -1);
+          if (line.startsWith(":") || line.trim() === "") continue;
+          if (!line.startsWith("data: ")) continue;
+
+          const jsonStr = line.slice(6).trim();
+          if (jsonStr === "[DONE]") break;
+
+          try {
+            const parsed = JSON.parse(jsonStr);
+            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
+            if (content) {
+              fullContent += content;
+              setAiIdeas(fullContent);
+            }
+          } catch {
+            textBuffer = line + "\n" + textBuffer;
+            break;
+          }
+        }
+      }
+
+      setIsLoadingAI(false);
+    } catch (err) {
+      console.error("AI ideas error:", err);
+      setIsLoadingAI(false);
+      toast.error("Couldn't generate ideas. Please try again.");
+    }
+  };
+
+  const formatAIContent = (content: string) => {
+    return content
+      .replace(/## (.+)/g, '<h3 class="text-base font-semibold text-foreground mt-4 mb-2 first:mt-0">$1</h3>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold">$1</strong>')
+      .replace(/\n- /g, '\n• ')
+      .replace(/\n/g, '<br />');
   };
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
@@ -298,25 +388,88 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
           </div>
 
           {!showEmailCapture ? (
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button 
-                size="lg" 
-                onClick={handleGetQuote}
-                className="gap-2 text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto h-12"
-              >
-                Get Exact Quote
-                <ArrowRight className="h-5 w-5" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                onClick={() => {
-                  toast.info("Call us at (678) 671-6336 to discuss your project");
-                }}
-                className="gap-2 text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto h-12"
-              >
-                Schedule Consultation
-              </Button>
+            <div className="space-y-4">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button 
+                  size="lg" 
+                  onClick={handleGetQuote}
+                  className="gap-2 text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto h-12"
+                >
+                  Get Exact Quote
+                  <ArrowRight className="h-5 w-5" />
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  onClick={() => {
+                    toast.info("Call us at (678) 671-6336 to discuss your project");
+                  }}
+                  className="gap-2 text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto h-12"
+                >
+                  Schedule Consultation
+                </Button>
+              </div>
+
+              {/* AI Design Ideas Button */}
+              {!showAIIdeas && (
+                <div className="text-center pt-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={fetchAIIdeas}
+                    className="gap-2 text-primary hover:text-primary"
+                  >
+                    <Sparkles className="h-4 w-4" />
+                    Get AI Design Ideas
+                  </Button>
+                </div>
+              )}
+
+              {/* AI Ideas Display */}
+              {showAIIdeas && (
+                <Card className="p-4 mt-4 bg-muted/30 border-primary/20">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Sparkles className="h-3.5 w-3.5 text-primary" />
+                      </div>
+                      <span className="text-sm font-medium text-foreground">AI Design Ideas</span>
+                      <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">Beta</span>
+                    </div>
+                    {!isLoadingAI && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={fetchAIIdeas}
+                        className="gap-1 text-xs text-muted-foreground hover:text-foreground h-7 px-2"
+                      >
+                        <RefreshCw className="h-3 w-3" />
+                        Regenerate
+                      </Button>
+                    )}
+                  </div>
+
+                  {isLoadingAI && !aiIdeas ? (
+                    <div className="flex flex-col items-center justify-center h-32 gap-2">
+                      <Loader2 className="h-6 w-6 text-primary animate-spin" />
+                      <p className="text-sm text-muted-foreground animate-pulse">
+                        Generating design ideas...
+                      </p>
+                    </div>
+                  ) : (
+                    <div
+                      className="prose prose-sm max-w-none text-foreground text-sm [&_h3]:text-primary [&_strong]:text-foreground"
+                      dangerouslySetInnerHTML={{ __html: formatAIContent(aiIdeas) }}
+                    />
+                  )}
+                  {isLoadingAI && aiIdeas && (
+                    <span className="inline-block w-1.5 h-3 bg-primary animate-pulse ml-0.5" />
+                  )}
+                  <p className="text-xs text-muted-foreground text-center mt-3">
+                    AI-generated suggestions based on your selections
+                  </p>
+                </Card>
+              )}
             </div>
           ) : (
             <form onSubmit={handleEmailSubmit} className="space-y-4 max-w-md mx-auto">
