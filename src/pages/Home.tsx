@@ -75,6 +75,7 @@ const Home = () => {
         trustLine="Licensed • Bonded • Insured • DBE • MBE • 20+ Years Serving Metro Atlanta"
         useH1={true}
         fullHeight={true}
+        priority={true}
       />
 
       {/* Services Section */}

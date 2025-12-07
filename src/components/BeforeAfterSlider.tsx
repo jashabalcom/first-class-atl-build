@@ -67,6 +67,10 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after co
       <img
         src={afterImage}
         alt={`${alt} - After`}
+        loading="lazy"
+        decoding="async"
+        width={800}
+        height={600}
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         draggable={false}
       />
@@ -79,6 +83,10 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after co
         <img
           src={beforeImage}
           alt={`${alt} - Before`}
+          loading="lazy"
+          decoding="async"
+          width={800}
+          height={600}
           className="absolute inset-0 w-full h-full object-cover"
           draggable={false}
         />

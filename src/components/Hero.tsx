@@ -3,6 +3,7 @@ import { ArrowRight, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import ScrollIndicator from "./ScrollIndicator";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
+import { useState } from "react";
 
 interface HeroProps {
   title?: string;
@@ -17,6 +18,8 @@ interface HeroProps {
   fullHeight?: boolean;
   showScrollIndicator?: boolean;
   credentialBadge?: string;
+  /** Priority loading for above-the-fold heroes (e.g., Home page) */
+  priority?: boolean;
 }
 
 const Hero = ({ 
@@ -31,8 +34,11 @@ const Hero = ({
   seoHeadline,
   fullHeight = false,
   showScrollIndicator = true,
-  credentialBadge
+  credentialBadge,
+  priority = false
 }: HeroProps) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  
   // In hybrid mode (benefitHeadline + seoHeadline), seoHeadline is always H1
   // In legacy mode (title only), respect useH1 prop
   const TitleTag = (seoHeadline || useH1) ? 'h1' : 'h2';
@@ -55,15 +61,34 @@ const Hero = ({
   
   return (
     <section className={`relative ${fullHeight ? 'min-h-screen' : 'min-h-[500px] md:min-h-[600px]'} flex items-center justify-center overflow-hidden`}>
-      {/* Background Image with Parallax Effect */}
-      <div 
-        className="absolute inset-0 z-0 bg-fixed"
-        style={{
-          backgroundImage: `linear-gradient(135deg, rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.50)), url(${backgroundImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
+      {/* Optimized Background Image with native lazy loading */}
+      <div className="absolute inset-0 z-0">
+        {/* Low-quality placeholder / skeleton */}
+        <div 
+          className={`absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/40 transition-opacity duration-500 ${imageLoaded ? 'opacity-0' : 'opacity-100'}`}
+          aria-hidden="true"
+        />
+        
+        {/* Main hero image with lazy loading */}
+        <img
+          src={backgroundImage}
+          alt=""
+          role="presentation"
+          width={1920}
+          height={1080}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          fetchPriority={priority ? "high" : "auto"}
+          onLoad={() => setImageLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        />
+        
+        {/* Gradient overlay */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/50"
+          aria-hidden="true"
+        />
+      </div>
       
       {/* Content */}
       <div className="container relative z-10 px-4 py-16 sm:py-20 md:py-24 lg:py-32">
