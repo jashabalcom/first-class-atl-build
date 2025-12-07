@@ -72,6 +72,10 @@ const ClientLogosCarousel = () => {
                   <img
                     src={client.logo}
                     alt={`${client.name} - First Class Construction Group Atlanta client`}
+                    loading="lazy"
+                    decoding="async"
+                    width={160}
+                    height={80}
                     className="max-h-20 max-w-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
                   />
                 </div>

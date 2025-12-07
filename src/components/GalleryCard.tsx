@@ -26,6 +26,10 @@ const GalleryCard = ({ project, onClick }: GalleryCardProps) => {
         <img
           src={project.afterImage}
           alt={project.title}
+          loading="lazy"
+          decoding="async"
+          width={800}
+          height={600}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         />
         <div className="absolute top-4 left-4">
