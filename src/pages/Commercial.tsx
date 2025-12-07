@@ -17,8 +17,6 @@ import officeRenovation from "@/assets/office-renovation.jpg";
 import AnimatedSection from "@/components/AnimatedSection";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import ClientLogosCarousel from "@/components/ClientLogosCarousel";
-import AIVisualizerCTA from "@/components/AIVisualizerCTA";
-import StickyAICTA from "@/components/StickyAICTA";
 import { Link } from "react-router-dom";
 
 const Commercial = () => {
@@ -221,13 +219,6 @@ const Commercial = () => {
           </section>
         </AnimatedSection>
 
-        {/* AI Room Visualizer CTA */}
-        <section className="py-8 bg-background">
-          <div className="container max-w-4xl">
-            <AIVisualizerCTA />
-          </div>
-        </section>
-
         {/* Benefits Section */}
         <AnimatedSection delay={100}>
           <section className="py-12 md:py-16 lg:py-20 border-y">
@@ -377,7 +368,6 @@ const Commercial = () => {
         </section>
       </main>
 
-      <StickyAICTA roomType="commercial space" />
       <Footer />
     </>
   );
