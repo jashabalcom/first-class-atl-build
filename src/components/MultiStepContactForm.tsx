@@ -423,6 +423,24 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
               </li>
             </ul>
           </div>
+
+          {/* Room Visualizer CTA */}
+          <div className="bg-gradient-to-r from-accent/10 via-primary/5 to-accent/10 border border-accent/20 rounded-xl p-6 max-w-md mx-auto">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Wand2 className="h-5 w-5 text-accent" />
+              <span className="font-semibold text-foreground">While You Wait...</span>
+            </div>
+            <p className="text-sm text-muted-foreground mb-4">
+              Try our FREE AI Room Visualizer to see what your remodel could look like!
+            </p>
+            <a
+              href="/room-visualizer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-semibold rounded-lg hover:bg-accent/90 transition-colors"
+            >
+              <Sparkles className="h-4 w-4" />
+              Try Room Visualizer
+            </a>
+          </div>
           
           <div className="pt-6">
             <p className="text-sm text-muted-foreground mb-3">

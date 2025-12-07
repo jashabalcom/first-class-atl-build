@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { Phone, CheckCircle, Shield, Clock, Award, Users, Sparkles, Droplets, Bath, Palette, Wrench, Lightbulb } from "lucide-react";
 import AIVisualizerCTA from "@/components/AIVisualizerCTA";
+import { BudgetEstimator } from "@/components/BudgetEstimator";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -282,6 +283,13 @@ const BathroomRemodeling = () => {
         <section className="py-8 bg-background">
           <div className="container max-w-4xl">
             <AIVisualizerCTA />
+          </div>
+        </section>
+
+        {/* Budget Estimator */}
+        <section className="py-16 lg:py-24 bg-muted/30">
+          <div className="container">
+            <BudgetEstimator />
           </div>
         </section>
 

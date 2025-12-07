@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, UserCheck, ShieldCheck, DollarSign, Hammer, CheckCircle, Ruler, Lightbulb, PaintBucket } from "lucide-react";
 import AIVisualizerCTA from "@/components/AIVisualizerCTA";
 import StickyAICTA from "@/components/StickyAICTA";
+import { BudgetEstimator } from "@/components/BudgetEstimator";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
 
@@ -246,6 +247,13 @@ const KitchenRemodeling = () => {
         <section className="py-8 bg-background">
           <div className="container max-w-4xl">
             <AIVisualizerCTA />
+          </div>
+        </section>
+
+        {/* Budget Estimator */}
+        <section className="py-16 md:py-20 bg-muted/30">
+          <div className="container">
+            <BudgetEstimator />
           </div>
         </section>
 
