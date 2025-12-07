@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.room-visualizer]
 verify_jwt = false
+
+[functions.voice-transcribe]
+verify_jwt = false
