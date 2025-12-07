@@ -13,6 +13,7 @@ import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Calendar, UserCheck, ShieldCheck, DollarSign, Hammer, CheckCircle, Ruler, Lightbulb, PaintBucket } from "lucide-react";
+import AIVisualizerCTA from "@/components/AIVisualizerCTA";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
 
@@ -239,6 +240,13 @@ const KitchenRemodeling = () => {
             </div>
           </section>
         </AnimatedSection>
+
+        {/* AI Room Visualizer CTA */}
+        <section className="py-8 bg-background">
+          <div className="container max-w-4xl">
+            <AIVisualizerCTA />
+          </div>
+        </section>
 
         {/* Features Checklist */}
         <section className="py-16 md:py-20 bg-muted/30">

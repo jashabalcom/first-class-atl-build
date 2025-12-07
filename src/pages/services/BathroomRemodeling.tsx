@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { Phone, CheckCircle, Shield, Clock, Award, Users, Sparkles, Droplets, Bath, Palette, Wrench, Lightbulb } from "lucide-react";
+import AIVisualizerCTA from "@/components/AIVisualizerCTA";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -275,6 +276,13 @@ const BathroomRemodeling = () => {
             </div>
           </div>
         </AnimatedSection>
+
+        {/* AI Room Visualizer CTA */}
+        <section className="py-8 bg-background">
+          <div className="container max-w-4xl">
+            <AIVisualizerCTA />
+          </div>
+        </section>
 
         {/* Features Checklist */}
         <AnimatedSection className="py-16 lg:py-24 bg-secondary/30">
