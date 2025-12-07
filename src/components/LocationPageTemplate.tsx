@@ -67,6 +67,7 @@ const LocationPageTemplate = ({
         primaryCTA={`Get My Free ${city} Quote`}
         secondaryCTA="Call 678-671-6336"
         backgroundImage={heroImages[heroImage]}
+        credentialBadge="Licensed Contractor · Atlanta Metro"
       />
 
       {/* City-Specific Intro */}

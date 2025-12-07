@@ -12,7 +12,7 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import MobileCallBar from "@/components/MobileCallBar";
-import heroKitchen from "@/assets/hero-kitchen.jpg";
+import heroFlooring from "@/assets/hero-flooring.jpg";
 
 const FlooringInstallation = () => {
   const serviceSchema = {
@@ -86,7 +86,7 @@ const FlooringInstallation = () => {
           subtitle="From classic hardwood to modern luxury vinyl, our expert installers deliver flawless flooring that enhances your home's beauty and value."
           primaryCTA="Get Free Estimate"
           secondaryCTA="Call 678-671-6336"
-          backgroundImage={heroKitchen}
+          backgroundImage={heroFlooring}
           showScrollIndicator={true}
           credentialBadge="Licensed Contractor · Atlanta Metro"
         />

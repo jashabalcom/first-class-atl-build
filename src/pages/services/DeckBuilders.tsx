@@ -12,7 +12,7 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import MobileCallBar from "@/components/MobileCallBar";
-import heroKitchen from "@/assets/hero-kitchen.jpg";
+import heroDeck from "@/assets/hero-deck.jpg";
 
 const DeckBuilders = () => {
   const serviceSchema = {
@@ -86,7 +86,7 @@ const DeckBuilders = () => {
           subtitle="Custom wood and composite decks designed for Atlanta's climate. Our licensed contractors deliver beautiful, durable outdoor spaces you'll enjoy for years."
           primaryCTA="Get Free Estimate"
           secondaryCTA="Call 678-671-6336"
-          backgroundImage={heroKitchen}
+          backgroundImage={heroDeck}
           showScrollIndicator={true}
           credentialBadge="Licensed Contractor · Atlanta Metro"
         />
