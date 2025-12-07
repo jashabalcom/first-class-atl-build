@@ -5,6 +5,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import PageTransition from "./components/PageTransition";
+import GoHighLevelChat from "./components/GoHighLevelChat";
+import { lazy, Suspense } from "react";
+
+// Core pages
 import Home from "./pages/Home";
 import ResidentialFunnel from "./pages/ResidentialFunnel";
 import Gallery from "./pages/Gallery";
@@ -12,19 +16,17 @@ import About from "./pages/About";
 import Book from "./pages/Book";
 import Commercial from "./pages/Commercial";
 import Contact from "./pages/Contact";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 import BuckheadKitchenRemodeling from "./pages/BuckheadKitchenRemodeling";
 import MidtownKitchenRemodeling from "./pages/MidtownKitchenRemodeling";
 import SandySpringsBasementRemodeling from "./pages/SandySpringsBasementRemodeling";
 import ViningsKitchenRemodeling from "./pages/ViningsKitchenRemodeling";
 import AtlantaBasementFinishing from "./pages/AtlantaBasementFinishing";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
 import AgencyProposal from "./pages/tools/AgencyProposal";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
-import { AdminDashboard } from "./pages/admin";
-import GoHighLevelChat from "./components/GoHighLevelChat";
 
 // Location Pages
 import Atlanta from "./pages/locations/Atlanta";
@@ -56,6 +58,9 @@ import Mableton from "./pages/locations/Mableton";
 import PowderSprings from "./pages/locations/PowderSprings";
 import Austell from "./pages/locations/Austell";
 import LithiaSprings from "./pages/locations/LithiaSprings";
+
+// Lazy load admin to prevent module loading issues
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 
 const queryClient = new QueryClient();
 
@@ -115,7 +120,7 @@ const App = () => (
             <Route path="/lithia-springs" element={<LithiaSprings />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/auth/reset-password" element={<ResetPassword />} />
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin" element={<Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}><AdminDashboard /></Suspense>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>
