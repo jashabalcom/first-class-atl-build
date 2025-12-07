@@ -9,6 +9,7 @@ interface BeforeAfterSliderProps {
 const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after comparison" }: BeforeAfterSliderProps) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const calculatePosition = useCallback((clientX: number) => {
@@ -22,6 +23,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after co
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     setIsDragging(true);
+    setHasInteracted(true);
     calculatePosition(e.clientX);
   }, [calculatePosition]);
 
@@ -36,6 +38,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after co
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     setIsDragging(true);
+    setHasInteracted(true);
     calculatePosition(e.touches[0].clientX);
   }, [calculatePosition]);
 
@@ -102,10 +105,12 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after co
         AFTER
       </div>
 
-      {/* Drag hint */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded text-xs pointer-events-none opacity-70">
-        Drag to compare
-      </div>
+      {/* Drag hint - hidden after first interaction */}
+      {!hasInteracted && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded text-xs pointer-events-none opacity-70 transition-opacity duration-300">
+          Drag to compare
+        </div>
+      )}
     </div>
   );
 };
