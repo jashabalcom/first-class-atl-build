@@ -5,7 +5,7 @@ const SandySprings = () => {
     <LocationPageTemplate
       city="Sandy Springs"
       metaTitle="Sandy Springs Home Renovation Contractor | Kitchen, Bathroom, Deck GA"
-      metaDescription="Expert Sandy Springs renovation services. Kitchen remodeling, bathroom remodel, deck builder, floor installation, painting. Licensed contractor since 2000. Call 678-671-6336."
+      metaDescription="Sandy Springs renovation contractor. Kitchen remodeling, bathroom remodel, deck builder, flooring, painting. Licensed since 2000. 678-671-6336."
       heroHeadline="Sandy Springs' Premier Home Renovation Contractor—Exceptional Quality Guaranteed"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, deck building, flooring installation, and painting services for Sandy Springs families. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[

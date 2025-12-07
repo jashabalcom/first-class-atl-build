@@ -5,7 +5,7 @@ const EastAtlantaVillage = () => {
     <LocationPageTemplate
       city="East Atlanta Village"
       metaTitle="East Atlanta Village Renovation Contractor | Painting, Home Renovations GA"
-      metaDescription="Expert East Atlanta Village home renovation and painting services. Residential renovations and professional painting. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="East Atlanta Village renovation contractor. Residential renovations and professional painting. Licensed since 2000. 678-671-6336."
       heroHeadline="East Atlanta Village Home Renovation & Painting Experts"
       heroSubtitle="Premium painting services and home renovations for East Atlanta Village residents. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[

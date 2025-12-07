@@ -5,7 +5,7 @@ const Marietta = () => {
     <LocationPageTemplate
       city="Marietta"
       metaTitle="Marietta Home Renovation Contractor | Kitchen, Bathroom, Deck, Basement GA"
-      metaDescription="Expert Marietta home renovation services. Kitchen remodeling, bathroom remodel, custom cabinets, basement finishing, deck building, flooring. Licensed contractor since 2000. Call 678-671-6336."
+      metaDescription="Marietta home renovation contractor. Kitchen remodeling, bathroom remodel, cabinets, basement finishing, decks. Licensed since 2000. 678-671-6336."
       heroHeadline="Transform Your Marietta Home With Metro Atlanta's Most Trusted Contractor"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, basement finishing, deck building, and flooring installation for Marietta families. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[

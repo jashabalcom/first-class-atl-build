@@ -5,7 +5,7 @@ const Douglasville = () => {
     <LocationPageTemplate
       city="Douglasville"
       metaTitle="Douglasville Home Renovation Contractor | Kitchen, Bathroom, Deck GA"
-      metaDescription="Expert Douglasville home renovation services. Kitchen remodel, bathroom remodel, flooring installation, deck builder, painting contractors. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Douglasville home renovation contractor. Kitchen remodel, bathroom remodel, flooring, deck builder, painting. Licensed since 2000. 678-671-6336."
       heroHeadline="Your Douglasville Home Transformation Starts Here"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, deck building, flooring installation, and painting services for Douglasville families. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[

@@ -5,7 +5,7 @@ const Alpharetta = () => {
     <LocationPageTemplate
       city="Alpharetta"
       metaTitle="Alpharetta Home Renovation Contractor | Kitchen, Bathroom, Deck, Basement GA"
-      metaDescription="Expert Alpharetta home renovation services. Kitchen remodeling, bathroom remodel, deck builder, basement finishing, custom cabinets, painting, flooring. Licensed contractor since 2000. Call 678-671-6336."
+      metaDescription="Alpharetta home renovation contractor. Kitchen remodeling, bathroom remodel, deck builder, basement finishing. Licensed since 2000. 678-671-6336."
       heroHeadline="Your Alpharetta Home Deserves First Class Renovation"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, deck building, basement finishing, and custom cabinetry for Alpharetta families. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[

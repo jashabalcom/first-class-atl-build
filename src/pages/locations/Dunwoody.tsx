@@ -5,7 +5,7 @@ const Dunwoody = () => {
     <LocationPageTemplate
       city="Dunwoody"
       metaTitle="Dunwoody Home Renovation Contractor | Kitchen, Bathroom, Basement GA"
-      metaDescription="Expert Dunwoody home renovation services. Kitchen remodeling, bathroom remodel, basement finishing, deck building, painting. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Dunwoody home renovation contractor. Kitchen remodeling, bathroom remodel, basement finishing, deck building. Licensed since 2000. 678-671-6336."
       heroHeadline="Dunwoody's Trusted Home Renovation Experts—Excellence in Every Detail"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, basement finishing, and custom renovations for Dunwoody families. Licensed, bonded, and DBE/MBE certified with 20+ years serving North Atlanta."
       primaryKeywords={[

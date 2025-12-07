@@ -5,7 +5,7 @@ const Decatur = () => {
     <LocationPageTemplate
       city="Decatur"
       metaTitle="Decatur Home Renovation Contractor | Kitchen, Bathroom, Deck Builders GA"
-      metaDescription="Expert Decatur home renovation services. Kitchen remodel, bathroom renovation, deck builders, flooring installation, painting. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Decatur home renovation contractor. Kitchen remodel, bathroom renovation, deck builders, flooring, painting. Licensed since 2000. 678-671-6336."
       heroHeadline="Your Decatur Home Deserves Expert Renovation—Done Right, On Time"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, deck building, and painting services for Decatur families. Licensed, bonded, and DBE/MBE certified with 20+ years serving Metro Atlanta."
       primaryKeywords={[

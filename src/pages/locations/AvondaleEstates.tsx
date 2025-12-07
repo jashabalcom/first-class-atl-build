@@ -5,7 +5,7 @@ const AvondaleEstates = () => {
     <LocationPageTemplate
       city="Avondale Estates"
       metaTitle="Avondale Estates Home Renovation Contractor | Kitchen, Bathroom GA"
-      metaDescription="Expert Avondale Estates home renovation services. Kitchen remodeling contractor, bathroom remodel, residential renovation. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Avondale Estates renovation contractor. Kitchen remodeling, bathroom remodel, residential renovation. Licensed since 2000. 678-671-6336."
       heroHeadline="Avondale Estates' Trusted Home Renovation & Remodeling Expert"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, and home renovation for Avondale Estates families. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[

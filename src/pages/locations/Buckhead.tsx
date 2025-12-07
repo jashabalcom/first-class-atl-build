@@ -5,7 +5,7 @@ const Buckhead = () => {
     <LocationPageTemplate
       city="Buckhead"
       metaTitle="Buckhead Home Renovation Contractor | Kitchen, Bathroom, Basement GA"
-      metaDescription="Expert Buckhead renovation services. Kitchen remodeling, bathroom remodel, basement finishing, painting contractor. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Buckhead renovation contractor. Kitchen remodeling, bathroom remodel, basement finishing, painting. Licensed since 2000. 678-671-6336."
       heroHeadline="Buckhead's Most Trusted Home Renovation Experts—Luxury Craftsmanship"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, basement finishing, and painting services for Buckhead's finest homes. Licensed, bonded, and DBE/MBE certified with 20+ years serving Atlanta."
       primaryKeywords={[

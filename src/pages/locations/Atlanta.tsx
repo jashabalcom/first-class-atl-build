@@ -5,7 +5,7 @@ const Atlanta = () => {
     <LocationPageTemplate
       city="Atlanta"
       metaTitle="General Contractor Atlanta GA | Construction Company Since 2000"
-      metaDescription="Expert general contractor in Atlanta GA. Residential & commercial construction, home renovations, kitchen remodeling, bathroom remodel. Licensed construction company in Atlanta since 2000. Call 678-671-6336."
+      metaDescription="Atlanta general contractor. Residential & commercial construction, kitchen remodeling, bathroom remodel. Licensed since 2000. 678-671-6336."
       heroHeadline="Metro Atlanta's Most Trusted General Contractor—Quality Work, On Time"
       heroSubtitle="Premier general construction services for residential and commercial projects across Metro Atlanta. Licensed, bonded, and DBE/MBE certified construction company with 20+ years building Atlanta."
       primaryKeywords={[

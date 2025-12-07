@@ -5,7 +5,7 @@ const Duluth = () => {
     <LocationPageTemplate
       city="Duluth"
       metaTitle="Duluth Home Renovation Contractor | Kitchen, Bathroom, Flooring GA"
-      metaDescription="Expert Duluth home renovation services. Kitchen remodel, bathroom remodel, flooring installation, painting contractors. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Duluth home renovation contractor. Kitchen remodel, bathroom remodel, flooring installation, painting. Licensed since 2000. 678-671-6336."
       heroHeadline="Transform Your Duluth Home With Expert Renovation Services"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, flooring installation, and painting services for Duluth families. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[
