@@ -27,6 +27,7 @@ import SandySpringsBasementRemodeling from "./pages/SandySpringsBasementRemodeli
 import ViningsKitchenRemodeling from "./pages/ViningsKitchenRemodeling";
 import AtlantaBasementFinishing from "./pages/AtlantaBasementFinishing";
 import AgencyProposal from "./pages/tools/AgencyProposal";
+import RoomVisualizer from "./pages/tools/RoomVisualizer";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
 import KitchenRemodeling from "./pages/services/KitchenRemodeling";
@@ -101,7 +102,8 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/tools/agency-proposal" element={<AgencyProposal />} />
+<Route path="/tools/agency-proposal" element={<AgencyProposal />} />
+            <Route path="/room-visualizer" element={<RoomVisualizer />} />
             <Route path="/areas/buckhead-kitchen-remodeling" element={<BuckheadKitchenRemodeling />} />
             <Route path="/areas/midtown-kitchen-remodeling" element={<MidtownKitchenRemodeling />} />
             <Route path="/areas/sandy-springs-bathroom-remodeling" element={<SandySpringsBasementRemodeling />} />
