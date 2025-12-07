@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, ArrowUp } from "lucide-react";
 import logo from "@/assets/fccg-logo.png";
-import mlaLogo from "@/assets/mla-logo-white.png";
+import mlaLogoWhite from "@/assets/mla-logo-white.png";
+import mlaLogoColor from "@/assets/mla-logo-color.png";
 
 const Footer = () => {
   const serviceAreas = [
@@ -190,11 +191,18 @@ const Footer = () => {
                 className="group flex items-center gap-2 opacity-50 hover:opacity-100 transition-all duration-300"
               >
                 <span className="text-xs tracking-wide">Website by</span>
-                <img 
-                  src={mlaLogo} 
-                  alt="Major Leads Agency" 
-                  className="h-5 w-auto group-hover:brightness-110 transition-all"
-                />
+                <div className="relative h-5 w-auto">
+                  <img 
+                    src={mlaLogoWhite} 
+                    alt="Major Leads Agency" 
+                    className="h-5 w-auto transition-opacity duration-300 group-hover:opacity-0"
+                  />
+                  <img 
+                    src={mlaLogoColor} 
+                    alt="" 
+                    className="absolute inset-0 h-5 w-auto opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  />
+                </div>
                 <span className="text-xs font-medium group-hover:text-accent transition-colors">
                   Major Leads Agency
                 </span>
