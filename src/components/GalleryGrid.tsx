@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import GalleryCard from "./GalleryCard";
 import ImageLightbox from "./ImageLightbox";
 import { supabase } from "@/integrations/supabase/client";
@@ -32,6 +32,37 @@ interface ProjectImage {
 const GalleryGrid = ({ filter }: GalleryGridProps) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentProject, setCurrentProject] = useState<GalleryProject | null>(null);
+  const queryClient = useQueryClient();
+
+  // Real-time subscriptions for instant updates
+  useEffect(() => {
+    const projectsChannel = supabase
+      .channel('gallery-projects-realtime')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'gallery_projects' },
+        () => {
+          queryClient.invalidateQueries({ queryKey: ['gallery-projects'] });
+        }
+      )
+      .subscribe();
+
+    const imagesChannel = supabase
+      .channel('gallery-images-realtime')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'gallery_project_images' },
+        () => {
+          queryClient.invalidateQueries({ queryKey: ['gallery-project-images'] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(projectsChannel);
+      supabase.removeChannel(imagesChannel);
+    };
+  }, [queryClient]);
 
   // Fetch projects
   const { data: projects = [], isLoading: projectsLoading } = useQuery({
