@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { formatPhoneNumber } from "@/lib/phone-formatter";
 import { submitLead } from "@/lib/lead-submission";
 import { AIRecommendations } from "@/components/AIRecommendations";
+import { FormQualifier } from "@/components/FormQualifier";
 import { Shield, Lock, Clock, ArrowLeft, ArrowRight, Check, Phone, Hammer, Bath, Home, PlusCircle, Building2, Wrench, SkipForward, Sparkles, Wand2 } from "lucide-react";
 
 const contactSchema = z.object({
@@ -43,6 +44,7 @@ interface MultiStepContactFormProps {
 }
 
 export function MultiStepContactForm({ showCity = true, showTimeline = true }: MultiStepContactFormProps) {
+  const [showQualifier, setShowQualifier] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -81,6 +83,8 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
           Object.keys(parsed).forEach((key) => {
             setValue(key as keyof ContactFormData, parsed[key]);
           });
+          // Skip qualifier if we have saved data
+          setShowQualifier(false);
           toast.info("We restored your previous form progress");
         }
       } catch (e) {
@@ -88,6 +92,13 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
       }
     }
   }, [setValue]);
+
+  const handleQualifierComplete = (projectType: string, timeline: string) => {
+    setValue("projectType", projectType);
+    setValue("timeline", timeline);
+    setShowQualifier(false);
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   // Auto-save on form changes
   useEffect(() => {
@@ -357,7 +368,9 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
 
   return (
     <div ref={formRef} className="w-full max-w-3xl mx-auto">
-      {isSubmitted ? (
+      {showQualifier ? (
+        <FormQualifier onComplete={handleQualifierComplete} />
+      ) : isSubmitted ? (
         <div className="text-center space-y-6 py-12 animate-fade-in">
           <div className="flex justify-center mb-6">
             <div className="h-20 w-20 bg-primary/10 rounded-full flex items-center justify-center">
