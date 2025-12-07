@@ -42,7 +42,7 @@ interface FormSubmission {
   formSource: string;
 }
 
-// Simple validation - requires either valid email OR valid phone
+// Simple validation - requires name, email, AND phone
 function validateFormData(data: any): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
   
@@ -50,22 +50,17 @@ function validateFormData(data: any): { valid: boolean; errors: string[] } {
     errors.push('Name is required and must be 1-100 characters');
   }
   
-  // Check for valid email if provided
-  const hasValidEmail = data.email && typeof data.email === 'string' && data.email.includes('@') && data.email.length <= 255;
-  
-  // Check for valid phone if provided
-  let hasValidPhone = false;
-  if (data.phone && typeof data.phone === 'string' && data.phone.length > 0) {
-    const digitsOnly = data.phone.replace(/\D/g, '');
-    hasValidPhone = digitsOnly.length >= 10 && digitsOnly.length <= 15;
-    if (!hasValidPhone && digitsOnly.length > 0) {
-      errors.push('Phone number must be 10-15 digits');
-    }
+  if (!data.email || typeof data.email !== 'string' || !data.email.includes('@') || data.email.length > 255) {
+    errors.push('Valid email is required');
   }
   
-  // Require at least one valid contact method
-  if (!hasValidEmail && !hasValidPhone) {
-    errors.push('Valid email or phone number is required');
+  if (!data.phone || typeof data.phone !== 'string' || data.phone.length === 0) {
+    errors.push('Phone number is required');
+  } else {
+    const digitsOnly = data.phone.replace(/\D/g, '');
+    if (digitsOnly.length < 10 || digitsOnly.length > 15) {
+      errors.push('Phone number must be 10-15 digits');
+    }
   }
   
   if (!data.formSource || typeof data.formSource !== 'string') {
