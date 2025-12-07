@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
-import { Trash2, Edit, Plus, Upload, X, GripVertical, Images, Layers, FolderUp, ExternalLink, CheckCircle } from 'lucide-react';
+import { Trash2, Edit, Plus, Upload, X, GripVertical, Images, Layers, FolderUp, ExternalLink, CheckCircle, Loader2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { compressImageForUpload, formatFileSize } from '@/lib/image-utils';
 import {
@@ -37,6 +37,8 @@ interface ProjectImage {
   image_url: string;
   image_type: 'before' | 'after' | 'gallery';
   display_order: number;
+  isUploading?: boolean;
+  isUploaded?: boolean;
 }
 
 interface GalleryProject {
@@ -142,6 +144,9 @@ export default function AdminGallery() {
   const [uploading, setUploading] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [currentProjectImages, setCurrentProjectImages] = useState<ProjectImage[]>([]);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [savedProject, setSavedProject] = useState<{ title: string; thumbnail: string } | null>(null);
+  const [uploadingImageId, setUploadingImageId] = useState<string | null>(null);
   
   interface BulkUploadItem {
     file: File;
@@ -332,19 +337,37 @@ export default function AdminGallery() {
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+      const tempId = `temp-${Date.now()}-${i}`;
+      
+      // Add placeholder with uploading state
+      const placeholderImage: ProjectImage = {
+        id: tempId,
+        project_id: editingProject?.id || '',
+        image_url: URL.createObjectURL(file),
+        image_type: imageType,
+        display_order: currentProjectImages.filter(img => img.image_type === imageType).length + i,
+        isUploading: true,
+        isUploaded: false
+      };
+      setCurrentProjectImages(prev => [...prev, placeholderImage]);
+      setUploadingImageId(tempId);
+      
       const url = await uploadImage(file, `${imageType}-${i}`);
+      
       if (url) {
-        const newImage: ProjectImage = {
-          id: `temp-${Date.now()}-${i}`,
-          project_id: editingProject?.id || '',
-          image_url: url,
-          image_type: imageType,
-          display_order: currentProjectImages.filter(img => img.image_type === imageType).length + i
-        };
-        setCurrentProjectImages(prev => [...prev, newImage]);
+        // Update with actual URL and mark as uploaded
+        setCurrentProjectImages(prev => prev.map(img => 
+          img.id === tempId 
+            ? { ...img, image_url: url, isUploading: false, isUploaded: true }
+            : img
+        ));
+      } else {
+        // Remove failed upload
+        setCurrentProjectImages(prev => prev.filter(img => img.id !== tempId));
       }
+      setUploadingImageId(null);
     }
-    toast.success(`${files.length} image(s) uploaded`);
+    toast.success(`✓ ${files.length} image(s) uploaded successfully`);
   };
 
   const removeMultiImage = (imageId: string) => {
@@ -563,7 +586,10 @@ export default function AdminGallery() {
       }
     }
 
-    toast.success(editingProject ? '✓ Project updated — changes are now live!' : '✓ Project added — now visible on website!');
+    // Show success dialog with preview
+    const thumbnailUrl = formData.after_image_url || currentProjectImages.find(i => i.image_type === 'after' || i.image_type === 'gallery')?.image_url || '';
+    setSavedProject({ title: formData.title, thumbnail: thumbnailUrl });
+    setShowSuccessDialog(true);
     setIsDialogOpen(false);
     fetchProjects();
     setLoading(false);
@@ -868,7 +894,14 @@ export default function AdminGallery() {
             {formData.display_mode === 'slideshow' && (
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <Label>Gallery Images</Label>
+                  <Label className="flex items-center gap-2">
+                    Gallery Images
+                    {currentProjectImages.filter(img => img.image_type === 'gallery').length > 0 && (
+                      <Badge variant="secondary" className="text-xs">
+                        {currentProjectImages.filter(img => img.image_type === 'gallery').length} uploaded
+                      </Badge>
+                    )}
+                  </Label>
                   <label className="cursor-pointer">
                     <input
                       type="file"
@@ -879,20 +912,34 @@ export default function AdminGallery() {
                       disabled={uploading}
                     />
                     <Button type="button" variant="outline" size="sm" disabled={uploading} asChild>
-                      <span><Upload className="w-4 h-4 mr-2" />Add Images</span>
+                      <span>
+                        {uploading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Upload className="w-4 h-4 mr-2" />}
+                        {currentProjectImages.filter(img => img.image_type === 'gallery').length > 0 ? 'Add More' : 'Add Images'}
+                      </span>
                     </Button>
                   </label>
                 </div>
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-4 gap-3">
                   {currentProjectImages.filter(img => img.image_type === 'gallery').map((img) => (
-                    <div key={img.id} className="relative">
-                      <img src={img.image_url} alt="Gallery" className="w-full h-20 object-cover rounded" />
+                    <div key={img.id} className={`relative rounded-lg overflow-hidden border-2 ${img.isUploaded ? 'border-green-500' : 'border-transparent'}`}>
+                      <img src={img.image_url} alt="Gallery" className="w-full h-24 object-cover" />
+                      {img.isUploading && (
+                        <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
+                          <Loader2 className="w-6 h-6 animate-spin text-primary" />
+                        </div>
+                      )}
+                      {img.isUploaded && (
+                        <div className="absolute top-1 left-1 bg-green-500 rounded-full p-0.5">
+                          <CheckCircle className="w-4 h-4 text-white" />
+                        </div>
+                      )}
                       <Button
                         type="button"
                         variant="destructive"
                         size="icon"
                         className="absolute top-1 right-1 w-5 h-5"
                         onClick={() => removeMultiImage(img.id)}
+                        disabled={img.isUploading}
                       >
                         <X className="w-3 h-3" />
                       </Button>
@@ -900,7 +947,7 @@ export default function AdminGallery() {
                   ))}
                 </div>
                 {currentProjectImages.filter(img => img.image_type === 'gallery').length === 0 && (
-                  <p className="text-sm text-muted-foreground">No images added yet.</p>
+                  <p className="text-sm text-muted-foreground">No images added yet. Click "Add Images" to upload.</p>
                 )}
               </div>
             )}
@@ -990,15 +1037,75 @@ export default function AdminGallery() {
               <Label htmlFor="featured">Featured Project</Label>
             </div>
 
-            <div className="flex gap-2 pt-4">
-              <Button type="submit" disabled={loading || uploading}>
-                {editingProject ? 'Update Project' : 'Add Project'}
+            <div className="flex gap-2 pt-4 border-t mt-4">
+              <Button type="submit" disabled={loading || uploading} size="lg" className="flex-1">
+                {loading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle className="w-4 h-4 mr-2" />
+                    {editingProject ? 'Save Changes' : 'Add Project'}
+                  </>
+                )}
               </Button>
               <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                 Cancel
               </Button>
             </div>
+            {currentProjectImages.some(img => img.isUploaded) && (
+              <p className="text-sm text-green-600 flex items-center gap-1 mt-2">
+                <CheckCircle className="w-4 h-4" />
+                {currentProjectImages.filter(img => img.isUploaded).length} image(s) ready to save
+              </p>
+            )}
           </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* Success Dialog with Live Preview */}
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <DialogContent className="max-w-md">
+          <div className="text-center space-y-4">
+            <div className="mx-auto w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
+              <CheckCircle className="w-10 h-10 text-green-600" />
+            </div>
+            <DialogTitle className="text-xl">Project Saved Successfully!</DialogTitle>
+            <p className="text-muted-foreground">Your changes are now live on the gallery.</p>
+            
+            {savedProject && (
+              <div className="border rounded-lg p-4 bg-muted/30">
+                <img 
+                  src={savedProject.thumbnail} 
+                  alt={savedProject.title}
+                  className="w-full h-32 object-cover rounded-md mb-2"
+                />
+                <p className="font-medium">{savedProject.title}</p>
+              </div>
+            )}
+            
+            <div className="flex gap-2 pt-2">
+              <Button 
+                variant="outline" 
+                className="flex-1"
+                onClick={() => setShowSuccessDialog(false)}
+              >
+                Continue Editing
+              </Button>
+              <Button 
+                className="flex-1 gap-2"
+                onClick={() => {
+                  window.open('/gallery', '_blank');
+                  setShowSuccessDialog(false);
+                }}
+              >
+                <ExternalLink className="w-4 h-4" />
+                View Live Gallery
+              </Button>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
 
