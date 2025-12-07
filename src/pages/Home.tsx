@@ -17,9 +17,11 @@ import AnimatedSection from "@/components/AnimatedSection";
 import FeaturedBlogSection from "@/components/FeaturedBlogSection";
 import BlogTeaser from "@/components/BlogTeaser";
 import SectionLabel from "@/components/SectionLabel";
-import { Home as HomeIcon, Building2, Calendar, UserCheck, ShieldCheck, ArrowRight } from "lucide-react";
+import { Home as HomeIcon, Building2, Calendar, UserCheck, ShieldCheck, ArrowRight, Sparkles, Wand2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
+import kitchenBefore from "@/assets/kitchen-before.jpg";
 import basementFinished from "@/assets/basement-finished.jpg";
 import retailBuildout from "@/assets/retail-buildout.jpg";
 import officeRenovation from "@/assets/office-renovation.jpg";
@@ -76,7 +78,106 @@ const Home = () => {
         useH1={true}
         fullHeight={true}
         priority={true}
+        tertiaryAction={{
+          text: "Try AI Room Visualizer",
+          href: "/room-visualizer"
+        }}
       />
+
+      {/* AI Room Visualizer Feature Section */}
+      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-b from-primary/5 via-accent/5 to-background relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-accent/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 right-10 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
+        </div>
+        
+        <div className="container relative z-10">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-full px-4 py-1.5 mb-4">
+              <Sparkles className="w-4 h-4 text-accent" />
+              <span className="text-xs uppercase tracking-widest font-medium text-accent">AI-Powered</span>
+            </div>
+            <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              See Your Remodel <span className="text-accent">Before It Happens</span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Upload a photo of your room, choose a style, and watch our AI transform it instantly
+            </p>
+          </div>
+
+          {/* Before/After Preview */}
+          <div className="max-w-4xl mx-auto mb-10">
+            <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
+              {/* Before Image */}
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-muted to-muted/50 rounded-lg blur opacity-25" />
+                <div className="relative overflow-hidden rounded-lg border border-border/50">
+                  <img 
+                    src={kitchenBefore} 
+                    alt="Kitchen before remodel" 
+                    className="w-full aspect-[4/3] object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute bottom-3 left-3 bg-background/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-medium">
+                    Your Room
+                  </div>
+                </div>
+              </div>
+
+              {/* Arrow Animation */}
+              <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                <div className="bg-accent text-accent-foreground rounded-full p-3 shadow-lg animate-pulse">
+                  <Wand2 className="w-6 h-6" />
+                </div>
+              </div>
+
+              {/* After Image */}
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-accent/30 to-accent/10 rounded-lg blur opacity-50" />
+                <div className="relative overflow-hidden rounded-lg border-2 border-accent/50">
+                  <img 
+                    src={kitchenAfter} 
+                    alt="Kitchen after AI visualization" 
+                    className="w-full aspect-[4/3] object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute bottom-3 left-3 bg-accent text-accent-foreground px-3 py-1.5 rounded-full text-sm font-medium flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    AI Preview
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Trust Indicators & CTA */}
+          <div className="text-center">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-6">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 bg-accent rounded-full" />
+                Free to Use
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 bg-accent rounded-full" />
+                Instant Results
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 bg-accent rounded-full" />
+                No Sign-Up Required
+              </span>
+            </div>
+            
+            <Link to="/room-visualizer">
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2 group h-12 px-8">
+                <Wand2 className="w-5 h-5" />
+                Try the AI Room Visualizer
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Services Section */}
       <AnimatedSection>
