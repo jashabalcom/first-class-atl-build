@@ -20,6 +20,11 @@ interface HeroProps {
   credentialBadge?: string;
   /** Priority loading for above-the-fold heroes (e.g., Home page) */
   priority?: boolean;
+  /** Optional tertiary action with NEW badge (e.g., AI Visualizer) */
+  tertiaryAction?: {
+    text: string;
+    href: string;
+  };
 }
 
 const Hero = ({ 
@@ -35,7 +40,8 @@ const Hero = ({
   fullHeight = false,
   showScrollIndicator = true,
   credentialBadge,
-  priority = false
+  priority = false,
+  tertiaryAction
 }: HeroProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   
@@ -123,7 +129,7 @@ const Hero = ({
             {subtitle}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center mb-4 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
             <Link to="/book" className="w-full sm:w-auto">
               <Button variant="outline" size="lg" className="w-full sm:w-auto h-12 border-2 border-accent text-accent-foreground bg-accent hover:bg-accent/90 gap-2 group">
                 {primaryCTA}
@@ -136,6 +142,23 @@ const Hero = ({
               </a>
             )}
           </div>
+          
+          {tertiaryAction && (
+            <div className="animate-fade-in-up mb-6 md:mb-8" style={{ animationDelay: '350ms' }}>
+              <Link 
+                to={tertiaryAction.href}
+                className="inline-flex items-center gap-2 text-white/90 hover:text-accent transition-colors group"
+              >
+                <span className="text-lg">✨</span>
+                <span className="underline underline-offset-4 decoration-white/30 group-hover:decoration-accent">
+                  {tertiaryAction.text}
+                </span>
+                <span className="bg-accent text-accent-foreground text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider">
+                  New
+                </span>
+              </Link>
+            </div>
+          )}
 
           {trustLine && (
             <p className="text-xs sm:text-sm text-gray-300/80 border-t border-white/20 pt-3 md:pt-4 mt-6 md:mt-8 animate-fade-in-up tracking-wide" style={{ animationDelay: '400ms' }}>
