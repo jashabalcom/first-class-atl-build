@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import logo from "@/assets/fcc-logo.png";
+import logo from "@/assets/fccg-logo.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
