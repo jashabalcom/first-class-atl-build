@@ -20,10 +20,10 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 md:h-20 items-center justify-between">
-        <Link to="/" className="flex flex-col items-start">
-          <img src={logo} alt="First Class Construction Group - Atlanta Licensed General Contractor" className="h-12 md:h-12 lg:h-14 w-auto" />
-          <span className="text-[9px] md:text-[10px] uppercase tracking-[0.12em] text-muted-foreground mt-0.5 hidden sm:block">
-            Licensed Contractor · Atlanta Metro
+        <Link to="/" className="flex flex-col items-start group transition-transform duration-300 hover:scale-[1.02]">
+          <img src={logo} alt="First Class Construction Group - Atlanta Licensed General Contractor" className="h-12 md:h-12 lg:h-14 w-auto drop-shadow-sm" />
+          <span className="text-[9px] md:text-[10px] uppercase tracking-[0.15em] text-muted-foreground mt-0.5 hidden sm:block transition-colors duration-300 group-hover:text-foreground/80">
+            Licensed Contractor <span className="text-accent">·</span> Atlanta Metro
           </span>
         </Link>
         
