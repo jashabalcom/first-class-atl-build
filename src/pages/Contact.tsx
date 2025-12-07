@@ -4,18 +4,17 @@ import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import SectionLabel from "@/components/SectionLabel";
-import { Phone, Mail, MapPin, Clock, Calendar } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Calendar, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import CertificationBadges from "@/components/CertificationBadges";
-import ClientLogosCarousel from "@/components/ClientLogosCarousel";
 
 const Contact = () => {
   const contactInfo = [
     {
       icon: Phone,
-      title: "Phone",
+      title: "Call Us",
       content: "678-671-6336",
       link: "tel:678-671-6336",
     },
@@ -28,13 +27,13 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Location",
-      content: "Serving Metro Atlanta & Surrounding Areas",
+      content: "Metro Atlanta & Surrounding Areas",
       link: null,
     },
     {
       icon: Clock,
-      title: "Office Hours",
-      content: "Monday - Friday: 8:00 AM - 6:00 PM\nSaturday: 9:00 AM - 2:00 PM",
+      title: "Hours",
+      content: "Mon-Fri: 8AM-6PM · Sat: 9AM-2PM",
       link: null,
     },
   ];
@@ -89,140 +88,167 @@ const Contact = () => {
       <MobileCallBar />
       
       <main className="min-h-screen pb-24 md:pb-0">
-        {/* Hero Section */}
-        <section className="relative py-12 md:py-20 bg-gradient-to-b from-secondary/10 to-background">
+        {/* Hero Section with Split Layout - Form Above the Fold */}
+        <section className="relative py-8 md:py-12 lg:py-16 bg-gradient-to-b from-secondary/10 to-background">
           <div className="container">
-            <div className="max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
-              <SectionLabel className="animate-fade-in-up">Contact Us</SectionLabel>
-              <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold mt-3 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
-                Let's Turn Your Vision <span className="text-accent">Into Reality</span>
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-                Get in touch with First Class Construction Group. We're ready to discuss your project and provide a free consultation.
-              </p>
-              <div className="section-divider" />
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start max-w-6xl mx-auto">
+              {/* Left: Headline & Quick Info */}
+              <div className="space-y-6 lg:sticky lg:top-24">
+                <div className="space-y-4">
+                  <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-accent font-medium">
+                    <Shield className="h-4 w-4" />
+                    Licensed Contractor · Atlanta Metro
+                  </div>
+                  <h1 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+                    Let's Turn Your Vision{" "}
+                    <span className="text-accent">Into Reality</span>
+                  </h1>
+                  <p className="text-muted-foreground text-lg">
+                    Get in touch with our team. We respond same-day and offer free consultations for all projects.
+                  </p>
+                </div>
+
+                {/* Trust Badges - Inline */}
+                <div className="flex flex-wrap gap-2 text-sm">
+                  {["Licensed", "Bonded", "Insured", "DBE/MBE"].map((badge, i) => (
+                    <span 
+                      key={badge}
+                      className={`px-3 py-1 rounded-full border bg-card text-foreground ${i === 3 ? 'border-accent text-accent font-medium' : ''}`}
+                    >
+                      ✓ {badge}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Quick Contact - Desktop Only */}
+                <div className="hidden lg:block pt-4 border-t space-y-3">
+                  <p className="text-sm text-muted-foreground">Prefer to call or email?</p>
+                  <div className="flex flex-wrap gap-4">
+                    <a 
+                      href="tel:678-671-6336" 
+                      className="inline-flex items-center gap-2 text-accent hover:underline font-medium"
+                    >
+                      <Phone className="h-4 w-4" />
+                      678-671-6336
+                    </a>
+                    <a 
+                      href="mailto:info@fcconstruct.com" 
+                      className="inline-flex items-center gap-2 text-accent hover:underline font-medium"
+                    >
+                      <Mail className="h-4 w-4" />
+                      info@fcconstruct.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: Contact Form */}
+              <div className="animate-fade-in-up">
+                <MultiStepContactForm showCity={true} showTimeline={true} />
+              </div>
             </div>
           </div>
         </section>
 
-        <ClientLogosCarousel />
-
-        {/* Contact Form + Info Section */}
-        <section className="py-12 md:py-20">
+        {/* Contact Info Cards */}
+        <section className="py-10 md:py-14 bg-muted/30">
           <div className="container">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
-              {/* Contact Form */}
-              <div className="animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-                <MultiStepContactForm showCity={true} showTimeline={true} />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+              {contactInfo.map((info, index) => {
+                const Icon = info.icon;
+                return (
+                  <div 
+                    key={index}
+                    className="group relative p-5 rounded-xl bg-card border hover:border-accent transition-all duration-300 hover:shadow-lg"
+                  >
+                    <div className="absolute inset-y-0 left-0 w-1 bg-accent/0 group-hover:bg-accent rounded-l-xl transition-all duration-300" />
+                    <div className="space-y-3">
+                      <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                        <Icon className="h-5 w-5 text-accent" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
+                          {info.title}
+                        </h3>
+                        {info.link ? (
+                          <a 
+                            href={info.link}
+                            className="text-foreground hover:text-accent transition-colors font-medium text-sm md:text-base break-all"
+                          >
+                            {info.content}
+                          </a>
+                        ) : (
+                          <p className="text-foreground text-sm md:text-base">{info.content}</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Service Areas - Pill Style */}
+        <section className="py-10 md:py-14">
+          <div className="container">
+            <div className="max-w-4xl mx-auto text-center space-y-6">
+              <div>
+                <SectionLabel>Service Areas</SectionLabel>
+                <h2 className="font-playfair text-2xl md:text-3xl font-bold mt-2">
+                  Serving <span className="text-accent">Metro Atlanta</span>
+                </h2>
               </div>
-
-              {/* Contact Info */}
-              <div className="space-y-8 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
-
-                <div>
-                  <h2 className="font-playfair text-2xl font-bold mb-6">Contact Information</h2>
-                  <div className="space-y-6">
-                    {contactInfo.map((info, index) => {
-                      const Icon = info.icon;
-                      const content = info.link ? (
-                        <a 
-                          href={info.link}
-                          className="text-accent hover:underline"
-                        >
-                          {info.content}
-                        </a>
-                      ) : (
-                        <span className="whitespace-pre-line">{info.content}</span>
-                      );
-
-                      return (
-                        <div key={index} className="flex gap-4">
-                          <div className="flex-shrink-0">
-                            <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
-                              <Icon className="h-6 w-6 text-accent" />
-                            </div>
-                          </div>
-                          <div>
-                            <h3 className="font-semibold mb-1">{info.title}</h3>
-                            <div className="text-muted-foreground">{content}</div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Service Areas */}
-                <div className="pt-8 border-t">
-                  <h3 className="font-playfair font-semibold text-lg mb-4">Service Areas</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {serviceAreas.map((area, index) => (
-                      <Link 
-                        key={index}
-                        to={area.path}
-                        className="text-sm text-muted-foreground flex items-center gap-2 hover:text-accent transition-colors"
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-                        {area.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Trust Badges */}
-                <div className="pt-8 border-t">
-                  <div className="flex flex-wrap gap-3 text-sm">
-                    <div className="px-3 py-1.5 rounded-full border bg-card hover:border-accent transition-colors">
-                      ✓ Licensed
-                    </div>
-                    <div className="px-3 py-1.5 rounded-full border bg-card hover:border-accent transition-colors">
-                      ✓ Bonded
-                    </div>
-                    <div className="px-3 py-1.5 rounded-full border bg-card hover:border-accent transition-colors">
-                      ✓ Insured
-                    </div>
-                    <div className="px-3 py-1.5 rounded-full border bg-card text-accent font-semibold">
-                      ✓ DBE/MBE
-                    </div>
-                  </div>
-                </div>
+              <div className="flex flex-wrap justify-center gap-2 md:gap-3">
+                {serviceAreas.map((area, index) => (
+                  <Link 
+                    key={index}
+                    to={area.path}
+                    className="px-4 py-2 rounded-full border bg-card hover:bg-accent hover:text-accent-foreground hover:border-accent transition-all duration-200 text-sm font-medium"
+                  >
+                    {area.name}
+                  </Link>
+                ))}
               </div>
+              <p className="text-sm text-muted-foreground">
+                + 20 more communities across the Atlanta metro area
+              </p>
             </div>
           </div>
         </section>
 
         {/* Reviews Widget */}
-        <section className="py-12 bg-background animate-fade-in-up" style={{ animationDelay: '500ms' }}>
+        <section className="py-10 md:py-14 bg-muted/30">
           <div className="container">
             <GHLReviewsWidget />
           </div>
         </section>
 
-        {/* Certification Badges */}
-        <section className="py-12 bg-muted/30">
+        {/* Certification Badges - Compact */}
+        <section className="py-10 md:py-14">
           <div className="container">
             <CertificationBadges />
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-16 md:py-24 bg-secondary text-secondary-foreground">
+        {/* CTA Section - Streamlined */}
+        <section className="py-12 md:py-16 bg-secondary text-secondary-foreground">
           <div className="container">
-            <div className="max-w-3xl mx-auto text-center space-y-6">
-              <h2 className="font-playfair text-3xl md:text-4xl font-bold">
+            <div className="max-w-2xl mx-auto text-center space-y-5">
+              <h2 className="font-playfair text-2xl md:text-3xl font-bold">
                 Ready to Get <span className="text-accent">Started?</span>
               </h2>
-              <p className="text-lg text-secondary-foreground/80">
-                Skip the back-and-forth. Book a free consultation directly on our calendar and let's discuss your project in detail.
+              <p className="text-secondary-foreground/80">
+                Book a free consultation directly on our calendar.
               </p>
               <Link to="/book">
-                <Button size="lg" className="mt-4 gap-2 text-base px-8 py-6">
+                <Button size="lg" className="gap-2 px-8">
                   <Calendar className="h-5 w-5" />
-                  Book Your Free Consultation
+                  Book Consultation
                 </Button>
               </Link>
-              <p className="text-sm text-secondary-foreground/60">
-                No obligation · Same-day response · 100% free estimate
+              <p className="text-xs text-secondary-foreground/60">
+                No obligation · Same-day response · Free estimate
               </p>
             </div>
           </div>
