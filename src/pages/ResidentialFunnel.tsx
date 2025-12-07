@@ -177,24 +177,52 @@ const ResidentialFunnel = () => {
                 </p>
               </a>
               
-              <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
-                <h3 className="text-xl font-bold mb-3">Basement Finishing</h3>
+              <a href="/basement-finishing" className="p-6 bg-card border rounded-lg hover:shadow-lg hover:border-accent transition-all group">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">Basement Finishing</h3>
                 <p className="text-sm text-muted-foreground">
                   Turn unused space into a media room, gym, in-law suite, or office.
                 </p>
-              </div>
+              </a>
+              
+              <a href="/home-renovation" className="p-6 bg-card border rounded-lg hover:shadow-lg hover:border-accent transition-all group">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">Home Renovation</h3>
+                <p className="text-sm text-muted-foreground">
+                  Complete interior transformations with cohesive design and quality finishes.
+                </p>
+              </a>
+              
+              <a href="/deck-builders" className="p-6 bg-card border rounded-lg hover:shadow-lg hover:border-accent transition-all group">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">Deck Building</h3>
+                <p className="text-sm text-muted-foreground">
+                  Custom wood and composite decks for outdoor living and entertaining.
+                </p>
+              </a>
+              
+              <a href="/custom-cabinets" className="p-6 bg-card border rounded-lg hover:shadow-lg hover:border-accent transition-all group">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">Custom Cabinets</h3>
+                <p className="text-sm text-muted-foreground">
+                  Kitchen cabinets, bathroom vanities, and built-in storage solutions.
+                </p>
+              </a>
+              
+              <a href="/flooring-installation" className="p-6 bg-card border rounded-lg hover:shadow-lg hover:border-accent transition-all group">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">Flooring Installation</h3>
+                <p className="text-sm text-muted-foreground">
+                  Hardwood, tile, luxury vinyl, and carpet installation by experts.
+                </p>
+              </a>
+              
+              <a href="/painting" className="p-6 bg-card border rounded-lg hover:shadow-lg hover:border-accent transition-all group">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">Painting Services</h3>
+                <p className="text-sm text-muted-foreground">
+                  Interior and exterior painting with premium paints and flawless finishes.
+                </p>
+              </a>
               
               <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
                 <h3 className="text-xl font-bold mb-3">Home Additions</h3>
                 <p className="text-sm text-muted-foreground">
                   Seamless expansions—more room, more value, perfectly integrated.
-                </p>
-              </div>
-              
-              <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow md:col-span-2 lg:col-span-1">
-                <h3 className="text-xl font-bold mb-3">Home Renovations</h3>
-                <p className="text-sm text-muted-foreground">
-                  Cohesive design, efficient timelines, and single-team accountability.
                 </p>
               </div>
             </div>
