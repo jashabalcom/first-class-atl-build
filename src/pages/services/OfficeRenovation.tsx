@@ -13,7 +13,7 @@ import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Calendar, UserCheck, ShieldCheck, Clock, Hammer, CheckCircle, Users, Lightbulb, Building2, Wifi } from "lucide-react";
-import heroCommercial from "@/assets/hero-commercial.jpg";
+import heroOffice from "@/assets/hero-office.jpg";
 import officeRenovation from "@/assets/office-renovation.jpg";
 
 const OfficeRenovation = () => {
@@ -117,7 +117,7 @@ const OfficeRenovation = () => {
           subtitle="Expert office renovation that minimizes downtime and maximizes results. Modern workspaces designed for collaboration, productivity, and your brand."
           primaryCTA="Request a Consultation"
           secondaryCTA="Call 678-671-6336"
-          backgroundImage={heroCommercial}
+          backgroundImage={heroOffice}
           trustLine="Licensed • Bonded • Insured • DBE/MBE • 20+ Years in Metro Atlanta"
           useH1={true}
         />

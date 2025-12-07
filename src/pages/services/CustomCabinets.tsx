@@ -12,7 +12,7 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import MobileCallBar from "@/components/MobileCallBar";
-import kitchenAfter from "@/assets/kitchen-after.jpg";
+import heroCabinets from "@/assets/hero-cabinets.jpg";
 
 const CustomCabinets = () => {
   const serviceSchema = {
@@ -86,7 +86,7 @@ const CustomCabinets = () => {
           subtitle="Beautiful, functional cabinetry designed specifically for your space. From kitchen cabinets to built-in storage, our craftsmen deliver exceptional quality."
           primaryCTA="Get Free Estimate"
           secondaryCTA="Call 678-671-6336"
-          backgroundImage={kitchenAfter}
+          backgroundImage={heroCabinets}
           showScrollIndicator={true}
           credentialBadge="Licensed Contractor · Atlanta Metro"
         />
@@ -109,7 +109,7 @@ const CustomCabinets = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
               <div className="relative rounded-lg overflow-hidden shadow-2xl">
-                <img src={kitchenAfter} alt="Custom kitchen cabinets with modern design - Atlanta custom cabinetry by First Class Construction" className="w-full h-auto" />
+                <img src={heroCabinets} alt="Custom kitchen cabinets with modern design - Atlanta custom cabinetry by First Class Construction" className="w-full h-auto" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
                   <p className="text-white text-lg font-medium">Custom kitchen cabinetry in Buckhead, Atlanta</p>
                 </div>
