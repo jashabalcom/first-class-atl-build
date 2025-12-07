@@ -184,7 +184,7 @@ const Footer = () => {
             {/* Agency Credit */}
             <div className="border-t border-white/10 mt-6 pt-4 flex justify-center">
               <a 
-                href="https://majorleadsagency.com" 
+                href="https://www.majorleadsagency.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="group flex items-center gap-2 opacity-50 hover:opacity-100 transition-all duration-300"
