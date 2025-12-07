@@ -10,6 +10,7 @@ import {
   CarouselNext,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import { getOptimizedImageUrl, imagePresets } from "@/lib/image-utils";
 
 interface SlideshowImage {
   id: string;
@@ -66,10 +67,12 @@ const ImageLightbox = ({ open, onClose, project }: ImageLightboxProps) => {
           <CarouselContent>
             {project.slideshowImages.map((image) => (
               <CarouselItem key={image.id}>
-                <div className="aspect-[4/3] w-full overflow-hidden rounded-lg">
+                <div className="aspect-[4/3] w-full overflow-hidden rounded-lg bg-muted">
                   <img
-                    src={image.image_url}
+                    src={getOptimizedImageUrl(image.image_url, imagePresets.lightbox)}
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -98,10 +101,12 @@ const ImageLightbox = ({ open, onClose, project }: ImageLightboxProps) => {
 
     // Single image mode - just show the image
     return (
-      <div className="aspect-[4/3] w-full overflow-hidden rounded-lg">
+      <div className="aspect-[4/3] w-full overflow-hidden rounded-lg bg-muted">
         <img
-          src={project.afterImage}
+          src={getOptimizedImageUrl(project.afterImage, imagePresets.lightbox)}
           alt={project.title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover"
         />
       </div>

@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import { getOptimizedImageUrl, imagePresets } from "@/lib/image-utils";
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -65,12 +66,12 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after co
     >
       {/* After Image (bottom layer) */}
       <img
-        src={afterImage}
+        src={getOptimizedImageUrl(afterImage, imagePresets.lightbox)}
         alt={`${alt} - After`}
         loading="lazy"
         decoding="async"
-        width={800}
-        height={600}
+        width={1600}
+        height={1200}
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         draggable={false}
       />
@@ -81,12 +82,12 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after co
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
         <img
-          src={beforeImage}
+          src={getOptimizedImageUrl(beforeImage, imagePresets.lightbox)}
           alt={`${alt} - Before`}
           loading="lazy"
           decoding="async"
-          width={800}
-          height={600}
+          width={1600}
+          height={1200}
           className="absolute inset-0 w-full h-full object-cover"
           draggable={false}
         />
