@@ -17,6 +17,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import FeaturedBlogSection from "@/components/FeaturedBlogSection";
 import BlogTeaser from "@/components/BlogTeaser";
 import SectionLabel from "@/components/SectionLabel";
+import TrustBadges from "@/components/TrustBadges";
 import { Home as HomeIcon, Building2, Calendar, UserCheck, ShieldCheck, ArrowRight } from "lucide-react";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
@@ -77,6 +78,9 @@ const Home = () => {
         fullHeight={true}
         priority={true}
       />
+
+      {/* Trust Badges */}
+      <TrustBadges />
 
       {/* Services Section */}
       <AnimatedSection>
