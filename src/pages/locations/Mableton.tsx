@@ -5,7 +5,7 @@ const Mableton = () => {
     <LocationPageTemplate
       city="Mableton"
       metaTitle="Mableton Deck Builder & Bathroom Remodeling Contractor GA"
-      metaDescription="Expert Mableton deck builder and bathroom remodeling services. Custom decks and bathroom renovations. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Mableton deck builder and bathroom remodeling. Custom decks and bath renovations. Licensed Atlanta contractor since 2000. 678-671-6336."
       heroHeadline="Mableton's Premier Deck Builder & Bathroom Renovation Expert"
       heroSubtitle="Premium custom deck building and bathroom remodeling for Mableton families. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[

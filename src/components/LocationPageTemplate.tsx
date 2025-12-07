@@ -57,6 +57,57 @@ const LocationPageTemplate = ({
         <meta name="description" content={metaDescription} />
         <meta name="keywords" content={primaryKeywords.join(", ")} />
         <link rel="canonical" href={`https://www.fcconstruct.com/${city.toLowerCase().replace(/\s+/g, '-')}/`} />
+        
+        {/* Open Graph Tags */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:url" content={`https://www.fcconstruct.com/${city.toLowerCase().replace(/\s+/g, '-')}/`} />
+        <meta property="og:image" content="https://www.fcconstruct.com/og-image.jpg" />
+        <meta property="og:site_name" content="First Class Construction Group" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Card Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content="https://www.fcconstruct.com/og-image.jpg" />
+        
+        {/* Schema.org LocalBusiness JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HomeAndConstructionBusiness",
+            "name": "First Class Construction Group",
+            "description": metaDescription,
+            "url": `https://www.fcconstruct.com/${city.toLowerCase().replace(/\s+/g, '-')}/`,
+            "telephone": "+1-678-671-6336",
+            "areaServed": {
+              "@type": "City",
+              "name": city,
+              "containedInPlace": {
+                "@type": "State",
+                "name": "Georgia"
+              }
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Atlanta",
+              "addressRegion": "GA",
+              "addressCountry": "US"
+            },
+            "priceRange": "$$",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "500"
+            },
+            "sameAs": [
+              "https://www.facebook.com/fcconstruct",
+              "https://www.instagram.com/fcconstruct"
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />
