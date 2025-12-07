@@ -41,8 +41,11 @@ const BlogCard = ({
           <img
             src={featuredImage}
             alt={title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            width={800}
+            height={600}
             loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
           {featured && (
             <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground font-inter text-xs tracking-wider">
