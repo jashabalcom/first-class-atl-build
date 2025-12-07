@@ -11,7 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { formatPhoneNumber } from "@/lib/phone-formatter";
 import { submitLead } from "@/lib/lead-submission";
-import { Shield, Lock, Clock, ArrowLeft, ArrowRight, Check, Phone, Hammer, Bath, Home, PlusCircle, Building2, Wrench } from "lucide-react";
+import { AIRecommendations } from "@/components/AIRecommendations";
+import { Shield, Lock, Clock, ArrowLeft, ArrowRight, Check, Phone, Hammer, Bath, Home, PlusCircle, Building2, Wrench, SkipForward } from "lucide-react";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
@@ -45,9 +46,10 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [recsComplete, setRecsComplete] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
-  const steps = ["Basic Info", "Project Details", "Description", "Review"];
+  const steps = ["Basic Info", "Project Details", "Description", "AI Insights", "Review"];
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
@@ -128,6 +130,12 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
     } else {
       toast.error("Please fill in all required fields correctly");
     }
+  };
+
+  const handleSkipRecs = () => {
+    setCompletedSteps([...completedSteps, currentStep]);
+    setCurrentStep(currentStep + 1);
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const handlePrevious = () => {
@@ -286,6 +294,24 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
         return (
           <div className="space-y-6 animate-fade-in">
             <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-foreground mb-2">Personalized Insights</h3>
+              <p className="text-muted-foreground">Ideas to prepare for your consultation</p>
+            </div>
+
+            <AIRecommendations
+              projectType={projectTypes.find(t => t.id === formValues.projectType)?.title || formValues.projectType}
+              message={formValues.message}
+              city={formValues.city}
+              timeline={formValues.timeline}
+              onComplete={() => setRecsComplete(true)}
+            />
+          </div>
+        );
+
+      case 4:
+        return (
+          <div className="space-y-6 animate-fade-in">
+            <div className="text-center mb-8">
               <h3 className="text-2xl font-bold text-foreground mb-2">Review Your Request</h3>
               <p className="text-muted-foreground">Everything look good?</p>
             </div>
@@ -387,84 +413,104 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
         <>
           <FormStepIndicator steps={steps} currentStep={currentStep} completedSteps={completedSteps} />
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-        {renderStepContent()}
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            {renderStepContent()}
 
-        {/* Navigation Buttons */}
-        <div className="flex items-center justify-between gap-4 pt-6 border-t border-border">
-          {currentStep > 0 ? (
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handlePrevious}
-              className="gap-2"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Previous
-            </Button>
-          ) : (
-            <div />
-          )}
-
-          {currentStep < steps.length - 1 ? (
-            <Button
-              type="button"
-              onClick={handleNext}
-              className="gap-2 ml-auto"
-            >
-              Next
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          ) : (
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="gap-2 ml-auto"
-            >
-              {isSubmitting ? (
-                <>
-                  <div className="h-4 w-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
-                  Submitting...
-                </>
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-between gap-4 pt-6 border-t border-border">
+              {currentStep > 0 ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handlePrevious}
+                  className="gap-2"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  Previous
+                </Button>
               ) : (
-                <>
-                  <Check className="h-4 w-4" />
-                  Submit Request
-                </>
+                <div />
               )}
-            </Button>
-          )}
-        </div>
 
-        {/* Trust Badges */}
-        <div className="grid grid-cols-3 gap-4 pt-6">
-          <div className="flex flex-col items-center text-center gap-2">
-            <Shield className="h-6 w-6 text-primary" />
-            <span className="text-xs text-muted-foreground">Secure & Private</span>
-          </div>
-          <div className="flex flex-col items-center text-center gap-2">
-            <Clock className="h-6 w-6 text-primary" />
-            <span className="text-xs text-muted-foreground">24hr Response</span>
-          </div>
-          <div className="flex flex-col items-center text-center gap-2">
-            <Lock className="h-6 w-6 text-primary" />
-            <span className="text-xs text-muted-foreground">No Spam Ever</span>
-          </div>
-        </div>
+              {currentStep === 3 ? (
+                <div className="flex gap-2 ml-auto">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={handleSkipRecs}
+                    className="gap-2 text-muted-foreground"
+                  >
+                    <SkipForward className="h-4 w-4" />
+                    Skip
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={handleNext}
+                    className="gap-2"
+                  >
+                    Continue
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              ) : currentStep < steps.length - 1 ? (
+                <Button
+                  type="button"
+                  onClick={handleNext}
+                  className="gap-2 ml-auto"
+                >
+                  Next
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="gap-2 ml-auto"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="h-4 w-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      <Check className="h-4 w-4" />
+                      Submit Request
+                    </>
+                  )}
+                </Button>
+              )}
+            </div>
 
-        {/* Alternative Contact */}
-        <div className="text-center pt-6 border-t border-border">
-          <p className="text-sm text-muted-foreground mb-3">Prefer to talk? Call us now</p>
-          <a
-            href="tel:+16786716336"
-            className="inline-flex items-center gap-2 text-primary hover:underline font-semibold"
-          >
-            <Phone className="h-4 w-4" />
-            (678) 671-6336
-          </a>
-        </div>
-      </form>
-      </>
+            {/* Trust Badges */}
+            <div className="grid grid-cols-3 gap-4 pt-6">
+              <div className="flex flex-col items-center text-center gap-2">
+                <Shield className="h-6 w-6 text-primary" />
+                <span className="text-xs text-muted-foreground">Secure & Private</span>
+              </div>
+              <div className="flex flex-col items-center text-center gap-2">
+                <Clock className="h-6 w-6 text-primary" />
+                <span className="text-xs text-muted-foreground">24hr Response</span>
+              </div>
+              <div className="flex flex-col items-center text-center gap-2">
+                <Lock className="h-6 w-6 text-primary" />
+                <span className="text-xs text-muted-foreground">No Spam Ever</span>
+              </div>
+            </div>
+
+            {/* Alternative Contact */}
+            <div className="text-center pt-6 border-t border-border">
+              <p className="text-sm text-muted-foreground mb-3">Prefer to talk? Call us now</p>
+              <a
+                href="tel:+16786716336"
+                className="inline-flex items-center gap-2 text-primary hover:underline font-semibold"
+              >
+                <Phone className="h-5 w-5" />
+                (678) 671-6336
+              </a>
+            </div>
+          </form>
+        </>
       )}
     </div>
   );
