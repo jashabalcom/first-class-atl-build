@@ -1,5 +1,6 @@
 import { MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { getOptimizedImageUrl, imagePresets } from "@/lib/image-utils";
 
 interface GalleryCardProps {
   project: {
@@ -22,14 +23,14 @@ const GalleryCard = ({ project, onClick }: GalleryCardProps) => {
       onClick={onClick}
       className="group cursor-pointer overflow-hidden rounded-lg border bg-card shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
-      <div className="aspect-[4/3] overflow-hidden relative">
+      <div className="aspect-[4/3] overflow-hidden relative bg-muted">
         <img
-          src={project.afterImage}
+          src={getOptimizedImageUrl(project.afterImage, imagePresets.thumbnail)}
           alt={project.title}
           loading="lazy"
           decoding="async"
-          width={800}
-          height={600}
+          width={600}
+          height={450}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         />
         <div className="absolute top-4 left-4">

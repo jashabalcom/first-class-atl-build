@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { Trash2, Edit, Plus, Upload, X, GripVertical, Images, Layers, FolderUp, ExternalLink, CheckCircle } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { compressImageForUpload, formatFileSize } from '@/lib/image-utils';
 import {
   DndContext,
   closestCenter,
@@ -275,14 +276,26 @@ export default function AdminGallery() {
   };
 
   const uploadImage = async (file: File, type: string): Promise<string | null> => {
-    const fileExt = file.name.split('.').pop();
+    setUploading(true);
+    
+    // Compress image before upload
+    const originalSize = file.size;
+    const compressedFile = await compressImageForUpload(file, {
+      maxWidthOrHeight: 2400,
+      maxSizeMB: 2,
+      quality: 0.85,
+    });
+    const compressedSize = compressedFile.size;
+    
+    console.log(`Image compression: ${formatFileSize(originalSize)} → ${formatFileSize(compressedSize)} (${Math.round((1 - compressedSize / originalSize) * 100)}% smaller)`);
+    
+    const fileExt = compressedFile.name.split('.').pop();
     const fileName = `${Date.now()}-${type}.${fileExt}`;
     const filePath = `${fileName}`;
 
-    setUploading(true);
     const { error: uploadError } = await supabase.storage
       .from('gallery-images')
-      .upload(filePath, file);
+      .upload(filePath, compressedFile);
 
     if (uploadError) {
       toast.error(`Failed to upload image`);
