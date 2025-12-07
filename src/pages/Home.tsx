@@ -113,6 +113,44 @@ const Home = () => {
                 icon={<Building2 className="h-12 w-12" />}
               />
             </div>
+
+            {/* Quick Links to All Service Pages */}
+            <div className="mt-12 max-w-5xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <Link to="/kitchen-remodeling" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
+                  Kitchen Remodeling
+                </Link>
+                <Link to="/bathroom-remodeling" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
+                  Bathroom Remodeling
+                </Link>
+                <Link to="/basement-finishing" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
+                  Basement Finishing
+                </Link>
+                <Link to="/home-renovation" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
+                  Home Renovation
+                </Link>
+                <Link to="/deck-builders" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
+                  Deck Building
+                </Link>
+                <Link to="/custom-cabinets" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
+                  Custom Cabinets
+                </Link>
+                <Link to="/flooring-installation" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
+                  Flooring Installation
+                </Link>
+                <Link to="/painting" className="flex items-center gap-2 px-4 py-3 bg-card border rounded-lg text-sm hover:border-accent hover:text-accent transition-colors group">
+                  <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-0.5 transition-transform" />
+                  Painting Services
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
       </AnimatedSection>
