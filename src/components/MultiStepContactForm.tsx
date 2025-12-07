@@ -14,6 +14,7 @@ import { submitLead } from "@/lib/lead-submission";
 import { AIRecommendations } from "@/components/AIRecommendations";
 import { FormQualifier } from "@/components/FormQualifier";
 import { GamifiedProgressBar } from "@/components/GamifiedProgressBar";
+import VoiceRecorder from "@/components/VoiceRecorder";
 import { Shield, Lock, Clock, ArrowLeft, ArrowRight, Check, Phone, Hammer, Bath, Home, PlusCircle, Building2, Wrench, SkipForward, Sparkles, Wand2 } from "lucide-react";
 
 const contactSchema = z.object({
@@ -288,6 +289,19 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
             <div className="text-center mb-8">
               <h3 className="text-2xl font-bold text-foreground mb-2">Tell Us More</h3>
               <p className="text-muted-foreground">Describe your project vision</p>
+            </div>
+
+            {/* Voice Recorder */}
+            <VoiceRecorder
+              projectType={projectTypes.find(t => t.id === formValues.projectType)?.title || formValues.projectType}
+              onTranscription={(text) => setValue("message", text, { shouldValidate: true })}
+              className="mb-4"
+            />
+
+            <div className="relative">
+              <div className="absolute inset-x-0 top-0 flex justify-center -translate-y-1/2">
+                <span className="bg-background px-3 text-xs text-muted-foreground">or type below</span>
+              </div>
             </div>
 
             <FloatingTextarea
