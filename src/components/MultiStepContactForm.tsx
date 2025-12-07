@@ -13,6 +13,7 @@ import { formatPhoneNumber } from "@/lib/phone-formatter";
 import { submitLead } from "@/lib/lead-submission";
 import { AIRecommendations } from "@/components/AIRecommendations";
 import { FormQualifier } from "@/components/FormQualifier";
+import { GamifiedProgressBar } from "@/components/GamifiedProgressBar";
 import { Shield, Lock, Clock, ArrowLeft, ArrowRight, Check, Phone, Hammer, Bath, Home, PlusCircle, Building2, Wrench, SkipForward, Sparkles, Wand2 } from "lucide-react";
 
 const contactSchema = z.object({
@@ -424,6 +425,13 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
         </div>
       ) : (
         <>
+          {/* Gamified Progress Bar */}
+          <GamifiedProgressBar 
+            currentStep={currentStep} 
+            totalSteps={steps.length} 
+            completedSteps={completedSteps} 
+          />
+
           {/* AI Teaser Banner */}
           <div className="mb-6 bg-gradient-to-r from-accent/10 via-primary/5 to-accent/10 border border-accent/20 rounded-xl p-4 animate-fade-in">
             <div className="flex items-center gap-3">
@@ -440,8 +448,6 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
               </div>
             </div>
           </div>
-
-          <FormStepIndicator steps={steps} currentStep={currentStep} completedSteps={completedSteps} />
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             {renderStepContent()}
