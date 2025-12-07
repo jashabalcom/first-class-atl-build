@@ -5,7 +5,7 @@ const InmanPark = () => {
     <LocationPageTemplate
       city="Inman Park"
       metaTitle="Inman Park Home Renovation Contractor | Deck Builder, Kitchen Remodel GA"
-      metaDescription="Expert Inman Park home renovation services. Deck builder, kitchen remodel for historic Victorian homes. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Inman Park renovation contractor. Deck builder, kitchen remodel for historic Victorian homes. Licensed since 2000. 678-671-6336."
       heroHeadline="Inman Park's Premier Deck Builder & Kitchen Remodeling Expert"
       heroSubtitle="Premium deck building and kitchen remodeling for Inman Park's beautiful Victorian and historic homes. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[

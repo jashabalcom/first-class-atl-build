@@ -5,7 +5,7 @@ const Smyrna = () => {
     <LocationPageTemplate
       city="Smyrna"
       metaTitle="Smyrna Home Renovation Contractor | Kitchen, Bathroom, Deck Builder GA"
-      metaDescription="Expert Smyrna home renovation services. Kitchen remodeling, bathroom remodel, deck builder, painting contractor, retail build-outs. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Smyrna home renovation contractor. Kitchen remodeling, bathroom remodel, deck builder, painting, retail build-outs. Licensed since 2000. 678-671-6336."
       heroHeadline="Smyrna's Premier Home Renovation & Remodeling Experts"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, deck building, and painting services for Smyrna families. Licensed, bonded, and DBE/MBE certified with 20+ years serving Metro Atlanta."
       primaryKeywords={[

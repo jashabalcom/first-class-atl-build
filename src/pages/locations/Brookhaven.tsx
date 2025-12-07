@@ -5,7 +5,7 @@ const Brookhaven = () => {
     <LocationPageTemplate
       city="Brookhaven"
       metaTitle="Brookhaven Home Renovation Contractor | Kitchen, Bathroom, Deck GA"
-      metaDescription="Expert Brookhaven home renovation services. Kitchen remodeling, bathroom remodel, deck building, basement finishing, painting. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Brookhaven home renovation contractor. Kitchen remodeling, bathroom remodel, deck building, basement finishing. Licensed since 2000. 678-671-6336."
       heroHeadline="Transform Your Brookhaven Home With Atlanta's Premier Contractor"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, deck building, and painting services for Brookhaven families. Licensed, bonded, and DBE/MBE certified with 20+ years serving Metro Atlanta."
       primaryKeywords={[

@@ -5,7 +5,7 @@ const Roswell = () => {
     <LocationPageTemplate
       city="Roswell"
       metaTitle="Roswell Home Renovation Contractor | Kitchen, Bathroom, Deck Builders GA"
-      metaDescription="Expert Roswell home renovation services. Kitchen remodeling, bathroom remodel, deck builders, flooring installation, basement contractors. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Roswell home renovation contractor. Kitchen remodeling, bathroom remodel, deck builders, flooring, basement finishing. Licensed since 2000. 678-671-6336."
       heroHeadline="Transform Your Roswell Home With Atlanta's Most Trusted Renovation Experts"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, deck building, and home renovations for Roswell families. Licensed, bonded, and DBE/MBE certified with 20+ years serving North Atlanta."
       primaryKeywords={[

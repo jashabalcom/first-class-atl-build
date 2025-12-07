@@ -5,7 +5,7 @@ const Midtown = () => {
     <LocationPageTemplate
       city="Midtown"
       metaTitle="Midtown Atlanta Renovation Contractor | Kitchen, Bathroom, Deck GA"
-      metaDescription="Expert Midtown Atlanta renovation services. Kitchen remodeling, bathroom renovation, custom cabinetry, deck builder. Licensed contractor since 2000. Call 678-671-6336."
+      metaDescription="Midtown Atlanta renovation contractor. Kitchen remodeling, bathroom renovation, cabinetry, deck builder. Licensed since 2000. 678-671-6336."
       heroHeadline="Midtown Atlanta's Premier Renovation Experts—Urban Living Perfected"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, custom cabinetry, and deck building for Midtown's sophisticated homeowners. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[

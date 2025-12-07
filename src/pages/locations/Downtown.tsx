@@ -5,7 +5,7 @@ const Downtown = () => {
     <LocationPageTemplate
       city="Downtown Atlanta"
       metaTitle="Downtown Atlanta Renovation Contractor | Kitchen, Bathroom Remodel GA"
-      metaDescription="Expert Downtown Atlanta home renovation services. Kitchen renovation, bathroom remodel for condos and lofts. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Downtown Atlanta renovation contractor. Kitchen renovation, bathroom remodel for condos and lofts. Licensed since 2000. 678-671-6336."
       heroHeadline="Downtown Atlanta Kitchen & Bathroom Renovation Specialists"
       heroSubtitle="Premium kitchen renovations and bathroom remodeling for Downtown Atlanta condos, lofts, and residences. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[

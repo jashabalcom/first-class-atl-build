@@ -5,7 +5,7 @@ const Kirkwood = () => {
     <LocationPageTemplate
       city="Kirkwood"
       metaTitle="Kirkwood Home Renovation Contractor | Kitchen, Bathroom, Painting GA"
-      metaDescription="Expert Kirkwood home renovation services. Kitchen remodel, bathroom remodeling, painting company. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Kirkwood home renovation contractor. Kitchen remodel, bathroom remodeling, painting company. Licensed since 2000. 678-671-6336."
       heroHeadline="Transform Your Kirkwood Home With Atlanta's Trusted Renovation Experts"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, and painting services for Kirkwood families. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[

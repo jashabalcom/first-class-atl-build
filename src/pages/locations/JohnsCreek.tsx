@@ -5,7 +5,7 @@ const JohnsCreek = () => {
     <LocationPageTemplate
       city="Johns Creek"
       metaTitle="Johns Creek Home Renovation Contractor | Kitchen, Bathroom, Basement GA"
-      metaDescription="Expert Johns Creek home renovation services. Kitchen remodeling, bathroom remodel, basement finishing, painting contractors. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Johns Creek home renovation contractor. Kitchen remodeling, bathroom remodel, basement finishing, painting. Licensed since 2000. 678-671-6336."
       heroHeadline="Elevate Your Johns Creek Home With Premier Renovation Services"
       heroSubtitle="Premium kitchen remodeling, bathroom renovations, basement finishing, and painting services for Johns Creek families. Licensed, bonded, and DBE/MBE certified with 20+ years serving North Atlanta."
       primaryKeywords={[
