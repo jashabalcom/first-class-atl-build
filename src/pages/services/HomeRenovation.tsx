@@ -106,7 +106,7 @@ const HomeRenovation = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <SectionLabel>Home Renovation Atlanta</SectionLabel>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
+              <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
                 Complete Home <span className="text-primary">Transformations</span>
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
@@ -120,7 +120,7 @@ const HomeRenovation = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <SectionLabel>Our Expertise</SectionLabel>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
+              <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground">
                 Home Renovation <span className="text-primary">Services</span>
               </h2>
             </div>
@@ -130,7 +130,7 @@ const HomeRenovation = () => {
                   <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                     <service.icon className="w-7 h-7 text-primary" />
                   </div>
-                  <h3 className="font-display text-xl text-foreground mb-2">{service.title}</h3>
+                  <h3 className="font-playfair text-xl text-foreground mb-2">{service.title}</h3>
                   <p className="text-muted-foreground text-sm">{service.description}</p>
                 </div>
               ))}
@@ -144,7 +144,7 @@ const HomeRenovation = () => {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
                   <SectionLabel>What We Offer</SectionLabel>
-                  <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+                  <h2 className="font-playfair text-3xl md:text-4xl text-foreground mb-6">
                     Complete Renovation <span className="text-primary">Solutions</span>
                   </h2>
                   <div className="grid sm:grid-cols-2 gap-3">
@@ -157,7 +157,7 @@ const HomeRenovation = () => {
                   </div>
                 </div>
                 <div className="bg-card border border-border rounded-lg p-8">
-                  <h3 className="font-display text-2xl text-foreground mb-4">Ready to Get Started?</h3>
+                  <h3 className="font-playfair text-2xl text-foreground mb-4">Ready to Get Started?</h3>
                   <p className="text-muted-foreground mb-6">Schedule your free in-home consultation today.</p>
                   <div className="space-y-4">
                     <Link to="/contact" className="block w-full bg-primary text-primary-foreground text-center py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">Get Free Estimate</Link>
@@ -175,7 +175,7 @@ const HomeRenovation = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <SectionLabel>The First Class Difference</SectionLabel>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">Why Choose <span className="text-primary">Us</span></h2>
+              <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground">Why Choose <span className="text-primary">Us</span></h2>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
               <ValueCard icon={Users} title="Dedicated Project Manager" description="One point of contact throughout your entire project." />
@@ -192,7 +192,7 @@ const HomeRenovation = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <SectionLabel>Customer Reviews</SectionLabel>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">What Our <span className="text-primary">Clients Say</span></h2>
+              <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground">What Our <span className="text-primary">Clients Say</span></h2>
             </div>
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
               {testimonials.map((testimonial, index) => (
@@ -207,7 +207,7 @@ const HomeRenovation = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <SectionLabel>Our Process</SectionLabel>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">How We <span className="text-primary">Work</span></h2>
+              <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground">How We <span className="text-primary">Work</span></h2>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
               {processSteps.map((step) => (
@@ -221,7 +221,7 @@ const HomeRenovation = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <SectionLabel>Service Areas</SectionLabel>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">Home Renovation Across <span className="text-primary">Metro Atlanta</span></h2>
+              <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground">Home Renovation Across <span className="text-primary">Metro Atlanta</span></h2>
             </div>
             <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
               {serviceAreas.map((area) => (
@@ -251,7 +251,7 @@ const HomeRenovation = () => {
             <div className="max-w-2xl mx-auto">
               <div className="text-center mb-8">
                 <SectionLabel>Get Started</SectionLabel>
-                <h2 className="font-display text-3xl md:text-4xl text-foreground">Request Your <span className="text-primary">Free Estimate</span></h2>
+                <h2 className="font-playfair text-3xl md:text-4xl text-foreground">Request Your <span className="text-primary">Free Estimate</span></h2>
               </div>
               <MultiStepContactForm />
             </div>
