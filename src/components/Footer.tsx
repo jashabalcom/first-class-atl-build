@@ -73,8 +73,8 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center gap-2 justify-center sm:justify-start">
                   <Mail className="h-4 w-4 text-accent" />
-                  <a href="mailto:info@firstclassconstructionatlanta.com" className="hover:text-accent transition-colors text-xs">
-                    info@firstclassconstructionatlanta.com
+                  <a href="mailto:info@fcconstruct.com" className="hover:text-accent transition-colors text-xs">
+                    info@fcconstruct.com
                   </a>
                 </div>
                 <div className="flex items-start gap-2 justify-center sm:justify-start">

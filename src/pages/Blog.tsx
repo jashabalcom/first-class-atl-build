@@ -91,7 +91,7 @@ const Blog = () => {
           name="keywords"
           content="construction blog, remodeling tips, Atlanta contractors, kitchen remodeling guide, bathroom renovation, basement finishing, commercial renovation"
         />
-        <link rel="canonical" href="https://www.firstclassconstructionatlanta.com/blog" />
+        <link rel="canonical" href="https://www.fcconstruct.com/blog" />
       </Helmet>
 
       <Header />
