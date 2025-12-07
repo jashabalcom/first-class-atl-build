@@ -7,6 +7,7 @@ import { Hammer, Bath, Home, PlusCircle, Building2, Calculator, ArrowRight, Info
 import { toast } from "sonner";
 import { submitLead } from "@/lib/lead-submission";
 import { CostBreakdownChart } from "@/components/CostBreakdownChart";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 const RECS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/project-recommendations`;
 
@@ -412,13 +413,15 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
               </div>
 
               {/* AI Cost Breakdown */}
-              <CostBreakdownChart
-                projectType={projectType}
-                scope={getScopeLabel()}
-                finishLevel={finishLevel}
-                budgetMin={estimate.min}
-                budgetMax={estimate.max}
-              />
+              <ErrorBoundary fallback={<div className="text-center py-4 text-muted-foreground text-sm">Cost breakdown unavailable</div>}>
+                <CostBreakdownChart
+                  projectType={projectType}
+                  scope={getScopeLabel()}
+                  finishLevel={finishLevel}
+                  budgetMin={estimate.min}
+                  budgetMax={estimate.max}
+                />
+              </ErrorBoundary>
 
               {/* AI Design Ideas Button */}
               {!showAIIdeas && (

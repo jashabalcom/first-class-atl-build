@@ -120,14 +120,19 @@ export function CostBreakdownChart({
     }
   };
 
-  // Prepare chart data
+  // Prepare chart data with null safety
   const chartData = breakdown
-    ? Object.entries(breakdown).map(([key, value]) => ({
-        name: categoryConfig[key as keyof typeof categoryConfig].label,
-        value: value.percentage,
-        amount: value.amount,
-        color: categoryConfig[key as keyof typeof categoryConfig].color,
-      }))
+    ? Object.entries(breakdown)
+        .filter(([key, value]) => {
+          const config = categoryConfig[key as keyof typeof categoryConfig];
+          return config && value && typeof value.percentage === 'number';
+        })
+        .map(([key, value]) => ({
+          name: categoryConfig[key as keyof typeof categoryConfig]?.label || key,
+          value: value?.percentage || 0,
+          amount: value?.amount || 0,
+          color: categoryConfig[key as keyof typeof categoryConfig]?.color || 'hsl(var(--primary))',
+        }))
     : [];
 
   if (!hasLoaded) {
@@ -239,6 +244,7 @@ export function CostBreakdownChart({
         <div className="space-y-2">
           {Object.entries(breakdown).map(([key, value], index) => {
             const config = categoryConfig[key as keyof typeof categoryConfig];
+            if (!config || !value) return null;
             const Icon = config.icon;
             const isVisible = index <= animatedIndex;
 
@@ -260,13 +266,13 @@ export function CostBreakdownChart({
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-medium text-sm text-foreground">{config.label}</span>
                     <span className="text-sm font-semibold text-foreground">
-                      {formatCurrency(value.amount)}
+                      {formatCurrency(value.amount || 0)}
                     </span>
                   </div>
                   <div className="flex items-center justify-between gap-2">
-                    <p className="text-xs text-muted-foreground truncate">{value.details}</p>
+                    <p className="text-xs text-muted-foreground truncate">{value.details || ''}</p>
                     <span className="text-xs text-muted-foreground flex-shrink-0">
-                      {value.percentage}%
+                      {value.percentage || 0}%
                     </span>
                   </div>
                 </div>
