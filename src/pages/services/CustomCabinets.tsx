@@ -69,10 +69,10 @@ const CustomCabinets = () => {
         <title>Custom Cabinets Atlanta | Cabinet Makers & Installation | First Class</title>
         <meta name="description" content="Atlanta custom cabinet makers. Kitchen cabinets, bathroom vanities & built-ins. Premium materials, expert installation. Free estimates. 678-671-6336." />
         <meta name="keywords" content="custom cabinets atlanta, kitchen cabinets atlanta, cabinet makers atlanta, custom cabinetry atlanta ga, cabinet installation atlanta, bathroom vanity atlanta" />
-        <link rel="canonical" href="https://fcconstruct.com/custom-cabinets" />
+        <link rel="canonical" href="https://www.fcconstruct.com/custom-cabinets" />
         <meta property="og:title" content="Custom Cabinets Atlanta | Expert Cabinet Makers" />
         <meta property="og:description" content="Beautiful custom cabinets designed and installed by Atlanta's trusted craftsmen. Kitchen cabinets, vanities & built-ins. Free estimates!" />
-        <meta property="og:url" content="https://fcconstruct.com/custom-cabinets" />
+        <meta property="og:url" content="https://www.fcconstruct.com/custom-cabinets" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
         <script type="application/ld+json">

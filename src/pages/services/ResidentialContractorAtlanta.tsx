@@ -19,8 +19,8 @@ const ResidentialContractorAtlanta = () => {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "First Class Construction Group - Residential Contractor Atlanta",
-    "@id": "https://fcconstruct.com/residential-contractor-atlanta",
-    "url": "https://fcconstruct.com/residential-contractor-atlanta",
+    "@id": "https://www.fcconstruct.com/residential-contractor-atlanta",
+    "url": "https://www.fcconstruct.com/residential-contractor-atlanta",
     "telephone": "+1-678-671-6336",
     "address": {
       "@type": "PostalAddress",
@@ -96,10 +96,10 @@ const ResidentialContractorAtlanta = () => {
         <title>Residential Contractor Atlanta | Licensed Home Remodeling | First Class</title>
         <meta name="description" content="Licensed Atlanta residential contractor. Kitchen, bathroom, basement, deck, flooring & painting. 20+ years experience. Free estimates. 678-671-6336." />
         <meta name="keywords" content="residential contractor atlanta, home contractor atlanta, residential remodeling atlanta, home remodeling contractor atlanta ga, residential construction atlanta, house contractor atlanta, licensed residential contractor atlanta" />
-        <link rel="canonical" href="https://fcconstruct.com/residential-contractor-atlanta" />
+        <link rel="canonical" href="https://www.fcconstruct.com/residential-contractor-atlanta" />
         <meta property="og:title" content="Residential Contractor Atlanta | Licensed Home Remodeling Experts" />
         <meta property="og:description" content="Atlanta's trusted residential contractor. Kitchen, bathroom, basement, deck, flooring & painting services. Licensed, insured, 20+ years experience. Free estimates!" />
-        <meta property="og:url" content="https://fcconstruct.com/residential-contractor-atlanta" />
+        <meta property="og:url" content="https://www.fcconstruct.com/residential-contractor-atlanta" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       </Helmet>

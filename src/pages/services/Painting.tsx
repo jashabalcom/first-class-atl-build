@@ -69,10 +69,10 @@ const Painting = () => {
         <title>Painting Services Atlanta | Interior & Exterior Painters | First Class</title>
         <meta name="description" content="Atlanta painting services. Interior & exterior painting, cabinet refinishing & deck staining. Licensed contractor. Free estimates. 678-671-6336." />
         <meta name="keywords" content="painting atlanta, house painters atlanta, interior painting atlanta, exterior painting atlanta ga, painting contractors atlanta, residential painting atlanta" />
-        <link rel="canonical" href="https://fcconstruct.com/painting" />
+        <link rel="canonical" href="https://www.fcconstruct.com/painting" />
         <meta property="og:title" content="Painting Services Atlanta | Expert Interior & Exterior Painters" />
         <meta property="og:description" content="Transform your home with Atlanta's trusted painting professionals. Interior, exterior & specialty finishes. Free estimates!" />
-        <meta property="og:url" content="https://fcconstruct.com/painting" />
+        <meta property="og:url" content="https://www.fcconstruct.com/painting" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
         <script type="application/ld+json">

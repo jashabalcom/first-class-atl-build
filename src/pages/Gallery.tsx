@@ -26,10 +26,10 @@ const Gallery = () => {
         <title>Project Gallery | Atlanta Renovation Portfolio | First Class Construction</title>
         <meta name="description" content="View our Atlanta renovation portfolio. Kitchen remodels, bathroom renovations, basements & commercial build-outs. Real projects, real results." />
         <meta name="keywords" content="atlanta renovation portfolio, kitchen remodel gallery, bathroom renovation photos, basement finishing atlanta, commercial buildout photos" />
-        <link rel="canonical" href="https://fcconstruct.com/gallery" />
+        <link rel="canonical" href="https://www.fcconstruct.com/gallery" />
         <meta property="og:title" content="Project Gallery | Atlanta Renovation Portfolio" />
         <meta property="og:description" content="View our Atlanta renovation portfolio. Kitchen remodels, bathrooms, basements & commercial. Real projects, real results." />
-        <meta property="og:url" content="https://fcconstruct.com/gallery" />
+        <meta property="og:url" content="https://www.fcconstruct.com/gallery" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">
           {JSON.stringify({

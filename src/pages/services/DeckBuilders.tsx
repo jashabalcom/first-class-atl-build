@@ -69,10 +69,10 @@ const DeckBuilders = () => {
         <title>Deck Builders Atlanta | Custom Deck Construction | First Class</title>
         <meta name="description" content="Atlanta deck builders. Custom wood & composite decks, pergolas & repairs. Licensed, 20+ years experience. Free estimates. 678-671-6336." />
         <meta name="keywords" content="deck builders atlanta, deck construction atlanta, composite deck atlanta, wood deck atlanta, deck contractors atlanta ga, deck building atlanta, deck repair atlanta" />
-        <link rel="canonical" href="https://fcconstruct.com/deck-builders" />
+        <link rel="canonical" href="https://www.fcconstruct.com/deck-builders" />
         <meta property="og:title" content="Deck Builders Atlanta | Custom Deck Construction" />
         <meta property="og:description" content="Build your dream outdoor space with Atlanta's trusted deck builders. Custom designs, quality materials, expert installation. Free estimates!" />
-        <meta property="og:url" content="https://fcconstruct.com/deck-builders" />
+        <meta property="og:url" content="https://www.fcconstruct.com/deck-builders" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
         <script type="application/ld+json">

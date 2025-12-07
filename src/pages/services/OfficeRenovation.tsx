@@ -75,10 +75,10 @@ const OfficeRenovation = () => {
         <title>Office Renovation Atlanta | Commercial Office Contractor | First Class</title>
         <meta name="description" content="Atlanta office renovation contractor. Modern buildouts, conference rooms & workspace design. Minimize downtime. Licensed & insured. 678-671-6336." />
         <meta name="keywords" content="office renovation atlanta, office renovation contractor, commercial office renovation, office buildout atlanta, office remodeling atlanta, workspace renovation atlanta, office construction atlanta, corporate office renovation" />
-        <link rel="canonical" href="https://fcconstruct.com/office-renovation" />
+        <link rel="canonical" href="https://www.fcconstruct.com/office-renovation" />
         <meta property="og:title" content="Office Renovation Atlanta | Commercial Office Contractor" />
         <meta property="og:description" content="Expert office renovation contractor in Atlanta. Modern office buildouts, conference rooms, open floor plans & workspace design. Minimize downtime." />
-        <meta property="og:url" content="https://fcconstruct.com/office-renovation" />
+        <meta property="og:url" content="https://www.fcconstruct.com/office-renovation" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Office Renovation Atlanta | First Class Construction" />

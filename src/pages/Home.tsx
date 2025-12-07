@@ -32,10 +32,10 @@ const Home = () => {
         <title>General Contractor Atlanta GA | Licensed Construction Company | First Class</title>
         <meta name="description" content="Atlanta's licensed general contractor. Kitchen & bathroom remodeling, commercial build-outs. DBE/MBE certified. Free estimates. 678-671-6336." />
         <meta name="keywords" content="general contractor atlanta ga, contractors atlanta ga, construction companies atlanta ga, licensed contractor atlanta, home remodeling atlanta, kitchen remodeling atlanta, bathroom remodel atlanta, commercial contractor atlanta, DBE contractor atlanta, MBE contractor atlanta" />
-        <link rel="canonical" href="https://fcconstruct.com/" />
+        <link rel="canonical" href="https://www.fcconstruct.com/" />
         <meta property="og:title" content="General Contractor Atlanta GA | Licensed Construction Company" />
         <meta property="og:description" content="Atlanta's premier licensed general contractor. Kitchen remodeling, bathroom renovations, commercial build-outs & more. DBE/MBE certified. Free estimates." />
-        <meta property="og:url" content="https://fcconstruct.com/" />
+        <meta property="og:url" content="https://www.fcconstruct.com/" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
         <meta name="twitter:card" content="summary_large_image" />

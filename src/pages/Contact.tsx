@@ -40,18 +40,18 @@ const Contact = () => {
   ];
 
   const serviceAreas = [
-    { name: "Atlanta", path: "/locations/atlanta" },
-    { name: "Buckhead", path: "/locations/buckhead" },
-    { name: "Midtown", path: "/locations/midtown" },
-    { name: "Decatur", path: "/locations/decatur" },
-    { name: "Sandy Springs", path: "/locations/sandy-springs" },
-    { name: "Brookhaven", path: "/locations/brookhaven" },
-    { name: "Dunwoody", path: "/locations/dunwoody" },
-    { name: "Marietta", path: "/locations/marietta" },
-    { name: "Alpharetta", path: "/locations/alpharetta" },
-    { name: "Roswell", path: "/locations/roswell" },
-    { name: "Johns Creek", path: "/locations/johns-creek" },
-    { name: "Smyrna", path: "/locations/smyrna" },
+    { name: "Atlanta", path: "/atlanta" },
+    { name: "Buckhead", path: "/buckhead" },
+    { name: "Midtown", path: "/midtown" },
+    { name: "Decatur", path: "/decatur" },
+    { name: "Sandy Springs", path: "/sandy-springs" },
+    { name: "Brookhaven", path: "/brookhaven" },
+    { name: "Dunwoody", path: "/dunwoody" },
+    { name: "Marietta", path: "/marietta" },
+    { name: "Alpharetta", path: "/alpharetta" },
+    { name: "Roswell", path: "/roswell" },
+    { name: "Johns Creek", path: "/johns-creek" },
+    { name: "Smyrna", path: "/smyrna" },
   ];
 
   return (
@@ -60,10 +60,10 @@ const Contact = () => {
         <title>Contact First Class Construction | Atlanta Contractor | 678-671-6336</title>
         <meta name="description" content="Contact First Class Construction for your Atlanta renovation. Free consultations, fast response. Licensed contractor. Call 678-671-6336." />
         <meta name="keywords" content="contact atlanta contractor, atlanta construction company phone, renovation consultation atlanta, contractor quote atlanta ga" />
-        <link rel="canonical" href="https://fcconstruct.com/contact" />
+        <link rel="canonical" href="https://www.fcconstruct.com/contact" />
         <meta property="og:title" content="Contact First Class Construction | Atlanta Contractor" />
         <meta property="og:description" content="Contact Atlanta's trusted construction company. Free consultations and fast response. Licensed, bonded, insured." />
-        <meta property="og:url" content="https://fcconstruct.com/contact" />
+        <meta property="og:url" content="https://www.fcconstruct.com/contact" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">
           {JSON.stringify({

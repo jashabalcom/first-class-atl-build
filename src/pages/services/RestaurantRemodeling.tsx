@@ -74,10 +74,10 @@ const RestaurantRemodeling = () => {
         <title>Restaurant Remodeling Atlanta | Restaurant Contractor | First Class</title>
         <meta name="description" content="Atlanta restaurant remodeling contractor. Commercial kitchens, dining rooms & bar construction. Code-compliant, inspection-ready. 678-671-6336." />
         <meta name="keywords" content="restaurant remodeling atlanta, restaurant contractor atlanta, restaurant remodel contractor, commercial kitchen contractor, restaurant construction atlanta, restaurant renovation atlanta, bar construction atlanta, restaurant buildout" />
-        <link rel="canonical" href="https://fcconstruct.com/restaurant-remodeling" />
+        <link rel="canonical" href="https://www.fcconstruct.com/restaurant-remodeling" />
         <meta property="og:title" content="Restaurant Remodeling Atlanta | Restaurant Contractor" />
         <meta property="og:description" content="Expert restaurant remodeling: commercial kitchens, dining rooms, bar construction & restaurant buildouts in Metro Atlanta. Code-compliant." />
-        <meta property="og:url" content="https://fcconstruct.com/restaurant-remodeling" />
+        <meta property="og:url" content="https://www.fcconstruct.com/restaurant-remodeling" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Restaurant Remodeling Atlanta | First Class Construction" />
