@@ -27,6 +27,7 @@ import AtlantaBasementFinishing from "./pages/AtlantaBasementFinishing";
 import AgencyProposal from "./pages/tools/AgencyProposal";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
+import KitchenRemodeling from "./pages/services/KitchenRemodeling";
 
 // Location Pages
 import Atlanta from "./pages/locations/Atlanta";
@@ -89,6 +90,7 @@ const App = () => (
             <Route path="/areas/sandy-springs-bathroom-remodeling" element={<SandySpringsBasementRemodeling />} />
             <Route path="/areas/vinings-kitchen-remodeling" element={<ViningsKitchenRemodeling />} />
             <Route path="/services/basement-finishing-atlanta" element={<AtlantaBasementFinishing />} />
+            <Route path="/kitchen-remodeling" element={<KitchenRemodeling />} />
             <Route path="/atlanta" element={<Atlanta />} />
             <Route path="/buckhead" element={<Buckhead />} />
             <Route path="/midtown" element={<Midtown />} />
