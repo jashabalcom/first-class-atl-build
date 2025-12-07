@@ -6,8 +6,8 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// Lovable AI endpoint
-const LOVABLE_AI_URL = "https://cguzpetufoftdqxwqygh.supabase.co/functions/v1/ai";
+// Lovable AI Gateway endpoint
+const LOVABLE_AI_URL = "https://ai.gateway.lovable.dev/v1/chat/completions";
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -20,6 +20,11 @@ serve(async (req) => {
     console.log("Generating cost breakdown for:", { projectType, scope, finishLevel, budgetMin, budgetMax });
 
     const midBudget = Math.round((budgetMin + budgetMax) / 2);
+
+    const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
+    if (!LOVABLE_API_KEY) {
+      throw new Error("LOVABLE_API_KEY is not configured");
+    }
 
     const systemPrompt = `You are a construction cost estimation expert specializing in residential remodeling projects in the Atlanta metro area. 
 Your task is to provide realistic cost breakdowns for renovation projects.
@@ -78,8 +83,8 @@ Respond with ONLY this JSON structure (no markdown, no explanation):
     const response = await fetch(LOVABLE_AI_URL, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${LOVABLE_API_KEY}`,
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${Deno.env.get('SUPABASE_ANON_KEY')}`,
       },
       body: JSON.stringify({
         model: "google/gemini-2.5-flash",
@@ -87,18 +92,31 @@ Respond with ONLY this JSON structure (no markdown, no explanation):
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt }
         ],
-        temperature: 0.3,
-        max_tokens: 1000,
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("Lovable AI error:", errorText);
+      console.error("Lovable AI error:", response.status, errorText);
+      
+      if (response.status === 429) {
+        return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again later." }), {
+          status: 429,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+      if (response.status === 402) {
+        return new Response(JSON.stringify({ error: "AI credits exhausted. Please add credits." }), {
+          status: 402,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
       throw new Error(`AI request failed: ${response.status}`);
     }
 
     const data = await response.json();
+    console.log("AI response received:", JSON.stringify(data).slice(0, 200));
+    
     const content = data.choices?.[0]?.message?.content;
 
     if (!content) {
