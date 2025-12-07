@@ -117,25 +117,25 @@ const Footer = () => {
               <h4 className="font-playfair text-lg font-semibold mb-4">Services</h4>
               <ul className="space-y-2 text-sm opacity-80">
                 <li>
-                  <Link to="/services/kitchen-remodeling" className="hover:text-accent hover:opacity-100 transition-colors">Kitchen Remodeling</Link>
+                  <Link to="/kitchen-remodeling" className="hover:text-accent hover:opacity-100 transition-colors">Kitchen Remodeling</Link>
                 </li>
                 <li>
-                  <Link to="/services/bathroom-remodeling" className="hover:text-accent hover:opacity-100 transition-colors">Bathroom Remodeling</Link>
+                  <Link to="/bathroom-remodeling" className="hover:text-accent hover:opacity-100 transition-colors">Bathroom Remodeling</Link>
                 </li>
                 <li>
-                  <Link to="/services/basement-finishing" className="hover:text-accent hover:opacity-100 transition-colors">Basement Finishing</Link>
+                  <Link to="/basement-finishing" className="hover:text-accent hover:opacity-100 transition-colors">Basement Finishing</Link>
                 </li>
                 <li>
-                  <Link to="/services/deck-builders" className="hover:text-accent hover:opacity-100 transition-colors">Custom Decks</Link>
+                  <Link to="/deck-builders" className="hover:text-accent hover:opacity-100 transition-colors">Custom Decks</Link>
                 </li>
                 <li>
-                  <Link to="/services/flooring-installation" className="hover:text-accent hover:opacity-100 transition-colors">Flooring Installation</Link>
+                  <Link to="/flooring-installation" className="hover:text-accent hover:opacity-100 transition-colors">Flooring Installation</Link>
                 </li>
                 <li>
-                  <Link to="/services/painting" className="hover:text-accent hover:opacity-100 transition-colors">Interior Painting</Link>
+                  <Link to="/painting" className="hover:text-accent hover:opacity-100 transition-colors">Interior Painting</Link>
                 </li>
                 <li>
-                  <Link to="/services/custom-cabinets" className="hover:text-accent hover:opacity-100 transition-colors">Custom Carpentry</Link>
+                  <Link to="/custom-cabinets" className="hover:text-accent hover:opacity-100 transition-colors">Custom Carpentry</Link>
                 </li>
                 <li>
                   <Link to="/commercial" className="hover:text-accent hover:opacity-100 transition-colors">Commercial Build-Outs</Link>
