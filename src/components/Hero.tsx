@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import ScrollIndicator from "./ScrollIndicator";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
@@ -16,6 +16,7 @@ interface HeroProps {
   seoHeadline?: string;
   fullHeight?: boolean;
   showScrollIndicator?: boolean;
+  credentialBadge?: string;
 }
 
 const Hero = ({ 
@@ -29,7 +30,8 @@ const Hero = ({
   benefitHeadline,
   seoHeadline,
   fullHeight = false,
-  showScrollIndicator = true
+  showScrollIndicator = true,
+  credentialBadge
 }: HeroProps) => {
   // In hybrid mode (benefitHeadline + seoHeadline), seoHeadline is always H1
   // In legacy mode (title only), respect useH1 prop
@@ -66,6 +68,16 @@ const Hero = ({
       {/* Content */}
       <div className="container relative z-10 px-4 py-16 sm:py-20 md:py-24 lg:py-32">
         <div className="max-w-3xl mx-auto text-center text-white">
+          {/* Credential Badge - Eyebrow */}
+          {credentialBadge && (
+            <div className="flex items-center justify-center gap-2 mb-4 animate-fade-in-up">
+              <Shield className="h-4 w-4 text-accent" />
+              <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-white/90 font-medium">
+                {credentialBadge}
+              </span>
+            </div>
+          )}
+          
           {/* Benefit-Driven Headline (Primary Visual) */}
           <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-balance leading-tight animate-fade-in-up">
             {renderHeadlineWithAccent(displayTitle || '')}
