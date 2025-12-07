@@ -67,7 +67,7 @@ const CustomCabinets = () => {
     <>
       <Helmet>
         <title>Custom Cabinets Atlanta | Cabinet Makers & Installation | First Class</title>
-        <meta name="description" content="Expert custom cabinet makers in Atlanta. Kitchen cabinets, bathroom vanities, built-ins & storage solutions. Premium materials, professional installation. Free estimates. Call 678-671-6336." />
+        <meta name="description" content="Atlanta custom cabinet makers. Kitchen cabinets, bathroom vanities & built-ins. Premium materials, expert installation. Free estimates. 678-671-6336." />
         <meta name="keywords" content="custom cabinets atlanta, kitchen cabinets atlanta, cabinet makers atlanta, custom cabinetry atlanta ga, cabinet installation atlanta, bathroom vanity atlanta" />
         <link rel="canonical" href="https://fcconstruct.com/custom-cabinets" />
         <meta property="og:title" content="Custom Cabinets Atlanta | Expert Cabinet Makers" />

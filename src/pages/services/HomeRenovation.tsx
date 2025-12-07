@@ -78,7 +78,7 @@ const HomeRenovation = () => {
     <>
       <Helmet>
         <title>Home Renovation Atlanta | Whole Home Remodeling Contractors | First Class</title>
-        <meta name="description" content="Expert home renovation in Atlanta. Whole-home remodeling, room additions, open floor plans & complete interior transformations. Licensed contractor, 20+ years experience. Free estimates. Call 678-671-6336." />
+        <meta name="description" content="Atlanta home renovation experts. Whole-home remodeling, room additions & interior transformations. Licensed, 20+ years experience. Free estimates. 678-671-6336." />
         <meta name="keywords" content="home renovation atlanta, whole home remodeling atlanta, home remodel atlanta ga, house renovation atlanta, home addition atlanta, interior remodeling atlanta, home renovation contractors atlanta" />
         <link rel="canonical" href="https://fcconstruct.com/home-renovation" />
         <meta property="og:title" content="Home Renovation Atlanta | Whole Home Remodeling Experts" />

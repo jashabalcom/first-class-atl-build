@@ -67,7 +67,7 @@ const BasementFinishing = () => {
     <>
       <Helmet>
         <title>Basement Finishing Atlanta | Basement Remodeling Contractors | First Class</title>
-        <meta name="description" content="Expert basement finishing in Atlanta. Media rooms, home gyms, in-law suites & complete basement remodels. Licensed contractor, 20+ years experience. Free estimates. Call 678-671-6336." />
+        <meta name="description" content="Atlanta basement finishing experts. Media rooms, home gyms & in-law suites. Licensed, 20+ years experience. Free estimates. 678-671-6336." />
         <meta name="keywords" content="basement finishing atlanta, basement remodeling atlanta, finished basement atlanta ga, basement contractors atlanta, basement renovation atlanta, basement buildout atlanta" />
         <link rel="canonical" href="https://fcconstruct.com/basement-finishing" />
         <meta property="og:title" content="Basement Finishing Atlanta | Expert Basement Contractors" />
