@@ -116,14 +116,30 @@ const Footer = () => {
             <div>
               <h4 className="font-playfair text-lg font-semibold mb-4">Services</h4>
               <ul className="space-y-2 text-sm opacity-80">
-                <li>Kitchen Remodeling</li>
-                <li>Bathroom Remodeling</li>
-                <li>Basement Finishing</li>
-                <li>Custom Decks</li>
-                <li>Flooring Installation</li>
-                <li>Interior Painting</li>
-                <li>Custom Carpentry</li>
-                <li>Commercial Build-Outs</li>
+                <li>
+                  <Link to="/services/kitchen-remodeling" className="hover:text-accent hover:opacity-100 transition-colors">Kitchen Remodeling</Link>
+                </li>
+                <li>
+                  <Link to="/services/bathroom-remodeling" className="hover:text-accent hover:opacity-100 transition-colors">Bathroom Remodeling</Link>
+                </li>
+                <li>
+                  <Link to="/services/basement-finishing" className="hover:text-accent hover:opacity-100 transition-colors">Basement Finishing</Link>
+                </li>
+                <li>
+                  <Link to="/services/deck-builders" className="hover:text-accent hover:opacity-100 transition-colors">Custom Decks</Link>
+                </li>
+                <li>
+                  <Link to="/services/flooring-installation" className="hover:text-accent hover:opacity-100 transition-colors">Flooring Installation</Link>
+                </li>
+                <li>
+                  <Link to="/services/painting" className="hover:text-accent hover:opacity-100 transition-colors">Interior Painting</Link>
+                </li>
+                <li>
+                  <Link to="/services/custom-cabinets" className="hover:text-accent hover:opacity-100 transition-colors">Custom Carpentry</Link>
+                </li>
+                <li>
+                  <Link to="/commercial" className="hover:text-accent hover:opacity-100 transition-colors">Commercial Build-Outs</Link>
+                </li>
               </ul>
             </div>
 
