@@ -11,6 +11,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import SectionLabel from "@/components/SectionLabel";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import ClientLogosCarousel from "@/components/ClientLogosCarousel";
+import StickyAICTA from "@/components/StickyAICTA";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Calendar, UserCheck, ShieldCheck, Clock, Hammer, CheckCircle, Users, Lightbulb, Building2, Wifi } from "lucide-react";
@@ -407,6 +408,7 @@ const OfficeRenovation = () => {
         </section>
       </main>
 
+      <StickyAICTA roomType="office" />
       <Footer />
     </>
   );
