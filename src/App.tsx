@@ -29,6 +29,12 @@ import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
 import KitchenRemodeling from "./pages/services/KitchenRemodeling";
 import BathroomRemodeling from "./pages/services/BathroomRemodeling";
+import HomeRenovation from "./pages/services/HomeRenovation";
+import BasementFinishing from "./pages/services/BasementFinishing";
+import DeckBuilders from "./pages/services/DeckBuilders";
+import CustomCabinets from "./pages/services/CustomCabinets";
+import FlooringInstallation from "./pages/services/FlooringInstallation";
+import Painting from "./pages/services/Painting";
 import OfficeRenovation from "./pages/services/OfficeRenovation";
 import RestaurantRemodeling from "./pages/services/RestaurantRemodeling";
 import RetailConstruction from "./pages/services/RetailConstruction";
@@ -97,6 +103,12 @@ const App = () => (
             <Route path="/services/basement-finishing-atlanta" element={<AtlantaBasementFinishing />} />
             <Route path="/kitchen-remodeling" element={<KitchenRemodeling />} />
             <Route path="/bathroom-remodeling" element={<BathroomRemodeling />} />
+            <Route path="/home-renovation" element={<HomeRenovation />} />
+            <Route path="/basement-finishing" element={<BasementFinishing />} />
+            <Route path="/deck-builders" element={<DeckBuilders />} />
+            <Route path="/custom-cabinets" element={<CustomCabinets />} />
+            <Route path="/flooring-installation" element={<FlooringInstallation />} />
+            <Route path="/painting" element={<Painting />} />
             <Route path="/office-renovation" element={<OfficeRenovation />} />
             <Route path="/restaurant-remodeling" element={<RestaurantRemodeling />} />
             <Route path="/retail-construction" element={<RetailConstruction />} />
