@@ -77,8 +77,7 @@ const Hero = ({
           width={1920}
           height={1080}
           loading={priority ? "eager" : "lazy"}
-          decoding="async"
-          fetchPriority={priority ? "high" : "auto"}
+          decoding={priority ? "sync" : "async"}
           onLoad={() => setImageLoaded(true)}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
         />
