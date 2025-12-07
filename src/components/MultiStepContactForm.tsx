@@ -10,7 +10,7 @@ import { FormStepIndicator } from "@/components/ui/form-step-indicator";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { formatPhoneNumber } from "@/lib/phone-formatter";
-import { submitLead } from "@/lib/lead-submission";
+import { submitLead, getFormTimestamp } from "@/lib/lead-submission";
 import { AIRecommendations } from "@/components/AIRecommendations";
 import { FormQualifier } from "@/components/FormQualifier";
 import { GamifiedProgressBar } from "@/components/GamifiedProgressBar";
@@ -52,6 +52,11 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [recsComplete, setRecsComplete] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
+  
+  // Anti-spam: honeypot fields and timestamp
+  const [honeypotWebsite, setHoneypotWebsite] = useState('');
+  const [honeypotGotcha, setHoneypotGotcha] = useState('');
+  const [formTimestamp] = useState(() => getFormTimestamp());
 
   const steps = ["Basic Info", "Project Details", "Description", "AI Insights", "Review"];
 
@@ -167,6 +172,10 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
         timeline: data.timeline,
         message: data.message,
         formSource: 'multistep',
+        // Anti-spam fields
+        website: honeypotWebsite,
+        _gotcha: honeypotGotcha,
+        _timestamp: formTimestamp,
       });
 
       if (result.success) {
@@ -215,6 +224,26 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
               error={errors.phone?.message}
               placeholder="(555) 555-5555"
             />
+            
+            {/* Honeypot fields - hidden from humans, visible to bots */}
+            <div className="absolute left-[-9999px] top-[-9999px]" aria-hidden="true">
+              <input
+                type="text"
+                name="website"
+                value={honeypotWebsite}
+                onChange={(e) => setHoneypotWebsite(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+              <input
+                type="text"
+                name="_gotcha"
+                value={honeypotGotcha}
+                onChange={(e) => setHoneypotGotcha(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
           </div>
         );
 

@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { submitLead } from "@/lib/lead-submission";
+import { submitLead, getFormTimestamp } from "@/lib/lead-submission";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { Check, Gift, Clock, Phone, X, Sparkles, Wand2 } from "lucide-react";
@@ -30,6 +30,9 @@ const ExitIntentPopup = () => {
     phone: "",
     projectType: "",
   });
+  // Anti-spam
+  const [honeypotWebsite, setHoneypotWebsite] = useState('');
+  const [formTimestamp] = useState(() => getFormTimestamp());
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -100,6 +103,9 @@ const ExitIntentPopup = () => {
       projectType: formData.projectType || "General Inquiry",
       formSource: "exit-intent-offer",
       message: "Exit Intent Popup - Renovation Blueprint Package Request",
+      // Anti-spam fields
+      website: honeypotWebsite,
+      _timestamp: formTimestamp,
     });
 
     setIsSubmitting(false);
