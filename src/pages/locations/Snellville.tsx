@@ -5,7 +5,7 @@ const Snellville = () => {
     <LocationPageTemplate
       city="Snellville"
       metaTitle="Snellville Deck Builder & Home Renovation Contractor GA"
-      metaDescription="Expert Snellville deck installer and home renovation services. Custom deck building and outdoor living spaces. Licensed Atlanta contractor since 2000. Call 678-671-6336."
+      metaDescription="Snellville deck builder and home renovation. Custom decks and outdoor living. Licensed Atlanta contractor since 2000. 678-671-6336."
       heroHeadline="Snellville's Trusted Deck Builder & Home Renovation Expert"
       heroSubtitle="Premium custom deck building, outdoor living spaces, and home renovation services for Snellville families. Licensed, bonded, and DBE/MBE certified since 2000."
       primaryKeywords={[
