@@ -169,6 +169,12 @@ const Footer = () => {
                   <ArrowUp className="h-4 w-4" />
                   <span className="hidden sm:inline">Back to top</span>
                 </button>
+                <Link 
+                  to="/auth" 
+                  className="text-xs opacity-40 hover:opacity-100 hover:text-accent transition-all ml-4"
+                >
+                  Admin
+                </Link>
               </div>
             </div>
           </div>
