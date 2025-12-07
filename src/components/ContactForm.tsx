@@ -16,8 +16,8 @@ import { Home, Droplet, Layers, Plus, Building2, Store, Shield, Lock, Clock } fr
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
   email: z.string().trim().email("Please enter a valid email address").max(255, "Email must be less than 255 characters"),
-  phone: z.string().optional().refine(
-    (val) => !val || unformatPhoneNumber(val).length === 10,
+  phone: z.string().min(14, "Please enter a valid phone number").refine(
+    (val) => unformatPhoneNumber(val).length === 10,
     "Please enter a valid 10-digit phone number"
   ),
   city: z.string().optional(),
@@ -146,12 +146,13 @@ const ContactForm = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FloatingInput
-              label="Phone"
+              label="Phone *"
               type="tel"
               value={phoneValue}
               onChange={handlePhoneChange}
               error={errors.phone?.message}
               success={touchedFields.phone && !errors.phone && dirtyFields.phone}
+              placeholder="(555) 555-5555"
             />
 
             {showCity && (
