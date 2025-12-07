@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
@@ -55,6 +56,35 @@ const Contact = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Contact First Class Construction | Atlanta Contractor | 678-671-6336</title>
+        <meta name="description" content="Contact First Class Construction for your Atlanta renovation. Free consultations, fast response. Licensed contractor. Call 678-671-6336." />
+        <meta name="keywords" content="contact atlanta contractor, atlanta construction company phone, renovation consultation atlanta, contractor quote atlanta ga" />
+        <link rel="canonical" href="https://fcconstruct.com/contact" />
+        <meta property="og:title" content="Contact First Class Construction | Atlanta Contractor" />
+        <meta property="og:description" content="Contact Atlanta's trusted construction company. Free consultations and fast response. Licensed, bonded, insured." />
+        <meta property="og:url" content="https://fcconstruct.com/contact" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "mainEntity": {
+              "@type": "GeneralContractor",
+              "name": "First Class Construction Group",
+              "telephone": "678-671-6336",
+              "email": "info@fcconstruct.com",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Atlanta",
+                "addressRegion": "GA",
+                "addressCountry": "US"
+              },
+              "openingHours": "Mo-Fr 08:00-18:00, Sa 09:00-14:00"
+            }
+          })}
+        </script>
+      </Helmet>
       <Header />
       <MobileCallBar />
       

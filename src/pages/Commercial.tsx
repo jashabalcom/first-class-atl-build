@@ -108,7 +108,7 @@ const Commercial = () => {
     <>
       <Helmet>
         <title>Commercial Contractor Atlanta | Office, Retail & Restaurant Build-Outs</title>
-        <meta name="description" content="Commercial construction contractor in Atlanta. Retail build-outs, restaurant fit-outs, office renovations & tenant improvements. Licensed, bonded, insured. Minimize downtime. Call 678-671-6336." />
+        <meta name="description" content="Atlanta commercial contractor. Retail build-outs, restaurant fit-outs, office renovations. Licensed, bonded. Minimize downtime. 678-671-6336." />
         <meta name="keywords" content="commercial contractor atlanta, office renovation atlanta, restaurant remodeling atlanta, retail build out atlanta, tenant improvement contractor, commercial construction atlanta ga, office renovation contractor, restaurant remodel contractor, tenant buildout atlanta" />
         <link rel="canonical" href="https://fcconstruct.com/commercial" />
         <meta property="og:title" content="Commercial Contractor Atlanta | Office, Retail & Restaurant Build-Outs" />

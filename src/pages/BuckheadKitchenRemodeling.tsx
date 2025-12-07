@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
@@ -16,6 +17,29 @@ import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 const BuckheadKitchenRemodeling = () => {
   return (
     <div className="min-h-screen pb-24 md:pb-0">
+      <Helmet>
+        <title>Kitchen Remodeling Buckhead | Premier Atlanta Kitchen Contractor</title>
+        <meta name="description" content="Buckhead kitchen remodeling by Atlanta's trusted contractor. Custom cabinets, premium finishes. Licensed, DBE/MBE certified. Free quote. 678-671-6336." />
+        <meta name="keywords" content="kitchen remodeling buckhead, buckhead kitchen contractor, kitchen renovation buckhead atlanta, custom kitchen buckhead" />
+        <link rel="canonical" href="https://fcconstruct.com/buckhead-kitchen-remodeling" />
+        <meta property="og:title" content="Kitchen Remodeling Buckhead | Premier Atlanta Kitchen Contractor" />
+        <meta property="og:description" content="Buckhead kitchen remodeling experts. Custom cabinets, premium finishes. Licensed, DBE/MBE certified." />
+        <meta property="og:url" content="https://fcconstruct.com/buckhead-kitchen-remodeling" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Kitchen Remodeling Buckhead",
+            "provider": {
+              "@type": "GeneralContractor",
+              "name": "First Class Construction Group",
+              "telephone": "678-671-6336"
+            },
+            "areaServed": "Buckhead, Atlanta, GA",
+            "serviceType": "Kitchen Remodeling"
+          })}
+        </script>
+      </Helmet>
       <Header />
       
       <Hero

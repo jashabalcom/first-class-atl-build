@@ -40,7 +40,7 @@ const About = () => {
     <>
       <Helmet>
         <title>About First Class Construction Group | Atlanta's Trusted Contractor Since 2004</title>
-        <meta name="description" content="20+ years building trust across Atlanta. First Class Construction Group is a licensed, bonded, insured DBE/MBE certified contractor. Learn our story, values, and commitment to quality craftsmanship." />
+        <meta name="description" content="20+ years building Atlanta. Licensed, bonded, insured DBE/MBE contractor. Quality craftsmanship and trusted service. Learn our story." />
         <meta name="keywords" content="about first class construction, atlanta contractor history, DBE contractor atlanta, MBE certified contractor, licensed contractor atlanta ga, construction company atlanta history, trusted contractor atlanta" />
         <link rel="canonical" href="https://fcconstruct.com/about" />
         <meta property="og:title" content="About First Class Construction Group | Atlanta's Trusted Contractor" />

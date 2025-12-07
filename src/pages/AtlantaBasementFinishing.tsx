@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -16,6 +17,29 @@ import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 const AtlantaBasementFinishing = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Basement Finishing Atlanta | Licensed Basement Contractor</title>
+        <meta name="description" content="Atlanta basement finishing experts. Transform unused space into living areas. Licensed, waterproofing included. Free quote. 678-671-6336." />
+        <meta name="keywords" content="basement finishing atlanta, atlanta basement contractor, basement remodeling atlanta ga, finished basement atlanta" />
+        <link rel="canonical" href="https://fcconstruct.com/atlanta-basement-finishing" />
+        <meta property="og:title" content="Basement Finishing Atlanta | Licensed Basement Contractor" />
+        <meta property="og:description" content="Atlanta basement finishing. Transform unused space into valuable living areas. Licensed contractor." />
+        <meta property="og:url" content="https://fcconstruct.com/atlanta-basement-finishing" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Basement Finishing Atlanta",
+            "provider": {
+              "@type": "GeneralContractor",
+              "name": "First Class Construction Group",
+              "telephone": "678-671-6336"
+            },
+            "areaServed": "Atlanta, GA",
+            "serviceType": "Basement Finishing"
+          })}
+        </script>
+      </Helmet>
       <Header />
       
       <Hero

@@ -13,7 +13,7 @@ const Book = () => {
   return (
     <>
       <Helmet>
-        <title>Schedule Your Free Consultation | Major Leads Agency</title>
+        <title>Schedule Your Free Consultation | First Class Construction Atlanta</title>
         <meta
           name="description"
           content="Book a free consultation with Atlanta's trusted renovation experts. Schedule your appointment online and get started on your dream renovation project."

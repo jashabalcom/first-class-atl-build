@@ -85,7 +85,7 @@ const Blog = () => {
         <title>Construction Blog - Expert Tips & Guides | First Class Construction Atlanta</title>
         <meta
           name="description"
-          content="Get expert construction advice, remodeling tips, cost guides, and design inspiration from Atlanta's licensed contractors. Kitchen, bathroom, basement, and commercial project insights."
+          content="Expert construction tips, cost guides & design inspiration from Atlanta's licensed contractors. Kitchen, bathroom & basement insights."
         />
         <meta
           name="keywords"
