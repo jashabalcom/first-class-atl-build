@@ -15,10 +15,12 @@ const authSchema = z.object({
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
+  const [resetEmailSent, setResetEmailSent] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -112,6 +114,44 @@ const Auth = () => {
     }
   };
 
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const emailValidation = z.string().email().safeParse(email);
+    if (!emailValidation.success) {
+      toast({
+        title: "Validation Error",
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/reset-password`,
+      });
+
+      if (error) throw error;
+
+      setResetEmailSent(true);
+      toast({
+        title: "Check Your Email",
+        description: "We've sent you a password reset link.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send reset email. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (checkingAuth) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -134,83 +174,181 @@ const Auth = () => {
         </Button>
 
         <div className="bg-card rounded-lg shadow-xl border p-8">
-          <div className="text-center mb-8">
-            <h1 className="font-playfair text-3xl font-bold text-foreground mb-2">
-              {isLogin ? "Admin Login" : "Create Account"}
-            </h1>
-            <p className="text-muted-foreground">
-              {isLogin
-                ? "Sign in to access the admin panel"
-                : "Create an account to get started"}
-            </p>
-          </div>
+          {isForgotPassword ? (
+            // Forgot Password View
+            <>
+              <div className="text-center mb-8">
+                <h1 className="font-playfair text-3xl font-bold text-foreground mb-2">
+                  Reset Password
+                </h1>
+                <p className="text-muted-foreground">
+                  {resetEmailSent
+                    ? "Check your inbox for the reset link"
+                    : "Enter your email to receive a reset link"}
+                </p>
+              </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="email" className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-muted-foreground" />
-                Email
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="bg-background"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="password" className="flex items-center gap-2">
-                <Lock className="h-4 w-4 text-muted-foreground" />
-                Password
-              </Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={6}
-                className="bg-background"
-              />
-            </div>
-
-            <Button
-              type="submit"
-              variant="cta"
-              size="lg"
-              className="w-full"
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  {isLogin ? "Signing in..." : "Creating account..."}
-                </>
+              {resetEmailSent ? (
+                <div className="text-center space-y-4">
+                  <div className="bg-primary/10 rounded-lg p-4">
+                    <Mail className="h-12 w-12 text-accent mx-auto mb-3" />
+                    <p className="text-sm text-muted-foreground">
+                      We've sent a password reset link to <strong>{email}</strong>. 
+                      Please check your email and click the link to reset your password.
+                    </p>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      setIsForgotPassword(false);
+                      setResetEmailSent(false);
+                      setEmail("");
+                    }}
+                    className="text-accent"
+                  >
+                    Back to Login
+                  </Button>
+                </div>
               ) : (
-                <>
-                  <User className="mr-2 h-4 w-4" />
-                  {isLogin ? "Sign In" : "Create Account"}
-                </>
-              )}
-            </Button>
-          </form>
+                <form onSubmit={handleForgotPassword} className="space-y-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="reset-email" className="flex items-center gap-2">
+                      <Mail className="h-4 w-4 text-muted-foreground" />
+                      Email
+                    </Label>
+                    <Input
+                      id="reset-email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="bg-background"
+                    />
+                  </div>
 
-          <div className="mt-6 text-center">
-            <button
-              type="button"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-accent hover:underline text-sm font-medium"
-            >
-              {isLogin
-                ? "Don't have an account? Sign up"
-                : "Already have an account? Sign in"}
-            </button>
-          </div>
+                  <Button
+                    type="submit"
+                    variant="cta"
+                    size="lg"
+                    className="w-full"
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      "Send Reset Link"
+                    )}
+                  </Button>
+
+                  <div className="text-center">
+                    <button
+                      type="button"
+                      onClick={() => setIsForgotPassword(false)}
+                      className="text-accent hover:underline text-sm font-medium"
+                    >
+                      Back to Login
+                    </button>
+                  </div>
+                </form>
+              )}
+            </>
+          ) : (
+            // Login/Signup View
+            <>
+              <div className="text-center mb-8">
+                <h1 className="font-playfair text-3xl font-bold text-foreground mb-2">
+                  {isLogin ? "Admin Login" : "Create Account"}
+                </h1>
+                <p className="text-muted-foreground">
+                  {isLogin
+                    ? "Sign in to access the admin panel"
+                    : "Create an account to get started"}
+                </p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="flex items-center gap-2">
+                    <Mail className="h-4 w-4 text-muted-foreground" />
+                    Email
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="bg-background"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="password" className="flex items-center gap-2">
+                      <Lock className="h-4 w-4 text-muted-foreground" />
+                      Password
+                    </Label>
+                    {isLogin && (
+                      <button
+                        type="button"
+                        onClick={() => setIsForgotPassword(true)}
+                        className="text-xs text-accent hover:underline"
+                      >
+                        Forgot Password?
+                      </button>
+                    )}
+                  </div>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    minLength={6}
+                    className="bg-background"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  variant="cta"
+                  size="lg"
+                  className="w-full"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      {isLogin ? "Signing in..." : "Creating account..."}
+                    </>
+                  ) : (
+                    <>
+                      <User className="mr-2 h-4 w-4" />
+                      {isLogin ? "Sign In" : "Create Account"}
+                    </>
+                  )}
+                </Button>
+              </form>
+
+              <div className="mt-6 text-center">
+                <button
+                  type="button"
+                  onClick={() => setIsLogin(!isLogin)}
+                  className="text-accent hover:underline text-sm font-medium"
+                >
+                  {isLogin
+                    ? "Don't have an account? Sign up"
+                    : "Already have an account? Sign in"}
+                </button>
+              </div>
+            </>
+          )}
         </div>
 
         <p className="mt-6 text-center text-xs text-muted-foreground">
