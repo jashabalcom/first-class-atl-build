@@ -94,7 +94,7 @@ const ResidentialContractorAtlanta = () => {
     <>
       <Helmet>
         <title>Residential Contractor Atlanta | Licensed Home Remodeling | First Class</title>
-        <meta name="description" content="Licensed residential contractor in Atlanta. Kitchen remodeling, bathroom renovations, basement finishing, deck building, flooring & painting. 20+ years experience. Free estimates. Call 678-671-6336." />
+        <meta name="description" content="Licensed Atlanta residential contractor. Kitchen, bathroom, basement, deck, flooring & painting. 20+ years experience. Free estimates. 678-671-6336." />
         <meta name="keywords" content="residential contractor atlanta, home contractor atlanta, residential remodeling atlanta, home remodeling contractor atlanta ga, residential construction atlanta, house contractor atlanta, licensed residential contractor atlanta" />
         <link rel="canonical" href="https://fcconstruct.com/residential-contractor-atlanta" />
         <meta property="og:title" content="Residential Contractor Atlanta | Licensed Home Remodeling Experts" />

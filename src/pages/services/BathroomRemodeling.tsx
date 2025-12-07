@@ -138,10 +138,7 @@ const BathroomRemodeling = () => {
     <>
       <Helmet>
         <title>Bathroom Remodeling Atlanta | Bathroom Remodel Contractors | First Class</title>
-        <meta 
-          name="description" 
-          content="Expert bathroom remodeling in Atlanta. Custom showers, vanities, tile work & complete bathroom renovations. Licensed contractor, 20+ years experience. Free estimates. Call 678-671-6336." 
-        />
+        <meta name="description" content="Atlanta bathroom remodeling experts. Custom showers, vanities & tile work. Licensed, 20+ years experience. Free estimates. 678-671-6336." />
         <meta 
           name="keywords" 
           content="bathroom remodel atlanta, bathroom remodeling atlanta ga, atlanta bathroom renovation, bathroom renovation atlanta, bathroom contractors atlanta, bathroom remodel contractors atlanta, shower remodel atlanta, vanity installation atlanta, tile contractor atlanta" 

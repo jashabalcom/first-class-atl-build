@@ -67,7 +67,7 @@ const DeckBuilders = () => {
     <>
       <Helmet>
         <title>Deck Builders Atlanta | Custom Deck Construction | First Class</title>
-        <meta name="description" content="Expert deck builders in Atlanta. Custom wood & composite decks, multi-level designs, pergolas & repairs. Licensed contractor, 20+ years experience. Free estimates. Call 678-671-6336." />
+        <meta name="description" content="Atlanta deck builders. Custom wood & composite decks, pergolas & repairs. Licensed, 20+ years experience. Free estimates. 678-671-6336." />
         <meta name="keywords" content="deck builders atlanta, deck construction atlanta, composite deck atlanta, wood deck atlanta, deck contractors atlanta ga, deck building atlanta, deck repair atlanta" />
         <link rel="canonical" href="https://fcconstruct.com/deck-builders" />
         <meta property="og:title" content="Deck Builders Atlanta | Custom Deck Construction" />
