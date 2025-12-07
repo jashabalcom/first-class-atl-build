@@ -19,13 +19,22 @@ interface GalleryProject {
   after_image_url: string;
   featured: boolean | null;
   display_order: number | null;
+  display_mode: string | null;
+}
+
+interface ProjectImage {
+  id: string;
+  project_id: string;
+  image_url: string;
+  display_order: number | null;
 }
 
 const GalleryGrid = ({ filter }: GalleryGridProps) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentProject, setCurrentProject] = useState<GalleryProject | null>(null);
 
-  const { data: projects = [], isLoading } = useQuery({
+  // Fetch projects
+  const { data: projects = [], isLoading: projectsLoading } = useQuery({
     queryKey: ['gallery-projects'],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -37,6 +46,34 @@ const GalleryGrid = ({ filter }: GalleryGridProps) => {
       return data as GalleryProject[];
     },
   });
+
+  // Fetch all project images for slideshow thumbnails
+  const { data: projectImages = [], isLoading: imagesLoading } = useQuery({
+    queryKey: ['gallery-project-images'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('gallery_project_images')
+        .select('*')
+        .order('display_order', { ascending: true });
+      
+      if (error) throw error;
+      return data as ProjectImage[];
+    },
+  });
+
+  const isLoading = projectsLoading || imagesLoading;
+
+  // Helper to get thumbnail for a project
+  const getThumbnail = (project: GalleryProject): string => {
+    // If slideshow mode and after_image_url is placeholder, use first slideshow image
+    if (project.display_mode === 'slideshow') {
+      const firstImage = projectImages.find(img => img.project_id === project.id);
+      if (firstImage) {
+        return firstImage.image_url;
+      }
+    }
+    return project.after_image_url;
+  };
 
   const filteredProjects = filter === "all" 
     ? projects 
@@ -82,7 +119,7 @@ const GalleryGrid = ({ filter }: GalleryGridProps) => {
               title: project.title,
               category: project.category,
               location: project.location || '',
-              afterImage: project.after_image_url,
+              afterImage: getThumbnail(project),
               description: project.description || '',
             }}
             onClick={() => handleCardClick(project)}
