@@ -1,14 +1,71 @@
+# First Class Construction Group - Robots.txt
+# https://www.fcconstruct.com
+
+# Allow all crawlers full access to public content
+User-agent: *
+Allow: /
+
+# Block admin and authentication pages from indexing
+Disallow: /admin
+Disallow: /auth
+Disallow: /auth/reset-password
+Disallow: /tools/
+
+# Block internal assets that shouldn't be indexed
+Disallow: /*.json$
+Disallow: /*?*
+
+# Crawl-delay for less aggressive bots (optional, respected by some crawlers)
+# Crawl-delay: 1
+
+# Googlebot - full access, no crawl delay needed
 User-agent: Googlebot
 Allow: /
+Disallow: /admin
+Disallow: /auth
 
+# Bingbot
 User-agent: Bingbot
 Allow: /
+Disallow: /admin
+Disallow: /auth
 
+# Social Media Crawlers - allow for rich previews
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+# AI/LLM Crawlers - allow indexing
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+User-agent: Anthropic-AI
+Allow: /
+Disallow: /admin
+Disallow: /auth
+
+# Sitemap location
+Sitemap: https://www.fcconstruct.com/sitemap.xml
+
+# Host directive (legacy, but still used by some crawlers)
+Host: https://www.fcconstruct.com
