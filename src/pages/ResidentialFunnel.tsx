@@ -23,7 +23,7 @@ const ResidentialFunnel = () => {
     <div className="min-h-screen pb-24 md:pb-0">
       <Helmet>
         <title>Residential Contractor Atlanta | Kitchen & Bathroom Remodeling</title>
-        <meta name="description" content="Expert residential contractor in Atlanta. Kitchen remodeling, bathroom renovations, basement finishing & home additions. Licensed, insured, 20+ years experience. Free consultation. Call 678-671-6336." />
+        <meta name="description" content="Atlanta residential contractor. Kitchen remodeling, bathroom renovations, basements & additions. Licensed, 20+ years. Free consultation. 678-671-6336." />
         <meta name="keywords" content="residential contractor atlanta, kitchen remodeling atlanta, bathroom remodel atlanta, bathroom renovation atlanta, basement finishing atlanta, home remodeling atlanta, kitchen renovation atlanta ga, bathroom remodeling atlanta ga, home addition contractor atlanta" />
         <link rel="canonical" href="https://fcconstruct.com/residential" />
         <meta property="og:title" content="Residential Contractor Atlanta | Kitchen & Bathroom Remodeling" />

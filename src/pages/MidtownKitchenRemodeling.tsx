@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -16,6 +17,29 @@ import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 const MidtownKitchenRemodeling = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Kitchen Remodeling Midtown Atlanta | Licensed Kitchen Contractor</title>
+        <meta name="description" content="Midtown Atlanta kitchen remodeling experts. Urban kitchen renovations for condos & homes. Licensed, DBE/MBE certified. Free quote. 678-671-6336." />
+        <meta name="keywords" content="kitchen remodeling midtown atlanta, midtown kitchen contractor, kitchen renovation midtown, atlanta urban kitchen remodel" />
+        <link rel="canonical" href="https://fcconstruct.com/midtown-kitchen-remodeling" />
+        <meta property="og:title" content="Kitchen Remodeling Midtown Atlanta | Licensed Kitchen Contractor" />
+        <meta property="og:description" content="Midtown Atlanta kitchen remodeling. Urban renovations for condos & homes. Licensed, DBE/MBE certified." />
+        <meta property="og:url" content="https://fcconstruct.com/midtown-kitchen-remodeling" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Kitchen Remodeling Midtown Atlanta",
+            "provider": {
+              "@type": "GeneralContractor",
+              "name": "First Class Construction Group",
+              "telephone": "678-671-6336"
+            },
+            "areaServed": "Midtown, Atlanta, GA",
+            "serviceType": "Kitchen Remodeling"
+          })}
+        </script>
+      </Helmet>
       <Header />
       
       <Hero

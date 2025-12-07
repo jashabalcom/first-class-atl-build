@@ -30,7 +30,7 @@ const Home = () => {
     <div className="min-h-screen pb-24 md:pb-0">
       <Helmet>
         <title>General Contractor Atlanta GA | Licensed Construction Company | First Class</title>
-        <meta name="description" content="First Class Construction Group is Atlanta's premier licensed general contractor. Kitchen remodeling, bathroom renovations, commercial build-outs & more. DBE/MBE certified. Free estimates. Call 678-671-6336." />
+        <meta name="description" content="Atlanta's licensed general contractor. Kitchen & bathroom remodeling, commercial build-outs. DBE/MBE certified. Free estimates. 678-671-6336." />
         <meta name="keywords" content="general contractor atlanta ga, contractors atlanta ga, construction companies atlanta ga, licensed contractor atlanta, home remodeling atlanta, kitchen remodeling atlanta, bathroom remodel atlanta, commercial contractor atlanta, DBE contractor atlanta, MBE contractor atlanta" />
         <link rel="canonical" href="https://fcconstruct.com/" />
         <meta property="og:title" content="General Contractor Atlanta GA | Licensed Construction Company" />

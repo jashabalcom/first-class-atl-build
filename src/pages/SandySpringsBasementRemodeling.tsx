@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -16,6 +17,29 @@ import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 const SandySpringsBasementRemodeling = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Bathroom Remodeling Sandy Springs | Licensed Bathroom Contractor</title>
+        <meta name="description" content="Sandy Springs bathroom remodeling experts. Luxury bathroom renovations with premium materials. Licensed, DBE/MBE certified. Free quote. 678-671-6336." />
+        <meta name="keywords" content="bathroom remodeling sandy springs, sandy springs bathroom contractor, bathroom renovation sandy springs ga, luxury bathroom sandy springs" />
+        <link rel="canonical" href="https://fcconstruct.com/sandy-springs-bathroom-remodeling" />
+        <meta property="og:title" content="Bathroom Remodeling Sandy Springs | Licensed Bathroom Contractor" />
+        <meta property="og:description" content="Sandy Springs bathroom remodeling. Luxury renovations with premium materials. Licensed, DBE/MBE certified." />
+        <meta property="og:url" content="https://fcconstruct.com/sandy-springs-bathroom-remodeling" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Bathroom Remodeling Sandy Springs",
+            "provider": {
+              "@type": "GeneralContractor",
+              "name": "First Class Construction Group",
+              "telephone": "678-671-6336"
+            },
+            "areaServed": "Sandy Springs, GA",
+            "serviceType": "Bathroom Remodeling"
+          })}
+        </script>
+      </Helmet>
       <Header />
       
       <Hero
