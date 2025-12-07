@@ -13,6 +13,7 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import MobileCallBar from "@/components/MobileCallBar";
+import StickyAICTA from "@/components/StickyAICTA";
 import heroBathroomImage from "@/assets/hero-bathroom.jpg";
 import bathroomAfterImage from "@/assets/bathroom-after.jpg";
 
@@ -493,6 +494,7 @@ const BathroomRemodeling = () => {
 
       <Footer />
       <MobileCallBar />
+      <StickyAICTA roomType="bathroom" />
     </>
   );
 };

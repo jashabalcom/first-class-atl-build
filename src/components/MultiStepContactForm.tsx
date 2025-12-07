@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import { formatPhoneNumber } from "@/lib/phone-formatter";
 import { submitLead } from "@/lib/lead-submission";
 import { AIRecommendations } from "@/components/AIRecommendations";
-import { Shield, Lock, Clock, ArrowLeft, ArrowRight, Check, Phone, Hammer, Bath, Home, PlusCircle, Building2, Wrench, SkipForward } from "lucide-react";
+import { Shield, Lock, Clock, ArrowLeft, ArrowRight, Check, Phone, Hammer, Bath, Home, PlusCircle, Building2, Wrench, SkipForward, Sparkles, Wand2 } from "lucide-react";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
@@ -411,6 +411,23 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
         </div>
       ) : (
         <>
+          {/* AI Teaser Banner */}
+          <div className="mb-6 bg-gradient-to-r from-accent/10 via-primary/5 to-accent/10 border border-accent/20 rounded-xl p-4 animate-fade-in">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
+                <Sparkles className="w-5 h-5 text-accent" />
+              </div>
+              <div className="flex-1">
+                <p className="font-medium text-foreground text-sm">
+                  ✨ Complete this form to unlock <span className="text-accent font-semibold">FREE AI Design Insights</span>
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Get personalized recommendations for your {formValues.projectType ? projectTypes.find(t => t.id === formValues.projectType)?.title?.toLowerCase() : 'project'}
+                </p>
+              </div>
+            </div>
+          </div>
+
           <FormStepIndicator steps={steps} currentStep={currentStep} completedSteps={completedSteps} />
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">

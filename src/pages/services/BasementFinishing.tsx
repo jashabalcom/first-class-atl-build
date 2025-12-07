@@ -13,6 +13,7 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import MobileCallBar from "@/components/MobileCallBar";
+import StickyAICTA from "@/components/StickyAICTA";
 import basementFinished from "@/assets/basement-finished.jpg";
 
 const BasementFinishing = () => {
@@ -312,6 +313,7 @@ const BasementFinishing = () => {
 
       <Footer />
       <MobileCallBar />
+      <StickyAICTA roomType="basement" />
     </>
   );
 };

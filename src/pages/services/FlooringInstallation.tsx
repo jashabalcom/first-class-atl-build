@@ -13,6 +13,7 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import MobileCallBar from "@/components/MobileCallBar";
+import StickyAICTA from "@/components/StickyAICTA";
 import heroFlooring from "@/assets/hero-flooring.jpg";
 
 const FlooringInstallation = () => {
@@ -299,6 +300,7 @@ const FlooringInstallation = () => {
 
       <Footer />
       <MobileCallBar />
+      <StickyAICTA roomType="flooring" />
     </>
   );
 };

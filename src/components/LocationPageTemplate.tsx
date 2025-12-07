@@ -12,6 +12,7 @@ import { Award, Clock, Shield, Home, Users, Sparkles } from "lucide-react";
 import AIVisualizerCTA from "@/components/AIVisualizerCTA";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import ClientLogosCarousel from "@/components/ClientLogosCarousel";
+import StickyAICTA from "@/components/StickyAICTA";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import heroBathroom from "@/assets/hero-bathroom.jpg";
 import heroCommercial from "@/assets/hero-commercial.jpg";
@@ -400,6 +401,7 @@ const LocationPageTemplate = ({
 
       <Footer />
       <MobileCallBar />
+      <StickyAICTA roomType={services[0]?.toLowerCase() || "room"} />
     </div>
   );
 };

@@ -13,6 +13,7 @@ import ProcessStep from "@/components/ProcessStep";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import MobileCallBar from "@/components/MobileCallBar";
+import StickyAICTA from "@/components/StickyAICTA";
 import heroDeck from "@/assets/hero-deck.jpg";
 
 const DeckBuilders = () => {
@@ -299,6 +300,7 @@ const DeckBuilders = () => {
 
       <Footer />
       <MobileCallBar />
+      <StickyAICTA roomType="deck" />
     </>
   );
 };
