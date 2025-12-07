@@ -163,19 +163,19 @@ const ResidentialFunnel = () => {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
-                <h3 className="text-xl font-bold mb-3">Kitchen Remodeling</h3>
+              <a href="/kitchen-remodeling" className="p-6 bg-card border rounded-lg hover:shadow-lg hover:border-accent transition-all group">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">Kitchen Remodeling</h3>
                 <p className="text-sm text-muted-foreground">
                   Layouts, custom cabinetry, countertops, lighting, and appliances for everyday luxury.
                 </p>
-              </div>
+              </a>
               
-              <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
-                <h3 className="text-xl font-bold mb-3">Bathroom Remodeling</h3>
+              <a href="/bathroom-remodeling" className="p-6 bg-card border rounded-lg hover:shadow-lg hover:border-accent transition-all group">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">Bathroom Remodeling</h3>
                 <p className="text-sm text-muted-foreground">
                   Spa-level finishes, smart storage, flawless tile & fixtures.
                 </p>
-              </div>
+              </a>
               
               <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
                 <h3 className="text-xl font-bold mb-3">Basement Finishing</h3>

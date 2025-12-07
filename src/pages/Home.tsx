@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
@@ -16,12 +17,13 @@ import AnimatedSection from "@/components/AnimatedSection";
 import FeaturedBlogSection from "@/components/FeaturedBlogSection";
 import BlogTeaser from "@/components/BlogTeaser";
 import SectionLabel from "@/components/SectionLabel";
-import { Home as HomeIcon, Building2, Calendar, UserCheck, ShieldCheck } from "lucide-react";
+import { Home as HomeIcon, Building2, Calendar, UserCheck, ShieldCheck, ArrowRight } from "lucide-react";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import kitchenAfter from "@/assets/kitchen-after.jpg";
 import basementFinished from "@/assets/basement-finished.jpg";
 import retailBuildout from "@/assets/retail-buildout.jpg";
 import officeRenovation from "@/assets/office-renovation.jpg";
+import bathroomAfter from "@/assets/bathroom-after.jpg";
 
 const Home = () => {
   return (
@@ -185,13 +187,21 @@ const Home = () => {
               <div className="section-divider mt-6" />
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <ProjectCard
                 title="Modern Kitchen Remodel"
                 subtitle="Buckhead Residence"
                 description="Open layout, custom cabinetry, stone surfaces, architectural lighting."
                 image={kitchenAfter}
-                link="#"
+                link="/kitchen-remodeling"
+                badge="Residential"
+              />
+              <ProjectCard
+                title="Luxury Bathroom Renovation"
+                subtitle="Sandy Springs Home"
+                description="Custom tile work, walk-in shower, elegant vanity installation."
+                image={bathroomAfter}
+                link="/bathroom-remodeling"
                 badge="Residential"
               />
               <ProjectCard
@@ -199,17 +209,37 @@ const Home = () => {
                 subtitle="Midtown Atlanta Commercial"
                 description="3,000 sq ft tenant improvement delivered in 6 weeks."
                 image={retailBuildout}
-                link="#"
+                link="/retail-construction"
                 badge="Commercial"
               />
-              <ProjectCard
-                title="Office Renovation"
-                subtitle="Perimeter Business Park Atlanta"
-                description="Phased construction with zero downtime for staff."
-                image={officeRenovation}
-                link="#"
-                badge="Commercial"
-              />
+            </div>
+
+            {/* Quick Links to Service Pages */}
+            <div className="mt-12 text-center">
+              <p className="text-muted-foreground mb-4">Explore our specialized services:</p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <Link 
+                  to="/kitchen-remodeling" 
+                  className="inline-flex items-center gap-1 px-4 py-2 bg-card border rounded-full text-sm hover:border-accent hover:text-accent transition-colors group"
+                >
+                  Kitchen Remodeling
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+                <Link 
+                  to="/bathroom-remodeling" 
+                  className="inline-flex items-center gap-1 px-4 py-2 bg-card border rounded-full text-sm hover:border-accent hover:text-accent transition-colors group"
+                >
+                  Bathroom Remodeling
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+                <Link 
+                  to="/office-renovation" 
+                  className="inline-flex items-center gap-1 px-4 py-2 bg-card border rounded-full text-sm hover:border-accent hover:text-accent transition-colors group"
+                >
+                  Office Renovation
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
