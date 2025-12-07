@@ -39,6 +39,7 @@ import OfficeRenovation from "./pages/services/OfficeRenovation";
 import RestaurantRemodeling from "./pages/services/RestaurantRemodeling";
 import RetailConstruction from "./pages/services/RetailConstruction";
 import TenantBuildout from "./pages/services/TenantBuildout";
+import ResidentialContractorAtlanta from "./pages/services/ResidentialContractorAtlanta";
 
 // Location Pages
 import Atlanta from "./pages/locations/Atlanta";
@@ -113,6 +114,7 @@ const App = () => (
             <Route path="/restaurant-remodeling" element={<RestaurantRemodeling />} />
             <Route path="/retail-construction" element={<RetailConstruction />} />
             <Route path="/tenant-buildout" element={<TenantBuildout />} />
+            <Route path="/residential-contractor-atlanta" element={<ResidentialContractorAtlanta />} />
             <Route path="/atlanta" element={<Atlanta />} />
             <Route path="/buckhead" element={<Buckhead />} />
             <Route path="/midtown" element={<Midtown />} />
