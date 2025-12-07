@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import GHLReviewsWidget from "@/components/GHLReviewsWidget";
 import CertificationBadges from "@/components/CertificationBadges";
+import ClientLogosCarousel from "@/components/ClientLogosCarousel";
 
 const Contact = () => {
   const contactInfo = [
@@ -73,6 +74,8 @@ const Contact = () => {
             </div>
           </div>
         </section>
+
+        <ClientLogosCarousel />
 
         {/* Contact Form + Info Section */}
         <section className="py-12 md:py-20">
