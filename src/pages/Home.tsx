@@ -220,6 +220,13 @@ const Home = () => {
               <p className="text-muted-foreground mb-4">Explore our specialized services:</p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Link 
+                  to="/residential-contractor-atlanta" 
+                  className="inline-flex items-center gap-1 px-4 py-2 bg-card border rounded-full text-sm hover:border-accent hover:text-accent transition-colors group"
+                >
+                  Residential Contractor
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+                <Link 
                   to="/kitchen-remodeling" 
                   className="inline-flex items-center gap-1 px-4 py-2 bg-card border rounded-full text-sm hover:border-accent hover:text-accent transition-colors group"
                 >

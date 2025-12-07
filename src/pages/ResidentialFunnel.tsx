@@ -219,6 +219,13 @@ const ResidentialFunnel = () => {
                 </p>
               </a>
               
+              <a href="/residential-contractor-atlanta" className="p-6 bg-card border rounded-lg hover:shadow-lg hover:border-accent transition-all group">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">All Residential Services</h3>
+                <p className="text-sm text-muted-foreground">
+                  View all our residential contractor services in one place.
+                </p>
+              </a>
+              
               <div className="p-6 bg-card border rounded-lg hover:shadow-lg transition-shadow">
                 <h3 className="text-xl font-bold mb-3">Home Additions</h3>
                 <p className="text-sm text-muted-foreground">
