@@ -62,14 +62,44 @@ const displayModeLabels = {
   before_after: 'Before & After'
 };
 
+// Placeholder image for projects without images
+const PLACEHOLDER_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect fill="%23e5e7eb" width="200" height="200"/%3E%3Ctext fill="%239ca3af" font-family="sans-serif" font-size="14" text-anchor="middle" x="100" y="105"%3ENo Image%3C/text%3E%3C/svg%3E';
+
+// Helper to get thumbnail for admin display - prioritizes uploaded images
+const getAdminThumbnail = (
+  project: GalleryProject,
+  projectImages: Record<string, ProjectImage[]>
+): string => {
+  const images = projectImages[project.id] || [];
+  
+  if (images.length > 0) {
+    // For before_after, prefer 'after' type image
+    if (project.display_mode === 'before_after') {
+      const afterImg = images.find(img => img.image_type === 'after');
+      if (afterImg) return afterImg.image_url;
+    }
+    // For slideshow or any mode, use first image
+    return images[0].image_url;
+  }
+  
+  // Fallback to after_image_url if it exists and isn't empty
+  if (project.after_image_url && project.after_image_url.trim() !== '') {
+    return project.after_image_url;
+  }
+  
+  // Return placeholder if no images available
+  return PLACEHOLDER_IMAGE;
+};
+
 interface SortableProjectCardProps {
   project: GalleryProject;
   onEdit: (project: GalleryProject) => void;
   onDelete: (id: string) => void;
   imageCount: number;
+  thumbnail: string;
 }
 
-function SortableProjectCard({ project, onEdit, onDelete, imageCount }: SortableProjectCardProps) {
+function SortableProjectCard({ project, onEdit, onDelete, imageCount, thumbnail }: SortableProjectCardProps) {
   const {
     attributes,
     listeners,
@@ -99,9 +129,9 @@ function SortableProjectCard({ project, onEdit, onDelete, imageCount }: Sortable
             <GripVertical className="w-5 h-5" />
           </button>
           <img
-            src={project.after_image_url}
+            src={thumbnail}
             alt={project.title}
-            className="w-20 h-20 object-cover rounded"
+            className="w-20 h-20 object-cover rounded bg-muted"
           />
           <div className="flex-1">
             <h3 className="font-semibold text-foreground">{project.title}</h3>
@@ -508,21 +538,50 @@ export default function AdminGallery() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    const needsAfterImage = formData.display_mode === 'single' || 
-      (formData.display_mode === 'slideshow' && currentProjectImages.filter(i => i.image_type === 'gallery').length === 0) ||
-      (formData.display_mode === 'before_after' && currentProjectImages.filter(i => i.image_type === 'after').length === 0);
-    
     if (!formData.title || !formData.category) {
       toast.error('Please fill in required fields (title, category)');
       return;
     }
 
-    if (needsAfterImage && !formData.after_image_url) {
-      toast.error('Please add at least one image');
+    // Validation based on display mode
+    if (formData.display_mode === 'single' && !formData.after_image_url) {
+      toast.error('Please add an image for this project');
       return;
+    }
+    
+    if (formData.display_mode === 'slideshow') {
+      const galleryImages = currentProjectImages.filter(i => i.image_type === 'gallery');
+      if (galleryImages.length === 0) {
+        toast.error('Please add at least one gallery image for slideshow mode');
+        return;
+      }
+    }
+    
+    if (formData.display_mode === 'before_after') {
+      const beforeImages = currentProjectImages.filter(i => i.image_type === 'before');
+      const afterImages = currentProjectImages.filter(i => i.image_type === 'after');
+      if (beforeImages.length === 0 || afterImages.length === 0) {
+        toast.error('Before & After mode requires both a before image and an after image');
+        return;
+      }
     }
 
     setLoading(true);
+
+    // Determine the best thumbnail URL for after_image_url field
+    let thumbnailUrl = formData.after_image_url;
+    if (!thumbnailUrl || thumbnailUrl.trim() === '') {
+      // For slideshow, use first gallery image
+      if (formData.display_mode === 'slideshow') {
+        const firstGallery = currentProjectImages.find(i => i.image_type === 'gallery');
+        thumbnailUrl = firstGallery?.image_url || '';
+      }
+      // For before_after, use the after image
+      if (formData.display_mode === 'before_after') {
+        const afterImg = currentProjectImages.find(i => i.image_type === 'after');
+        thumbnailUrl = afterImg?.image_url || '';
+      }
+    }
 
     const projectData = {
       title: formData.title,
@@ -530,7 +589,7 @@ export default function AdminGallery() {
       location: formData.location || null,
       description: formData.description || null,
       before_image_url: formData.before_image_url || null,
-      after_image_url: formData.after_image_url || currentProjectImages.find(i => i.image_type === 'after' || i.image_type === 'gallery')?.image_url || '',
+      after_image_url: thumbnailUrl,
       featured: formData.featured,
       display_order: formData.display_order,
       display_mode: formData.display_mode
@@ -586,9 +645,9 @@ export default function AdminGallery() {
       }
     }
 
-    // Show success dialog with preview
-    const thumbnailUrl = formData.after_image_url || currentProjectImages.find(i => i.image_type === 'after' || i.image_type === 'gallery')?.image_url || '';
-    setSavedProject({ title: formData.title, thumbnail: thumbnailUrl });
+    // Show success dialog with preview - use same logic as thumbnail calculation
+    const successThumbnail = thumbnailUrl || currentProjectImages.find(i => i.image_type === 'after' || i.image_type === 'gallery')?.image_url || PLACEHOLDER_IMAGE;
+    setSavedProject({ title: formData.title, thumbnail: successThumbnail });
     setShowSuccessDialog(true);
     setIsDialogOpen(false);
     fetchProjects();
@@ -1159,6 +1218,7 @@ export default function AdminGallery() {
                   onEdit={openEditDialog}
                   onDelete={handleDelete}
                   imageCount={projectImages[project.id]?.length || 0}
+                  thumbnail={getAdminThumbnail(project, projectImages)}
                 />
               ))}
             </div>
@@ -1171,9 +1231,9 @@ export default function AdminGallery() {
               <CardContent className="p-4">
                 <div className="flex items-center gap-4">
                   <img
-                    src={project.after_image_url}
+                    src={getAdminThumbnail(project, projectImages)}
                     alt={project.title}
-                    className="w-20 h-20 object-cover rounded"
+                    className="w-20 h-20 object-cover rounded bg-muted"
                   />
                   <div className="flex-1">
                     <h3 className="font-semibold text-foreground">{project.title}</h3>
