@@ -6,6 +6,7 @@ import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { Hammer, Bath, Home, PlusCircle, Building2, Calculator, ArrowRight, Info, Sparkles, Loader2, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { submitLead } from "@/lib/lead-submission";
+import DOMPurify from "dompurify";
 
 const RECS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/project-recommendations`;
 
@@ -210,11 +211,17 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
   };
 
   const formatAIContent = (content: string) => {
-    return content
+    const html = content
       .replace(/## (.+)/g, '<h3 class="text-base font-semibold text-foreground mt-4 mb-2 first:mt-0">$1</h3>')
       .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold">$1</strong>')
       .replace(/\n- /g, '\n• ')
       .replace(/\n/g, '<br />');
+    
+    // Sanitize to prevent XSS from AI-generated content
+    return DOMPurify.sanitize(html, {
+      ALLOWED_TAGS: ['h3', 'strong', 'br'],
+      ALLOWED_ATTR: ['class']
+    });
   };
 
   const handleEmailSubmit = async (e: React.FormEvent) => {

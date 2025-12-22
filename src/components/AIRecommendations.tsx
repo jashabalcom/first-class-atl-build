@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Sparkles, RefreshCw, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import DOMPurify from "dompurify";
 
 interface AIRecommendationsProps {
   projectType: string;
@@ -108,12 +109,18 @@ export function AIRecommendations({
 
   const formatContent = (content: string) => {
     // Convert markdown headers and formatting to styled HTML
-    return content
+    const html = content
       .replace(/## (.+)/g, '<h3 class="text-lg font-semibold text-foreground mt-6 mb-3 first:mt-0">$1</h3>')
       .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold">$1</strong>')
       .replace(/\n- /g, '\n• ')
       .replace(/\n(\d+)\. /g, '\n$1. ')
       .replace(/\n/g, '<br />');
+    
+    // Sanitize to prevent XSS from AI-generated content
+    return DOMPurify.sanitize(html, {
+      ALLOWED_TAGS: ['h3', 'strong', 'br'],
+      ALLOWED_ATTR: ['class']
+    });
   };
 
   if (error && !recommendations) {
