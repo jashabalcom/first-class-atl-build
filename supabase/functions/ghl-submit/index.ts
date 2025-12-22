@@ -272,7 +272,7 @@ async function appendToGoogleSheets(lead: FormSubmission & { created_at: string 
   }
 }
 
-// Send to GoHighLevel
+// Send to GoHighLevel - Create/Update Contact
 async function sendToGHL(formData: FormSubmission): Promise<{ success: boolean; contactId?: string }> {
   try {
     const ghlApiKey = Deno.env.get('GHL_API_KEY');
@@ -362,10 +362,115 @@ async function sendToGHL(formData: FormSubmission): Promise<{ success: boolean; 
       return { success: false };
     }
 
-    console.log('GHL success:', ghlData);
+    console.log('GHL contact created:', ghlData.contact?.id);
     return { success: true, contactId: ghlData.contact?.id };
   } catch (error) {
-    console.error('GHL error:', error);
+    console.error('GHL contact error:', error);
+    return { success: false };
+  }
+}
+
+// Create Opportunity in GHL Pipeline
+async function createOpportunity(
+  contactId: string, 
+  formData: FormSubmission
+): Promise<{ success: boolean; opportunityId?: string }> {
+  try {
+    const ghlApiKey = Deno.env.get('GHL_API_KEY');
+    const ghlLocationId = Deno.env.get('GHL_LOCATION_ID');
+    const pipelineId = Deno.env.get('GHL_PIPELINE_ID');
+    const stageId = Deno.env.get('GHL_PIPELINE_STAGE_ID');
+
+    if (!ghlApiKey || !ghlLocationId || !pipelineId || !stageId) {
+      console.log('GHL pipeline credentials not configured, skipping opportunity creation...');
+      return { success: false };
+    }
+
+    // Parse monetary value from budget string
+    let monetaryValue = 0;
+    if (formData.estimatedBudget) {
+      const budgetMatch = formData.estimatedBudget.match(/[\d,]+/);
+      if (budgetMatch) {
+        monetaryValue = parseInt(budgetMatch[0].replace(/,/g, ''), 10) || 0;
+      }
+    }
+
+    // Create opportunity name
+    const opportunityName = `${formData.name} - ${formData.projectType || formData.formSource || 'Website Lead'}`;
+
+    const opportunityPayload = {
+      pipelineId,
+      locationId: ghlLocationId,
+      name: opportunityName,
+      status: 'open',
+      contactId,
+      monetaryValue,
+      pipelineStageId: stageId,
+      source: formData.formSource || 'Website',
+    };
+
+    console.log('Creating GHL opportunity:', opportunityName);
+
+    const response = await fetch('https://services.leadconnectorhq.com/opportunities/', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${ghlApiKey}`,
+        'Content-Type': 'application/json',
+        'Version': '2021-07-28'
+      },
+      body: JSON.stringify(opportunityPayload)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error('GHL opportunity error:', data);
+      return { success: false };
+    }
+
+    console.log('GHL opportunity created:', data.opportunity?.id);
+    return { success: true, opportunityId: data.opportunity?.id };
+  } catch (error) {
+    console.error('GHL opportunity error:', error);
+    return { success: false };
+  }
+}
+
+// Trigger Workflow for Contact
+async function triggerWorkflow(contactId: string): Promise<{ success: boolean }> {
+  try {
+    const ghlApiKey = Deno.env.get('GHL_API_KEY');
+    const workflowId = Deno.env.get('GHL_WORKFLOW_ID');
+
+    if (!ghlApiKey || !workflowId) {
+      console.log('GHL workflow not configured, skipping...');
+      return { success: false };
+    }
+
+    console.log('Triggering workflow for contact:', contactId);
+
+    const response = await fetch(
+      `https://services.leadconnectorhq.com/contacts/${contactId}/workflow/${workflowId}`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${ghlApiKey}`,
+          'Content-Type': 'application/json',
+          'Version': '2021-07-28'
+        }
+      }
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('GHL workflow error:', errorText);
+      return { success: false };
+    }
+
+    console.log('GHL workflow triggered successfully');
+    return { success: true };
+  } catch (error) {
+    console.error('GHL workflow error:', error);
     return { success: false };
   }
 }
@@ -448,10 +553,28 @@ serve(async (req) => {
       syncErrors.push('Google Sheets sync failed');
     }
 
-    // STEP 3: Send to GoHighLevel (CRM)
+    // STEP 3: Send to GoHighLevel (CRM) - Contact
     const ghlResult = await sendToGHL(formData);
     if (!ghlResult.success) {
-      syncErrors.push('GoHighLevel sync failed');
+      syncErrors.push('GoHighLevel contact sync failed');
+    }
+
+    // STEP 4: Create Opportunity in GHL Pipeline
+    let opportunityResult: { success: boolean; opportunityId?: string } = { success: false };
+    if (ghlResult.success && ghlResult.contactId) {
+      opportunityResult = await createOpportunity(ghlResult.contactId, formData);
+      if (!opportunityResult.success) {
+        syncErrors.push('GoHighLevel opportunity creation failed');
+      }
+    }
+
+    // STEP 5: Trigger Workflow for Contact
+    let workflowResult = { success: false };
+    if (ghlResult.success && ghlResult.contactId) {
+      workflowResult = await triggerWorkflow(ghlResult.contactId);
+      if (!workflowResult.success) {
+        syncErrors.push('GoHighLevel workflow trigger failed');
+      }
     }
 
     // Update lead with sync status
@@ -462,6 +585,8 @@ serve(async (req) => {
           synced_to_sheets: sheetsSuccess,
           synced_to_ghl: ghlResult.success,
           ghl_contact_id: ghlResult.contactId || null,
+          ghl_opportunity_id: opportunityResult.opportunityId || null,
+          workflow_triggered: workflowResult.success,
           sync_errors: syncErrors.length > 0 ? syncErrors : [],
         })
         .eq('id', leadData.id);
@@ -482,10 +607,13 @@ serve(async (req) => {
         success: true, 
         leadId: leadData?.id,
         contactId: ghlResult.contactId,
+        opportunityId: opportunityResult.opportunityId,
         syncStatus: {
           database: !!leadData,
           googleSheets: sheetsSuccess,
           goHighLevel: ghlResult.success,
+          opportunity: opportunityResult.success,
+          workflow: workflowResult.success,
         }
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }

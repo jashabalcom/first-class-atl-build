@@ -161,6 +161,7 @@ export type Database = {
           estimated_budget: string | null
           form_source: string
           ghl_contact_id: string | null
+          ghl_opportunity_id: string | null
           id: string
           message: string | null
           name: string
@@ -171,6 +172,7 @@ export type Database = {
           synced_to_ghl: boolean | null
           synced_to_sheets: boolean | null
           timeline: string | null
+          workflow_triggered: boolean | null
         }
         Insert: {
           business_type?: string | null
@@ -181,6 +183,7 @@ export type Database = {
           estimated_budget?: string | null
           form_source: string
           ghl_contact_id?: string | null
+          ghl_opportunity_id?: string | null
           id?: string
           message?: string | null
           name: string
@@ -191,6 +194,7 @@ export type Database = {
           synced_to_ghl?: boolean | null
           synced_to_sheets?: boolean | null
           timeline?: string | null
+          workflow_triggered?: boolean | null
         }
         Update: {
           business_type?: string | null
@@ -201,6 +205,7 @@ export type Database = {
           estimated_budget?: string | null
           form_source?: string
           ghl_contact_id?: string | null
+          ghl_opportunity_id?: string | null
           id?: string
           message?: string | null
           name?: string
@@ -211,6 +216,7 @@ export type Database = {
           synced_to_ghl?: boolean | null
           synced_to_sheets?: boolean | null
           timeline?: string | null
+          workflow_triggered?: boolean | null
         }
         Relationships: []
       }
