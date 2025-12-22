@@ -105,8 +105,11 @@ function detectSpam(formData: LeadFormData): { isSpam: boolean; reason?: string 
  * 3. GoHighLevel CRM (if configured)
  */
 export async function submitLead(formData: LeadFormData): Promise<SubmissionResult> {
+  console.log('[Lead Submission] Starting submission process...');
+  
   // Check rate limiting first
   if (isRateLimited()) {
+    console.warn('[Lead Submission] Rate limited - too many submissions');
     return {
       success: false,
       error: 'Too many submissions. Please try again later.',
@@ -117,7 +120,7 @@ export async function submitLead(formData: LeadFormData): Promise<SubmissionResu
   const spamCheck = detectSpam(formData);
   if (spamCheck.isSpam) {
     // Silently fail for bots (don't reveal detection)
-    console.warn('Spam detected:', spamCheck.reason);
+    console.warn('[Lead Submission] Spam detected:', spamCheck.reason);
     // Return fake success to not alert the bot
     return {
       success: true,
@@ -131,33 +134,90 @@ export async function submitLead(formData: LeadFormData): Promise<SubmissionResu
   delete cleanData._gotcha;
   delete cleanData._timestamp;
   
+  console.log('[Lead Submission] Cleaned data prepared, invoking edge function...');
+  console.log('[Lead Submission] Form source:', cleanData.formSource);
+  
   try {
-    const { data, error } = await supabase.functions.invoke('ghl-submit', {
+    console.log('[Lead Submission] Calling supabase.functions.invoke("ghl-submit")...');
+    
+    const response = await supabase.functions.invoke('ghl-submit', {
       body: cleanData,
     });
 
-    if (error) {
-      console.error('Lead submission error:', error);
+    console.log('[Lead Submission] Response received:', {
+      hasData: !!response.data,
+      hasError: !!response.error,
+      errorMessage: response.error?.message,
+      errorContext: response.error?.context,
+    });
+
+    if (response.error) {
+      console.error('[Lead Submission] Edge function error:', {
+        message: response.error.message,
+        context: response.error.context,
+        name: response.error.name,
+      });
+      
+      // Provide more specific error messages
+      let errorMessage = 'Failed to submit lead';
+      if (response.error.message?.includes('Failed to fetch') || response.error.message?.includes('NetworkError')) {
+        errorMessage = 'Network error - please check your connection and try again';
+      } else if (response.error.message?.includes('timeout')) {
+        errorMessage = 'Request timed out - please try again';
+      } else if (response.error.message) {
+        errorMessage = response.error.message;
+      }
+      
       return {
         success: false,
-        error: error.message || 'Failed to submit lead',
+        error: errorMessage,
       };
     }
 
+    // Check if data is null or undefined
+    if (!response.data) {
+      console.error('[Lead Submission] No data returned from edge function');
+      return {
+        success: false,
+        error: 'No response from server - please try again',
+      };
+    }
+
+    console.log('[Lead Submission] Success! Lead ID:', response.data.leadId);
+    
     // Record successful submission for rate limiting
     recordSubmission();
 
     return {
-      success: data.success,
-      leadId: data.leadId,
-      contactId: data.contactId,
-      syncStatus: data.syncStatus,
+      success: response.data.success,
+      leadId: response.data.leadId,
+      contactId: response.data.contactId,
+      syncStatus: response.data.syncStatus,
     };
   } catch (error) {
-    console.error('Lead submission exception:', error);
+    console.error('[Lead Submission] Exception caught:', {
+      name: error instanceof Error ? error.name : 'Unknown',
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+    
+    // More specific error handling
+    let errorMessage = 'Network error - please try again';
+    if (error instanceof Error) {
+      if (error.message.includes('Failed to fetch')) {
+        errorMessage = 'Unable to connect to server - please check your internet connection';
+      } else if (error.message.includes('timeout')) {
+        errorMessage = 'Request timed out - please try again';
+      } else if (error.message.includes('NetworkError')) {
+        errorMessage = 'Network error - please check your connection';
+      } else {
+        errorMessage = error.message;
+      }
+    }
+    
     return {
       success: false,
-      error: error instanceof Error ? error.message : 'Network error',
+      error: errorMessage,
     };
   }
 }

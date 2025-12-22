@@ -162,6 +162,7 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
   };
 
   const onSubmit = async (data: ContactFormData) => {
+    console.log('[MultiStepForm] Submitting form data...');
     try {
       const result = await submitLead({
         name: data.name,
@@ -178,16 +179,21 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
         _timestamp: formTimestamp,
       });
 
+      console.log('[MultiStepForm] Submission result:', result);
+
       if (result.success) {
         localStorage.removeItem(STORAGE_KEY);
         setIsSubmitted(true);
         formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
-        throw new Error(result.error);
+        console.error('[MultiStepForm] Submission failed:', result.error);
+        // Show the specific error message from the backend
+        toast.error(result.error || "Failed to send request. Please try again or call us at 678-671-6336.");
       }
     } catch (error) {
-      console.error('MultiStep form submission error:', error);
-      toast.error("Failed to send request. Please try again or call us at 678-671-6336.");
+      console.error('[MultiStepForm] Exception during submission:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      toast.error(`${errorMessage}. Please try again or call us at 678-671-6336.`);
     }
   };
 
