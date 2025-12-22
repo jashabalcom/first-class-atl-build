@@ -1,5 +1,8 @@
 project_id = "cguzpetufoftdqxwqygh"
 
+[functions.ghl-fetch-config]
+verify_jwt = false
+
 [functions.ghl-submit]
 verify_jwt = false
 
