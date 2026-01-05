@@ -163,7 +163,7 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
       });
 
       if (!result.success) {
-        toast.error("Failed to send request. Please try again or call us at 678-671-6336.");
+        toast.error(result.error || "Failed to send request. Please try again or call us at 678-671-6336.");
         return;
       }
 

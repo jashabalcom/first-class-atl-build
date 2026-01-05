@@ -31,36 +31,51 @@ export interface SubmissionResult {
   error?: string;
 }
 
-// Rate limiting storage key
-const RATE_LIMIT_KEY = 'fcc_lead_submissions';
-const RATE_LIMIT_MAX = 3; // Max submissions per window
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
+// Rate limiting - per form source
+const RATE_LIMIT_KEY_PREFIX = 'fcc_lead_submissions_';
+const RATE_LIMIT_MAX = 10; // Max submissions per window (increased from 3)
+const RATE_LIMIT_WINDOW = 30 * 60 * 1000; // 30 minutes in milliseconds (reduced from 1 hour)
 const MIN_FORM_TIME = 3000; // Minimum 3 seconds to fill form (bots are faster)
 
 /**
- * Check if submission is rate limited
+ * Get rate limit key for a specific form source
  */
-function isRateLimited(): boolean {
+function getRateLimitKey(formSource: string): string {
+  return `${RATE_LIMIT_KEY_PREFIX}${formSource}`;
+}
+
+/**
+ * Check if submission is rate limited for a specific form
+ */
+function isRateLimited(formSource: string): { limited: boolean; waitTime?: number } {
   try {
-    const stored = localStorage.getItem(RATE_LIMIT_KEY);
-    if (!stored) return false;
+    const key = getRateLimitKey(formSource);
+    const stored = localStorage.getItem(key);
+    if (!stored) return { limited: false };
     
     const submissions: number[] = JSON.parse(stored);
     const now = Date.now();
     const recentSubmissions = submissions.filter(ts => now - ts < RATE_LIMIT_WINDOW);
     
-    return recentSubmissions.length >= RATE_LIMIT_MAX;
+    if (recentSubmissions.length >= RATE_LIMIT_MAX) {
+      const oldestSubmission = Math.min(...recentSubmissions);
+      const waitTime = Math.ceil((RATE_LIMIT_WINDOW - (now - oldestSubmission)) / 60000);
+      return { limited: true, waitTime };
+    }
+    
+    return { limited: false };
   } catch {
-    return false;
+    return { limited: false };
   }
 }
 
 /**
  * Record a submission for rate limiting
  */
-function recordSubmission(): void {
+function recordSubmission(formSource: string): void {
   try {
-    const stored = localStorage.getItem(RATE_LIMIT_KEY);
+    const key = getRateLimitKey(formSource);
+    const stored = localStorage.getItem(key);
     const submissions: number[] = stored ? JSON.parse(stored) : [];
     const now = Date.now();
     
@@ -68,7 +83,7 @@ function recordSubmission(): void {
     const recentSubmissions = submissions.filter(ts => now - ts < RATE_LIMIT_WINDOW);
     recentSubmissions.push(now);
     
-    localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(recentSubmissions));
+    localStorage.setItem(key, JSON.stringify(recentSubmissions));
   } catch {
     // Ignore storage errors
   }
@@ -99,20 +114,28 @@ function detectSpam(formData: LeadFormData): { isSpam: boolean; reason?: string 
 }
 
 /**
+ * Normalize phone number to digits only
+ */
+function normalizePhone(phone: string): string {
+  return phone.replace(/\D/g, '');
+}
+
+/**
  * Submit lead to the triple-layer capture system:
  * 1. Supabase database (primary)
  * 2. Google Sheets (backup)
  * 3. GoHighLevel CRM (if configured)
  */
 export async function submitLead(formData: LeadFormData): Promise<SubmissionResult> {
-  console.log('[Lead Submission] Starting submission process...');
+  console.log('[Lead Submission] Starting submission process for form:', formData.formSource);
   
-  // Check rate limiting first
-  if (isRateLimited()) {
-    console.warn('[Lead Submission] Rate limited - too many submissions');
+  // Check rate limiting first (per form source)
+  const rateLimit = isRateLimited(formData.formSource);
+  if (rateLimit.limited) {
+    console.warn('[Lead Submission] Rate limited for form:', formData.formSource);
     return {
       success: false,
-      error: 'Too many submissions. Please try again later.',
+      error: `Too many submissions. Please try again in ${rateLimit.waitTime} minute${rateLimit.waitTime !== 1 ? 's' : ''}.`,
     };
   }
   
@@ -128,14 +151,16 @@ export async function submitLead(formData: LeadFormData): Promise<SubmissionResu
     };
   }
   
-  // Clean form data - remove honeypot fields before submission
-  const cleanData = { ...formData };
+  // Clean form data - remove honeypot fields and normalize phone
+  const cleanData = { 
+    ...formData,
+    phone: normalizePhone(formData.phone),
+  };
   delete cleanData.website;
   delete cleanData._gotcha;
   delete cleanData._timestamp;
   
   console.log('[Lead Submission] Cleaned data prepared, invoking edge function...');
-  console.log('[Lead Submission] Form source:', cleanData.formSource);
   
   try {
     console.log('[Lead Submission] Calling supabase.functions.invoke("ghl-submit")...');
@@ -148,24 +173,17 @@ export async function submitLead(formData: LeadFormData): Promise<SubmissionResu
       hasData: !!response.data,
       hasError: !!response.error,
       errorMessage: response.error?.message,
-      errorContext: response.error?.context,
     });
 
     if (response.error) {
-      console.error('[Lead Submission] Edge function error:', {
-        message: response.error.message,
-        context: response.error.context,
-        name: response.error.name,
-      });
+      console.error('[Lead Submission] Edge function error:', response.error);
       
       // Provide more specific error messages
-      let errorMessage = 'Failed to submit lead';
+      let errorMessage = 'Failed to submit. Please try again or call us at 678-671-6336.';
       if (response.error.message?.includes('Failed to fetch') || response.error.message?.includes('NetworkError')) {
-        errorMessage = 'Network error - please check your connection and try again';
+        errorMessage = 'Network error - please check your connection and try again.';
       } else if (response.error.message?.includes('timeout')) {
-        errorMessage = 'Request timed out - please try again';
-      } else if (response.error.message) {
-        errorMessage = response.error.message;
+        errorMessage = 'Request timed out - please try again.';
       }
       
       return {
@@ -179,14 +197,14 @@ export async function submitLead(formData: LeadFormData): Promise<SubmissionResu
       console.error('[Lead Submission] No data returned from edge function');
       return {
         success: false,
-        error: 'No response from server - please try again',
+        error: 'No response from server - please try again.',
       };
     }
 
     console.log('[Lead Submission] Success! Lead ID:', response.data.leadId);
     
     // Record successful submission for rate limiting
-    recordSubmission();
+    recordSubmission(formData.formSource);
 
     return {
       success: response.data.success,
@@ -195,29 +213,11 @@ export async function submitLead(formData: LeadFormData): Promise<SubmissionResu
       syncStatus: response.data.syncStatus,
     };
   } catch (error) {
-    console.error('[Lead Submission] Exception caught:', {
-      name: error instanceof Error ? error.name : 'Unknown',
-      message: error instanceof Error ? error.message : String(error),
-      stack: error instanceof Error ? error.stack : undefined,
-    });
-    
-    // More specific error handling
-    let errorMessage = 'Network error - please try again';
-    if (error instanceof Error) {
-      if (error.message.includes('Failed to fetch')) {
-        errorMessage = 'Unable to connect to server - please check your internet connection';
-      } else if (error.message.includes('timeout')) {
-        errorMessage = 'Request timed out - please try again';
-      } else if (error.message.includes('NetworkError')) {
-        errorMessage = 'Network error - please check your connection';
-      } else {
-        errorMessage = error.message;
-      }
-    }
+    console.error('[Lead Submission] Exception caught:', error);
     
     return {
       success: false,
-      error: errorMessage,
+      error: 'Network error - please check your connection and try again.',
     };
   }
 }
