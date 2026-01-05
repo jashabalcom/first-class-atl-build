@@ -366,6 +366,29 @@ async function sendToGHL(formData: FormSubmission): Promise<{ success: boolean; 
     
     if (!ghlResponse.ok) {
       console.error('GHL API error:', ghlData);
+      
+      // Handle duplicate contact error - extract existing contact ID if available
+      const errorMessage = ghlData?.message || ghlData?.error || '';
+      const isDuplicateError = 
+        errorMessage.toLowerCase().includes('duplicate') ||
+        errorMessage.toLowerCase().includes('already exists') ||
+        ghlData?.meta?.contactId;
+      
+      if (isDuplicateError && ghlData?.meta?.contactId) {
+        console.log('Duplicate contact detected, using existing contact ID:', ghlData.meta.contactId);
+        return { success: true, contactId: ghlData.meta.contactId };
+      }
+      
+      // If it's a duplicate but we don't have the contact ID, try to look it up
+      if (isDuplicateError) {
+        console.log('Duplicate contact detected, attempting to find existing contact...');
+        const existingContact = await findExistingContact(formData.email, formData.phone, ghlApiKey, ghlLocationId);
+        if (existingContact) {
+          console.log('Found existing contact:', existingContact);
+          return { success: true, contactId: existingContact };
+        }
+      }
+      
       return { success: false };
     }
 
@@ -374,6 +397,40 @@ async function sendToGHL(formData: FormSubmission): Promise<{ success: boolean; 
   } catch (error) {
     console.error('GHL contact error:', error);
     return { success: false };
+  }
+}
+
+// Find existing contact in GHL by email or phone
+async function findExistingContact(
+  email: string, 
+  phone: string, 
+  apiKey: string, 
+  locationId: string
+): Promise<string | null> {
+  try {
+    // Try to find by email first
+    const searchUrl = `https://services.leadconnectorhq.com/contacts/search/duplicate?locationId=${locationId}&email=${encodeURIComponent(email)}`;
+    
+    const response = await fetch(searchUrl, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'Version': '2021-07-28'
+      }
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      if (data?.contact?.id) {
+        return data.contact.id;
+      }
+    }
+    
+    return null;
+  } catch (error) {
+    console.error('Error finding existing contact:', error);
+    return null;
   }
 }
 

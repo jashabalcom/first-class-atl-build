@@ -114,7 +114,11 @@ const ContactForm = ({
         });
         reset();
       } else {
-        throw new Error(result.error);
+        toast({
+          title: "Submission Failed",
+          description: result.error || "Something went wrong. Please try again or call us at 678-671-6336.",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       console.error('Contact form submission error:', error);
