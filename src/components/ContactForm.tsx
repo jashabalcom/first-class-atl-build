@@ -11,8 +11,7 @@ import { submitLead, getFormTimestamp } from "@/lib/lead-submission";
 import { formatPhoneNumber, unformatPhoneNumber } from "@/lib/phone-formatter";
 import { Label } from "@/components/ui/label";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
-import { Home, Droplet, Layers, Plus, Building2, Store, Shield, Lock, Clock, MessageSquare } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Home, Droplet, Layers, Plus, Building2, Store, Shield, Lock, Clock } from "lucide-react";
 import { useState } from "react";
 
 const contactSchema = z.object({
@@ -26,9 +25,6 @@ const contactSchema = z.object({
   projectType: z.string().min(1, "Please select a project type"),
   timeline: z.string().optional(),
   message: z.string().trim().min(10, "Please provide at least 10 characters").max(1000, "Message must be less than 1000 characters"),
-  smsConsent: z.boolean().refine(val => val === true, {
-    message: "You must agree to receive communications to submit"
-  }),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -82,7 +78,6 @@ const ContactForm = ({
       projectType: "",
       timeline: "",
       message: "",
-      smsConsent: false,
     },
   });
 
@@ -235,30 +230,6 @@ const ContactForm = ({
             showCharCount
           />
 
-          {/* TCPA Consent Checkbox */}
-          <div className="bg-muted/30 rounded-lg p-4 border border-border">
-            <div className="flex items-start gap-3">
-              <Checkbox
-                id="smsConsent"
-                checked={watch("smsConsent")}
-                onCheckedChange={(checked) => setValue("smsConsent", checked === true, { shouldValidate: true })}
-                className="mt-1"
-              />
-              <label htmlFor="smsConsent" className="text-sm text-muted-foreground cursor-pointer leading-relaxed">
-                <span className="flex items-center gap-2 font-medium text-foreground mb-1">
-                  <MessageSquare className="h-4 w-4 text-primary" />
-                  Communication Consent
-                </span>
-                By checking this box, I consent to receive text messages and phone calls from MLA Construction at the phone number provided. Message and data rates may apply. Message frequency varies. Reply STOP to opt out at any time.
-              </label>
-            </div>
-            {errors.smsConsent && (
-              <p className="text-xs text-destructive mt-2 ml-7 animate-fade-in">
-                {errors.smsConsent.message}
-              </p>
-            )}
-          </div>
-
           {/* Trust Badges */}
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 py-4 border-y bg-muted/20">
             <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
@@ -283,7 +254,7 @@ const ContactForm = ({
               variant="cta" 
               size="lg" 
               className="w-full transition-all hover:scale-[1.02] active:scale-[0.98]" 
-              disabled={isSubmitting || !watch("smsConsent")}
+              disabled={isSubmitting}
             >
               <span className={isSubmitting ? "animate-pulse" : ""}>
                 {isSubmitting ? (
