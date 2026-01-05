@@ -13,6 +13,10 @@ const allowedOrigins = [
 // Check if origin is allowed (includes Lovable preview URLs)
 function isAllowedOrigin(origin: string | null): boolean {
   if (!origin) return false;
+
+  // Some sandboxed iframes send Origin: "null" (common in previews)
+  if (origin === 'null') return true;
+
   if (allowedOrigins.includes(origin)) return true;
   // Allow Lovable preview URLs
   if (origin.includes('.lovable.app') || origin.includes('.lovableproject.com')) return true;
@@ -25,6 +29,8 @@ function getCorsHeaders(origin: string | null) {
     'Access-Control-Allow-Origin': allowedOrigin!,
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    // Prevent caching a CORS response for one Origin and reusing it for another
+    'Vary': 'Origin',
   };
 }
 
