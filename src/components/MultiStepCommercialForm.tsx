@@ -8,7 +8,8 @@ import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { FormStepIndicator } from "@/components/ui/form-step-indicator";
 import { toast } from "sonner";
-import { Store, Utensils, Briefcase, Building2, Wrench, PlusCircle, Phone, Check } from "lucide-react";
+import { Store, Utensils, Briefcase, Building2, Wrench, PlusCircle, Phone, Check, MessageSquare, Shield } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import { formatPhoneNumber, unformatPhoneNumber } from "@/lib/phone-formatter";
 import { submitLead } from "@/lib/lead-submission";
 
@@ -24,6 +25,9 @@ const commercialSchema = z.object({
   city: z.string().trim().max(100, "City must be less than 100 characters").optional(),
   timeline: z.string().trim().max(100, "Timeline must be less than 100 characters").optional(),
   message: z.string().trim().min(10, "Please provide at least 10 characters").max(1000, "Message must be less than 1000 characters"),
+  smsConsent: z.boolean().refine(val => val === true, {
+    message: "You must agree to receive communications to submit"
+  }),
 });
 
 type CommercialFormData = z.infer<typeof commercialSchema>;
@@ -67,6 +71,7 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
       city: "",
       timeline: "",
       message: "",
+      smsConsent: false,
     },
   });
 
@@ -376,9 +381,34 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
               </div>
             </div>
 
-            <p className="text-xs text-center text-muted-foreground">
-              By submitting this form, you agree to be contacted about your commercial project.
-            </p>
+            {/* TCPA Consent Checkbox */}
+            <div className="bg-muted/30 rounded-lg p-4 border border-border">
+              <div className="flex items-start gap-3">
+                <Checkbox
+                  id="smsConsent"
+                  checked={watchedFields.smsConsent}
+                  onCheckedChange={(checked) => setValue("smsConsent", checked === true, { shouldValidate: true })}
+                  className="mt-1"
+                />
+                <label htmlFor="smsConsent" className="text-sm text-muted-foreground cursor-pointer leading-relaxed">
+                  <span className="flex items-center gap-2 font-medium text-foreground mb-1">
+                    <MessageSquare className="h-4 w-4 text-primary" />
+                    Communication Consent
+                  </span>
+                  By checking this box, I consent to receive text messages and phone calls from MLA Construction at the phone number provided. Message and data rates may apply. Message frequency varies. Reply STOP to opt out at any time.
+                </label>
+              </div>
+              {errors.smsConsent && (
+                <p className="text-sm text-destructive mt-2 ml-7 animate-fade-in">
+                  {errors.smsConsent.message}
+                </p>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/30 p-4 rounded-lg">
+              <Shield className="h-5 w-5 text-primary flex-shrink-0" />
+              <span>Your information is secure and will never be shared with third parties.</span>
+            </div>
           </div>
         );
 
@@ -473,6 +503,7 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
             <Button
               type="submit"
               className="flex-1"
+              disabled={!watchedFields.smsConsent}
             >
               Submit Request
             </Button>
