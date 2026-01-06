@@ -89,8 +89,8 @@ const App = () => (
         <Sonner />
         <GoHighLevelChat />
         <BrowserRouter>
-          <ExitIntentPopup />
           <ScrollToTop />
+          <ExitIntentPopup />
           <PageTransition>
             <Routes>
             <Route path="/" element={<Home />} />
