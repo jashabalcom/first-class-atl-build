@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FloatingInput } from "@/components/ui/floating-input";
 import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { submitLead, getFormTimestamp } from "@/lib/lead-submission";
@@ -25,6 +26,9 @@ const contactSchema = z.object({
   projectType: z.string().min(1, "Please select a project type"),
   timeline: z.string().optional(),
   message: z.string().trim().min(10, "Please provide at least 10 characters").max(1000, "Message must be less than 1000 characters"),
+  smsConsent: z.boolean().refine(val => val === true, {
+    message: "You must agree to receive communications"
+  }),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -78,6 +82,7 @@ const ContactForm = ({
       projectType: "",
       timeline: "",
       message: "",
+      smsConsent: false,
     },
   });
 
@@ -101,6 +106,8 @@ const ContactForm = ({
         timeline: data.timeline,
         message: data.message,
         formSource: 'contact',
+        smsConsent: data.smsConsent,
+        consentTimestamp: new Date().toISOString(),
         // Anti-spam fields
         website: honeypotWebsite,
         _gotcha: honeypotGotcha,
@@ -232,6 +239,13 @@ const ContactForm = ({
             rows={5}
             maxLength={1000}
             showCharCount
+          />
+
+          {/* SMS Consent Checkbox */}
+          <SMSConsentCheckbox
+            checked={watch("smsConsent")}
+            onCheckedChange={(checked) => setValue("smsConsent", checked, { shouldValidate: true })}
+            error={errors.smsConsent?.message}
           />
 
           {/* Trust Badges */}

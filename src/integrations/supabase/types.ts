@@ -156,6 +156,8 @@ export type Database = {
           business_type: string | null
           city: string | null
           company_name: string | null
+          consent_ip: string | null
+          consent_timestamp: string | null
           created_at: string
           email: string
           estimated_budget: string | null
@@ -167,6 +169,7 @@ export type Database = {
           name: string
           phone: string
           project_type: string | null
+          sms_consent: boolean | null
           square_footage: string | null
           sync_errors: Json | null
           synced_to_ghl: boolean | null
@@ -178,6 +181,8 @@ export type Database = {
           business_type?: string | null
           city?: string | null
           company_name?: string | null
+          consent_ip?: string | null
+          consent_timestamp?: string | null
           created_at?: string
           email: string
           estimated_budget?: string | null
@@ -189,6 +194,7 @@ export type Database = {
           name: string
           phone: string
           project_type?: string | null
+          sms_consent?: boolean | null
           square_footage?: string | null
           sync_errors?: Json | null
           synced_to_ghl?: boolean | null
@@ -200,6 +206,8 @@ export type Database = {
           business_type?: string | null
           city?: string | null
           company_name?: string | null
+          consent_ip?: string | null
+          consent_timestamp?: string | null
           created_at?: string
           email?: string
           estimated_budget?: string | null
@@ -211,6 +219,7 @@ export type Database = {
           name?: string
           phone?: string
           project_type?: string | null
+          sms_consent?: boolean | null
           square_footage?: string | null
           sync_errors?: Json | null
           synced_to_ghl?: boolean | null

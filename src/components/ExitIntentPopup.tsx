@@ -4,9 +4,11 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { FloatingInput } from "@/components/ui/floating-input";
+import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
 import {
   Select,
   SelectContent,
@@ -29,6 +31,7 @@ const ExitIntentPopup = () => {
     email: "",
     phone: "",
     projectType: "",
+    smsConsent: false,
   });
   // Anti-spam
   const [honeypotWebsite, setHoneypotWebsite] = useState('');
@@ -94,6 +97,15 @@ const ExitIntentPopup = () => {
       return;
     }
 
+    if (!formData.smsConsent) {
+      toast({
+        title: "Consent required",
+        description: "Please agree to receive communications to continue.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     const result = await submitLead({
@@ -103,6 +115,8 @@ const ExitIntentPopup = () => {
       projectType: formData.projectType || "General Inquiry",
       formSource: "exit-intent-offer",
       message: "Exit Intent Popup - Renovation Blueprint Package Request",
+      smsConsent: formData.smsConsent,
+      consentTimestamp: new Date().toISOString(),
       // Anti-spam fields
       website: honeypotWebsite,
       _timestamp: formTimestamp,
@@ -160,6 +174,9 @@ const ExitIntentPopup = () => {
                   See Your Remodel with <span className="text-accent">AI</span><br />
                   Before Committing
                 </DialogTitle>
+                <DialogDescription className="sr-only">
+                  Special offer popup for renovation blueprint package
+                </DialogDescription>
               </DialogHeader>
               <p className="text-muted-foreground text-sm mt-2">
                 Get your <span className="text-accent font-semibold">FREE Renovation Blueprint</span> — Valued at $1,650+
@@ -245,9 +262,14 @@ const ExitIntentPopup = () => {
                 </SelectContent>
               </Select>
 
+              <SMSConsentCheckbox
+                checked={formData.smsConsent}
+                onCheckedChange={(checked) => setFormData({ ...formData, smsConsent: checked })}
+              />
+
               <Button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !formData.smsConsent}
                 className="w-full h-12 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-base"
               >
                 {isSubmitting ? "Submitting..." : "Claim My Free Blueprint"}

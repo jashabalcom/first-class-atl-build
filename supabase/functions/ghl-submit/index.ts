@@ -6,6 +6,8 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const allowedOrigins = [
   'https://firstclassconstructionatlanta.com',
   'https://www.firstclassconstructionatlanta.com',
+  'https://fcconstruct.com',
+  'https://www.fcconstruct.com',
   'http://localhost:5173',
   'http://localhost:8080',
 ];
@@ -47,6 +49,8 @@ interface FormSubmission {
   squareFootage?: string;
   estimatedBudget?: string;
   formSource: string;
+  smsConsent?: boolean;
+  consentTimestamp?: string;
 }
 
 // Spam detection patterns
@@ -597,6 +601,8 @@ serve(async (req) => {
         business_type: formData.businessType || null,
         square_footage: formData.squareFootage || null,
         form_source: formData.formSource,
+        sms_consent: formData.smsConsent || false,
+        consent_timestamp: formData.consentTimestamp || null,
         synced_to_sheets: false,
         synced_to_ghl: false,
       })

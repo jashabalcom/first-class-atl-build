@@ -7,6 +7,7 @@ import { FloatingInput } from "@/components/ui/floating-input";
 import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { FormStepIndicator } from "@/components/ui/form-step-indicator";
+import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
 import { toast } from "sonner";
 import { Store, Utensils, Briefcase, Building2, Wrench, PlusCircle, Phone, Check } from "lucide-react";
 import { formatPhoneNumber, unformatPhoneNumber } from "@/lib/phone-formatter";
@@ -24,6 +25,9 @@ const commercialSchema = z.object({
   city: z.string().trim().max(100, "City must be less than 100 characters").optional(),
   timeline: z.string().trim().max(100, "Timeline must be less than 100 characters").optional(),
   message: z.string().trim().min(10, "Please provide at least 10 characters").max(1000, "Message must be less than 1000 characters"),
+  smsConsent: z.boolean().refine(val => val === true, {
+    message: "You must agree to receive communications"
+  }),
 });
 
 type CommercialFormData = z.infer<typeof commercialSchema>;
@@ -67,6 +71,7 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
       city: "",
       timeline: "",
       message: "",
+      smsConsent: false,
     },
   });
 
@@ -159,7 +164,9 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
         city: data.city,
         timeline: data.timeline,
         message: data.message,
-        formSource: 'commercial'
+        formSource: 'commercial',
+        smsConsent: data.smsConsent,
+        consentTimestamp: new Date().toISOString(),
       });
 
       if (!result.success) {
@@ -375,6 +382,13 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
                 <p className="font-medium whitespace-pre-wrap">{watchedFields.message}</p>
               </div>
             </div>
+
+            {/* SMS Consent Checkbox */}
+            <SMSConsentCheckbox
+              checked={watchedFields.smsConsent}
+              onCheckedChange={(checked) => setValue("smsConsent", checked, { shouldValidate: true })}
+              error={errors.smsConsent?.message}
+            />
 
             <p className="text-xs text-center text-muted-foreground">
               By submitting this form, you agree to be contacted about your commercial project.
