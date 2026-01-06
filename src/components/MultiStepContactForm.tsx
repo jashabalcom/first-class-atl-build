@@ -7,6 +7,7 @@ import { FloatingInput } from "@/components/ui/floating-input";
 import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { FormStepIndicator } from "@/components/ui/form-step-indicator";
+import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { formatPhoneNumber } from "@/lib/phone-formatter";
@@ -25,6 +26,9 @@ const contactSchema = z.object({
   city: z.string().optional(),
   timeline: z.string().optional(),
   message: z.string().min(10, "Message must be at least 10 characters").max(1000),
+  smsConsent: z.boolean().refine(val => val === true, {
+    message: "You must agree to receive communications"
+  }),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -70,6 +74,7 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
       city: "",
       timeline: "",
       message: "",
+      smsConsent: false,
     },
     mode: "onChange",
   });
@@ -173,6 +178,8 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
         timeline: data.timeline,
         message: data.message,
         formSource: 'multistep',
+        smsConsent: data.smsConsent,
+        consentTimestamp: new Date().toISOString(),
         // Anti-spam fields
         website: honeypotWebsite,
         _gotcha: honeypotGotcha,
@@ -403,6 +410,13 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
                 <p className="text-foreground whitespace-pre-wrap">{formValues.message}</p>
               </div>
             </div>
+
+            {/* SMS Consent Checkbox */}
+            <SMSConsentCheckbox
+              checked={formValues.smsConsent}
+              onCheckedChange={(checked) => setValue("smsConsent", checked, { shouldValidate: true })}
+              error={errors.smsConsent?.message}
+            />
 
             <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/30 p-4 rounded-lg">
               <Shield className="h-5 w-5 text-primary flex-shrink-0" />

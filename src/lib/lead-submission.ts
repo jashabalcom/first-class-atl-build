@@ -13,6 +13,9 @@ export interface LeadFormData {
   squareFootage?: string;
   estimatedBudget?: string;
   formSource: string;
+  // SMS/TCPA consent fields
+  smsConsent?: boolean;
+  consentTimestamp?: string;
   // Anti-spam fields (should be empty if human)
   website?: string; // honeypot field
   _gotcha?: string; // secondary honeypot

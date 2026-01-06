@@ -3,9 +3,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
+import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
 import { Hammer, Bath, Home, PlusCircle, Building2, Calculator, ArrowRight, Info, Sparkles, Loader2, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { submitLead } from "@/lib/lead-submission";
+import { formatPhoneNumber } from "@/lib/phone-formatter";
 import DOMPurify from "dompurify";
 
 const RECS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/project-recommendations`;
@@ -90,6 +92,8 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
   const [showEmailCapture, setShowEmailCapture] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [smsConsent, setSmsConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showAIIdeas, setShowAIIdeas] = useState(false);
   const [aiIdeas, setAiIdeas] = useState("");
@@ -224,11 +228,26 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
     });
   };
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setPhone(formatted);
+  };
+
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email || !name) {
-      toast.error("Please enter your name and email");
+    if (!email || !name || !phone) {
+      toast.error("Please enter your name, email, and phone number");
+      return;
+    }
+
+    if (phone.replace(/\D/g, '').length < 10) {
+      toast.error("Please enter a valid 10-digit phone number");
+      return;
+    }
+
+    if (!smsConsent) {
+      toast.error("Please agree to receive communications to continue");
       return;
     }
 
@@ -241,15 +260,17 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
       const result = await submitLead({
         name,
         email,
-        phone: '',
+        phone: phone.replace(/\D/g, ''),
         projectType,
         estimatedBudget: estimateText,
         message: `Budget Estimator: ${projectDetails}. Estimated range: ${estimateText}`,
-        formSource: 'budget'
+        formSource: 'budget',
+        smsConsent: true,
+        consentTimestamp: new Date().toISOString(),
       });
 
       if (!result.success) {
-        toast.error("Failed to send estimate. Please try again or call us at 678-671-6336.");
+        toast.error(result.error || "Failed to send estimate. Please try again or call us at 678-671-6336.");
         return;
       }
 
@@ -257,6 +278,8 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
       setShowEmailCapture(false);
       setEmail("");
       setName("");
+      setPhone("");
+      setSmsConsent(false);
       
       if (onGetQuote) {
         onGetQuote();
@@ -483,7 +506,7 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
               <div className="space-y-3">
                 <input
                   type="text"
-                  placeholder="Your Name"
+                  placeholder="Your Name *"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
@@ -491,19 +514,33 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
                 />
                 <input
                   type="email"
-                  placeholder="Your Email"
+                  placeholder="Your Email *"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                   required
                 />
+                <input
+                  type="tel"
+                  placeholder="Your Phone * (555) 555-5555"
+                  value={phone}
+                  onChange={handlePhoneChange}
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  required
+                />
               </div>
+              
+              <SMSConsentCheckbox
+                checked={smsConsent}
+                onCheckedChange={setSmsConsent}
+              />
+
               <div className="flex gap-2">
                 <Button
                   type="submit"
                   size="lg"
                   className="flex-1"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !smsConsent}
                 >
                   {isSubmitting ? "Sending..." : "Send Me Quote"}
                 </Button>
