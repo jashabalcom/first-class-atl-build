@@ -30,6 +30,9 @@ import AgencyProposal from "./pages/tools/AgencyProposal";
 import RoomVisualizer from "./pages/tools/RoomVisualizer";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import CookieConsent from "./components/CookieConsent";
 import KitchenRemodeling from "./pages/services/KitchenRemodeling";
 import BathroomRemodeling from "./pages/services/BathroomRemodeling";
 import HomeRenovation from "./pages/services/HomeRenovation";
@@ -154,9 +157,12 @@ const App = () => (
             <Route path="/lithia-springs" element={<LithiaSprings />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/auth/reset-password" element={<ResetPassword />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/admin" element={<Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}><AdminDashboard /></Suspense>} />
             <Route path="*" element={<NotFound />} />
             </Routes>
+          <CookieConsent />
           </PageTransition>
         </BrowserRouter>
       </ErrorBoundary>

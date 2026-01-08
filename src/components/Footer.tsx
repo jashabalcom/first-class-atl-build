@@ -179,6 +179,12 @@ const Footer = () => {
                 © {new Date().getFullYear()} First Class Construction Group. All rights reserved.
               </p>
               <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 text-xs md:text-sm">
+                <Link to="/privacy-policy" className="opacity-80 hover:opacity-100 hover:text-accent transition-colors">
+                  Privacy Policy
+                </Link>
+                <Link to="/terms-of-service" className="opacity-80 hover:opacity-100 hover:text-accent transition-colors">
+                  Terms of Service
+                </Link>
                 <span className="opacity-80">Licensed • Bonded • Insured</span>
                 <span className="text-accent font-semibold">DBE • MBE Certified</span>
                 <button 
