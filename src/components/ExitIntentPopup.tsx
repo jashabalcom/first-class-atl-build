@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { FloatingInput } from "@/components/ui/floating-input";
 import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
+import { SMSFormDisclaimer } from "@/components/ui/sms-form-disclaimer";
 import {
   Select,
   SelectContent,
@@ -275,9 +276,7 @@ const ExitIntentPopup = () => {
                 {isSubmitting ? "Submitting..." : "Claim My Free Blueprint"}
               </Button>
 
-              <p className="text-center text-xs text-muted-foreground pt-1">
-                No pressure. No obligation. Just great ideas for your space.
-              </p>
+              <SMSFormDisclaimer className="pt-1" />
             </form>
           </>
         ) : (

@@ -6,6 +6,7 @@ import { FloatingInput } from "@/components/ui/floating-input";
 import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
+import { SMSFormDisclaimer } from "@/components/ui/sms-form-disclaimer";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { submitLead, getFormTimestamp } from "@/lib/lead-submission";
@@ -286,10 +287,7 @@ const ContactForm = ({
               </span>
             </Button>
             
-            <p className="text-xs text-muted-foreground text-center flex items-center justify-center gap-1.5">
-              <Lock className="h-3 w-3" />
-              Your information is confidential. No spam—ever.
-            </p>
+            <SMSFormDisclaimer className="mt-4" />
             
             <p className="text-sm text-center">
               Prefer to talk now?{" "}

@@ -8,6 +8,7 @@ import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { FormStepIndicator } from "@/components/ui/form-step-indicator";
 import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
+import { SMSFormDisclaimer } from "@/components/ui/sms-form-disclaimer";
 import { toast } from "sonner";
 import { Store, Utensils, Briefcase, Building2, Wrench, PlusCircle, Phone, Check } from "lucide-react";
 import { formatPhoneNumber, unformatPhoneNumber } from "@/lib/phone-formatter";
@@ -390,9 +391,7 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
               error={errors.smsConsent?.message}
             />
 
-            <p className="text-xs text-center text-muted-foreground">
-              By submitting this form, you agree to be contacted about your commercial project.
-            </p>
+            <SMSFormDisclaimer className="mt-4" />
           </div>
         );
 
