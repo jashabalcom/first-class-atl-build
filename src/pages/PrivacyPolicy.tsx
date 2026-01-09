@@ -62,19 +62,20 @@ const PrivacyPolicy = () => {
             </section>
 
             <section className="space-y-4">
-              <h2 className="font-playfair text-2xl font-semibold text-primary">4. SMS/Text Message Consent</h2>
+              <h2 className="font-playfair text-2xl font-semibold text-primary">4. SMS Communications</h2>
               <p>
-                By providing your phone number and opting in to receive SMS/text messages, you consent to receive text messages from First Class Construction Group regarding your project inquiry, estimates, appointment reminders, and promotional offers.
+                By submitting your phone number on our website, you consent to receive SMS/text messages 
+                from FC Construct related to estimates, project updates, invoices, scheduling, and customer service.
               </p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>Message frequency varies based on your interactions and project status</li>
+                <li>Message frequency may vary</li>
                 <li>Message and data rates may apply</li>
-                <li>You can opt out at any time by replying STOP to any message</li>
+                <li>You may opt out at any time by replying STOP</li>
                 <li>Reply HELP for assistance</li>
-                <li>We will not share your phone number with third parties for marketing purposes</li>
               </ul>
               <p>
-                Your consent to receive text messages is not a condition of purchasing any goods or services.
+                We do not sell or share your mobile information with third parties for marketing purposes. 
+                Your consent to receive SMS messages is not a condition of purchasing any goods or services.
               </p>
             </section>
 

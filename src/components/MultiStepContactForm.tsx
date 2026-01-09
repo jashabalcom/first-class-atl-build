@@ -8,6 +8,7 @@ import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { FormStepIndicator } from "@/components/ui/form-step-indicator";
 import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
+import { SMSFormDisclaimer } from "@/components/ui/sms-form-disclaimer";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { formatPhoneNumber } from "@/lib/phone-formatter";
@@ -418,10 +419,7 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
               error={errors.smsConsent?.message}
             />
 
-            <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/30 p-4 rounded-lg">
-              <Shield className="h-5 w-5 text-primary flex-shrink-0" />
-              <span>Your information is secure and will never be shared with third parties.</span>
-            </div>
+            <SMSFormDisclaimer className="mt-4" />
           </div>
         );
 

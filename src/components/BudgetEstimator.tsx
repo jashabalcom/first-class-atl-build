@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
+import { SMSFormDisclaimer } from "@/components/ui/sms-form-disclaimer";
 import { Hammer, Bath, Home, PlusCircle, Building2, Calculator, ArrowRight, Info, Sparkles, Loader2, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { submitLead } from "@/lib/lead-submission";
@@ -554,6 +555,7 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
                   Cancel
                 </Button>
               </div>
+              <SMSFormDisclaimer className="mt-2" />
             </form>
           )}
         </Card>

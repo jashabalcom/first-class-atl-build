@@ -65,17 +65,22 @@ const TermsOfService = () => {
 
             <section className="space-y-4">
               <h2 className="font-playfair text-2xl font-semibold text-primary">5. SMS/Text Message Terms</h2>
+              <p>
+                By using our website and submitting your information, you agree to receive SMS/text messages 
+                from FC Construct for service-related communications as described in our Privacy Policy.
+              </p>
               <p>If you opt in to receive SMS/text messages from us:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>You consent to receive automated and non-automated text messages related to your inquiry and our services</li>
-                <li>Message frequency varies</li>
+                <li>You consent to receive automated and non-automated SMS text messages related to estimates, project updates, invoices, and customer service</li>
+                <li>Message frequency may vary</li>
                 <li>Message and data rates may apply</li>
-                <li>Text STOP to cancel at any time</li>
-                <li>Text HELP for assistance</li>
+                <li>Reply STOP to cancel at any time</li>
+                <li>Reply HELP for assistance</li>
                 <li>Carriers are not liable for delayed or undelivered messages</li>
               </ul>
               <p>
-                By opting in, you confirm that the phone number provided is yours and that you are authorized to receive text messages at that number.
+                By opting in, you confirm that the phone number provided is yours and that you are authorized 
+                to receive SMS text messages at that number.
               </p>
             </section>
 

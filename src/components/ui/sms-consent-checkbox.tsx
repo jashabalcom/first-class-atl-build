@@ -1,6 +1,7 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 interface SMSConsentCheckboxProps {
   checked: boolean;
@@ -28,10 +29,17 @@ export function SMSConsentCheckbox({
           htmlFor="sms-consent" 
           className="text-xs text-muted-foreground leading-relaxed cursor-pointer"
         >
-          By checking this box, I consent to receive text messages and phone calls 
-          from First Class Construction Group at the phone number provided. 
-          Message and data rates may apply. Message frequency varies. 
-          Reply STOP to opt out.
+          I agree to receive SMS text messages from FC Construct regarding estimates, 
+          project updates, invoices, and customer service communications. Message 
+          frequency may vary. Message & data rates may apply. Reply STOP to opt out 
+          or HELP for help. I agree to the{" "}
+          <Link to="/privacy-policy" className="text-primary underline hover:text-primary/80">
+            Privacy Policy
+          </Link>{" "}
+          and{" "}
+          <Link to="/terms-of-service" className="text-primary underline hover:text-primary/80">
+            Terms of Service
+          </Link>.
         </Label>
       </div>
       {error && (
