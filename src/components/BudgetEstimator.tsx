@@ -3,13 +3,13 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
-import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
-import { SMSFormDisclaimer } from "@/components/ui/sms-form-disclaimer";
+import { SMSConsentCheckboxes } from "@/components/ui/sms-consent-checkbox";
 import { Hammer, Bath, Home, PlusCircle, Building2, Calculator, ArrowRight, Info, Sparkles, Loader2, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { submitLead } from "@/lib/lead-submission";
 import { formatPhoneNumber } from "@/lib/phone-formatter";
 import DOMPurify from "dompurify";
+import { Link } from "react-router-dom";
 
 const RECS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/project-recommendations`;
 
@@ -94,7 +94,8 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [smsConsent, setSmsConsent] = useState(false);
+  const [marketingSmsConsent, setMarketingSmsConsent] = useState(false);
+  const [nonMarketingSmsConsent, setNonMarketingSmsConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showAIIdeas, setShowAIIdeas] = useState(false);
   const [aiIdeas, setAiIdeas] = useState("");
@@ -247,11 +248,7 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
       return;
     }
 
-    if (!smsConsent) {
-      toast.error("Please agree to receive communications to continue");
-      return;
-    }
-
+    // A2P Compliant: SMS consent is OPTIONAL - no longer required to submit
     setIsSubmitting(true);
     
     try {
@@ -266,7 +263,8 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
         estimatedBudget: estimateText,
         message: `Budget Estimator: ${projectDetails}. Estimated range: ${estimateText}`,
         formSource: 'budget',
-        smsConsent: true,
+        marketingSmsConsent,
+        nonMarketingSmsConsent,
         consentTimestamp: new Date().toISOString(),
       });
 
@@ -280,7 +278,8 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
       setEmail("");
       setName("");
       setPhone("");
-      setSmsConsent(false);
+      setMarketingSmsConsent(false);
+      setNonMarketingSmsConsent(false);
       
       if (onGetQuote) {
         onGetQuote();
@@ -531,9 +530,12 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
                 />
               </div>
               
-              <SMSConsentCheckbox
-                checked={smsConsent}
-                onCheckedChange={setSmsConsent}
+              {/* A2P Compliant: Two separate OPTIONAL consent checkboxes */}
+              <SMSConsentCheckboxes
+                marketingConsent={marketingSmsConsent}
+                nonMarketingConsent={nonMarketingSmsConsent}
+                onMarketingChange={setMarketingSmsConsent}
+                onNonMarketingChange={setNonMarketingSmsConsent}
               />
 
               <div className="flex gap-2">
@@ -541,7 +543,7 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
                   type="submit"
                   size="lg"
                   className="flex-1"
-                  disabled={isSubmitting || !smsConsent}
+                  disabled={isSubmitting}
                 >
                   {isSubmitting ? "Sending..." : "Send Me Quote"}
                 </Button>
@@ -555,7 +557,18 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
                   Cancel
                 </Button>
               </div>
-              <SMSFormDisclaimer className="mt-2" />
+              
+              {/* Footer Links */}
+              <p className="text-xs text-muted-foreground text-center mt-2">
+                By submitting, you agree to our{" "}
+                <Link to="/privacy-policy" className="text-primary underline hover:text-primary/80">
+                  Privacy Policy
+                </Link>{" "}
+                and{" "}
+                <Link to="/terms-of-service" className="text-primary underline hover:text-primary/80">
+                  Terms of Service
+                </Link>.
+              </p>
             </form>
           )}
         </Card>

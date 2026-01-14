@@ -13,8 +13,10 @@ export interface LeadFormData {
   squareFootage?: string;
   estimatedBudget?: string;
   formSource: string;
-  // SMS/TCPA consent fields
-  smsConsent?: boolean;
+  // SMS/TCPA consent fields - now supports two types
+  smsConsent?: boolean; // Legacy single consent
+  marketingSmsConsent?: boolean; // Marketing messages
+  nonMarketingSmsConsent?: boolean; // Non-marketing (customer care)
   consentTimestamp?: string;
   // Anti-spam fields (should be empty if human)
   website?: string; // honeypot field
@@ -158,6 +160,9 @@ export async function submitLead(formData: LeadFormData): Promise<SubmissionResu
   const cleanData = { 
     ...formData,
     phone: normalizePhone(formData.phone),
+    // Handle legacy smsConsent field - map to both consent types if using old format
+    marketingSmsConsent: formData.marketingSmsConsent ?? formData.smsConsent ?? false,
+    nonMarketingSmsConsent: formData.nonMarketingSmsConsent ?? formData.smsConsent ?? false,
   };
   delete cleanData.website;
   delete cleanData._gotcha;

@@ -165,8 +165,10 @@ export type Database = {
           ghl_contact_id: string | null
           ghl_opportunity_id: string | null
           id: string
+          marketing_sms_consent: boolean | null
           message: string | null
           name: string
+          non_marketing_sms_consent: boolean | null
           phone: string
           project_type: string | null
           sms_consent: boolean | null
@@ -190,8 +192,10 @@ export type Database = {
           ghl_contact_id?: string | null
           ghl_opportunity_id?: string | null
           id?: string
+          marketing_sms_consent?: boolean | null
           message?: string | null
           name: string
+          non_marketing_sms_consent?: boolean | null
           phone: string
           project_type?: string | null
           sms_consent?: boolean | null
@@ -215,8 +219,10 @@ export type Database = {
           ghl_contact_id?: string | null
           ghl_opportunity_id?: string | null
           id?: string
+          marketing_sms_consent?: boolean | null
           message?: string | null
           name?: string
+          non_marketing_sms_consent?: boolean | null
           phone?: string
           project_type?: string | null
           sms_consent?: boolean | null

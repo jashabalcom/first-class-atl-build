@@ -7,14 +7,14 @@ import { FloatingInput } from "@/components/ui/floating-input";
 import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { FormStepIndicator } from "@/components/ui/form-step-indicator";
-import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
-import { SMSFormDisclaimer } from "@/components/ui/sms-form-disclaimer";
+import { SMSConsentCheckboxes } from "@/components/ui/sms-consent-checkbox";
 import { toast } from "sonner";
 import { Store, Utensils, Briefcase, Building2, Wrench, PlusCircle, Phone, Check } from "lucide-react";
 import { formatPhoneNumber, unformatPhoneNumber } from "@/lib/phone-formatter";
 import { submitLead } from "@/lib/lead-submission";
+import { Link } from "react-router-dom";
 
-// Define schema for form validation
+// A2P Compliant: SMS consent is OPTIONAL - not required to submit
 const commercialSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
   email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
@@ -26,9 +26,8 @@ const commercialSchema = z.object({
   city: z.string().trim().max(100, "City must be less than 100 characters").optional(),
   timeline: z.string().trim().max(100, "Timeline must be less than 100 characters").optional(),
   message: z.string().trim().min(10, "Please provide at least 10 characters").max(1000, "Message must be less than 1000 characters"),
-  smsConsent: z.boolean().refine(val => val === true, {
-    message: "You must agree to receive communications"
-  }),
+  marketingSmsConsent: z.boolean().optional().default(false),
+  nonMarketingSmsConsent: z.boolean().optional().default(false),
 });
 
 type CommercialFormData = z.infer<typeof commercialSchema>;
@@ -72,7 +71,8 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
       city: "",
       timeline: "",
       message: "",
-      smsConsent: false,
+      marketingSmsConsent: false,
+      nonMarketingSmsConsent: false,
     },
   });
 
@@ -166,7 +166,8 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
         timeline: data.timeline,
         message: data.message,
         formSource: 'commercial',
-        smsConsent: data.smsConsent,
+        marketingSmsConsent: data.marketingSmsConsent,
+        nonMarketingSmsConsent: data.nonMarketingSmsConsent,
         consentTimestamp: new Date().toISOString(),
       });
 
@@ -384,14 +385,19 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
               </div>
             </div>
 
-            {/* SMS Consent Checkbox */}
-            <SMSConsentCheckbox
-              checked={watchedFields.smsConsent}
-              onCheckedChange={(checked) => setValue("smsConsent", checked, { shouldValidate: true })}
-              error={errors.smsConsent?.message}
+            {/* A2P Compliant: Two separate OPTIONAL consent checkboxes */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-semibold text-foreground">SMS Communication Preferences (Optional)</h4>
+              <p className="text-xs text-muted-foreground">
+                Choose which types of text messages you'd like to receive. These are optional.
+              </p>
+            </div>
+            <SMSConsentCheckboxes
+              marketingConsent={watchedFields.marketingSmsConsent || false}
+              nonMarketingConsent={watchedFields.nonMarketingSmsConsent || false}
+              onMarketingChange={(checked) => setValue("marketingSmsConsent", checked)}
+              onNonMarketingChange={(checked) => setValue("nonMarketingSmsConsent", checked)}
             />
-
-            <SMSFormDisclaimer className="mt-4" />
           </div>
         );
 
@@ -492,35 +498,19 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
           )}
         </div>
 
-        {/* Trust Indicators */}
-        <div className="pt-8 border-t text-center space-y-4">
-          <div className="flex items-center justify-center gap-6 text-xs text-muted-foreground flex-wrap">
-            <span className="flex items-center gap-1">
-              <Check className="h-3 w-3 text-primary" />
-              Licensed & Insured
-            </span>
-            <span className="flex items-center gap-1">
-              <Check className="h-3 w-3 text-primary" />
-              DBE & MBE Certified
-            </span>
-            <span className="flex items-center gap-1">
-              <Check className="h-3 w-3 text-primary" />
-              20+ Years Experience
-            </span>
-          </div>
-
-          <p className="text-xs text-muted-foreground">
-            Or call us directly at{" "}
-            <a
-              href="tel:+16786716336"
-              className="text-primary hover:underline font-medium"
-            >
-              (678) 671-6336
-            </a>
-          </p>
-        </div>
+        {/* Footer Links */}
+        <p className="text-xs text-muted-foreground text-center">
+          By submitting this form, you agree to our{" "}
+          <Link to="/privacy-policy" className="text-primary underline hover:text-primary/80">
+            Privacy Policy
+          </Link>{" "}
+          and{" "}
+          <Link to="/terms-of-service" className="text-primary underline hover:text-primary/80">
+            Terms of Service
+          </Link>.
+        </p>
       </form>
-      </>
+        </>
       )}
     </div>
   );
