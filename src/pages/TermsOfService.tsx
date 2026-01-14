@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
 
 const TermsOfService = () => {
   return (
@@ -17,7 +18,7 @@ const TermsOfService = () => {
           <h1 className="font-playfair text-3xl md:text-4xl font-bold text-primary mb-8">Terms of Service</h1>
           
           <div className="prose prose-lg max-w-none text-foreground/80 space-y-6">
-            <p className="text-sm text-muted-foreground">Last Updated: January 6, 2025</p>
+            <p className="text-sm text-muted-foreground">Last Updated: January 14, 2025</p>
             
             <section className="space-y-4">
               <h2 className="font-playfair text-2xl font-semibold text-primary">1. Agreement to Terms</h2>
@@ -41,7 +42,7 @@ const TermsOfService = () => {
             <section className="space-y-4">
               <h2 className="font-playfair text-2xl font-semibold text-primary">3. Services Description</h2>
               <p>
-                First Class Construction Group provides residential renovation and commercial construction services in the Metro Atlanta area. Information on our Site regarding services, pricing, and availability is subject to change without notice.
+                First Class Construction Group provides residential renovation and commercial construction services in the Metro Atlanta area. When you opt in to receive text messages, you may receive communications about estimates, project updates, invoices, scheduling, and customer service.
               </p>
               <p>
                 Any estimates provided through our Site are preliminary and subject to change based on actual project assessment.
@@ -66,9 +67,42 @@ const TermsOfService = () => {
             <section className="space-y-4">
               <h2 className="font-playfair text-2xl font-semibold text-primary">5. SMS/Text Message Terms</h2>
               <p>
-                By using our website and submitting your information, you agree to receive SMS/text messages 
-                from FC Construct for service-related communications as described in our Privacy Policy.
+                First Class Construction Group provides renovation and construction services in the Metro Atlanta area. 
+                When you opt in, you may receive text messages about estimates, project updates, invoices, scheduling, 
+                and customer service.
               </p>
+              
+              <h3 className="text-xl font-semibold text-primary">Opt-Out Instructions</h3>
+              <p>
+                You can cancel the SMS service at any time. Just text "STOP" to our number. After you send "STOP", 
+                we will confirm your unsubscription. You will no longer receive SMS messages from us. To rejoin, 
+                sign up again through our forms.
+              </p>
+              
+              <h3 className="text-xl font-semibold text-primary">Help & Support</h3>
+              <p>
+                If you need help, reply HELP to any message or contact us at info@fcconstruct.com or 678-671-6336.
+              </p>
+              
+              <h3 className="text-xl font-semibold text-primary">Message Frequency & Rates</h3>
+              <p>
+                Message and data rates may apply. Message frequency varies based on your project activity. 
+                Contact your wireless provider for details about your text plan or data plan.
+              </p>
+              
+              <h3 className="text-xl font-semibold text-primary">Carrier Disclaimer</h3>
+              <p>
+                Carriers are not liable for delayed or undelivered messages.
+              </p>
+              
+              <h3 className="text-xl font-semibold text-primary">Privacy</h3>
+              <p>
+                For questions about how we handle your data, please read our{" "}
+                <Link to="/privacy-policy" className="text-primary underline hover:text-primary/80">
+                  Privacy Policy
+                </Link>.
+              </p>
+              
               <p>If you opt in to receive SMS/text messages from us:</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>You consent to receive automated and non-automated SMS text messages related to estimates, project updates, invoices, and customer service</li>

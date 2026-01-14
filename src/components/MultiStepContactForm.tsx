@@ -7,8 +7,7 @@ import { FloatingInput } from "@/components/ui/floating-input";
 import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { FormStepIndicator } from "@/components/ui/form-step-indicator";
-import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
-import { SMSFormDisclaimer } from "@/components/ui/sms-form-disclaimer";
+import { SMSConsentCheckboxes } from "@/components/ui/sms-consent-checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { formatPhoneNumber } from "@/lib/phone-formatter";
@@ -18,7 +17,9 @@ import { FormQualifier } from "@/components/FormQualifier";
 import { GamifiedProgressBar } from "@/components/GamifiedProgressBar";
 import VoiceRecorder from "@/components/VoiceRecorder";
 import { Shield, Lock, Clock, ArrowLeft, ArrowRight, Check, Phone, Hammer, Bath, Home, PlusCircle, Building2, Wrench, SkipForward, Sparkles, Wand2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
+// A2P Compliant: SMS consent is OPTIONAL - not required to submit
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
   email: z.string().email("Invalid email address").max(255),
@@ -27,9 +28,8 @@ const contactSchema = z.object({
   city: z.string().optional(),
   timeline: z.string().optional(),
   message: z.string().min(10, "Message must be at least 10 characters").max(1000),
-  smsConsent: z.boolean().refine(val => val === true, {
-    message: "You must agree to receive communications"
-  }),
+  marketingSmsConsent: z.boolean().optional().default(false),
+  nonMarketingSmsConsent: z.boolean().optional().default(false),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -75,7 +75,8 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
       city: "",
       timeline: "",
       message: "",
-      smsConsent: false,
+      marketingSmsConsent: false,
+      nonMarketingSmsConsent: false,
     },
     mode: "onChange",
   });
@@ -179,7 +180,8 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
         timeline: data.timeline,
         message: data.message,
         formSource: 'multistep',
-        smsConsent: data.smsConsent,
+        marketingSmsConsent: data.marketingSmsConsent,
+        nonMarketingSmsConsent: data.nonMarketingSmsConsent,
         consentTimestamp: new Date().toISOString(),
         // Anti-spam fields
         website: honeypotWebsite,
@@ -412,14 +414,19 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
               </div>
             </div>
 
-            {/* SMS Consent Checkbox */}
-            <SMSConsentCheckbox
-              checked={formValues.smsConsent}
-              onCheckedChange={(checked) => setValue("smsConsent", checked, { shouldValidate: true })}
-              error={errors.smsConsent?.message}
+            {/* A2P Compliant: Two separate OPTIONAL consent checkboxes */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-semibold text-foreground">SMS Communication Preferences (Optional)</h4>
+              <p className="text-xs text-muted-foreground">
+                Choose which types of text messages you'd like to receive. These are optional.
+              </p>
+            </div>
+            <SMSConsentCheckboxes
+              marketingConsent={formValues.marketingSmsConsent || false}
+              nonMarketingConsent={formValues.nonMarketingSmsConsent || false}
+              onMarketingChange={(checked) => setValue("marketingSmsConsent", checked)}
+              onNonMarketingChange={(checked) => setValue("nonMarketingSmsConsent", checked)}
             />
-
-            <SMSFormDisclaimer className="mt-4" />
           </div>
         );
 
@@ -612,6 +619,18 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
                 <span className="text-xs text-muted-foreground">No Spam Ever</span>
               </div>
             </div>
+
+            {/* Footer Links */}
+            <p className="text-xs text-muted-foreground text-center">
+              By submitting this form, you agree to our{" "}
+              <Link to="/privacy-policy" className="text-primary underline hover:text-primary/80">
+                Privacy Policy
+              </Link>{" "}
+              and{" "}
+              <Link to="/terms-of-service" className="text-primary underline hover:text-primary/80">
+                Terms of Service
+              </Link>.
+            </p>
 
             {/* Alternative Contact */}
             <div className="text-center pt-6 border-t border-border">

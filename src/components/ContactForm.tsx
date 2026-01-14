@@ -5,8 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FloatingInput } from "@/components/ui/floating-input";
 import { FloatingTextarea } from "@/components/ui/floating-textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
-import { SMSFormDisclaimer } from "@/components/ui/sms-form-disclaimer";
+import { SMSConsentCheckboxes } from "@/components/ui/sms-consent-checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { submitLead, getFormTimestamp } from "@/lib/lead-submission";
@@ -15,7 +14,9 @@ import { Label } from "@/components/ui/label";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
 import { Home, Droplet, Layers, Plus, Building2, Store, Shield, Lock, Clock } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
+// A2P Compliant: SMS consent is OPTIONAL - not required to submit
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
   email: z.string().trim().email("Please enter a valid email address").max(255, "Email must be less than 255 characters"),
@@ -27,9 +28,8 @@ const contactSchema = z.object({
   projectType: z.string().min(1, "Please select a project type"),
   timeline: z.string().optional(),
   message: z.string().trim().min(10, "Please provide at least 10 characters").max(1000, "Message must be less than 1000 characters"),
-  smsConsent: z.boolean().refine(val => val === true, {
-    message: "You must agree to receive communications"
-  }),
+  marketingSmsConsent: z.boolean().optional().default(false),
+  nonMarketingSmsConsent: z.boolean().optional().default(false),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -83,7 +83,8 @@ const ContactForm = ({
       projectType: "",
       timeline: "",
       message: "",
-      smsConsent: false,
+      marketingSmsConsent: false,
+      nonMarketingSmsConsent: false,
     },
   });
 
@@ -93,8 +94,6 @@ const ContactForm = ({
     const formatted = formatPhoneNumber(e.target.value);
     setValue("phone", formatted, { shouldValidate: true, shouldDirty: true });
   };
-
-  
 
   const onSubmit = async (data: ContactFormData) => {
     try {
@@ -107,7 +106,8 @@ const ContactForm = ({
         timeline: data.timeline,
         message: data.message,
         formSource: 'contact',
-        smsConsent: data.smsConsent,
+        marketingSmsConsent: data.marketingSmsConsent,
+        nonMarketingSmsConsent: data.nonMarketingSmsConsent,
         consentTimestamp: new Date().toISOString(),
         // Anti-spam fields
         website: honeypotWebsite,
@@ -242,11 +242,18 @@ const ContactForm = ({
             showCharCount
           />
 
-          {/* SMS Consent Checkbox */}
-          <SMSConsentCheckbox
-            checked={watch("smsConsent")}
-            onCheckedChange={(checked) => setValue("smsConsent", checked, { shouldValidate: true })}
-            error={errors.smsConsent?.message}
+          {/* A2P Compliant: Two separate OPTIONAL consent checkboxes */}
+          <div className="space-y-2">
+            <h4 className="text-sm font-semibold text-foreground">SMS Communication Preferences (Optional)</h4>
+            <p className="text-xs text-muted-foreground">
+              Choose which types of text messages you'd like to receive. These are optional.
+            </p>
+          </div>
+          <SMSConsentCheckboxes
+            marketingConsent={watch("marketingSmsConsent") || false}
+            nonMarketingConsent={watch("nonMarketingSmsConsent") || false}
+            onMarketingChange={(checked) => setValue("marketingSmsConsent", checked)}
+            onNonMarketingChange={(checked) => setValue("nonMarketingSmsConsent", checked)}
           />
 
           {/* Trust Badges */}
@@ -287,7 +294,17 @@ const ContactForm = ({
               </span>
             </Button>
             
-            <SMSFormDisclaimer className="mt-4" />
+            {/* Footer Links */}
+            <p className="text-xs text-muted-foreground text-center">
+              By submitting this form, you agree to our{" "}
+              <Link to="/privacy-policy" className="text-primary underline hover:text-primary/80">
+                Privacy Policy
+              </Link>{" "}
+              and{" "}
+              <Link to="/terms-of-service" className="text-primary underline hover:text-primary/80">
+                Terms of Service
+              </Link>.
+            </p>
             
             <p className="text-sm text-center">
               Prefer to talk now?{" "}

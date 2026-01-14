@@ -49,7 +49,9 @@ interface FormSubmission {
   squareFootage?: string;
   estimatedBudget?: string;
   formSource: string;
-  smsConsent?: boolean;
+  smsConsent?: boolean; // Legacy single consent
+  marketingSmsConsent?: boolean; // Marketing messages
+  nonMarketingSmsConsent?: boolean; // Non-marketing (customer care)
   consentTimestamp?: string;
 }
 
@@ -586,6 +588,10 @@ serve(async (req) => {
     const created_at = new Date().toISOString();
 
     // STEP 1: Save to database (primary capture - must succeed)
+    // A2P Compliant: Track both consent types separately
+    const marketingConsent = formData.marketingSmsConsent ?? formData.smsConsent ?? false;
+    const nonMarketingConsent = formData.nonMarketingSmsConsent ?? formData.smsConsent ?? false;
+    
     const { data: leadData, error: dbError } = await supabase
       .from('leads')
       .insert({
@@ -601,7 +607,9 @@ serve(async (req) => {
         business_type: formData.businessType || null,
         square_footage: formData.squareFootage || null,
         form_source: formData.formSource,
-        sms_consent: formData.smsConsent || false,
+        sms_consent: marketingConsent || nonMarketingConsent, // Legacy: true if either consent given
+        marketing_sms_consent: marketingConsent,
+        non_marketing_sms_consent: nonMarketingConsent,
         consent_timestamp: formData.consentTimestamp || null,
         synced_to_sheets: false,
         synced_to_ghl: false,

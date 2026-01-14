@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
           <h1 className="font-playfair text-3xl md:text-4xl font-bold text-primary mb-8">Privacy Policy</h1>
           
           <div className="prose prose-lg max-w-none text-foreground/80 space-y-6">
-            <p className="text-sm text-muted-foreground">Last Updated: January 6, 2025</p>
+            <p className="text-sm text-muted-foreground">Last Updated: January 14, 2025</p>
             
             <section className="space-y-4">
               <h2 className="font-playfair text-2xl font-semibold text-primary">1. Introduction</h2>
@@ -62,19 +62,44 @@ const PrivacyPolicy = () => {
             </section>
 
             <section className="space-y-4">
-              <h2 className="font-playfair text-2xl font-semibold text-primary">4. SMS Communications</h2>
+              <h2 className="font-playfair text-2xl font-semibold text-primary">4. SMS/Text Message Communications</h2>
               <p>
-                By submitting your phone number on our website, you consent to receive SMS/text messages 
-                from FC Construct related to estimates, project updates, invoices, scheduling, and customer service.
+                First Class Construction Group offers two types of SMS text message communications:
               </p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Message frequency may vary</li>
-                <li>Message and data rates may apply</li>
-                <li>You may opt out at any time by replying STOP</li>
-                <li>Reply HELP for assistance</li>
-              </ul>
+              
+              <h3 className="text-xl font-semibold text-primary">Non-Marketing Messages (Customer Care)</h3>
               <p>
-                We do not sell or share your mobile information with third parties for marketing purposes. 
+                If you opt in, you may receive non-marketing text messages about estimates, project updates, 
+                invoices, scheduling, and customer service communications.
+              </p>
+              
+              <h3 className="text-xl font-semibold text-primary">Marketing Messages</h3>
+              <p>
+                If you separately opt in, you may receive marketing text messages about promotions, 
+                special offers, and company news.
+              </p>
+              
+              <h3 className="text-xl font-semibold text-primary">Message Details</h3>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>Message frequency may vary based on your project activity</li>
+                <li>Message and data rates may apply</li>
+                <li>You may opt out at any time by replying STOP to any message</li>
+                <li>Reply HELP for assistance</li>
+                <li>Carriers are not liable for delayed or undelivered messages</li>
+              </ul>
+              
+              <div className="bg-muted/50 p-4 rounded-lg border border-border mt-4">
+                <h3 className="text-lg font-semibold text-primary mb-2">SMS Privacy Notice</h3>
+                <p className="text-sm">
+                  <strong>No mobile information will be shared with third parties/affiliates for 
+                  marketing/promotional purposes.</strong> Information sharing to subcontractors in 
+                  support services, such as customer service, is permitted. All other use case categories 
+                  exclude text messaging originator opt-in data and consent; this information will not be 
+                  shared with any third parties.
+                </p>
+              </div>
+              
+              <p>
                 Your consent to receive SMS messages is not a condition of purchasing any goods or services.
               </p>
             </section>
@@ -142,7 +167,7 @@ const PrivacyPolicy = () => {
 
             <section className="space-y-4">
               <h2 className="font-playfair text-2xl font-semibold text-primary">11. Contact Us</h2>
-              <p>If you have questions about this Privacy Policy, please contact us:</p>
+              <p>If you have questions about this Privacy Policy or how we handle your data, please contact us:</p>
               <ul className="list-none space-y-2">
                 <li><strong>Phone:</strong> 678-671-6336</li>
                 <li><strong>Email:</strong> info@fcconstruct.com</li>

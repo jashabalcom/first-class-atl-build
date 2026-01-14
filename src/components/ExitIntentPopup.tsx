@@ -8,8 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { FloatingInput } from "@/components/ui/floating-input";
-import { SMSConsentCheckbox } from "@/components/ui/sms-consent-checkbox";
-import { SMSFormDisclaimer } from "@/components/ui/sms-form-disclaimer";
+import { SMSConsentCheckboxes } from "@/components/ui/sms-consent-checkbox";
 import {
   Select,
   SelectContent,
@@ -21,7 +20,7 @@ import { submitLead, getFormTimestamp } from "@/lib/lead-submission";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { Check, Gift, Clock, Phone, X, Sparkles, Wand2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const ExitIntentPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +31,8 @@ const ExitIntentPopup = () => {
     email: "",
     phone: "",
     projectType: "",
-    smsConsent: false,
+    marketingSmsConsent: false,
+    nonMarketingSmsConsent: false,
   });
   // Anti-spam
   const [honeypotWebsite, setHoneypotWebsite] = useState('');
@@ -98,15 +98,7 @@ const ExitIntentPopup = () => {
       return;
     }
 
-    if (!formData.smsConsent) {
-      toast({
-        title: "Consent required",
-        description: "Please agree to receive communications to continue.",
-        variant: "destructive",
-      });
-      return;
-    }
-
+    // A2P Compliant: SMS consent is OPTIONAL - no longer required to submit
     setIsSubmitting(true);
 
     const result = await submitLead({
@@ -116,7 +108,8 @@ const ExitIntentPopup = () => {
       projectType: formData.projectType || "General Inquiry",
       formSource: "exit-intent-offer",
       message: "Exit Intent Popup - Renovation Blueprint Package Request",
-      smsConsent: formData.smsConsent,
+      marketingSmsConsent: formData.marketingSmsConsent,
+      nonMarketingSmsConsent: formData.nonMarketingSmsConsent,
       consentTimestamp: new Date().toISOString(),
       // Anti-spam fields
       website: honeypotWebsite,
@@ -263,20 +256,33 @@ const ExitIntentPopup = () => {
                 </SelectContent>
               </Select>
 
-              <SMSConsentCheckbox
-                checked={formData.smsConsent}
-                onCheckedChange={(checked) => setFormData({ ...formData, smsConsent: checked })}
+              {/* A2P Compliant: Two separate OPTIONAL consent checkboxes */}
+              <SMSConsentCheckboxes
+                marketingConsent={formData.marketingSmsConsent}
+                nonMarketingConsent={formData.nonMarketingSmsConsent}
+                onMarketingChange={(checked) => setFormData({ ...formData, marketingSmsConsent: checked })}
+                onNonMarketingChange={(checked) => setFormData({ ...formData, nonMarketingSmsConsent: checked })}
               />
 
               <Button
                 type="submit"
-                disabled={isSubmitting || !formData.smsConsent}
+                disabled={isSubmitting}
                 className="w-full h-12 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-base"
               >
                 {isSubmitting ? "Submitting..." : "Claim My Free Blueprint"}
               </Button>
 
-              <SMSFormDisclaimer className="pt-1" />
+              {/* Footer Links */}
+              <p className="text-xs text-muted-foreground text-center pt-1">
+                By submitting, you agree to our{" "}
+                <Link to="/privacy-policy" className="text-primary underline hover:text-primary/80">
+                  Privacy Policy
+                </Link>{" "}
+                and{" "}
+                <Link to="/terms-of-service" className="text-primary underline hover:text-primary/80">
+                  Terms of Service
+                </Link>.
+              </p>
             </form>
           </>
         ) : (
