@@ -32,6 +32,7 @@ import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import SMSTerms from "./pages/SMSTerms";
 import CookieConsent from "./components/CookieConsent";
 import KitchenRemodeling from "./pages/services/KitchenRemodeling";
 import BathroomRemodeling from "./pages/services/BathroomRemodeling";
@@ -159,6 +160,7 @@ const App = () => (
             <Route path="/auth/reset-password" element={<ResetPassword />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/sms-terms" element={<SMSTerms />} />
             <Route path="/admin" element={<Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}><AdminDashboard /></Suspense>} />
             <Route path="*" element={<NotFound />} />
             </Routes>
