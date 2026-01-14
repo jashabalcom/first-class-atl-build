@@ -185,6 +185,9 @@ const Footer = () => {
                 <Link to="/terms-of-service" className="opacity-80 hover:opacity-100 hover:text-accent transition-colors">
                   Terms of Service
                 </Link>
+                <Link to="/sms-terms" className="opacity-80 hover:opacity-100 hover:text-accent transition-colors">
+                  SMS Terms
+                </Link>
                 <span className="opacity-80">Licensed • Bonded • Insured</span>
                 <span className="text-accent font-semibold">DBE • MBE Certified</span>
                 <button 
