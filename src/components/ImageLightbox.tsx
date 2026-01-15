@@ -28,8 +28,18 @@ interface ImageLightboxProps {
     afterImage: string;
     displayMode?: string;
     slideshowImages?: SlideshowImage[];
+    aspectRatio?: string;
+    fitMode?: string;
   } | null;
 }
+
+const aspectClasses: Record<string, string> = {
+  'original': 'aspect-auto',
+  '4:3': 'aspect-[4/3]',
+  '16:9': 'aspect-[16/9]',
+  '1:1': 'aspect-square',
+  '3:4': 'aspect-[3/4]',
+};
 
 const ImageLightbox = ({ open, onClose, project }: ImageLightboxProps) => {
   const carouselRef = useRef<CarouselApi | null>(null);
@@ -57,6 +67,12 @@ const ImageLightbox = ({ open, onClose, project }: ImageLightboxProps) => {
   if (!project) return null;
 
   const renderContent = () => {
+    const aspectRatio = project.aspectRatio || '4:3';
+    const fitMode = project.fitMode || 'cover';
+    const aspectClass = aspectClasses[aspectRatio] || aspectClasses['4:3'];
+    // In lightbox, prefer contain for full visibility, but respect user's fitMode choice
+    const fitClass = fitMode === 'contain' ? 'object-contain' : 'object-contain';
+
     // Slideshow mode - show carousel of images
     if (project.displayMode === 'slideshow' && project.slideshowImages && project.slideshowImages.length > 0) {
       const setApi = (api: CarouselApi) => {
@@ -67,13 +83,13 @@ const ImageLightbox = ({ open, onClose, project }: ImageLightboxProps) => {
           <CarouselContent>
             {project.slideshowImages.map((image) => (
               <CarouselItem key={image.id}>
-                <div className="aspect-[4/3] w-full overflow-hidden rounded-lg bg-muted">
+                <div className="w-full max-h-[70vh] overflow-hidden rounded-lg bg-muted flex items-center justify-center">
                   <img
                     src={getOptimizedImageUrl(image.image_url, imagePresets.lightbox)}
                     alt={project.title}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover"
+                    className="max-w-full max-h-[70vh] object-contain"
                   />
                 </div>
               </CarouselItem>
@@ -95,19 +111,20 @@ const ImageLightbox = ({ open, onClose, project }: ImageLightboxProps) => {
           beforeImage={project.beforeImage}
           afterImage={project.afterImage}
           alt={project.title}
+          aspectRatio={aspectRatio}
         />
       );
     }
 
-    // Single image mode - just show the image
+    // Single image mode - show full image without cropping
     return (
-      <div className="aspect-[4/3] w-full overflow-hidden rounded-lg bg-muted">
+      <div className="w-full max-h-[70vh] overflow-hidden rounded-lg bg-muted flex items-center justify-center">
         <img
           src={getOptimizedImageUrl(project.afterImage, imagePresets.lightbox)}
           alt={project.title}
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-cover"
+          className="max-w-full max-h-[70vh] object-contain"
         />
       </div>
     );

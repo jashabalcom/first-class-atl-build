@@ -112,6 +112,7 @@ export type Database = {
       gallery_projects: {
         Row: {
           after_image_url: string
+          aspect_ratio: string | null
           before_image_url: string | null
           category: string
           created_at: string
@@ -119,12 +120,14 @@ export type Database = {
           display_mode: string | null
           display_order: number | null
           featured: boolean | null
+          fit_mode: string | null
           id: string
           location: string | null
           title: string
         }
         Insert: {
           after_image_url: string
+          aspect_ratio?: string | null
           before_image_url?: string | null
           category: string
           created_at?: string
@@ -132,12 +135,14 @@ export type Database = {
           display_mode?: string | null
           display_order?: number | null
           featured?: boolean | null
+          fit_mode?: string | null
           id?: string
           location?: string | null
           title: string
         }
         Update: {
           after_image_url?: string
+          aspect_ratio?: string | null
           before_image_url?: string | null
           category?: string
           created_at?: string
@@ -145,6 +150,7 @@ export type Database = {
           display_mode?: string | null
           display_order?: number | null
           featured?: boolean | null
+          fit_mode?: string | null
           id?: string
           location?: string | null
           title?: string

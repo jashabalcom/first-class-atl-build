@@ -5,9 +5,18 @@ interface BeforeAfterSliderProps {
   beforeImage: string;
   afterImage: string;
   alt?: string;
+  aspectRatio?: string;
 }
 
-const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after comparison" }: BeforeAfterSliderProps) => {
+const aspectClasses: Record<string, string> = {
+  'original': 'aspect-auto min-h-[300px]',
+  '4:3': 'aspect-[4/3]',
+  '16:9': 'aspect-[16/9]',
+  '1:1': 'aspect-square',
+  '3:4': 'aspect-[3/4]',
+};
+
+const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after comparison", aspectRatio = '4:3' }: BeforeAfterSliderProps) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -52,10 +61,12 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after co
     setIsDragging(false);
   }, []);
 
+  const aspectClass = aspectClasses[aspectRatio] || aspectClasses['4:3'];
+
   return (
     <div 
       ref={containerRef}
-      className={`relative w-full aspect-[4/3] overflow-hidden rounded-lg shadow-xl select-none ${isDragging ? 'cursor-ew-resize' : 'cursor-ew-resize'}`}
+      className={`relative w-full ${aspectClass} overflow-hidden rounded-lg shadow-xl select-none ${isDragging ? 'cursor-ew-resize' : 'cursor-ew-resize'}`}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
