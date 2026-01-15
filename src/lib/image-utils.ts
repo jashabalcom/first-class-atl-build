@@ -92,3 +92,76 @@ export const formatFileSize = (bytes: number): string => {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 };
+
+/**
+ * Get image dimensions from a File object
+ * Returns a promise with width, height, and aspect ratio
+ */
+export interface ImageDimensions {
+  width: number;
+  height: number;
+  aspectRatio: number;
+}
+
+export const getImageDimensions = (file: File): Promise<ImageDimensions> => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve({
+        width: img.naturalWidth,
+        height: img.naturalHeight,
+        aspectRatio: img.naturalWidth / img.naturalHeight
+      });
+    };
+    
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error('Failed to load image'));
+    };
+    
+    img.src = objectUrl;
+  });
+};
+
+/**
+ * Suggest the best fit mode based on image dimensions
+ * Grid uses 4:3 (1.33) containers, so:
+ * - Images close to 4:3 work well with "cover" (minimal cropping)
+ * - Very wide or tall images benefit from "contain" (show full image)
+ */
+export const suggestFitMode = (dimensions: ImageDimensions): 'cover' | 'contain' => {
+  const gridAspectRatio = 4 / 3; // 1.333...
+  const imageAspectRatio = dimensions.aspectRatio;
+  
+  // Calculate how much the image differs from the grid container
+  const ratioDifference = Math.abs(imageAspectRatio - gridAspectRatio) / gridAspectRatio;
+  
+  // If the image is within ~25% of the 4:3 ratio, cover works well
+  // Otherwise, contain is better to avoid excessive cropping
+  if (ratioDifference <= 0.25) {
+    return 'cover';
+  }
+  
+  return 'contain';
+};
+
+/**
+ * Get a human-readable description of why a fit mode was suggested
+ */
+export const getFitModeSuggestionReason = (dimensions: ImageDimensions, suggestedMode: 'cover' | 'contain'): string => {
+  const gridAspectRatio = 4 / 3;
+  const imageAspectRatio = dimensions.aspectRatio;
+  
+  if (suggestedMode === 'cover') {
+    return `Image is close to 4:3 ratio — minimal cropping with Cover mode`;
+  }
+  
+  if (imageAspectRatio > gridAspectRatio) {
+    return `Wide image (${dimensions.width}×${dimensions.height}) — Contain mode shows the full image`;
+  }
+  
+  return `Tall image (${dimensions.width}×${dimensions.height}) — Contain mode shows the full image`;
+};
