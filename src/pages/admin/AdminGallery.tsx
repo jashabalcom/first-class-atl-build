@@ -868,40 +868,23 @@ export default function AdminGallery() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="aspect_ratio">Aspect Ratio</Label>
-                <Select
-                  value={formData.aspect_ratio}
-                  onValueChange={(value) => setFormData(prev => ({ ...prev, aspect_ratio: value }))}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="original">Auto (Original)</SelectItem>
-                    <SelectItem value="4:3">4:3 (Landscape)</SelectItem>
-                    <SelectItem value="16:9">16:9 (Widescreen)</SelectItem>
-                    <SelectItem value="1:1">1:1 (Square)</SelectItem>
-                    <SelectItem value="3:4">3:4 (Portrait)</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="fit_mode">Fit Mode</Label>
-                <Select
-                  value={formData.fit_mode}
-                  onValueChange={(value) => setFormData(prev => ({ ...prev, fit_mode: value }))}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="cover">Cover (Crop to Fill)</SelectItem>
-                    <SelectItem value="contain">Contain (Show Full)</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="fit_mode">Grid Thumbnail Display</Label>
+              <Select
+                value={formData.fit_mode}
+                onValueChange={(value) => setFormData(prev => ({ ...prev, fit_mode: value }))}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="cover">Cover (Crop to Fill Card)</SelectItem>
+                  <SelectItem value="contain">Contain (Show Full Image)</SelectItem>
+                </SelectContent>
+              </Select>
+              <p className="text-xs text-muted-foreground">
+                All grid cards use 4:3 containers for alignment. "Cover" crops to fill, "Contain" shows full image with letterboxing.
+              </p>
             </div>
 
             <div className="space-y-2">

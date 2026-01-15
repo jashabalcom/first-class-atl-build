@@ -15,22 +15,14 @@ interface GalleryCardProps {
   onClick: () => void;
 }
 
-const aspectClasses: Record<string, string> = {
-  'original': 'aspect-auto min-h-[200px]',
-  '4:3': 'aspect-[4/3]',
-  '16:9': 'aspect-[16/9]',
-  '1:1': 'aspect-square',
-  '3:4': 'aspect-[3/4]',
-};
-
 const GalleryCard = ({ project, onClick }: GalleryCardProps) => {
   const getCategoryLabel = (category: string) => {
     return category.charAt(0).toUpperCase() + category.slice(1);
   };
 
-  const aspectRatio = project.aspectRatio || '4:3';
+  // Always use 4:3 container for uniform grid alignment
+  // fitMode controls whether image crops (cover) or shows full with letterboxing (contain)
   const fitMode = project.fitMode || 'cover';
-  const aspectClass = aspectClasses[aspectRatio] || aspectClasses['4:3'];
   const fitClass = fitMode === 'contain' ? 'object-contain' : 'object-cover';
 
   return (
@@ -38,7 +30,8 @@ const GalleryCard = ({ project, onClick }: GalleryCardProps) => {
       onClick={onClick}
       className="group cursor-pointer overflow-hidden rounded-lg border bg-card shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
-      <div className={`${aspectClass} overflow-hidden relative bg-muted`}>
+      {/* Fixed 4:3 container ensures all cards align in grid */}
+      <div className="aspect-[4/3] overflow-hidden relative bg-muted">
         <img
           src={getOptimizedImageUrl(project.afterImage, imagePresets.thumbnail)}
           alt={project.title}
