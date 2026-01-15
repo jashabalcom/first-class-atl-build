@@ -52,6 +52,8 @@ interface GalleryProject {
   featured: boolean | null;
   display_order: number | null;
   display_mode: 'single' | 'slideshow' | 'before_after' | null;
+  aspect_ratio: string | null;
+  fit_mode: string | null;
 }
 
 const categories = ['kitchen', 'bathroom', 'basement', 'commercial', 'exterior'];
@@ -197,7 +199,9 @@ export default function AdminGallery() {
     after_image_url: '',
     featured: false,
     display_order: 0,
-    display_mode: 'single' as 'single' | 'slideshow' | 'before_after'
+    display_mode: 'single' as 'single' | 'slideshow' | 'before_after',
+    aspect_ratio: '4:3',
+    fit_mode: 'cover'
   });
 
   const categoryCounts = useMemo(() => {
@@ -507,7 +511,9 @@ export default function AdminGallery() {
       after_image_url: '',
       featured: false,
       display_order: 0,
-      display_mode: 'single'
+      display_mode: 'single',
+      aspect_ratio: '4:3',
+      fit_mode: 'cover'
     });
     setEditingProject(null);
     setCurrentProjectImages([]);
@@ -524,7 +530,9 @@ export default function AdminGallery() {
       after_image_url: project.after_image_url,
       featured: project.featured || false,
       display_order: project.display_order || 0,
-      display_mode: project.display_mode || 'single'
+      display_mode: project.display_mode || 'single',
+      aspect_ratio: project.aspect_ratio || '4:3',
+      fit_mode: project.fit_mode || 'cover'
     });
     await fetchProjectImages(project.id);
     setIsDialogOpen(true);
@@ -592,7 +600,9 @@ export default function AdminGallery() {
       after_image_url: thumbnailUrl,
       featured: formData.featured,
       display_order: formData.display_order,
-      display_mode: formData.display_mode
+      display_mode: formData.display_mode,
+      aspect_ratio: formData.aspect_ratio,
+      fit_mode: formData.fit_mode
     };
 
     let projectId = editingProject?.id;
@@ -853,6 +863,42 @@ export default function AdminGallery() {
                     <SelectItem value="single">Single Image</SelectItem>
                     <SelectItem value="slideshow">Slideshow</SelectItem>
                     <SelectItem value="before_after">Before & After</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="aspect_ratio">Aspect Ratio</Label>
+                <Select
+                  value={formData.aspect_ratio}
+                  onValueChange={(value) => setFormData(prev => ({ ...prev, aspect_ratio: value }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="original">Auto (Original)</SelectItem>
+                    <SelectItem value="4:3">4:3 (Landscape)</SelectItem>
+                    <SelectItem value="16:9">16:9 (Widescreen)</SelectItem>
+                    <SelectItem value="1:1">1:1 (Square)</SelectItem>
+                    <SelectItem value="3:4">3:4 (Portrait)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="fit_mode">Fit Mode</Label>
+                <Select
+                  value={formData.fit_mode}
+                  onValueChange={(value) => setFormData(prev => ({ ...prev, fit_mode: value }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="cover">Cover (Crop to Fill)</SelectItem>
+                    <SelectItem value="contain">Contain (Show Full)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

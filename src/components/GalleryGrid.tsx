@@ -20,6 +20,8 @@ interface GalleryProject {
   featured: boolean | null;
   display_order: number | null;
   display_mode: string | null;
+  aspect_ratio: string | null;
+  fit_mode: string | null;
 }
 
 interface ProjectImage {
@@ -160,6 +162,8 @@ const GalleryGrid = ({ filter }: GalleryGridProps) => {
       id: img.id,
       image_url: img.image_url,
     })),
+    aspectRatio: currentProject.aspect_ratio || '4:3',
+    fitMode: currentProject.fit_mode || 'cover',
   } : null;
 
   return (
@@ -174,6 +178,8 @@ const GalleryGrid = ({ filter }: GalleryGridProps) => {
               location: project.location || '',
               afterImage: getThumbnail(project),
               description: project.description || '',
+              aspectRatio: project.aspect_ratio || '4:3',
+              fitMode: project.fit_mode || 'cover',
             }}
             onClick={() => handleCardClick(project)}
           />
