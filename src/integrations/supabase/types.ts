@@ -114,6 +114,7 @@ export type Database = {
           after_image_url: string
           aspect_ratio: string | null
           before_image_url: string | null
+          categories: string[] | null
           category: string
           created_at: string
           description: string | null
@@ -129,6 +130,7 @@ export type Database = {
           after_image_url: string
           aspect_ratio?: string | null
           before_image_url?: string | null
+          categories?: string[] | null
           category: string
           created_at?: string
           description?: string | null
@@ -144,6 +146,7 @@ export type Database = {
           after_image_url?: string
           aspect_ratio?: string | null
           before_image_url?: string | null
+          categories?: string[] | null
           category?: string
           created_at?: string
           description?: string | null
