@@ -187,6 +187,19 @@ const ContactForm = ({
             )}
           </div>
 
+          {/* A2P Compliant: SMS consent immediately after phone number */}
+          <div className="pt-2">
+            <p className="text-sm font-medium text-foreground mb-3">
+              SMS Text Message Preferences (Optional)
+            </p>
+            <SMSConsentCheckboxes
+              marketingConsent={watch("marketingSmsConsent") || false}
+              nonMarketingConsent={watch("nonMarketingSmsConsent") || false}
+              onMarketingChange={(checked) => setValue("marketingSmsConsent", checked)}
+              onNonMarketingChange={(checked) => setValue("nonMarketingSmsConsent", checked)}
+            />
+          </div>
+
           {/* Project Type Cards */}
           <div className="space-y-3">
             <Label className="text-sm">Project Type *</Label>
@@ -242,19 +255,6 @@ const ContactForm = ({
             showCharCount
           />
 
-          {/* A2P Compliant: Two separate OPTIONAL consent checkboxes */}
-          <div className="space-y-2">
-            <h4 className="text-sm font-semibold text-foreground">SMS Communication Preferences (Optional)</h4>
-            <p className="text-xs text-muted-foreground">
-              Choose which types of text messages you'd like to receive. These are optional.
-            </p>
-          </div>
-          <SMSConsentCheckboxes
-            marketingConsent={watch("marketingSmsConsent") || false}
-            nonMarketingConsent={watch("nonMarketingSmsConsent") || false}
-            onMarketingChange={(checked) => setValue("marketingSmsConsent", checked)}
-            onNonMarketingChange={(checked) => setValue("nonMarketingSmsConsent", checked)}
-          />
 
           {/* Trust Badges */}
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 py-4 border-y bg-muted/20">

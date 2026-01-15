@@ -30,7 +30,7 @@ export function SMSConsentCheckboxes({
 }: SMSConsentCheckboxesProps) {
   return (
     <div className={cn("space-y-4", className)}>
-      {/* Non-Marketing SMS Consent (Customer Care) */}
+      {/* Transactional SMS Consent (Customer Care) */}
       <div className="flex items-start gap-3 p-3 rounded-lg border border-border bg-muted/30">
         <Checkbox
           id="non-marketing-sms-consent"
@@ -42,9 +42,9 @@ export function SMSConsentCheckboxes({
           htmlFor="non-marketing-sms-consent" 
           className="text-xs text-muted-foreground leading-relaxed cursor-pointer"
         >
-          I consent to receive non-marketing text messages from First Class Construction Group 
-          about estimates, project updates, invoices, scheduling, and customer service. 
-          Message & data rates may apply. Text HELP for assistance, reply STOP to opt out.
+          I consent to receive transactional messages from First Class Construction Group 
+          at the phone number provided. Message frequency may vary. Message & Data rates may apply. 
+          Reply HELP for help or STOP to opt-out.
         </Label>
       </div>
 
@@ -60,9 +60,9 @@ export function SMSConsentCheckboxes({
           htmlFor="marketing-sms-consent" 
           className="text-xs text-muted-foreground leading-relaxed cursor-pointer"
         >
-          I consent to receive marketing text messages from First Class Construction Group 
-          at the phone number provided. Frequency may vary. Message & data rates may apply. 
-          Text HELP for assistance, reply STOP to opt out.
+          I consent to receive marketing and promotional messages from First Class Construction Group 
+          at the phone number provided. Message frequency may vary. Message & Data rates may apply. 
+          Reply HELP for help or STOP to opt-out.
         </Label>
       </div>
 
