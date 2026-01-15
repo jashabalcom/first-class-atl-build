@@ -45,6 +45,7 @@ interface GalleryProject {
   id: string;
   title: string;
   category: string;
+  categories: string[] | null;
   location: string | null;
   description: string | null;
   before_image_url: string | null;
@@ -56,7 +57,7 @@ interface GalleryProject {
   fit_mode: string | null;
 }
 
-const categories = ['kitchen', 'bathroom', 'basement', 'commercial', 'exterior'];
+const categories = ['kitchen', 'bathroom', 'basement', 'commercial', 'exterior', 'carpentry', 'closets', 'renovation'];
 
 const displayModeLabels = {
   single: 'Single Image',
@@ -138,9 +139,11 @@ function SortableProjectCard({ project, onEdit, onDelete, imageCount, thumbnail 
           <div className="flex-1">
             <h3 className="font-semibold text-foreground">{project.title}</h3>
             <p className="text-sm text-muted-foreground">
-              {project.category} {project.location && `• ${project.location}`}
+              {project.categories && project.categories.length > 0 
+                ? project.categories.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(', ')
+                : project.category} {project.location && `• ${project.location}`}
             </p>
-            <div className="flex gap-2 mt-1">
+            <div className="flex flex-wrap gap-2 mt-1">
               {project.featured && (
                 <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Featured</span>
               )}
@@ -194,6 +197,7 @@ export default function AdminGallery() {
   const [formData, setFormData] = useState({
     title: '',
     category: '',
+    categories: [] as string[],
     location: '',
     description: '',
     before_image_url: '',
@@ -208,14 +212,21 @@ export default function AdminGallery() {
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { all: projects.length };
     projects.forEach(p => {
-      counts[p.category] = (counts[p.category] || 0) + 1;
+      // Count each category the project belongs to
+      const projectCategories = p.categories && p.categories.length > 0 ? p.categories : [p.category];
+      projectCategories.forEach(cat => {
+        counts[cat] = (counts[cat] || 0) + 1;
+      });
     });
     return counts;
   }, [projects]);
 
   const filteredProjects = useMemo(() => {
     if (activeCategory === 'all') return projects;
-    return projects.filter(p => p.category === activeCategory);
+    return projects.filter(p => {
+      const projectCategories = p.categories && p.categories.length > 0 ? p.categories : [p.category];
+      return projectCategories.includes(activeCategory);
+    });
   }, [projects, activeCategory]);
 
   const sensors = useSensors(
@@ -535,6 +546,7 @@ export default function AdminGallery() {
     setFormData({
       title: '',
       category: '',
+      categories: [],
       location: '',
       description: '',
       before_image_url: '',
@@ -555,6 +567,7 @@ export default function AdminGallery() {
     setFormData({
       title: project.title,
       category: project.category,
+      categories: project.categories && project.categories.length > 0 ? project.categories : [project.category],
       location: project.location || '',
       description: project.description || '',
       before_image_url: project.before_image_url || '',
@@ -577,8 +590,8 @@ export default function AdminGallery() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.title || !formData.category) {
-      toast.error('Please fill in required fields (title, category)');
+    if (!formData.title || formData.categories.length === 0) {
+      toast.error('Please fill in required fields (title, at least one category)');
       return;
     }
 
@@ -624,7 +637,8 @@ export default function AdminGallery() {
 
     const projectData = {
       title: formData.title,
-      category: formData.category,
+      category: formData.categories[0] || formData.category, // Primary category for backward compat
+      categories: formData.categories,
       location: formData.location || null,
       description: formData.description || null,
       before_image_url: formData.before_image_url || null,
@@ -842,33 +856,51 @@ export default function AdminGallery() {
             <DialogTitle>{editingProject ? 'Edit Project' : 'Add New Project'}</DialogTitle>
           </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="title">Title *</Label>
-                <Input
-                  id="title"
-                  value={formData.title}
-                  onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                  placeholder="Project title"
-                  required
-                />
+            <div className="space-y-2">
+              <Label htmlFor="title">Title *</Label>
+              <Input
+                id="title"
+                value={formData.title}
+                onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                placeholder="Project title"
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Categories *</Label>
+              <div className="flex flex-wrap gap-2 p-3 border rounded-md bg-background">
+                {categories.map(cat => {
+                  const isSelected = formData.categories.includes(cat);
+                  return (
+                    <Badge
+                      key={cat}
+                      variant={isSelected ? "default" : "outline"}
+                      className={`cursor-pointer capitalize transition-colors ${
+                        isSelected 
+                          ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                          : 'hover:bg-secondary'
+                      }`}
+                      onClick={() => {
+                        setFormData(prev => ({
+                          ...prev,
+                          categories: isSelected
+                            ? prev.categories.filter(c => c !== cat)
+                            : [...prev.categories, cat]
+                        }));
+                      }}
+                    >
+                      {isSelected && <CheckCircle className="w-3 h-3 mr-1" />}
+                      {cat}
+                    </Badge>
+                  );
+                })}
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="category">Category *</Label>
-                <Select
-                  value={formData.category}
-                  onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {categories.map(cat => (
-                      <SelectItem key={cat} value={cat}>{cat}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+              {formData.categories.length > 0 && (
+                <p className="text-xs text-muted-foreground">
+                  Selected: {formData.categories.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(', ')}
+                </p>
+              )}
             </div>
 
             <div className="grid grid-cols-2 gap-4">

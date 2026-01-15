@@ -19,6 +19,9 @@ const Gallery = () => {
     { id: "basement", label: "Basements" },
     { id: "commercial", label: "Commercial" },
     { id: "exterior", label: "Exterior" },
+    { id: "carpentry", label: "Carpentry" },
+    { id: "closets", label: "Closets" },
+    { id: "renovation", label: "Renovation" },
   ];
 
   return (

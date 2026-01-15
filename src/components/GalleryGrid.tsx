@@ -13,6 +13,7 @@ interface GalleryProject {
   id: string;
   title: string;
   category: string;
+  categories: string[] | null;
   location: string | null;
   description: string | null;
   before_image_url: string | null;
@@ -117,7 +118,11 @@ const GalleryGrid = ({ filter }: GalleryGridProps) => {
 
   const filteredProjects = filter === "all" 
     ? projects 
-    : projects.filter(p => p.category === filter);
+    : projects.filter(p => {
+        // Check new categories array first, fallback to old category
+        const projectCategories = p.categories && p.categories.length > 0 ? p.categories : [p.category];
+        return projectCategories.includes(filter);
+      });
 
   const handleCardClick = (project: GalleryProject) => {
     setCurrentProject(project);
