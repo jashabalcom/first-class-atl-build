@@ -240,6 +240,19 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
               error={errors.phone?.message}
               placeholder="(555) 555-5555"
             />
+
+            {/* A2P Compliant: SMS consent immediately after phone number */}
+            <div className="mt-4 pt-4 border-t border-border">
+              <p className="text-sm font-medium text-foreground mb-3">
+                SMS Text Message Preferences (Optional)
+              </p>
+              <SMSConsentCheckboxes
+                marketingConsent={formValues.marketingSmsConsent || false}
+                nonMarketingConsent={formValues.nonMarketingSmsConsent || false}
+                onMarketingChange={(checked) => setValue("marketingSmsConsent", checked)}
+                onNonMarketingChange={(checked) => setValue("nonMarketingSmsConsent", checked)}
+              />
+            </div>
             
             {/* Honeypot fields - hidden from humans, visible to bots */}
             <div className="absolute left-[-9999px] top-[-9999px]" aria-hidden="true">
@@ -414,19 +427,16 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true }: M
               </div>
             </div>
 
-            {/* A2P Compliant: Two separate OPTIONAL consent checkboxes */}
-            <div className="space-y-2">
-              <h4 className="text-sm font-semibold text-foreground">SMS Communication Preferences (Optional)</h4>
-              <p className="text-xs text-muted-foreground">
-                Choose which types of text messages you'd like to receive. These are optional.
+            {/* SMS Preferences Summary */}
+            <div className="border-t border-border pt-4">
+              <h4 className="text-sm font-semibold text-muted-foreground mb-1">SMS Preferences</h4>
+              <p className="text-foreground text-sm">
+                {formValues.marketingSmsConsent ? "✓ Marketing messages" : "✗ No marketing messages"}
+              </p>
+              <p className="text-foreground text-sm">
+                {formValues.nonMarketingSmsConsent ? "✓ Project updates/service messages" : "✗ No service messages"}
               </p>
             </div>
-            <SMSConsentCheckboxes
-              marketingConsent={formValues.marketingSmsConsent || false}
-              nonMarketingConsent={formValues.nonMarketingSmsConsent || false}
-              onMarketingChange={(checked) => setValue("marketingSmsConsent", checked)}
-              onNonMarketingChange={(checked) => setValue("nonMarketingSmsConsent", checked)}
-            />
           </div>
         );
 

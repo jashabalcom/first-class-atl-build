@@ -224,6 +224,19 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
               }}
               error={errors.phone?.message}
             />
+
+            {/* A2P Compliant: SMS consent immediately after phone number */}
+            <div className="mt-4 pt-4 border-t border-border">
+              <p className="text-sm font-medium text-foreground mb-3">
+                SMS Text Message Preferences (Optional)
+              </p>
+              <SMSConsentCheckboxes
+                marketingConsent={watchedFields.marketingSmsConsent || false}
+                nonMarketingConsent={watchedFields.nonMarketingSmsConsent || false}
+                onMarketingChange={(checked) => setValue("marketingSmsConsent", checked)}
+                onNonMarketingChange={(checked) => setValue("nonMarketingSmsConsent", checked)}
+              />
+            </div>
           </div>
         );
 
@@ -385,19 +398,16 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
               </div>
             </div>
 
-            {/* A2P Compliant: Two separate OPTIONAL consent checkboxes */}
-            <div className="space-y-2">
-              <h4 className="text-sm font-semibold text-foreground">SMS Communication Preferences (Optional)</h4>
-              <p className="text-xs text-muted-foreground">
-                Choose which types of text messages you'd like to receive. These are optional.
+            {/* SMS Preferences Summary */}
+            <div className="border-t border-border pt-4">
+              <h4 className="text-sm font-semibold text-muted-foreground mb-1">SMS Preferences</h4>
+              <p className="text-foreground text-sm">
+                {watchedFields.marketingSmsConsent ? "✓ Marketing messages" : "✗ No marketing messages"}
+              </p>
+              <p className="text-foreground text-sm">
+                {watchedFields.nonMarketingSmsConsent ? "✓ Project updates/service messages" : "✗ No service messages"}
               </p>
             </div>
-            <SMSConsentCheckboxes
-              marketingConsent={watchedFields.marketingSmsConsent || false}
-              nonMarketingConsent={watchedFields.nonMarketingSmsConsent || false}
-              onMarketingChange={(checked) => setValue("marketingSmsConsent", checked)}
-              onNonMarketingChange={(checked) => setValue("nonMarketingSmsConsent", checked)}
-            />
           </div>
         );
 
