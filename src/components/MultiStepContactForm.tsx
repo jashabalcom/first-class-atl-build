@@ -48,10 +48,11 @@ const STORAGE_KEY = "residential-form-progress";
 interface MultiStepContactFormProps {
   showCity?: boolean;
   showTimeline?: boolean;
+  skipQualifier?: boolean;
 }
 
-export function MultiStepContactForm({ showCity = true, showTimeline = true }: MultiStepContactFormProps) {
-  const [showQualifier, setShowQualifier] = useState(true);
+export function MultiStepContactForm({ showCity = true, showTimeline = true, skipQualifier = false }: MultiStepContactFormProps) {
+  const [showQualifier, setShowQualifier] = useState(!skipQualifier);
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);

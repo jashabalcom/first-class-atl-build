@@ -226,7 +226,7 @@ const Contact = () => {
 
               {/* Right: Contact Form */}
               <div className="animate-fade-in-up">
-                <MultiStepContactForm showCity={true} showTimeline={true} />
+                <MultiStepContactForm showCity={true} showTimeline={true} skipQualifier={true} />
               </div>
             </div>
           </div>
