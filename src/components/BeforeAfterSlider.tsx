@@ -5,18 +5,10 @@ interface BeforeAfterSliderProps {
   beforeImage: string;
   afterImage: string;
   alt?: string;
-  aspectRatio?: string;
+  inLightbox?: boolean;
 }
 
-const aspectClasses: Record<string, string> = {
-  'original': 'aspect-auto min-h-[300px]',
-  '4:3': 'aspect-[4/3]',
-  '16:9': 'aspect-[16/9]',
-  '1:1': 'aspect-square',
-  '3:4': 'aspect-[3/4]',
-};
-
-const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after comparison", aspectRatio = '4:3' }: BeforeAfterSliderProps) => {
+const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after comparison", inLightbox = false }: BeforeAfterSliderProps) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -61,12 +53,16 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after co
     setIsDragging(false);
   }, []);
 
-  const aspectClass = aspectClasses[aspectRatio] || aspectClasses['4:3'];
+  // In lightbox: use fixed height for proper sizing
+  // Outside lightbox: use 4:3 aspect ratio for grid consistency
+  const containerClass = inLightbox 
+    ? 'h-[60vh] w-full' 
+    : 'aspect-[4/3] w-full';
 
   return (
     <div 
       ref={containerRef}
-      className={`relative w-full ${aspectClass} overflow-hidden rounded-lg shadow-xl select-none ${isDragging ? 'cursor-ew-resize' : 'cursor-ew-resize'}`}
+      className={`relative ${containerClass} overflow-hidden rounded-lg shadow-xl select-none cursor-ew-resize`}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
