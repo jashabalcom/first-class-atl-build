@@ -183,8 +183,6 @@ const GalleryGrid = ({ filter }: GalleryGridProps) => {
               location: project.location || '',
               afterImage: getThumbnail(project),
               description: project.description || '',
-              aspectRatio: project.aspect_ratio || '4:3',
-              fitMode: project.fit_mode || 'cover',
             }}
             onClick={() => handleCardClick(project)}
           />

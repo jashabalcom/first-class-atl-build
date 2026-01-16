@@ -53,16 +53,16 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after co
     setIsDragging(false);
   }, []);
 
-  // In lightbox: use fixed height for proper sizing
+  // In lightbox: use 16:9 aspect ratio with max height for elegant comparison
   // Outside lightbox: use 4:3 aspect ratio for grid consistency
   const containerClass = inLightbox 
-    ? 'h-[60vh] w-full' 
+    ? 'max-h-[70vh] w-full aspect-video' 
     : 'aspect-[4/3] w-full';
 
   return (
     <div 
       ref={containerRef}
-      className={`relative ${containerClass} overflow-hidden rounded-lg shadow-xl select-none cursor-ew-resize`}
+      className={`relative ${containerClass} overflow-hidden rounded-lg shadow-xl select-none cursor-ew-resize mx-auto`}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -78,7 +78,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after co
         loading="lazy"
         decoding="async"
         width={1600}
-        height={1200}
+        height={900}
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         draggable={false}
       />
@@ -94,7 +94,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, alt = "Before and after co
           loading="lazy"
           decoding="async"
           width={1600}
-          height={1200}
+          height={900}
           className="absolute inset-0 w-full h-full object-cover"
           draggable={false}
         />

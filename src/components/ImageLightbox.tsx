@@ -28,8 +28,6 @@ interface ImageLightboxProps {
     afterImage: string;
     displayMode?: string;
     slideshowImages?: SlideshowImage[];
-    aspectRatio?: string;
-    fitMode?: string;
   } | null;
 }
 
@@ -59,30 +57,30 @@ const ImageLightbox = ({ open, onClose, project }: ImageLightboxProps) => {
   if (!project) return null;
 
   const renderContent = () => {
-    // Slideshow mode - show carousel of images
+    // Slideshow mode - show carousel of images at natural aspect ratio
     if (project.displayMode === 'slideshow' && project.slideshowImages && project.slideshowImages.length > 0) {
       const setApi = (api: CarouselApi) => {
         carouselRef.current = api;
       };
       return (
-        <div className="w-full h-[60vh] flex items-center justify-center">
-          <Carousel className="w-full h-full" opts={{ loop: true }} setApi={setApi}>
-            <CarouselContent className="h-full">
+        <div className="w-full flex items-center justify-center py-4">
+          <Carousel className="w-full max-w-4xl" opts={{ loop: true }} setApi={setApi}>
+            <CarouselContent>
               {project.slideshowImages.map((image) => (
-                <CarouselItem key={image.id} className="flex items-center justify-center h-full">
+                <CarouselItem key={image.id} className="flex items-center justify-center">
                   <img
                     src={getOptimizedImageUrl(image.image_url, imagePresets.lightbox)}
                     alt={project.title}
                     loading="lazy"
                     decoding="async"
-                    className="max-w-full max-h-[55vh] object-contain rounded-lg"
+                    className="max-w-full max-h-[70vh] w-auto h-auto object-contain rounded-lg shadow-lg"
                   />
                 </CarouselItem>
               ))}
             </CarouselContent>
             <CarouselPrevious className="left-2" />
             <CarouselNext className="right-2" />
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-sm text-muted-foreground">
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-sm text-muted-foreground bg-background/80 backdrop-blur px-3 py-1 rounded-full">
               {project.slideshowImages.length} images
             </div>
           </Carousel>
@@ -102,15 +100,15 @@ const ImageLightbox = ({ open, onClose, project }: ImageLightboxProps) => {
       );
     }
 
-    // Single image mode - show full image without cropping
+    // Single image mode - show full image at natural aspect ratio
     return (
-      <div className="w-full h-[60vh] flex items-center justify-center bg-muted rounded-lg">
+      <div className="w-full flex items-center justify-center py-4">
         <img
           src={getOptimizedImageUrl(project.afterImage, imagePresets.lightbox)}
           alt={project.title}
           loading="lazy"
           decoding="async"
-          className="max-w-full max-h-[55vh] object-contain"
+          className="max-w-full max-h-[70vh] w-auto h-auto object-contain rounded-lg shadow-lg"
         />
       </div>
     );
