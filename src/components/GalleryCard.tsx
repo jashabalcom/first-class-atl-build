@@ -9,8 +9,6 @@ interface GalleryCardProps {
     location: string;
     afterImage: string;
     description: string;
-    aspectRatio?: string;
-    fitMode?: string;
   };
   onClick: () => void;
 }
@@ -19,11 +17,6 @@ const GalleryCard = ({ project, onClick }: GalleryCardProps) => {
   const getCategoryLabel = (category: string) => {
     return category.charAt(0).toUpperCase() + category.slice(1);
   };
-
-  // Always use 4:3 container for uniform grid alignment
-  // fitMode controls whether image crops (cover) or shows full with letterboxing (contain)
-  const fitMode = project.fitMode || 'cover';
-  const fitClass = fitMode === 'contain' ? 'object-contain' : 'object-cover';
 
   return (
     <div
@@ -39,7 +32,7 @@ const GalleryCard = ({ project, onClick }: GalleryCardProps) => {
           decoding="async"
           width={600}
           height={450}
-          className={`w-full h-full ${fitClass} transition-transform duration-300 group-hover:scale-110`}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         />
         <div className="absolute top-4 left-4">
           <Badge variant="secondary" className="bg-background/90 backdrop-blur">

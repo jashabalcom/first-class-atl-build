@@ -12,7 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { Trash2, Edit, Plus, Upload, X, GripVertical, Images, Layers, FolderUp, ExternalLink, CheckCircle, Loader2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { compressImageForUpload, formatFileSize, getImageDimensions, suggestFitMode, getFitModeSuggestionReason } from '@/lib/image-utils';
+import { compressImageForUpload, formatFileSize } from '@/lib/image-utils';
 import {
   DndContext,
   closestCenter,
@@ -182,7 +182,6 @@ export default function AdminGallery() {
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [savedProject, setSavedProject] = useState<{ title: string; thumbnail: string } | null>(null);
   const [uploadingImageId, setUploadingImageId] = useState<string | null>(null);
-  const [fitModeSuggestion, setFitModeSuggestion] = useState<{ mode: 'cover' | 'contain'; reason: string } | null>(null);
   
   interface BulkUploadItem {
     file: File;
@@ -205,8 +204,7 @@ export default function AdminGallery() {
     featured: false,
     display_order: 0,
     display_mode: 'single' as 'single' | 'slideshow' | 'before_after',
-    aspect_ratio: '4:3',
-    fit_mode: 'cover'
+    aspect_ratio: '4:3'
   });
 
   const categoryCounts = useMemo(() => {
@@ -366,21 +364,6 @@ export default function AdminGallery() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Detect dimensions and suggest fit mode for the primary image
-    if (type === 'after') {
-      try {
-        const dimensions = await getImageDimensions(file);
-        const suggested = suggestFitMode(dimensions);
-        const reason = getFitModeSuggestionReason(dimensions, suggested);
-        setFitModeSuggestion({ mode: suggested, reason });
-        
-        // Auto-apply the suggested fit mode
-        setFormData(prev => ({ ...prev, fit_mode: suggested }));
-      } catch (err) {
-        console.error('Could not detect image dimensions:', err);
-      }
-    }
-
     const url = await uploadImage(file, type);
     if (url) {
       if (type === 'before') {
@@ -395,20 +378,6 @@ export default function AdminGallery() {
   const handleMultiImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, imageType: 'before' | 'after' | 'gallery') => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
-
-    // Detect dimensions from the first image and suggest fit mode
-    const firstFile = files[0];
-    if (imageType === 'gallery' || imageType === 'after') {
-      try {
-        const dimensions = await getImageDimensions(firstFile);
-        const suggested = suggestFitMode(dimensions);
-        const reason = getFitModeSuggestionReason(dimensions, suggested);
-        setFitModeSuggestion({ mode: suggested, reason });
-        setFormData(prev => ({ ...prev, fit_mode: suggested }));
-      } catch (err) {
-        console.error('Could not detect image dimensions:', err);
-      }
-    }
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
@@ -554,12 +523,10 @@ export default function AdminGallery() {
       featured: false,
       display_order: 0,
       display_mode: 'single',
-      aspect_ratio: '4:3',
-      fit_mode: 'cover'
+      aspect_ratio: '4:3'
     });
     setEditingProject(null);
     setCurrentProjectImages([]);
-    setFitModeSuggestion(null);
   };
 
   const openEditDialog = async (project: GalleryProject) => {
@@ -575,8 +542,7 @@ export default function AdminGallery() {
       featured: project.featured || false,
       display_order: project.display_order || 0,
       display_mode: project.display_mode || 'single',
-      aspect_ratio: project.aspect_ratio || '4:3',
-      fit_mode: project.fit_mode || 'cover'
+      aspect_ratio: project.aspect_ratio || '4:3'
     });
     await fetchProjectImages(project.id);
     setIsDialogOpen(true);
@@ -646,8 +612,7 @@ export default function AdminGallery() {
       featured: formData.featured,
       display_order: formData.display_order,
       display_mode: formData.display_mode,
-      aspect_ratio: formData.aspect_ratio,
-      fit_mode: formData.fit_mode
+      aspect_ratio: formData.aspect_ratio
     };
 
     let projectId = editingProject?.id;
@@ -931,43 +896,6 @@ export default function AdminGallery() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="fit_mode">Grid Thumbnail Display</Label>
-                {fitModeSuggestion && (
-                  <Badge variant="secondary" className="text-xs font-normal">
-                    ✨ Auto-detected
-                  </Badge>
-                )}
-              </div>
-              <Select
-                value={formData.fit_mode}
-                onValueChange={(value) => {
-                  setFormData(prev => ({ ...prev, fit_mode: value }));
-                  // Clear suggestion if user manually changes
-                  if (fitModeSuggestion && value !== fitModeSuggestion.mode) {
-                    setFitModeSuggestion(null);
-                  }
-                }}
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="cover">Cover (Crop to Fill Card)</SelectItem>
-                  <SelectItem value="contain">Contain (Show Full Image)</SelectItem>
-                </SelectContent>
-              </Select>
-              {fitModeSuggestion ? (
-                <p className="text-xs text-green-600 dark:text-green-400">
-                  {fitModeSuggestion.reason}
-                </p>
-              ) : (
-                <p className="text-xs text-muted-foreground">
-                  All grid cards use 4:3 containers for alignment. "Cover" crops to fill, "Contain" shows full image with letterboxing.
-                </p>
-              )}
-            </div>
 
             <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
