@@ -89,10 +89,10 @@ const ExitIntentPopup = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
+    if (!formData.name.trim() || !formData.email.trim()) {
       toast({
-        title: "Please fill in all fields",
-        description: "We need your name, email, and phone to reach you.",
+        title: "Please fill in required fields",
+        description: "We need your name and email to reach you.",
         variant: "destructive",
       });
       return;
@@ -232,11 +232,10 @@ const ExitIntentPopup = () => {
                 required
               />
               <FloatingInput
-                label="Phone Number"
+                label="Phone Number (Optional)"
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                required
               />
               <Select
                 value={formData.projectType}

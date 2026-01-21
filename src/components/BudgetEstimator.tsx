@@ -238,12 +238,13 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email || !name || !phone) {
-      toast.error("Please enter your name, email, and phone number");
+    if (!email || !name) {
+      toast.error("Please enter your name and email address");
       return;
     }
 
-    if (phone.replace(/\D/g, '').length < 10) {
+    // Only validate phone if provided
+    if (phone && phone.replace(/\D/g, '').length > 0 && phone.replace(/\D/g, '').length < 10) {
       toast.error("Please enter a valid 10-digit phone number");
       return;
     }

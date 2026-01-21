@@ -20,8 +20,8 @@ import { Link } from "react-router-dom";
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
   email: z.string().trim().email("Please enter a valid email address").max(255, "Email must be less than 255 characters"),
-  phone: z.string().min(14, "Please enter a valid phone number").refine(
-    (val) => unformatPhoneNumber(val).length === 10,
+  phone: z.string().optional().refine(
+    (val) => !val || val.length === 0 || unformatPhoneNumber(val).length === 10,
     "Please enter a valid 10-digit phone number"
   ),
   city: z.string().optional(),
@@ -168,7 +168,7 @@ const ContactForm = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FloatingInput
-              label="Phone *"
+              label="Phone"
               type="tel"
               value={phoneValue}
               onChange={handlePhoneChange}

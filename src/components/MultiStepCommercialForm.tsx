@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 const commercialSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
   email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-  phone: z.string().min(10, "Phone number must be 10 digits"),
+  phone: z.string().optional().or(z.literal('')),
   projectType: z.string().min(1, "Please select a project type"),
   companyName: z.string().trim().max(200, "Company name must be less than 200 characters").optional(),
   businessType: z.string().trim().max(100, "Business type must be less than 100 characters").optional(),
@@ -133,7 +133,7 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
 
     switch (currentStep) {
       case 0: // Business Info
-        fieldsToValidate = ["name", "email", "phone"];
+        fieldsToValidate = ["name", "email"];
         if (watchedFields.companyName) fieldsToValidate.push("companyName");
         break;
       case 1: // Project Details
@@ -215,7 +215,7 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
             />
 
             <FloatingInput
-              label="Phone Number *"
+              label="Phone Number"
               type="tel"
               {...register("phone")}
               onChange={(e) => {
