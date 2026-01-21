@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
   email: z.string().email("Invalid email address").max(255),
-  phone: z.string().min(14, "Please enter a valid phone number"),
+  phone: z.string().optional().or(z.literal('')),
   projectType: z.string().min(1, "Please select a project type"),
   city: z.string().optional(),
   timeline: z.string().optional(),
@@ -133,7 +133,7 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true, ski
     let fieldsToValidate: (keyof ContactFormData)[] = [];
 
     if (currentStep === 0) {
-      fieldsToValidate = ["name", "email", "phone"];
+      fieldsToValidate = ["name", "email"];
     } else if (currentStep === 1) {
       fieldsToValidate = ["projectType"];
       if (showCity) fieldsToValidate.push("city");
@@ -234,7 +234,7 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true, ski
             />
 
             <FloatingInput
-              label="Phone Number *"
+              label="Phone Number"
               type="tel"
               value={formValues.phone}
               onChange={handlePhoneChange}

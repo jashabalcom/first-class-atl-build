@@ -121,26 +121,14 @@ const PrivacyPolicy = () => {
             </section>
 
             <section className="space-y-4">
-              <h2 className="font-playfair text-2xl font-semibold text-primary">6. Information Sharing</h2>
-              <p>We may share your information with:</p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Service providers who assist in our operations</li>
-                <li>Business partners for project fulfillment</li>
-                <li>Legal authorities when required by law</li>
-                <li>Successors in the event of a merger or acquisition</li>
-              </ul>
-              <p>We do not sell your personal information to third parties.</p>
-            </section>
-
-            <section className="space-y-4">
-              <h2 className="font-playfair text-2xl font-semibold text-primary">7. Data Security</h2>
+              <h2 className="font-playfair text-2xl font-semibold text-primary">6. Data Security</h2>
               <p>
                 We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet is 100% secure.
               </p>
             </section>
 
             <section className="space-y-4">
-              <h2 className="font-playfair text-2xl font-semibold text-primary">8. Your Rights</h2>
+              <h2 className="font-playfair text-2xl font-semibold text-primary">7. Your Rights</h2>
               <p>Depending on your location, you may have the right to:</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Access the personal information we hold about you</li>
@@ -152,21 +140,21 @@ const PrivacyPolicy = () => {
             </section>
 
             <section className="space-y-4">
-              <h2 className="font-playfair text-2xl font-semibold text-primary">9. Children's Privacy</h2>
+              <h2 className="font-playfair text-2xl font-semibold text-primary">8. Children's Privacy</h2>
               <p>
                 Our website is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13.
               </p>
             </section>
 
             <section className="space-y-4">
-              <h2 className="font-playfair text-2xl font-semibold text-primary">10. Changes to This Policy</h2>
+              <h2 className="font-playfair text-2xl font-semibold text-primary">9. Changes to This Policy</h2>
               <p>
                 We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.
               </p>
             </section>
 
             <section className="space-y-4">
-              <h2 className="font-playfair text-2xl font-semibold text-primary">11. Contact Us</h2>
+              <h2 className="font-playfair text-2xl font-semibold text-primary">10. Contact Us</h2>
               <p>If you have questions about this Privacy Policy or how we handle your data, please contact us:</p>
               <ul className="list-none space-y-2">
                 <li><strong>Phone:</strong> 678-671-6336</li>
