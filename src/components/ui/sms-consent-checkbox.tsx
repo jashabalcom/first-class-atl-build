@@ -42,9 +42,9 @@ export function SMSConsentCheckboxes({
           htmlFor="non-marketing-sms-consent" 
           className="text-xs text-muted-foreground leading-relaxed cursor-pointer"
         >
-          I consent to receive transactional messages from First Class Construction Group 
-          at the phone number provided. Message frequency may vary. Message & Data rates may apply. 
-          Reply HELP for help or STOP to opt-out.
+          I consent to receive non-marketing text messages from First Class Construction Group 
+          about Appointment reminders etc, Message frequency may vary, message & data rates may apply. 
+          Text HELP for assistance, reply STOP to opt out.
         </Label>
       </div>
 
