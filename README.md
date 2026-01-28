@@ -1,73 +1,51 @@
-# Welcome to your Lovable project
+# First Class ATL Build  
+**AI-Powered Construction, Renovation & Project Intelligence Platform**
 
-## Project info
+## Overview  
+First Class ATL Build is a smart construction and renovation platform that combines **AI-assisted design**, **renovation intelligence**, **project booking automation**, and **customer experience workflows** to modernize how property owners plan, visualize, and execute building projects.
 
-**URL**: https://lovable.dev/projects/f64adabb-1112-40f1-87c3-d50b54aaacd8
+This project demonstrates my ability to build **real-world AI-powered business tools**, integrating automation, intelligent user workflows, and scalable cloud infrastructure.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## Key Features  
+- 🧠 **AI Renovation Assistant** — suggests remodel ideas, materials, and budget ranges  
+- 🏗️ **AI Room Visualization** — generates concept ideas and renovation inspiration  
+- 🤖 **AI Booking Agent** — automates contractor scheduling and customer intake  
+- 📊 **Project Cost Estimator** — renovation cost forecasting & scope planning  
+- 🏘️ **Customer Project Portal** — manage builds, timelines, and updates  
+- 📩 **Automated Email & Client Communication Pipelines**  
+- 📱 **Mobile-Ready UI for homeowners & contractors**
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f64adabb-1112-40f1-87c3-d50b54aaacd8) and start prompting.
+## Technical Architecture  
+**Frontend:** React / TypeScript  
+**Backend:** Supabase (Postgres, Auth, Edge Functions)  
+**AI Services:** LLM-powered automation & renovation intelligence  
+**Database:** Structured project, client, and estimate modeling  
+**Hosting:** Cloud-deployed with scalable API architecture  
+**Integrations:** Payments, email automation, booking workflows
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## What This Project Demonstrates  
+- AI product integration in real-world business workflows  
+- Full-stack engineering & scalable cloud architecture  
+- Database design for customer & project lifecycle management  
+- Automation of operational business processes  
+- UX design for high-trust service platforms  
+- Product thinking — building tools that solve revenue-driven problems  
+- Ability to ship production-grade software, not demo apps  
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Real-World Use Case  
+Designed to modernize how construction firms manage **leads, estimates, renovations, scheduling, and customer experience** — reducing friction and increasing operational efficiency.
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/f64adabb-1112-40f1-87c3-d50b54aaacd8) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Author  
+**Jasha Balcom**  
+Cloud • AI • Full-Stack • Product Engineering  
+Former Pro Athlete • Real Estate Strategist • Tech Founder  
