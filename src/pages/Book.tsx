@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,6 +6,7 @@ import MobileCallBar from "@/components/MobileCallBar";
 import SectionLabel from "@/components/SectionLabel";
 import CertificationBadges from "@/components/CertificationBadges";
 import { Shield, Clock, Award } from "lucide-react";
+import { trackBookingPageView } from "@/lib/gtag";
 
 const Book = () => {
   const [calendarLoaded, setCalendarLoaded] = useState(false);
@@ -86,7 +87,7 @@ const Book = () => {
                     scrolling="no"
                     id="ITabl42VTFSLL9X27hGf_1765057687412"
                     title="Schedule Appointment"
-                    onLoad={() => setCalendarLoaded(true)}
+                    onLoad={() => { setCalendarLoaded(true); trackBookingPageView(); }}
                   />
                 </div>
               </div>

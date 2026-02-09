@@ -8,7 +8,8 @@ import PageTransition from "./components/PageTransition";
 import GoHighLevelChat from "./components/GoHighLevelChat";
 import ExitIntentPopup from "./components/ExitIntentPopup";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
+import { initGlobalConversionTracking } from "@/lib/gtag";
 
 // Core pages
 import Home from "./pages/Home";
@@ -85,7 +86,12 @@ const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 
 const queryClient = new QueryClient();
 
-const App = () => (
+const App = () => {
+  useEffect(() => {
+    initGlobalConversionTracking();
+  }, []);
+
+  return (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <ErrorBoundary>
@@ -170,6 +176,7 @@ const App = () => (
       </ErrorBoundary>
     </TooltipProvider>
   </QueryClientProvider>
-);
+  );
+};
 
 export default App;
