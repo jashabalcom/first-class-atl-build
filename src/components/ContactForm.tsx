@@ -9,6 +9,7 @@ import { SMSConsentCheckboxes } from "@/components/ui/sms-consent-checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { submitLead, getFormTimestamp } from "@/lib/lead-submission";
+import { trackFormConversion } from "@/lib/gtag";
 import { formatPhoneNumber, unformatPhoneNumber } from "@/lib/phone-formatter";
 import { Label } from "@/components/ui/label";
 import { ProjectTypeCard } from "@/components/ui/project-type-card";
@@ -116,6 +117,7 @@ const ContactForm = ({
       });
 
       if (result.success) {
+        trackFormConversion('contact');
         toast({
           title: "Thanks—We Received Your Request",
           description: "A project specialist will contact you within one business day to discuss next steps.",

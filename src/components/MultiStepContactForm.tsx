@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { formatPhoneNumber } from "@/lib/phone-formatter";
 import { submitLead, getFormTimestamp } from "@/lib/lead-submission";
+import { trackFormConversion } from "@/lib/gtag";
 import { AIRecommendations } from "@/components/AIRecommendations";
 import { FormQualifier } from "@/components/FormQualifier";
 import { GamifiedProgressBar } from "@/components/GamifiedProgressBar";
@@ -193,6 +194,7 @@ export function MultiStepContactForm({ showCity = true, showTimeline = true, ski
       console.log('[MultiStepForm] Submission result:', result);
 
       if (result.success) {
+        trackFormConversion('multistep');
         localStorage.removeItem(STORAGE_KEY);
         setIsSubmitted(true);
         formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });

@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { Store, Utensils, Briefcase, Building2, Wrench, PlusCircle, Phone, Check } from "lucide-react";
 import { formatPhoneNumber, unformatPhoneNumber } from "@/lib/phone-formatter";
 import { submitLead } from "@/lib/lead-submission";
+import { trackFormConversion } from "@/lib/gtag";
 import { Link } from "react-router-dom";
 
 // A2P Compliant: SMS consent is OPTIONAL - not required to submit
@@ -176,6 +177,7 @@ export function MultiStepCommercialForm({ showCity = true, showTimeline = true }
         return;
       }
 
+      trackFormConversion('commercial');
       localStorage.removeItem(STORAGE_KEY);
       setIsSubmitted(true);
       formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
