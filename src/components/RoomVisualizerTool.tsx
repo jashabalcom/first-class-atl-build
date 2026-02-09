@@ -7,6 +7,7 @@ import { Upload, Wand2, Download, ArrowRight, ArrowLeft, Loader2, ImageIcon, Spa
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import BeforeAfterSlider from "./BeforeAfterSlider";
+import { trackVisualizerConversion } from "@/lib/gtag";
 
 const ROOM_TYPES = [
   { id: "kitchen", label: "Kitchen", icon: "🍳" },
@@ -129,6 +130,7 @@ const RoomVisualizerTool = ({ onComplete }: RoomVisualizerToolProps) => {
 
       if (data.generatedImage) {
         setGeneratedImage(data.generatedImage);
+        trackVisualizerConversion();
         toast.success("Your room visualization is ready!");
         onComplete?.();
       } else {
