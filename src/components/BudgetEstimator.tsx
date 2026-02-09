@@ -7,6 +7,7 @@ import { SMSConsentCheckboxes } from "@/components/ui/sms-consent-checkbox";
 import { Hammer, Bath, Home, PlusCircle, Building2, Calculator, ArrowRight, Info, Sparkles, Loader2, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { submitLead } from "@/lib/lead-submission";
+import { trackFormConversion } from "@/lib/gtag";
 import { formatPhoneNumber } from "@/lib/phone-formatter";
 import DOMPurify from "dompurify";
 import { Link } from "react-router-dom";
@@ -274,6 +275,7 @@ export function BudgetEstimator({ onGetQuote }: BudgetEstimatorProps) {
         return;
       }
 
+      trackFormConversion('budget');
       toast.success("We've received your estimate request and will send you a detailed quote shortly!");
       setShowEmailCapture(false);
       setEmail("");

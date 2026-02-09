@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { submitLead, getFormTimestamp } from "@/lib/lead-submission";
+import { trackFormConversion } from "@/lib/gtag";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { Check, Gift, Clock, Phone, X, Sparkles, Wand2 } from "lucide-react";
@@ -119,6 +120,7 @@ const ExitIntentPopup = () => {
     setIsSubmitting(false);
 
     if (result.success) {
+      trackFormConversion('exit-intent');
       setIsSuccess(true);
     } else {
       toast({
