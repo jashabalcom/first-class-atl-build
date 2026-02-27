@@ -1,27 +1,51 @@
 
 
-## Add Google Ads Conversion Label
+## Google Ads Conversion Tracking: Complete Fix
 
-**What's changing:** One simple but critical update -- plugging in your actual Google Ads conversion label so conversions start showing up in your Google Ads dashboard charts.
+### The Problem
+The conversion label in `src/lib/gtag.ts` (line 10) is still set to `null`. This means every conversion event fires to the generic account ID instead of the specific conversion action you created in Google Ads. That's why conversions aren't showing up in your main campaign charts.
 
-**Your conversion details:**
-- Conversion ID: `17856485643`
-- Conversion Label: `tzJuCKb4yPUbEIuy0cJC`
-- Full send_to value: `AW-17856485643/tzJuCKb4yPUbEIuy0cJC`
+### The Fix -- One Line Change
+**File: `src/lib/gtag.ts`, line 10**
 
-**The fix:**
-In `src/lib/gtag.ts`, line 10 currently reads:
+Change:
 ```
 const CONVERSION_LABEL: string | null = null;
 ```
-
-It will be updated to:
+To:
 ```
 const CONVERSION_LABEL = 'AW-17856485643/tzJuCKb4yPUbEIuy0cJC';
 ```
 
-**What this unlocks:**
-All 5 tracking channels (form submissions, phone clicks, booking page, AI visualizer, chat widget) will now send the correct `send_to` value that Google Ads needs to count them as real conversions in your campaign reports and optimization algorithms.
+### What This Connects (All 5 Conversion Channels)
 
-**After deployment**, conversions should start appearing in your main Google Ads charts within 1-3 hours (sometimes up to 24 hours for the first batch).
+Once the label is set, every conversion event across your entire site will send the correct `send_to: 'AW-17856485643/tzJuCKb4yPUbEIuy0cJC'` value to Google Ads:
+
+| Channel | Where It Fires | Event Type |
+|---|---|---|
+| Contact Form | `/contact`, homepage, service pages | Lead |
+| Multi-Step Residential Form | `/residential` | Lead |
+| Multi-Step Commercial Form | `/commercial` | Lead |
+| Exit-Intent Popup | Site-wide (triggers on mouse leave) | Lead |
+| Budget Estimator | Embedded on pages | Lead |
+| Phone Call Clicks | Every `tel:678-671-6336` link site-wide | Engagement |
+| Booking Calendar | `/book` page (fires when calendar loads) | Engagement |
+| AI Room Visualizer | `/room-visualizer` (fires on image generation) | Lead |
+| GHL Chat Widget | Site-wide (fires when chat button clicked) | Engagement |
+
+### How to Verify After Deployment
+
+1. Open your live site in Chrome
+2. Open DevTools (F12) and go to Console
+3. Submit a test form, click the phone number, or visit `/book`
+4. You should see: `[gtag] Conversion fired: lead / contact` with the correct send_to value
+5. In Google Ads, conversions should appear in the main charts within 1-24 hours
+
+### Technical Details
+- The Google Tag (`gtag.js`) is already correctly installed in `index.html` (line 39-45)
+- `initGlobalConversionTracking()` is called on app mount in `App.tsx` (line 91), which sets up phone click tracking and chat widget detection
+- All 5 form components already import and call `trackFormConversion()` on successful submission
+- The booking page already calls `trackBookingPageView()` on iframe load
+- The visualizer already calls `trackVisualizerConversion()` on successful generation
+- No other files need changes -- just the one label value
 
